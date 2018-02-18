@@ -78,6 +78,133 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-30T00:53:32.000Z"><a href="/2018/01/30/JS系列 -- 基本概念（二）数据类型/">2018-01-30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/30/JS系列 -- 基本概念（二）数据类型/">JS系列 -- 基本概念（二）数据类型</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
+<li>基本数据类型（简单数据类型）：<ul>
+<li>数值</li>
+<li>字符串</li>
+<li>布尔值</li>
+<li>undefined</li>
+<li>null</li>
+<li>Symbol </li>
+</ul>
+</li>
+<li>复杂数据类型：<ul>
+<li>Object  ==&gt;  由一组无序的键值对组成，即哈希。分为 <strong>狭义对象</strong> <strong>数组</strong> <strong>函数</strong></li>
+</ul>
+</li>
+<li>原始类型：字符串 数值 布尔值</li>
+<li>合成类型：对象</li>
+<li>特殊值：undefined null</li>
+</ol>
+<h1 id="判断类型"><a href="#判断类型" class="headerlink" title="判断类型"></a>判断类型</h1><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
+<li>typeof 运算符：返回一个值的数据类型(<strong>字符串</strong>)<ul>
+<li>“undefined” ==&gt; 如果这个值  <strong>未定义</strong></li>
+<li>“boolean” ==&gt; 如果这个值是  <strong>布尔值</strong></li>
+<li>“string” ==&gt; 如果这个值是  <strong>字符串</strong></li>
+<li>“number” ==&gt; 如果这个值是  <strong>数值</strong></li>
+<li>“Object” ==&gt; 如果这个值是   <strong>对象</strong> 或 <strong>null</strong></li>
+<li>“function” ==&gt; 如果这个值  <strong>函数</strong></li>
+</ul>
+</li>
+<li>instanceof 运算符</li>
+<li>Object.prototype.toString方法</li>
+</ol>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><ol>
+<li>没有 Array 类型</li>
+<li>对<strong>未初始化</strong>的变量执行 typeof 操作符会返回 undefined 值</li>
+<li>对<strong>未声明</strong>的变量执行 typeof 操作符会返回 undefined 值</li>
+</ol>
+<h1 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h1><h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p>非数值，是一个特殊的<strong>数值</strong>（typeof NaN  ==&gt;  number）</p>
+<ul>
+<li>任何涉及 NaN 的操作都会返回 NaN</li>
+<li>NaN 与任何值都不相等，包括 NaN 本身</li>
+</ul>
+<h3 id="转换类型（3函数-2操作符）"><a href="#转换类型（3函数-2操作符）" class="headerlink" title="转换类型（3函数 2操作符）"></a>转换类型（3函数 2操作符）</h3><ul>
+<li>Number() ==&gt; 可以用于任何函数</li>
+<li>parseInt() ==&gt; 用于将字符串转换为数值 <strong>parseInt(“”) //NaN</strong></li>
+<li>parseFloat() ==&gt; 用于将字符串转换为数值</li>
+<li>一元 + 操作符 ==&gt; 等价于Number()</li>
+<li>‘ - 0 ‘  //任意一个类型减去0</li>
+</ul>
+<p><strong>parseInt(‘s’) ==&gt; NaN</strong></p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>字符串默认只能写在一行内，分成多行将会报错。</p>
+<ul>
+<li>如果长字符串必须分成多行，可以在每一行的尾部使用<strong>反斜杠</strong>。<br><strong>注意</strong>：反斜杠的后面必须是换行符，而不能有其他字符（比如空格），否则会报错。</li>
+<li>连接<strong>运算符（+）</strong>可以连接多个单行字符串，将长字符串拆成多行书写，输出的时候也是单行</li>
+</ul>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>字符串是不可变的，字符串一旦创建，值就不能改变，要改变某个变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量</p>
+<h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p>返回字符串的长度，该属性也是无法改变的</p>
+<h3 id="字符字面量（转义符）"><a href="#字符字面量（转义符）" class="headerlink" title="字符字面量（转义符）"></a>字符字面量（转义符）</h3><p>反斜杠（\）在字符串内有特殊含义，用来表示非打印，所以又称为字符字面量（转义符）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\0 ：null（\u0000）</span><br><span class="line">\b ：后退键（\u0008）</span><br><span class="line">\f ：换页符（\u000C）</span><br><span class="line">\n ：换行符（\u000A）</span><br><span class="line">\r ：回车键（\u000D）</span><br><span class="line">\t ：制表符（\u0009）</span><br><span class="line">\v ：垂直制表符（\u000B）</span><br><span class="line">\&apos; ：单引号（\u0027）</span><br><span class="line">\&quot; ：双引号（\u0022）</span><br><span class="line">\\ ：反斜杠（\u005C）</span><br></pre></td></tr></table></figure></p>
+<p>如果在非特殊字符前面使用反斜杠，则反斜杠会被省略。</p>
+<h3 id="字符串与数组"><a href="#字符串与数组" class="headerlink" title="字符串与数组"></a>字符串与数组</h3><p>字符串可以被视为字符数组，因此可以使用数组的方括号运算符，用来返回某个位置的字符（位置编号从0开始）。<br>无法改变字符串之中的单个字符。</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>转换为字符串</p>
+<ol>
+<li>一元 + 号操作符   </li>
+<li>String()     </li>
+<li>toString()</li>
+</ol>
+<h1 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h1><p> <strong>falsy</strong> ： 在 Boolean 上下文中认定可转换为 false 的值 ( 5个假值 )<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">0</span><br><span class="line">NaN</span><br><span class="line">&apos;&apos;</span><br><span class="line">null</span><br><span class="line">undefined</span><br></pre></td></tr></table></figure></p>
+<p><strong>空数组（[]）和空对象（{}）对应的布尔值，都是true。</strong></p>
+<h3 id="转换类型"><a href="#转换类型" class="headerlink" title="转换类型"></a>转换类型</h3><p>转换为布尔值</p>
+<ol>
+<li>Boolean()</li>
+<li><code>!!</code>    //取反再取反</li>
+</ol>
+<h1 id="null-和-undefined-区别"><a href="#null-和-undefined-区别" class="headerlink" title="null 和 undefined 区别"></a>null 和 undefined 区别</h1><ul>
+<li>null是一个表示<strong>“空”的对象</strong>，转为数值时为0。</li>
+<li><p>null表示<strong>空值</strong>，即该处的值现在为空。调用函数时，某个参数未设置任何值，这时就可以传入null，表示该参数为空。</p>
+</li>
+<li><p>undefined是一个表示”此处无定义”的原始值，转为数值时为NaN。返回undefined的情景。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 变量声明了，但没有赋值</span><br><span class="line">var i;</span><br><span class="line">i // undefined</span><br><span class="line"></span><br><span class="line">// 调用函数时，应该提供的参数没有提供，该参数等于 undefined</span><br><span class="line">function f(x) &#123;</span><br><span class="line">  return x;</span><br><span class="line">&#125;</span><br><span class="line">f() // undefined</span><br><span class="line"></span><br><span class="line">// 对象没有赋值的属性</span><br><span class="line">var  o = new Object();</span><br><span class="line">o.p // undefined</span><br><span class="line"></span><br><span class="line">// 函数没有返回值时，默认返回 undefined</span><br><span class="line">function f() &#123;&#125;</span><br><span class="line">f() // undefined</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-30T00:51:28.000Z"><a href="/2018/01/30/JS系列 -- 基本概念（一）基础/">2018-01-30</a></time>
       
       
@@ -962,134 +1089,6 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-26T02:57:26.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">2018-01-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">CSS 最佳实践 + 套路（四） -- 移动端适配</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><a href="https://github.com/bowen-wu/node-create-file" target="_blank" rel="noopener">脚本实现自动创建移动端适配的相关文件</a></p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>手机上显示网页是将整个网页缩小，模拟页面宽度 980px ，可以使用 <code>document.documentElement.clientWidth</code> 来获取到页面宽度为 980px。在移动端加上 <code>&lt;meta&gt;</code> 标签才是自适应，否则就是 980px ，即网页整体缩小。</p>
-<h1 id="meta-标签"><a href="#meta-标签" class="headerlink" title="meta 标签"></a>meta 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&apos; viewport &apos; content=&apos; width=device-width user-scalable=no initial-scale=1.0 maximum=1.0 minimum-scale=1.0 &apos;&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>说明：</strong></p>
-<ul>
-<li><code>width=device-width</code> ==&gt; 网页宽度默认等于屏幕宽度</li>
-<li><code>user-scalable=no</code> ==&gt; 用户是否可以缩放</li>
-<li><code>initial-scale=1.0</code> ==&gt; 原始缩放比例为 1.0 ，即网页初始大小占屏幕面积的 100%</li>
-<li><code>maximum=1.0</code> ==&gt; 最大缩放比例</li>
-<li><code>minimum-scale=1.0</code> ==&gt; 最小缩放比例</li>
-</ul>
-<p><code>&lt;meta&gt;</code> 标签可以防止手机模拟 980px，防止页面在用户双击的时候放大和防止用户横屏</p>
-<h1 id="Media-Query-（媒体查询）模块"><a href="#Media-Query-（媒体查询）模块" class="headerlink" title="Media Query （媒体查询）模块"></a>Media Query （媒体查询）模块</h1><p>由一个可选的媒体类型和零个或多个使用媒体功能的限制了样式表范围的表达式组成，即<strong>对媒体进行某些条件的查询</strong></p>
-<ol>
-<li><p>目前来说只用两种模式 ：</p>
-<ul>
-<li>移动端 </li>
-<li>PC 端 </li>
-</ul>
-</li>
-<li><p>两种技术：</p>
-<ul>
-<li><strong>mobiles-first</strong> ==&gt; 先做移动端页面后做 PC 端页面（推荐）</li>
-<li>desktop-first ==&gt; 先做 PC 端页面后做移动端页面</li>
-</ul>
-</li>
-<li><p>两种方案：</p>
-<ul>
-<li>移动端和 PC 端分别跳转不同网站（京东、淘宝）</li>
-<li>渲染不同的 HTML+CSS（知乎）</li>
-</ul>
-</li>
-</ol>
-<h3 id="元素中的-CSS-媒体查询"><a href="#元素中的-CSS-媒体查询" class="headerlink" title=" 元素中的 CSS 媒体查询"></a><link> 元素中的 CSS 媒体查询</h3><p>满足查询条件，则生效，否则不生效。但是无论生效与否<strong>都会下载</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width: 800px)&quot; href=&quot;example.css&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="样式表中的CSS媒体查询"><a href="#样式表中的CSS媒体查询" class="headerlink" title="样式表中的CSS媒体查询"></a>样式表中的CSS媒体查询</h3><p>满足查询条件，则生效，否则不生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">@media (max-width: 600px) &#123;</span><br><span class="line">  .facet_sidebar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
-<li><p>and 操作符 ==&gt; 把多个媒体属性组合成一条媒体查询，对成链式的特征进行请求，只有当每个属性都为真时，结果才为真</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(min-width: 700px) and (max-width: 960px) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>逗号分隔列表 ==&gt; 使用逗号分隔效果等同于<strong>or逻辑操作符</strong>。当使用逗号分隔的媒体查询时，如果<strong>任何一个媒体查询返回真</strong>，<strong>样式</strong>就是<strong>有效</strong>的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@media (min-width: 700px), handheld and (orientation: landscape) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>not 操作符 ==&gt; 应用于整个媒体查询，在媒体查询为假时返回真</p>
-</li>
-<li><p>only 操作符 ==&gt; 防止老旧的浏览器不支持带媒体属性的查询而应用到给定的样式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; media=&quot;only screen and (color)&quot; href=&quot;example.css&quot; /&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>说明：</strong>若使用了not或only操作符，必须明确指定一个媒体类型。</p>
-<h3 id="媒体特征"><a href="#媒体特征" class="headerlink" title="媒体特征"></a>媒体特征</h3><ul>
-<li>device-width ==&gt; 设备宽度</li>
-<li>width ==&gt; 宽度。描述了输出设备渲染区域的宽度。接受 <strong>mix/min</strong> 前缀</li>
-</ul>
-<h3 id="响应式"><a href="#响应式" class="headerlink" title="响应式"></a>响应式</h3><p>响应式即不同的屏幕得到不同的样式</p>
-<h1 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h1><ul>
-<li>px ==&gt; 绝对长度单位，像素</li>
-<li>em ==&gt; 相对长度单位，这个单位表示<strong>元素的 <code>font-size</code> 的计算值</strong>。</li>
-<li>rem ==&gt; 相对长度单位，这个单位代表<strong>根元素（<html>）</html></strong>的 <code>font-size</code> 大小<br><strong>说明：网页默认的 <code>font-size: 16px</code></strong></li>
-<li>vh ==&gt; viewport hight，相对长度单位，视口高度的 1/100。</li>
-<li>vw ==&gt; viewport width，相对长度单位，视口宽度的 1/100。<br><strong>说明：vh 和 vw 的兼容性比较差，使用较少</strong></li>
-</ul>
-<h1 id="动态-REM"><a href="#动态-REM" class="headerlink" title="动态 REM"></a>动态 REM</h1><p>由于手机上分辨率太多，不是做响应式，只能退而求其次</p>
-<ul>
-<li><strong>百分比布局</strong>：高度问题，宽度不知道具体大小，仅仅知道百分比。造成了宽度不确定导致高度和宽度不能做任何配合</li>
-<li><strong>动态REM</strong>：一切单位以宽度为基准（vw 啊，但是 vw 兼容性较差），退而求其次：<strong>rem</strong></li>
-</ul>
-<p><strong>rem ==&gt; html font-size   =（JS实现）=&gt; page width（页面宽度）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var pageWidth = window.innerWidth</span><br><span class="line">        document.write( &apos;&lt;style&gt;html&#123;font-size:&apos; + pageWidth/10 + &apos;px;&#125;&lt;/style&gt;&apos; )</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body&#123;</span><br><span class="line">            font-size: 16px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure></p>
-<p>将 rem 变为 pageWidth/100 即可以表示 vw（视口宽度的 1/100），<strong>Chrome 浏览器默认最小字号 12px</strong>，此时的 <code>font-size</code> 被 Chrome 浏览器强制为 <strong>12px</strong>。所以将 rem 变为 pageWidth/10 。</p>
-<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><h3 id="SASS-实现将-px-自动变为-rem"><a href="#SASS-实现将-px-自动变为-rem" class="headerlink" title="SASS 实现将 px 自动变为 rem"></a>SASS 实现将 px 自动变为 rem</h3><p><a href="https://www.jianshu.com/p/f1fccdb53f8a" target="_blank" rel="noopener">LUNIX 安装SASS</a><br>SASS 文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@function px( $px )&#123;</span><br><span class="line">  @return $px/$designWidth*10 + rem; // 此处的 10 是 html&#123;font-size:&apos; + pageWidth/10 + &apos;px;&#125; 中的10 </span><br><span class="line">&#125;</span><br><span class="line">$designWidth : 640; // 640 是设计稿的宽度，需要根据设计稿的宽度填写</span><br></pre></td></tr></table></figure></p>
-<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ol>
-<li>移动端中没有 hover 事件，但是有 <strong><a href="https://www.jianshu.com/p/f0df9575a101" target="_blank" rel="noopener">touch 事件</a></strong></li>
-<li>移动端中<strong>没有 resize 事件</strong>，并且没有滚动条（隐藏滚动条）</li>
-<li>使用相对大小的字体 rem</li>
-<li>流动布局，各个区块都是浮动的</li>
-<li>选择加载 CSS ，Media Query 模块（CSS3）自动探测屏幕宽度，然后加载相应的 CSS 文件</li>
-<li>CSS 的 @media 规则</li>
-<li>图片自适应 max-width: 100%;</li>
-<li>很小很小的地方使用 px ==&gt; 1px</li>
-<li>rem 单位和其他单位混用，例如：<code>font-size: 16px</code></li>
-</ol>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
@@ -1127,7 +1126,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>2</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

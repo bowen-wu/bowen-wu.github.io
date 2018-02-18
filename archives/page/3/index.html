@@ -82,6 +82,134 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-26T02:57:26.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">2018-01-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">CSS 最佳实践 + 套路（四） -- 移动端适配</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/bowen-wu/node-create-file" target="_blank" rel="noopener">脚本实现自动创建移动端适配的相关文件</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>手机上显示网页是将整个网页缩小，模拟页面宽度 980px ，可以使用 <code>document.documentElement.clientWidth</code> 来获取到页面宽度为 980px。在移动端加上 <code>&lt;meta&gt;</code> 标签才是自适应，否则就是 980px ，即网页整体缩小。</p>
+<h1 id="meta-标签"><a href="#meta-标签" class="headerlink" title="meta 标签"></a>meta 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&apos; viewport &apos; content=&apos; width=device-width user-scalable=no initial-scale=1.0 maximum=1.0 minimum-scale=1.0 &apos;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>说明：</strong></p>
+<ul>
+<li><code>width=device-width</code> ==&gt; 网页宽度默认等于屏幕宽度</li>
+<li><code>user-scalable=no</code> ==&gt; 用户是否可以缩放</li>
+<li><code>initial-scale=1.0</code> ==&gt; 原始缩放比例为 1.0 ，即网页初始大小占屏幕面积的 100%</li>
+<li><code>maximum=1.0</code> ==&gt; 最大缩放比例</li>
+<li><code>minimum-scale=1.0</code> ==&gt; 最小缩放比例</li>
+</ul>
+<p><code>&lt;meta&gt;</code> 标签可以防止手机模拟 980px，防止页面在用户双击的时候放大和防止用户横屏</p>
+<h1 id="Media-Query-（媒体查询）模块"><a href="#Media-Query-（媒体查询）模块" class="headerlink" title="Media Query （媒体查询）模块"></a>Media Query （媒体查询）模块</h1><p>由一个可选的媒体类型和零个或多个使用媒体功能的限制了样式表范围的表达式组成，即<strong>对媒体进行某些条件的查询</strong></p>
+<ol>
+<li><p>目前来说只用两种模式 ：</p>
+<ul>
+<li>移动端 </li>
+<li>PC 端 </li>
+</ul>
+</li>
+<li><p>两种技术：</p>
+<ul>
+<li><strong>mobiles-first</strong> ==&gt; 先做移动端页面后做 PC 端页面（推荐）</li>
+<li>desktop-first ==&gt; 先做 PC 端页面后做移动端页面</li>
+</ul>
+</li>
+<li><p>两种方案：</p>
+<ul>
+<li>移动端和 PC 端分别跳转不同网站（京东、淘宝）</li>
+<li>渲染不同的 HTML+CSS（知乎）</li>
+</ul>
+</li>
+</ol>
+<h3 id="元素中的-CSS-媒体查询"><a href="#元素中的-CSS-媒体查询" class="headerlink" title=" 元素中的 CSS 媒体查询"></a><link> 元素中的 CSS 媒体查询</h3><p>满足查询条件，则生效，否则不生效。但是无论生效与否<strong>都会下载</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width: 800px)&quot; href=&quot;example.css&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="样式表中的CSS媒体查询"><a href="#样式表中的CSS媒体查询" class="headerlink" title="样式表中的CSS媒体查询"></a>样式表中的CSS媒体查询</h3><p>满足查询条件，则生效，否则不生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">@media (max-width: 600px) &#123;</span><br><span class="line">  .facet_sidebar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
+<li><p>and 操作符 ==&gt; 把多个媒体属性组合成一条媒体查询，对成链式的特征进行请求，只有当每个属性都为真时，结果才为真</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(min-width: 700px) and (max-width: 960px) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逗号分隔列表 ==&gt; 使用逗号分隔效果等同于<strong>or逻辑操作符</strong>。当使用逗号分隔的媒体查询时，如果<strong>任何一个媒体查询返回真</strong>，<strong>样式</strong>就是<strong>有效</strong>的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@media (min-width: 700px), handheld and (orientation: landscape) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>not 操作符 ==&gt; 应用于整个媒体查询，在媒体查询为假时返回真</p>
+</li>
+<li><p>only 操作符 ==&gt; 防止老旧的浏览器不支持带媒体属性的查询而应用到给定的样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; media=&quot;only screen and (color)&quot; href=&quot;example.css&quot; /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>说明：</strong>若使用了not或only操作符，必须明确指定一个媒体类型。</p>
+<h3 id="媒体特征"><a href="#媒体特征" class="headerlink" title="媒体特征"></a>媒体特征</h3><ul>
+<li>device-width ==&gt; 设备宽度</li>
+<li>width ==&gt; 宽度。描述了输出设备渲染区域的宽度。接受 <strong>mix/min</strong> 前缀</li>
+</ul>
+<h3 id="响应式"><a href="#响应式" class="headerlink" title="响应式"></a>响应式</h3><p>响应式即不同的屏幕得到不同的样式</p>
+<h1 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h1><ul>
+<li>px ==&gt; 绝对长度单位，像素</li>
+<li>em ==&gt; 相对长度单位，这个单位表示<strong>元素的 <code>font-size</code> 的计算值</strong>。</li>
+<li>rem ==&gt; 相对长度单位，这个单位代表<strong>根元素（<html>）</html></strong>的 <code>font-size</code> 大小<br><strong>说明：网页默认的 <code>font-size: 16px</code></strong></li>
+<li>vh ==&gt; viewport hight，相对长度单位，视口高度的 1/100。</li>
+<li>vw ==&gt; viewport width，相对长度单位，视口宽度的 1/100。<br><strong>说明：vh 和 vw 的兼容性比较差，使用较少</strong></li>
+</ul>
+<h1 id="动态-REM"><a href="#动态-REM" class="headerlink" title="动态 REM"></a>动态 REM</h1><p>由于手机上分辨率太多，不是做响应式，只能退而求其次</p>
+<ul>
+<li><strong>百分比布局</strong>：高度问题，宽度不知道具体大小，仅仅知道百分比。造成了宽度不确定导致高度和宽度不能做任何配合</li>
+<li><strong>动态REM</strong>：一切单位以宽度为基准（vw 啊，但是 vw 兼容性较差），退而求其次：<strong>rem</strong></li>
+</ul>
+<p><strong>rem ==&gt; html font-size   =（JS实现）=&gt; page width（页面宽度）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var pageWidth = window.innerWidth</span><br><span class="line">        document.write( &apos;&lt;style&gt;html&#123;font-size:&apos; + pageWidth/10 + &apos;px;&#125;&lt;/style&gt;&apos; )</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body&#123;</span><br><span class="line">            font-size: 16px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure></p>
+<p>将 rem 变为 pageWidth/100 即可以表示 vw（视口宽度的 1/100），<strong>Chrome 浏览器默认最小字号 12px</strong>，此时的 <code>font-size</code> 被 Chrome 浏览器强制为 <strong>12px</strong>。所以将 rem 变为 pageWidth/10 。</p>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><h3 id="SASS-实现将-px-自动变为-rem"><a href="#SASS-实现将-px-自动变为-rem" class="headerlink" title="SASS 实现将 px 自动变为 rem"></a>SASS 实现将 px 自动变为 rem</h3><p><a href="https://www.jianshu.com/p/f1fccdb53f8a" target="_blank" rel="noopener">LUNIX 安装SASS</a><br>SASS 文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@function px( $px )&#123;</span><br><span class="line">  @return $px/$designWidth*10 + rem; // 此处的 10 是 html&#123;font-size:&apos; + pageWidth/10 + &apos;px;&#125; 中的10 </span><br><span class="line">&#125;</span><br><span class="line">$designWidth : 640; // 640 是设计稿的宽度，需要根据设计稿的宽度填写</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ol>
+<li>移动端中没有 hover 事件，但是有 <strong><a href="https://www.jianshu.com/p/f0df9575a101" target="_blank" rel="noopener">touch 事件</a></strong></li>
+<li>移动端中<strong>没有 resize 事件</strong>，并且没有滚动条（隐藏滚动条）</li>
+<li>使用相对大小的字体 rem</li>
+<li>流动布局，各个区块都是浮动的</li>
+<li>选择加载 CSS ，Media Query 模块（CSS3）自动探测屏幕宽度，然后加载相应的 CSS 文件</li>
+<li>CSS 的 @media 规则</li>
+<li>图片自适应 max-width: 100%;</li>
+<li>很小很小的地方使用 px ==&gt; 1px</li>
+<li>rem 单位和其他单位混用，例如：<code>font-size: 16px</code></li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-26T02:54:17.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（三）-- 堆叠上下文/">2018-01-26</a></time>
       
       
@@ -959,110 +1087,6 @@
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-15T10:27:13.000Z"><a href="/2018/01/15/HTTP系列 -- 请求与响应/">2018-01-15</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/15/HTTP系列 -- 请求与响应/">HTTP系列 -- 请求与响应</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
-<li><p><strong>Server（服务器）</strong>：服务器作为硬件来说，通常是指那些具有较高计算能力，能够提供给多个用户使用的计算机</p>
-</li>
-<li><p><strong>Client（客户端）</strong>：是指与服务器相对应，为客户提供本地服务的程序</p>
-</li>
-</ol>
-<h1 id="浏览器-服务器-HTTP-三者关系"><a href="#浏览器-服务器-HTTP-三者关系" class="headerlink" title="浏览器 + 服务器 + HTTP 三者关系"></a>浏览器 + 服务器 + HTTP 三者关系</h1><ul>
-<li>浏览器负责发起请求</li>
-<li>服务器在<strong>80端口</strong>接收请求</li>
-<li>服务器负责返回内容（响应）</li>
-<li>浏览器负责下载响应内容</li>
-</ul>
-<p><strong>HTTP 的作用就是指导浏览器和服务器如何进行沟通。</strong></p>
-<h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h3 id="请求头（Request-Headers）格式"><a href="#请求头（Request-Headers）格式" class="headerlink" title="请求头（Request Headers）格式"></a>请求头（Request Headers）格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.请求类型 路径 协议/版本 // 请求行</span><br><span class="line">2.key: value  // 请求头</span><br><span class="line">3.</span><br><span class="line">4.要上传的数据  // 其他消息体</span><br></pre></td></tr></table></figure>
-<h3 id="请求类型"><a href="#请求类型" class="headerlink" title="请求类型"></a>请求类型</h3><ol>
-<li><p>GET ==&gt; 用于获取数据。</p>
-</li>
-<li><p>POST ==&gt; 用于提交数据，请求服务器进行处理。</p>
-</li>
-<li><p>PUT ==&gt; 向指定资源位置上传其最新内容（所有内容都更新）。</p>
-</li>
-<li><p>PATCH ==&gt; 用于将局部修改应用到资源。</p>
-</li>
-<li><p>DELETE ==&gt; 请求服务器删除Request-URI所标识的资源。</p>
-</li>
-<li><p>HEAD ==&gt; 向服务器发出指定资源的请求，但服务器将不传回资源的本文部分。</p>
-</li>
-<li><p>OPTIONS ==&gt; 使服务器传回该资源所支持的所有HTTP请求方法，向Web服务器发送OPTIONS请求，可以测试服务器功能是否正常运作。</p>
-</li>
-</ol>
-<h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><p>必须以 <code>/</code> 开头，如果不设置，默认为 <code>/</code> ，路径包括<strong>查询参数</strong>，但是不包括<strong>锚点</strong></p>
-<h3 id="版本："><a href="#版本：" class="headerlink" title="版本："></a>版本：</h3><p>版本大部分都是 <code>HTTP/1.1</code>，还有<code>HTTP/2</code>.</p>
-<h3 id="请求头（key-value）："><a href="#请求头（key-value）：" class="headerlink" title="请求头（key: value）："></a>请求头（key: value）：</h3><p>请求头定义一些操作参数。其中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host: www.baidu.com  // 域名</span><br><span class="line">User-Agent:      // 用的什么软件发起的请求</span><br><span class="line">Content-Type: application/x-www-form-urlcoded    //标识了第4部分的格式，POST 请求</span><br><span class="line">Content-Length: </span><br><span class="line">Cookie:</span><br></pre></td></tr></table></figure></p>
-<h3 id="第3部分："><a href="#第3部分：" class="headerlink" title="第3部分："></a>第3部分：</h3><p>是一个空行（回车）。</p>
-<h3 id="第4部分："><a href="#第4部分：" class="headerlink" title="第4部分："></a>第4部分：</h3><p>上传的数据，可以没有 </p>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
-<li>https 协议 ==&gt; 所有数据在网络上请求和传输的时候都是加密的</li>
-<li>http 协议  ==&gt; 所有数据在网络上请求和传输的时候都是明文的</li>
-</ul>
-<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><h3 id="响应头（Response-Headers）格式"><a href="#响应头（Response-Headers）格式" class="headerlink" title="响应头（Response Headers）格式"></a>响应头（Response Headers）格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.协议/版本 状态码 状态解释</span><br><span class="line">2.key: value  </span><br><span class="line">3.</span><br><span class="line">4.要下载的数据</span><br></pre></td></tr></table></figure>
-<h3 id="状态码："><a href="#状态码：" class="headerlink" title="状态码："></a>状态码：</h3><p>表示网页服务器超文本传输协议响应状态的3位数字代码。</p>
-<ul>
-<li><p>2xx成功 ==&gt; 代表请求已成功被服务器接收、理解、并接受。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.200 OK 请求已成功，请求所希望的响应头或数据体将随此响应返回（GET）。</span><br><span class="line">b.204 No Content 服务器成功处理了请求，没有返回任何内容（创建成功 ==&gt; POST）。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>3xx重定向 ==&gt; 类状态码代表需要客户端采取进一步的操作才能完成请求。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.301 Move Permanently 被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个URI之一。</span><br><span class="line">b.302 Found 要求客户端执行临时重定向。</span><br><span class="line">c.304 Not Modified 表示资源未被修改。在这种情况下，由于客户端仍然具有以前下载的副本，因此不需要重新传输资源。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>4xx客户端错误 ==&gt; 这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.403 Forbidden 客户端错误，服务器已经理解请求，但是拒绝执行  它。</span><br><span class="line">b.404 Not Found 请求失败，请求所希望得到的资源未被在服务器上发    现，但允许用户的后续请求。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>5xx服务器错误 ==&gt; 表示服务器无法完成明显有效的请求。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.500 Internal Server Error 通用错误消息，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。</span><br><span class="line">b.502 Bad Gateway 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="HTML-与-HTTP"><a href="#HTML-与-HTTP" class="headerlink" title="HTML 与 HTTP"></a>HTML 与 HTTP</h1><p>所有 App 都会内置一个浏览器（WebView）用来展示 HTML，而 HTML 都是通过 HTTP 下载的，而如果你要使用 HTTP 一般都会用到 URL。</p>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/HTTP/">HTTP</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1103,7 +1127,7 @@
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>2</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

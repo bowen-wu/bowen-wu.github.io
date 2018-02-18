@@ -82,6 +82,172 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-18T23:40:03.000Z"><a href="/2018/02/19/前端基础系列（二） -- 命令行基础/">2018-02-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/19/前端基础系列（二） -- 命令行基础/">前端基础系列（二） -- 命令行基础</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>命令行操作会解放我们的鼠标，让我们更加流畅的进行我们想要的操作</p>
+<h1 id="文件与文件夹（目录）"><a href="#文件与文件夹（目录）" class="headerlink" title="文件与文件夹（目录）"></a>文件与文件夹（目录）</h1><ul>
+<li><code>~</code> ==&gt; 用户目录</li>
+<li><code>/</code> ==&gt; 所有硬盘</li>
+<li><code>.</code> ==&gt; 当前目录</li>
+<li><code>..</code> ==&gt; 父级目录</li>
+<li><code>$</code> ==&gt; 已准备好</li>
+<li><code>directory</code> ==&gt; 目录文件夹</li>
+<li><code>file</code> ==&gt; 文件</li>
+<li><code>make</code> ==&gt; 新建</li>
+<li><code>remove</code> ==&gt; 删除</li>
+<li><code>move</code> ==&gt; 移动</li>
+<li><code>list</code> ==&gt; 枚举</li>
+<li><code>link</code> ==&gt; 链接（windows不支持）</li>
+<li><code>find</code> ==&gt; 查找</li>
+<li><code>echo</code> ==&gt; 发出回音、重复</li>
+<li><code>touch</code> ==&gt; 触摸</li>
+<li><code>change</code> ==&gt; 改变</li>
+<li><code>copy</code> ==&gt; 复制</li>
+</ul>
+<h1 id="缩写规则"><a href="#缩写规则" class="headerlink" title="缩写规则"></a>缩写规则</h1><p>删除元音字母（A E I O U）,保留前两个到三个辅音</p>
+<ul>
+<li><code>mkdir</code> ==&gt; <code>make directory</code> ==&gt; 创建目录</li>
+<li><code>rm</code> ==&gt; <code>remove</code> ==&gt; 删除</li>
+<li><code>mv</code> ==&gt; <code>move</code> ==&gt; 移动、重命名</li>
+<li><code>cp</code> ==&gt; <code>copy</code> ==&gt; 复制</li>
+<li><code>ls</code> ==&gt; <code>list</code> ==&gt; 枚举</li>
+<li><code>cd</code> ==&gt; <code>change directory</code> ==&gt; 改变目录</li>
+<li><code>-rf</code> ==&gt; 用于删除目录，其中：<ul>
+<li><code>-r</code> ==&gt; 文件夹的递归操作</li>
+<li><code>-f</code> ==&gt; 强制，否则每个文件都要询问</li>
+</ul>
+</li>
+</ul>
+<h1 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h1><ul>
+<li><p><code>cd</code> ==&gt; 进入目录</p>
+</li>
+<li><p><code>pwd</code> ==&gt; 显示当前目录 </p>
+</li>
+<li><p><code>mkdir 目录名</code> ==&gt; 创建目录</p>
+</li>
+<li><p><code>mkdir -p 目录路径</code> ==&gt; 创建目录（<em>eg.：mkdir -p demo/outter/inner</em>），如果<code>目录路径</code>有特殊字符（<em>eg.：空格</em>）要加引号。所以坚决避免有特殊字符</p>
+</li>
+<li><p><code>whoami</code> ==&gt; 我是谁</p>
+</li>
+<li><p><code>ls</code> ==&gt; 查看路径</p>
+</li>
+<li><p><code>ls -a</code> ==&gt; 查看路径（显示所有文件【包括隐藏文件】）</p>
+</li>
+<li><p><code>ls -l</code> ==&gt; 查看路径（包括详细信息）</p>
+</li>
+<li><p><code>ls -al</code> | <code>ls -la</code> ==&gt; <code>ls -a</code> + <code>ls -l</code></p>
+</li>
+<li><p><code>touch 文件名</code> ==&gt; 创建文件</p>
+</li>
+<li><p><code>touch 文件名（已存在的文件名）</code> ==&gt; 改变文件更新时间</p>
+</li>
+<li><p><code>cp 源路径 目标路径</code> ==&gt; 复制文件</p>
+</li>
+<li><p><code>cp -r 源路径 目标路径</code> ==&gt; 复制目录</p>
+</li>
+<li><p><code>mv 源路径 目标路径</code> ==&gt; 移动节点</p>
+</li>
+<li><p><code>rm 文件路径</code> ==&gt; 删除文件</p>
+</li>
+<li><p><code>rm -f 文件路径</code> ==&gt; 强制删除文件</p>
+</li>
+<li><p><code>rm -r 目录路径</code> ==&gt; 删除目录</p>
+</li>
+<li><p><code>rm -rf 目录路径</code> ==&gt; 强制删除目录</p>
+</li>
+<li><p><code>curl -L http://www.baidu.com &gt; baidu.html</code> ==&gt; 下载文件</p>
+</li>
+<li><p><code>df -kh</code> ==&gt; 磁盘占用</p>
+</li>
+<li><p><code>du -sh</code> ==&gt; 当前目录大小</p>
+</li>
+<li><p><code>du -h</code> ==&gt; 各文件大小</p>
+</li>
+</ul>
+<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>使用 git 三种方式</p>
+<ol>
+<li>只在本地上使用</li>
+<li>将本地仓库上传到github</li>
+<li>下载github上的仓库</li>
+</ol>
+<h3 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone &apos;SSH地址&apos; ==&gt; 下载仓库</span><br><span class="line">git init  ==&gt; 初始化本地仓库 .git 目录</span><br><span class="line">git status -sb ==&gt; 显示当前所有文件状态</span><br><span class="line">git add . ==&gt; 把当前目录（&apos;.&apos; 表示当前目录）里面的变动添加到【暂存区】</span><br><span class="line">git commit -m &apos;信息&apos; ==&gt; 将 &apos;add&apos; 的内容【正式提交】到本地仓库，并添加注释信息</span><br><span class="line">git commit --amend -m &apos;信息&apos; ==&gt; 修改上次的注释信息</span><br><span class="line">git log ==&gt; 历史变动</span><br></pre></td></tr></table></figure>
+<p><code>git status -sb</code> ==&gt; <code>-s(summary)：显示总结</code> + <code>-b(branch)：显示分支</code><br><code>start css/style.css</code> ==&gt; 使用默认编辑器打开 style.css<br>如果有新的变动，需要一次执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &apos;信息&apos;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>git status -sb</code> ==&gt; 显示当前所有文件状态，其中：<br>  <code>??</code> ==&gt; 表示待处理<br>  <code>A</code> ==&gt; 表示添加<br>  <code>M</code> ==&gt; 表示这个文件被修改了（Modified）</li>
+</ul>
+<h3 id="本地使用"><a href="#本地使用" class="headerlink" title="本地使用"></a>本地使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">mkdir + touch</span><br><span class="line">git add .</span><br><span class="line">git commit -m &apos;信息&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="将本地仓库上传到github"><a href="#将本地仓库上传到github" class="headerlink" title="将本地仓库上传到github"></a>将本地仓库上传到github</h3><p>create a new repository on the command line<br>创建一个新仓库在命令行中<br>push an existing repository from the command line<br>添加一个现有的仓库从命令行<br><strong>注</strong>：existing — 现有</p>
+<h3 id="直接在github创建一个仓库然后下载本地"><a href="#直接在github创建一个仓库然后下载本地" class="headerlink" title="直接在github创建一个仓库然后下载本地"></a>直接在github创建一个仓库然后下载本地</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create a new repository</span><br><span class="line">repository name</span><br><span class="line">Decription</span><br><span class="line">Initilize this repository with a README</span><br><span class="line">Add .gitignore : Node</span><br><span class="line">Add a license : MIT License</span><br><span class="line">clone or download</span><br><span class="line">Use SSH ==&gt; git@github.com开头地址</span><br><span class="line">在要粘贴的文件夹 git bash here</span><br><span class="line">git clone &apos;地址&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="上传更新"><a href="#上传更新" class="headerlink" title="上传更新"></a>上传更新</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. git add 文件路径</span><br><span class="line">2. git commit -m &apos;信息&apos;</span><br><span class="line">3. git pull</span><br><span class="line">4. git push</span><br></pre></td></tr></table></figure>
+<p><strong>注</strong>：在命令行中输入命令是区分大小写</p>
+<h3 id="github-上删除-node-modules"><a href="#github-上删除-node-modules" class="headerlink" title="github 上删除 node_modules"></a>github 上删除 node_modules</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached node_modules  // --cached不会把本地的.idea删除</span><br><span class="line">git commit -m &apos;delete node_modules&apos;</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h1 id="命令行技巧"><a href="#命令行技巧" class="headerlink" title="命令行技巧"></a>命令行技巧</h1><h3 id="bashrc"><a href="#bashrc" class="headerlink" title="~/.bashrc"></a>~/.bashrc</h3><p>~/.bashrc 文件的功能很强大</p>
+<p>自动运行</p>
+<ol>
+<li><code>touch ~/.bashrc</code></li>
+<li><code>start ~/.bashrc</code></li>
+<li>编辑 <code>~/.bashrc</code>，内容为 <code>cd ~/Desktop</code>，重启 Git Bash，默认就进入桌面目录了<br>可以用 <code>~/.bashrc</code> 在进入 Git Bash 前执行任何命令，十分方便</li>
+</ol>
+<h3 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h3><ol>
+<li>在 <code>~/.bashrc</code> 里新增一行 <code>alias b=&quot;echo &#39;bowen is awesome&#39;&quot;</code></li>
+<li>运行 <code>source ~/.bashrc</code>，作用是执行 <code>~/.bashrc</code></li>
+<li>运行<code>b</code>，就会看到 <code>bowen is awesome</code></li>
+<li>也就是说，现在 <code>b</code> 就是 <code>echo &#39;bowen is awesome&#39;</code> 的缩写了</li>
+</ol>
+<h5 id="常见命令缩写"><a href="#常见命令缩写" class="headerlink" title="常见命令缩写"></a>常见命令缩写</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">alias la=&apos;ls -a&apos;</span><br><span class="line">alias ll=&apos;ls -l&apos;</span><br><span class="line">alias gst=&apos;git status -sb&apos;</span><br><span class="line">alias ga=&apos;git add&apos;</span><br><span class="line">alias ga.=&apos;git add .&apos;</span><br><span class="line">alias gc=&apos;git commit&apos;</span><br><span class="line">alias gc.=&apos;git commit .&apos;</span><br></pre></td></tr></table></figure>
+<p>保存退出，然后运行 <code>source ~/.bashrc</code></p>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ul>
+<li>绝对路径： 以 <code>/</code> 开头的路径就是绝对路径</li>
+<li>隐藏文件以 <code>.</code> 开头</li>
+<li>d — 目录、r — 可读、w — 可写、x — 可执行<br>rwx（管理员权限）<br>r-x（用户所在组权限）<br>r-x（任意用户权限）<pre><code>![更多信息](http://upload-images.jianshu.io/upload_images/9617841-96efb0bf3fef1021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/前端基础/">前端基础</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-18T23:37:54.000Z"><a href="/2018/02/19/前端基础系列（一） -- 编程基础/">2018-02-19</a></time>
       
       
@@ -1069,133 +1235,6 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-30T00:53:32.000Z"><a href="/2018/01/30/JS系列 -- 基本概念（二）数据类型/">2018-01-30</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/30/JS系列 -- 基本概念（二）数据类型/">JS系列 -- 基本概念（二）数据类型</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
-<li>基本数据类型（简单数据类型）：<ul>
-<li>数值</li>
-<li>字符串</li>
-<li>布尔值</li>
-<li>undefined</li>
-<li>null</li>
-<li>Symbol </li>
-</ul>
-</li>
-<li>复杂数据类型：<ul>
-<li>Object  ==&gt;  由一组无序的键值对组成，即哈希。分为 <strong>狭义对象</strong> <strong>数组</strong> <strong>函数</strong></li>
-</ul>
-</li>
-<li>原始类型：字符串 数值 布尔值</li>
-<li>合成类型：对象</li>
-<li>特殊值：undefined null</li>
-</ol>
-<h1 id="判断类型"><a href="#判断类型" class="headerlink" title="判断类型"></a>判断类型</h1><h3 id="方法："><a href="#方法：" class="headerlink" title="方法："></a>方法：</h3><ol>
-<li>typeof 运算符：返回一个值的数据类型(<strong>字符串</strong>)<ul>
-<li>“undefined” ==&gt; 如果这个值  <strong>未定义</strong></li>
-<li>“boolean” ==&gt; 如果这个值是  <strong>布尔值</strong></li>
-<li>“string” ==&gt; 如果这个值是  <strong>字符串</strong></li>
-<li>“number” ==&gt; 如果这个值是  <strong>数值</strong></li>
-<li>“Object” ==&gt; 如果这个值是   <strong>对象</strong> 或 <strong>null</strong></li>
-<li>“function” ==&gt; 如果这个值  <strong>函数</strong></li>
-</ul>
-</li>
-<li>instanceof 运算符</li>
-<li>Object.prototype.toString方法</li>
-</ol>
-<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><ol>
-<li>没有 Array 类型</li>
-<li>对<strong>未初始化</strong>的变量执行 typeof 操作符会返回 undefined 值</li>
-<li>对<strong>未声明</strong>的变量执行 typeof 操作符会返回 undefined 值</li>
-</ol>
-<h1 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h1><h3 id="NaN"><a href="#NaN" class="headerlink" title="NaN"></a>NaN</h3><p>非数值，是一个特殊的<strong>数值</strong>（typeof NaN  ==&gt;  number）</p>
-<ul>
-<li>任何涉及 NaN 的操作都会返回 NaN</li>
-<li>NaN 与任何值都不相等，包括 NaN 本身</li>
-</ul>
-<h3 id="转换类型（3函数-2操作符）"><a href="#转换类型（3函数-2操作符）" class="headerlink" title="转换类型（3函数 2操作符）"></a>转换类型（3函数 2操作符）</h3><ul>
-<li>Number() ==&gt; 可以用于任何函数</li>
-<li>parseInt() ==&gt; 用于将字符串转换为数值 <strong>parseInt(“”) //NaN</strong></li>
-<li>parseFloat() ==&gt; 用于将字符串转换为数值</li>
-<li>一元 + 操作符 ==&gt; 等价于Number()</li>
-<li>‘ - 0 ‘  //任意一个类型减去0</li>
-</ul>
-<p><strong>parseInt(‘s’) ==&gt; NaN</strong></p>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>字符串默认只能写在一行内，分成多行将会报错。</p>
-<ul>
-<li>如果长字符串必须分成多行，可以在每一行的尾部使用<strong>反斜杠</strong>。<br><strong>注意</strong>：反斜杠的后面必须是换行符，而不能有其他字符（比如空格），否则会报错。</li>
-<li>连接<strong>运算符（+）</strong>可以连接多个单行字符串，将长字符串拆成多行书写，输出的时候也是单行</li>
-</ul>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>字符串是不可变的，字符串一旦创建，值就不能改变，要改变某个变量保存的字符串，首先要销毁原来的字符串，然后再用另一个包含新值的字符串填充该变量</p>
-<h3 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h3><p>返回字符串的长度，该属性也是无法改变的</p>
-<h3 id="字符字面量（转义符）"><a href="#字符字面量（转义符）" class="headerlink" title="字符字面量（转义符）"></a>字符字面量（转义符）</h3><p>反斜杠（\）在字符串内有特殊含义，用来表示非打印，所以又称为字符字面量（转义符）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\0 ：null（\u0000）</span><br><span class="line">\b ：后退键（\u0008）</span><br><span class="line">\f ：换页符（\u000C）</span><br><span class="line">\n ：换行符（\u000A）</span><br><span class="line">\r ：回车键（\u000D）</span><br><span class="line">\t ：制表符（\u0009）</span><br><span class="line">\v ：垂直制表符（\u000B）</span><br><span class="line">\&apos; ：单引号（\u0027）</span><br><span class="line">\&quot; ：双引号（\u0022）</span><br><span class="line">\\ ：反斜杠（\u005C）</span><br></pre></td></tr></table></figure></p>
-<p>如果在非特殊字符前面使用反斜杠，则反斜杠会被省略。</p>
-<h3 id="字符串与数组"><a href="#字符串与数组" class="headerlink" title="字符串与数组"></a>字符串与数组</h3><p>字符串可以被视为字符数组，因此可以使用数组的方括号运算符，用来返回某个位置的字符（位置编号从0开始）。<br>无法改变字符串之中的单个字符。</p>
-<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>转换为字符串</p>
-<ol>
-<li>一元 + 号操作符   </li>
-<li>String()     </li>
-<li>toString()</li>
-</ol>
-<h1 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h1><p> <strong>falsy</strong> ： 在 Boolean 上下文中认定可转换为 false 的值 ( 5个假值 )<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">0</span><br><span class="line">NaN</span><br><span class="line">&apos;&apos;</span><br><span class="line">null</span><br><span class="line">undefined</span><br></pre></td></tr></table></figure></p>
-<p><strong>空数组（[]）和空对象（{}）对应的布尔值，都是true。</strong></p>
-<h3 id="转换类型"><a href="#转换类型" class="headerlink" title="转换类型"></a>转换类型</h3><p>转换为布尔值</p>
-<ol>
-<li>Boolean()</li>
-<li><code>!!</code>    //取反再取反</li>
-</ol>
-<h1 id="null-和-undefined-区别"><a href="#null-和-undefined-区别" class="headerlink" title="null 和 undefined 区别"></a>null 和 undefined 区别</h1><ul>
-<li>null是一个表示<strong>“空”的对象</strong>，转为数值时为0。</li>
-<li><p>null表示<strong>空值</strong>，即该处的值现在为空。调用函数时，某个参数未设置任何值，这时就可以传入null，表示该参数为空。</p>
-</li>
-<li><p>undefined是一个表示”此处无定义”的原始值，转为数值时为NaN。返回undefined的情景。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 变量声明了，但没有赋值</span><br><span class="line">var i;</span><br><span class="line">i // undefined</span><br><span class="line"></span><br><span class="line">// 调用函数时，应该提供的参数没有提供，该参数等于 undefined</span><br><span class="line">function f(x) &#123;</span><br><span class="line">  return x;</span><br><span class="line">&#125;</span><br><span class="line">f() // undefined</span><br><span class="line"></span><br><span class="line">// 对象没有赋值的属性</span><br><span class="line">var  o = new Object();</span><br><span class="line">o.p // undefined</span><br><span class="line"></span><br><span class="line">// 函数没有返回值时，默认返回 undefined</span><br><span class="line">function f() &#123;&#125;</span><br><span class="line">f() // undefined</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/JavaScript/">JavaScript</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1234,7 +1273,7 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>2</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   
