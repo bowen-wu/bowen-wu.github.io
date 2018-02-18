@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS系列 -- Array 浅析之相关 API | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="判断数组1Array.isArray( arguments )
+原型实例化对象的 __proto__ 指向构造函数的 prototype123456789101112typeof Array === &amp;apos;function&amp;apos;Array instanceof Function === ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JS系列 -- Array 浅析之相关 API"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/30/JS系列 -- Array-浅析之相关-API/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-30T01:02:22.000Z"><a href="/2018/01/30/JS系列 -- Array-浅析之相关-API/">2018-01-30</a></time>
+      
+      
+  
+    <h1 class="title">JS系列 -- Array 浅析之相关 API</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="判断数组"><a href="#判断数组" class="headerlink" title="判断数组"></a>判断数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Array.isArray( arguments )</span><br></pre></td></tr></table></figure>
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p><strong>实例化对象的 <code>__proto__</code> 指向构造函数的 <code>prototype</code></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typeof Array === &apos;function&apos;</span><br><span class="line"></span><br><span class="line">Array instanceof Function === true</span><br><span class="line">Array.__proto__ === Function.prototype</span><br><span class="line"></span><br><span class="line">Array instanceof Object === true</span><br><span class="line">Array.__proto__.__proto__ === Object.prototype </span><br><span class="line"></span><br><span class="line">let arr = []</span><br><span class="line">arr.__proto__ === Arr.prototype</span><br><span class="line">arr.__proto__.__proto__ === Object.prototype</span><br><span class="line">arr.__proto__.constructor === Array</span><br></pre></td></tr></table></figure></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><h4 id="需求一"><a href="#需求一" class="headerlink" title="需求一"></a>需求一</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr1 = [&apos;a&apos;]</span><br><span class="line">let arr2 = [ &apos;b&apos; , &apos;c&apos; ]</span><br><span class="line">数组 arr1 ==&gt; [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]</span><br><span class="line">数组 arr2 不变</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. arr1 = arr.concat(arr2)</span><br><span class="line">2. arr2.forEach( (item) =&gt; &#123;arr1.push(item)&#125; )</span><br><span class="line">3. arr1.push( ...arr2 )</span><br><span class="line">4. [].push.apply( arr1, arr2 )</span><br></pre></td></tr></table></figure>
+<h4 id="需求二"><a href="#需求二" class="headerlink" title="需求二"></a>需求二</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function max()&#123;</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br><span class="line">max(1,2,3) // 3</span><br><span class="line">max( 1,4 ) // 4</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. return Math.max(...arguments)</span><br><span class="line">2. return Math.max.apply( null, arguments )</span><br></pre></td></tr></table></figure>
+<h4 id="需求三"><a href="#需求三" class="headerlink" title="需求三"></a>需求三</h4><p>将 <code>arguments</code> 转化为 <code>Array</code></p>
+<h6 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. args = Array.from( arguments )</span><br><span class="line">2. args = [].slice.call( arguments )</span><br></pre></td></tr></table></figure>
+<h4 id="需求四"><a href="#需求四" class="headerlink" title="需求四"></a>需求四</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function repeat( str, num )&#123;</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br><span class="line">repeat( &apos;abc&apos;, 3 ) // &apos;abcabcabc&apos;</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-3"><a href="#解决方法-3" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return Array( num + 1 ).join( str )</span><br></pre></td></tr></table></figure>
+<h4 id="需求五"><a href="#需求五" class="headerlink" title="需求五"></a>需求五</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]</span><br><span class="line">判断 &apos;b&apos; 在不在 arr 里面</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-4"><a href="#解决方法-4" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.indexOf( &apos;b&apos; ) !== -1  // true ==&gt; 在   false ==&gt; 不在</span><br><span class="line">arr.includes( &apos;b&apos; )   // 直接返回 true | false</span><br></pre></td></tr></table></figure>
+<h4 id="需求五升级"><a href="#需求五升级" class="headerlink" title="需求五升级"></a>需求五升级</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = [ &#123;name: &apos;xiaoming&apos;&#125;, &#123;name: &apos;xiaozhang&apos;&#125; ]</span><br><span class="line">查看数组中是否有叫小明的人</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-5"><a href="#解决方法-5" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. arr.forEach((item) =&gt; &#123;</span><br><span class="line">	if(item.name === &apos;xiaoming&apos;)&#123;</span><br><span class="line">		console.log(&apos;true&apos;)</span><br><span class="line">	&#125;</span><br><span class="line">   &#125;)</span><br><span class="line">// forEach 方法返回 undefined ，没有想到怎么取得它的结果，目前只能 console.log(&apos;true&apos;)</span><br><span class="line">2. let it = arr.find( (item) =&gt; &#123;</span><br><span class="line">    return item.name === &apos;xiaoming&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(it)  // &#123;name: &quot;xiaoming&quot;&#125;</span><br><span class="line">3. let it = arr.findIndex((item) =&gt; &#123;</span><br><span class="line">	return item.name === &apos;xiaoming&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">    console.log(it)  // 0</span><br></pre></td></tr></table></figure>
+<h4 id="需求六"><a href="#需求六" class="headerlink" title="需求六"></a>需求六</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [ 20, 30, 40 ]</span><br><span class="line">使得 arr 中每个元素 +5</span><br><span class="line">arr ==&gt; [ 25, 35, 45 ]</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-6"><a href="#解决方法-6" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. arr.map( (item) =&gt; &#123;</span><br><span class="line">    return item + 5</span><br><span class="line">  &#125;)</span><br><span class="line">2. arr.forEach( (item, index, ctx) =&gt; &#123;</span><br><span class="line">    ctx[ index ] = item + 5</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="需求七"><a href="#需求七" class="headerlink" title="需求七"></a>需求七</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; name: &apos;xiaoming&apos;, age: 20, id: 123456789 &#125;</span><br><span class="line">function validPerson( person )&#123;</span><br><span class="line">    // 如果有 名字 | id 就有效</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1. if(person.hasOwnProperty( &apos;name&apos; ) || person.hasOwnProperty( &apos;id&apos; ))&#123;</span><br><span class="line">      return true</span><br><span class="line">   &#125;</span><br><span class="line">    return false</span><br><span class="line">2. </span><br><span class="line">let obj = &#123; name: &apos;xiaoming&apos;, age: 20, id: 123456789 &#125;</span><br><span class="line">let validFileds = [ &apos;name&apos;, &apos;id&apos; ]</span><br><span class="line">function validPerson( person )&#123;</span><br><span class="line">    return validFileds.some( (item) =&gt; &#123;</span><br><span class="line">        return person.hasOwnProperty( item )</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">3. </span><br><span class="line">let obj = &#123; name: &apos;xiaoming&apos;, age: 20, id: 123456789 &#125;</span><br><span class="line">let validFileds = [ &apos;name&apos;, &apos;id&apos; ]</span><br><span class="line">function validPerson( person )&#123;</span><br><span class="line">    return validFileds.some( Object.prototype.hasOwnProperty, person )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery系列（一） -- touch jQuery | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="封装函数尽管 DOM 提供了 API ，可是当我们使用 DOM API 的时候却不尽人意，它提供的功能实在是有限，并且有些方法还没有，所以我们先来封装两个函数。第一个函数作用是获取一个元素节点的所有兄弟，第二个函数作用是可以对一个节点添加或者删除 class 。
+获取一个元素节点的所有兄弟当调用 g">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="jQuery系列（一） -- touch jQuery"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/12/jQuery系列（一）-- touch-jQuery/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-12T11:01:20.000Z"><a href="/2018/01/12/jQuery系列（一）-- touch-jQuery/">2018-01-12</a></time>
+      
+      
+  
+    <h1 class="title">jQuery系列（一） -- touch jQuery</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="封装函数"><a href="#封装函数" class="headerlink" title="封装函数"></a>封装函数</h1><p>尽管 DOM 提供了 API ，可是当我们使用 DOM API 的时候却不尽人意，它提供的功能实在是有限，并且有些方法还没有，所以我们先来封装两个函数。第一个函数作用是获取一个元素节点的所有兄弟，第二个函数作用是可以对一个节点添加或者删除 class 。</p>
+<h4 id="获取一个元素节点的所有兄弟"><a href="#获取一个元素节点的所有兄弟" class="headerlink" title="获取一个元素节点的所有兄弟"></a>获取一个元素节点的所有兄弟</h4><p>当调用 getSiblings 函数的时候只需要传入一个元素节点即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getSiblings(node) &#123;</span><br><span class="line">        let allchild = node.parentNode.children</span><br><span class="line">        let siblings = &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;</span><br><span class="line">        for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">            if (allchild[i] !== node) &#123;</span><br><span class="line">                siblings[siblings.length] = allchild[i]</span><br><span class="line">                siblings.length += 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return siblings;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="操纵一个节点的-class-可以进行添加和删除"><a href="#操纵一个节点的-class-可以进行添加和删除" class="headerlink" title="操纵一个节点的 class 可以进行添加和删除"></a>操纵一个节点的 class 可以进行添加和删除</h4><p>调用 operationClass 时，需要传入一个节点和一个 classes 对象<code>operationClass( node, { className: true, className: false } )</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function operationClass(node,classes)&#123;</span><br><span class="line">        for(let key in classes)&#123;</span><br><span class="line">            let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">            node.classList[method](key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><p>利用命名空间，从而对上述两个函数进行优化<br>调用方法：<br><code>DOM.operationClass.call(undefined,node,{className:true,className:false})</code><br><code>console.log(DOM.getSiblings.call(undefined,node))</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let DOM = &#123;&#125;</span><br><span class="line">    DOM.operationClass = (node,classes) =&gt; &#123;</span><br><span class="line">        for(let key in classes)&#123;</span><br><span class="line">            let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">            node.classList[method](key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    DOM.getSiblings = (node) =&gt; &#123;</span><br><span class="line">        let allchild = node.parentNode.children</span><br><span class="line"></span><br><span class="line">        let siblings = &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">            if (allchild[i] !== node) &#123;</span><br><span class="line">                siblings[siblings.length] = allchild[i]</span><br><span class="line">                siblings.length += 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return siblings;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="最终优化"><a href="#最终优化" class="headerlink" title="最终优化"></a>最终优化</h1><h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>在 Node.prototype 上添加方法，调用方法是：<br><code>node.operationClass.call(node,{className:true,className:false})</code><br><code>node.getSiblings.call(node)</code><br><strong>缺点</strong>：改变了 Node.prototype<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Node.prototype.operationClass = function(classes)&#123;</span><br><span class="line">       for(let key in classes)&#123;</span><br><span class="line">           let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">           this.classList[method](key)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   Node.prototype.getSiblings = function()&#123;</span><br><span class="line">       let allchild = this.parentNode.children</span><br><span class="line">       let siblings = &#123;</span><br><span class="line">           length: 0</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">           if (allchild[i] !== this) &#123;</span><br><span class="line">               siblings[siblings.length] = allchild[i]</span><br><span class="line">               siblings.length += 1</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return siblings;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>创造一个新的接口，使用全局变量 otherNode ，无侵入式调用。<br>调用方法：</p>
+<pre><code>let node = otherNode.call(undefined,node)
+node.operationClass.call(undefined,{red:true,blue:false})
+node.getSiblings.call(undefined))
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">window.otherNode = (node) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        operationClass: (classes) =&gt; &#123;</span><br><span class="line">            for (let key in classes) &#123;</span><br><span class="line">                let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">                node.classList[method](key)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        getSiblings : () =&gt; &#123;</span><br><span class="line">            let allchild = node.parentNode.children</span><br><span class="line">            let siblings = &#123;</span><br><span class="line">                length: 0</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">                if (allchild[i] !== node) &#123;</span><br><span class="line">                    siblings[siblings.length] = allchild[i]</span><br><span class="line">                    siblings.length += 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return siblings;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="方案二优化"><a href="#方案二优化" class="headerlink" title="方案二优化"></a>方案二优化</h6><p>优化方向：</p>
+<ul>
+<li>允许用户传入一个 CSS 选择器</li>
+<li>添加了操作文本的功能<br>调用方法：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let node = otherNode.call(undefined,&apos;#id&apos;)</span><br><span class="line">node.getSiblings.call(undefined)</span><br><span class="line">node.operationClass.call(undefined,&#123;red:true,blue:false&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">window.otherNode = (nodeOrSelector) =&gt; &#123;</span><br><span class="line">        let node</span><br><span class="line">        if(typeof nodeOrSelector === &apos;string&apos;)&#123;</span><br><span class="line">            node = document.querySelector(nodeOrSelector)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            node = nodeOrSelector</span><br><span class="line">        &#125;</span><br><span class="line">        return &#123;</span><br><span class="line">            operationClass: (classes) =&gt; &#123;</span><br><span class="line">                for (let key in classes) &#123;</span><br><span class="line">                    let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">                    node.classList[method](key)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            setText:(text) =&gt; &#123;</span><br><span class="line">                node.textContent = text;</span><br><span class="line">            &#125;,</span><br><span class="line">            getSiblings : () =&gt; &#123;</span><br><span class="line">                let allchild = node.parentNode.children</span><br><span class="line">                let siblings = &#123;</span><br><span class="line">                    length: 0</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">                    if (allchild[i] !== node) &#123;</span><br><span class="line">                        siblings[siblings.length] = allchild[i]</span><br><span class="line">                        siblings.length += 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return siblings;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="方案二再优化"><a href="#方案二再优化" class="headerlink" title="方案二再优化"></a>方案二再优化</h6><p>优化方向：</p>
+<ul>
+<li>满足更多的 CSS 选择器，例如 <code>ul &gt; li</code></li>
+<li>简化了 <code>text</code> 功能，不传参数，就是获取，传参数就是设置<br>使用方法：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let node = otherNode.call(undefined, &apos;ul &gt; li&apos;)</span><br><span class="line">node.text()</span><br><span class="line">node.text(&apos;hello world&apos;)</span><br><span class="line">node.operationClass.call(undefined, &#123;</span><br><span class="line">    className: false,</span><br><span class="line">    className: true</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">window.otherNode = (nodeOrSelector) =&gt; &#123;</span><br><span class="line">    let nodes = &#123;&#125;</span><br><span class="line">    if (typeof nodeOrSelector === &apos;string&apos;) &#123;</span><br><span class="line">        let temp = document.querySelectorAll(nodeOrSelector)</span><br><span class="line">        for (let i = 0, len = temp.length; i &lt; len; i++) &#123;</span><br><span class="line">            nodes[i] = temp[i]</span><br><span class="line">        &#125;</span><br><span class="line">        nodes.length = temp.length</span><br><span class="line">    &#125; else if (nodeOrSelector instanceof Node) &#123;</span><br><span class="line">        nodes = &#123;</span><br><span class="line">            0: nodeOrSelector,</span><br><span class="line">            length: 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    nodes.operationClass = (classes) =&gt; &#123;</span><br><span class="line">        for (let key in classes) &#123;</span><br><span class="line">            let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">            for (let i = 0, len = nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">                nodes[i].classList[method](key)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    nodes.text = (text) =&gt; &#123;</span><br><span class="line">        if (text === undefined) &#123;</span><br><span class="line">            let texts = []</span><br><span class="line">            for (let i = 0, len = nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">                texts.push(nodes[i].textContent)</span><br><span class="line">            &#125;</span><br><span class="line">            return texts</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            for (let i = 0, len = nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">                nodes[i].textContent = text;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h1><p>jQuery 就是将 otherNode 更名为 jQuery，当然 jQuery 的兼容性更好、功能更加丰富（DOM 操作、动画、AJAX操作等等），并且它使用了 prototype 。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

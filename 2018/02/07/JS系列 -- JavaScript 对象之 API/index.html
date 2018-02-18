@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS系列 -- JavaScript 对象之 API | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述之前介绍了 《JavaScript 对象基础》 ，现在我们来介绍一下挂载在 Object.prototype 上的属性
+Object.prototype APIObject.prototype 表示对象的原型对象Object.prototype 属性的属性特征123writable ==&amp;gt;">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JS系列 -- JavaScript 对象之 API"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/07/JS系列 -- JavaScript 对象之 API/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-07T11:17:07.000Z"><a href="/2018/02/07/JS系列 -- JavaScript 对象之 API/">2018-02-07</a></time>
+      
+      
+  
+    <h1 class="title">JS系列 -- JavaScript 对象之 API</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>之前介绍了 <a href="https://bowen-wu.github.io/2018/01/10/JS%E7%B3%BB%E5%88%97%20--%20JavaScript%20%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">《JavaScript 对象基础》 </a>，现在我们来介绍一下挂载在 <code>Object.prototype</code> 上的属性</p>
+<h1 id="Object-prototype-API"><a href="#Object-prototype-API" class="headerlink" title="Object.prototype API"></a>Object.prototype API</h1><p><code>Object.prototype</code> 表示对象的原型对象<br><code>Object.prototype</code> 属性的属性特征<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writable ==&gt; 是否可写 ==&gt; false(默认)</span><br><span class="line">enumerable ==&gt; 是否可枚举 ==&gt; false(默认)</span><br><span class="line">configurable ==&gt; 是否可配置 ==&gt; false(默认)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><p>用于将所有可枚举属性的值从一个或多个源对象复制到目标对象并返回目标对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object.assign(target, ...sources)  // target 目标对象， sources 源对象</span><br><span class="line"></span><br><span class="line">Object.assign( &#123; a: 2, b: 1 &#125;, &#123; a: 1 &#125; )   // &#123; a: 1, b: 1 &#125;</span><br><span class="line">Object.assign( &#123; a: 1, b: 2 &#125;, &#123; a: &apos;a&apos; &#125;, &#123; c: 3 &#125;, &#123; a: 4 &#125; )  // &#123; a: 4, b: 2, c: 3 &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h3><p>创建一个空对象，空对象的原型指向参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.create( proto[, propertiesObject] ) // 第二参数为一个对象，可以写入新对象的属性 + 描述符</span><br></pre></td></tr></table></figure></p>
+<h5 id="使用-Object-create-实现继承"><a href="#使用-Object-create-实现继承" class="headerlink" title="使用 Object.create() 实现继承"></a>使用 Object.create() 实现继承</h5><p><img src="http://upload-images.jianshu.io/upload_images/9617841-985125c7f108b498.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object.create 实现继承"></p>
+<h3 id="Object-setPrototypeOf"><a href="#Object-setPrototypeOf" class="headerlink" title="Object.setPrototypeOf()"></a>Object.setPrototypeOf()</h3><p>设置一个指定的对象的原型到另一个对象或 <code>null</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.setPrototypeOf( obj, prototype ) // 将对象 obj 的原型设置为 prototype（原型 | null）</span><br><span class="line">obj = Object.create( prototype )  === Object.setPrototypeOf( obj, prototype )</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-defineProperty-Object-defineProperties"><a href="#Object-defineProperty-Object-defineProperties" class="headerlink" title="Object.defineProperty() | Object.defineProperties()"></a>Object.defineProperty() | Object.defineProperties()</h3><p>这两个方法都是在一个对象上定义新属性或修改现有属性，并返回对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty( obj, prop, descriptor )</span><br><span class="line">Object.defineProperties( obj, props )</span><br></pre></td></tr></table></figure></p>
+<h5 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h5><p>属性描述符分为<strong>数据描述符</strong> 和 <strong>存取描述符</strong>。描述符必须是二者之一</p>
+<ul>
+<li>数据描述符 ==&gt; value + writable ==&gt; 具有值的属性，该值可能是可写的，也可能是不可写的</li>
+<li>存取描述符 ==&gt; set + get<h6 id="描述符可选键值"><a href="#描述符可选键值" class="headerlink" title="描述符可选键值"></a>描述符可选键值</h6></li>
+<li><p>configurable ==&gt; 是否可配置 ==&gt; false(默认)</p>
+</li>
+<li><p>enumerable ==&gt; 是否可枚举 ==&gt; false(默认)</p>
+</li>
+<li><p>writable ==&gt; 是否可写 ==&gt; false(默认)</p>
+</li>
+<li><p>value ==&gt; 属性对应的值</p>
+</li>
+<li><p>get ==&gt; 一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值，默认为 undefined</p>
+</li>
+<li><p>set ==&gt; 一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法接受唯一参数，并将该参数的新值分配给该属性，默认为 undefined<br><img src="http://upload-images.jianshu.io/upload_images/9617841-3a71e414e2343590.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="属性描述符"><br>如果对象属性有 getter + setter ，那么调用时走 getter，赋值时走 setter，getter + setter 作用：</p>
+<ol>
+<li>保护私有变量</li>
+<li>响应式开发 | 双向数据绑定 | MVVM （<code>Object.definedProperty() + get + set</code>）</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">let person = &#123;&#125;</span><br><span class="line">let ageValue = 18</span><br><span class="line">Object.definePrototype( person, &apos;name&apos;, &#123;</span><br><span class="line">    value: xxx,</span><br><span class="line">    configurable: false,  // 如果不写默认 false</span><br><span class="line">    writable: true,</span><br><span class="line">    enumerable: true</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Object.definePrototype( person, &apos;age&apos;, &#123;</span><br><span class="line">    configurable: false,  // 如果不写默认 false</span><br><span class="line">    enumerable: true,</span><br><span class="line">    get : function()&#123;</span><br><span class="line">        return ageValue;</span><br><span class="line">    &#125;,</span><br><span class="line">    set : function( newValue )&#123;</span><br><span class="line">        ageValue = newValue;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">person.age   // 18</span><br><span class="line">person.age = 19</span><br><span class="line">person.age  // 19</span><br><span class="line"></span><br><span class="line">Object.defineProperties( person, &#123;</span><br><span class="line">    &apos;property1&apos; : &#123;</span><br><span class="line">        value: xxx,</span><br><span class="line">        configurable: false,  // 如果不写默认 false</span><br><span class="line">        writable: true,</span><br><span class="line">        enumerable: true</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;property2&apos; : &#123;</span><br><span class="line">        value: xxx,</span><br><span class="line">        configurable: false,  // 如果不写默认 false</span><br><span class="line">        writable: true,</span><br><span class="line">        enumerable: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Object-getOwnPropertyDescriptor"><a href="#Object-getOwnPropertyDescriptor" class="headerlink" title="Object.getOwnPropertyDescriptor()"></a>Object.getOwnPropertyDescriptor()</h3><p>返回制定对象上一个自有属性对应的属性描述符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyDescriptor( obj, prop )</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-getOwnPropertyNames"><a href="#Object-getOwnPropertyNames" class="headerlink" title="Object.getOwnPropertyNames()"></a>Object.getOwnPropertyNames()</h3><p>返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括 Symbol 值作为名称的属性）组成的数组</p>
+<h3 id="Object-keys-Object-values"><a href="#Object-keys-Object-values" class="headerlink" title="Object.keys() | Object.values()"></a><a href="https://bowen-wu.github.io/2018/01/10/JS%E7%B3%BB%E5%88%97%20--%20JavaScript%20%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">Object.keys() | Object.values()</a></h3><h3 id="Object-prototype-hasOwnProperty"><a href="#Object-prototype-hasOwnProperty" class="headerlink" title="Object.prototype.hasOwnProperty()"></a>Object.prototype.hasOwnProperty()</h3><p>返回一个布尔值，指示对象自身属性中是否具有指定的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.hasOwnProperty( prop )</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用-get-set-实现需求"><a href="#使用-get-set-实现需求" class="headerlink" title="使用 get + set 实现需求"></a>使用 get + set 实现需求</h1><p>给定一个对象 obj，返回一个新对象，新对象具有对象 obj 的所有属性，并且给新对象每个属性重新赋值都会触发修改函数，在下方代码处填写代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getReactiveObj( obj, cb )&#123;</span><br><span class="line">    // 代码 code</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123; a: &apos;a&apos;, b: &apos;b&apos; &#125;</span><br><span class="line">function fn( prop,val )&#123;</span><br><span class="line">    console.log( `$&#123; prop &#125;属性的值变为$&#123; val &#125;` )</span><br><span class="line">&#125;</span><br><span class="line">let newObj = getReactiveObj( obj, fn )</span><br><span class="line">console.log( newObj.a )  // a</span><br><span class="line">console.log( newObj.b )  // b</span><br><span class="line">newObj.a = &apos;d&apos;  // a属性的值变为d</span><br><span class="line">console.log( newObj.a )  // d</span><br><span class="line">console.log( obj )  // &#123; a: &apos;a&apos;, b: &apos;b&apos; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>解决方案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function getReactiveObj( obj, cb )&#123;</span><br><span class="line">    let result = &#123;&#125;</span><br><span class="line">    Object.keys( obj ).forEach( ( item ) =&gt; &#123;</span><br><span class="line">        let value = obj[ item ]</span><br><span class="line">        Object.defineProperty( result, item, &#123;</span><br><span class="line">            get() &#123;</span><br><span class="line">                return value</span><br><span class="line">            &#125;,</span><br><span class="line">            set( val ) &#123;</span><br><span class="line">                cb.call( null, item, val )</span><br><span class="line">                value = val</span><br><span class="line">            &#125; </span><br><span class="line">        &#125; )</span><br><span class="line">    &#125;)</span><br><span class="line">    return reault</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="实现查询参数"><a href="#实现查询参数" class="headerlink" title="实现查询参数"></a>实现查询参数</h1><p>把一个 JS 对象转化成符合查询参数的字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery()&#123;</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br><span class="line">parseToQuery(&#123; id: 100, name: &apos;hello&apos;, groups: &apos;xxx&apos; &#125;)  // &apos;id=100&amp;name=hello&amp;groups=xxx&apos; </span><br><span class="line">parseToQuery(&#123; id: 100, name: &apos;hello&apos;, groups: [ &apos;xxx&apos;, &apos;yyy&apos; ] &#125;)  // &apos;id=100&amp;name=hello&amp;groups=xxx&amp;groups=yyy&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现无数组方法一"><a href="#实现无数组方法一" class="headerlink" title="实现无数组方法一"></a>实现无数组方法一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    let arr = []</span><br><span class="line">    for( let key in obj )&#123;</span><br><span class="line">        arr.push( encodeURIComponent( key ) + &apos;=&apos; + encodeURIComponent( obj[ key ] ) )</span><br><span class="line">    &#125;</span><br><span class="line">    return arr.join( &apos;&amp;&apos; )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent()"></a>encodeURIComponent()</h5><p>对统一资源标识符（URI）的组成部分进行编码的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">encodeURIComponent( str )   // URI 的组成部分</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现无数组方法二"><a href="#实现无数组方法二" class="headerlink" title="实现无数组方法二"></a>实现无数组方法二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    let str = &apos;&apos;</span><br><span class="line">    Object.keys( obj ).forEach( ( item ) =&gt; &#123;</span><br><span class="line">        var str1 = ` $&#123; item &#125;=$&#123; obj[ item ] &#125;&amp; `</span><br><span class="line">        str = str.concat( str1 )</span><br><span class="line">    &#125;)</span><br><span class="line">    return str.slice( 0, str.length-1 )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现无数组方法三"><a href="#实现无数组方法三" class="headerlink" title="实现无数组方法三"></a>实现无数组方法三</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    return Object.keys( obj ).map( ( key ) =&gt; &#123;</span><br><span class="line">        `$&#123; key &#125;=$&#123; obj[ key ] &#125;`).join( &apos;&amp;&apos; )</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现有数组方法"><a href="#实现有数组方法" class="headerlink" title="实现有数组方法"></a>实现有数组方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    let result = &apos;&apos;</span><br><span class="line">    for( let key in obj )&#123;</span><br><span class="line">        if( obj[ key ] instanceof Array )&#123;</span><br><span class="line">            obj[ key ].forEach( (item) =&gt; &#123;</span><br><span class="line">                result += key + &apos;=&apos; + value + &apos;&amp;&apos;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            result += key + &apos;=&apos; + obj[ key ] + &apos;&amp;&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result.substring( 0, result.length-1 )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

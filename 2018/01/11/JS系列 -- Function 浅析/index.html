@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS系列 -- Function 浅析 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述函数是一个可以执行代码的对象。每个函数都是 Function 类型的实例，并且都与其他引用类型一样具有属性和方法。
+
+每个 Function 的实例的 __proto__ 都指向了 Function.prototype(原型)，函数原型（Function.prototype）的 __proto_">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JS系列 -- Function 浅析"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/11/JS系列 -- Function 浅析/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-11T12:04:06.000Z"><a href="/2018/01/11/JS系列 -- Function 浅析/">2018-01-11</a></time>
+      
+      
+  
+    <h1 class="title">JS系列 -- Function 浅析</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>函数是一个可以执行代码的对象。每个函数都是 Function 类型的实例，并且都与其他引用类型一样具有属性和方法。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-4afc8efd99ed4324.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Function"></p>
+<p>每个 Function 的实例的 <code>__proto__</code> 都指向了 Function.prototype(原型)，函数原型（Function.prototype）的 <code>__proto__</code> 指向了 Object.prototype(对象的原型)</p>
+<h1 id="定义函数"><a href="#定义函数" class="headerlink" title="定义函数"></a>定义函数</h1><ol>
+<li><p>函数声明</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function name( param1[ , param2[, ...] ] )&#123;</span><br><span class="line">    return</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>如果 <code>return</code> 省略，那么浏览器将自动添加 <code>return undefined</code></strong><br> <code>function</code> 是关键字，它只能用来声明函数，而 <code>var</code> 则可以用来声明7    种数据类型（number、string、boolean、null、undefined、symbol、    object）中的任意一种。</p>
+</li>
+<li><p>函数表达式</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x = function( param1[ , param2[, ...] ] )&#123;</span><br><span class="line">    return </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 匿名函数需要赋给变量，之后才能调用。<strong>这个匿名函数称为函数表达式</strong></p>
+</li>
+<li><p>混合式</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var fn = function name( param1[ , param2[, ...] ] )&#123;</span><br><span class="line">    return </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 混合式中，函数名 name 只在函数体内部有效，指代函数表达式本身，在函数体外部无效。</p>
+</li>
+<li><p>Function 构造函数<br> 最后一个参数被始终看成函数体，而前面的参数则枚举了新函数的参数。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var fn = new Function( &apos;param1&apos;[ , &apos;param2&apos;[,&apos; ...&apos;] ] , functionBoby )&#123;</span><br><span class="line">    return </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>例子：</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let n = 1;</span><br><span class="line">let fn = new Function( &apos;x&apos; , &apos;y&apos; , &apos;return x + &apos; + n + &apos; + y&apos; );</span><br><span class="line">fn( 1,2 )  //4，此时的 n 是1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>箭头函数（ES6）</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（param1[ , param2[, ...] ]）=&gt; &#123; return  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="形参和实参"><a href="#形参和实参" class="headerlink" title="形参和实参"></a>形参和实参</h3><ul>
+<li>parameters ==&gt; 形参，定义时的占位符</li>
+<li>arguments ==&gt; 实参，调用时传入的参数</li>
+</ul>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li>函数会在执行完 return 语句之后停止并立即退出，因此，位于 return 语句之后的任何代码都永远不会执行。</li>
+<li>没有传递值的命名参数将自动被赋值 undefined</li>
+<li>所有参数传递的都是值，不可能通过引用传递参数</li>
+<li>验证函数，使用 <code>typeof xxx === &#39;function&#39;</code></li>
+</ul>
+<h1 id="函数声明和函数表达式"><a href="#函数声明和函数表达式" class="headerlink" title="函数声明和函数表达式"></a>函数声明和函数表达式</h1><ul>
+<li>函数声明<br>  浏览器解析器会率先读取函数声明（<strong>声明前置</strong>），并使其在执行任何代码之前可用</li>
+<li>函数表达式<br>  必须要等到浏览器解析器执行到它所在的代码行，才会被解析执行</li>
+</ul>
+<h1 id="声明前置"><a href="#声明前置" class="headerlink" title="声明前置"></a>声明前置</h1><p>先声明变量，后声明 function，如果 function 名字和 var 声明名字一样<br> function 优先。如果赋值就按照赋值的类型。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-b685a2f72fd44407.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="声明前置"></p>
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h3 id="自身-API"><a href="#自身-API" class="headerlink" title="自身 API"></a>自身 API</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-03cb79b4dd1cd59d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="自身属性 API"></p>
+<ul>
+<li><code>name</code> ==&gt; 返回函数实例的名称</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-43d062bc839e7d48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="fn.name"></p>
+<ul>
+<li><code>length</code> ==&gt; 指明函数的<strong>形参</strong>个数</li>
+</ul>
+<h3 id="Function-prototype-API"><a href="#Function-prototype-API" class="headerlink" title="Function.prototype API"></a>Function.prototype API</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-b7e392157560ccdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Function.prototype API"></p>
+<ul>
+<li><p><code>call()</code> ==&gt; 调用一个函数, 其具有一个指定的this值和分别地提供的参数(参数的列表)<br>  <strong>作用：</strong></p>
+<ol>
+<li>改变 this 值<br><img src="http://upload-images.jianshu.io/upload_images/9617841-248eb360eed5d5e7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="改变 this 值"></li>
+<li><p>操作参数</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.call(this, arg1, arg2, ...)</span><br></pre></td></tr></table></figure>
+<p><strong>参数：</strong></p>
+</li>
+<li><p>this ：函数运行时的指定的 this 值。</p>
+<ul>
+<li><p><strong>非严格模式</strong>下，若 this 为 null 或者 undefined ，则 this 自动指向<strong>全局对象（global[ window ]）</strong>，同时值为原始值(数字，字符串，布尔值)的 this 会<strong>指向该原始值的自动包装对象</strong>。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-91e0f7d177fcb401.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非严格模式"></p>
+</li>
+<li><p><strong>严格模式</strong>下，若 this 为 undefined ，则 <strong>this === undefined</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-8ed9e92d37439649.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="严格模式"><br>此处 call 的时候指明了 this === 1，例子不明显，应该 fn.call()，此时便可以打印出 undefined</p>
+</li>
+</ul>
+</li>
+<li><p>arguments ：伪数组，元素为函数的参数</p>
+<ul>
+<li>函数中的参数在内部是用一个伪数组（<code>arguments</code>）来表示，在函数内部通过 <code>arguments</code> 对象来访问参数从而获取传递给函数的每一个参数。</li>
+<li><code>arguments</code> 可以被用作被调用对象的所有未指定的参数。可以使用arguments来把所有的参数传递给被调用对象。 </li>
+<li><code>arguments</code> 对象的长度是由传入的参数个数决定的，不是由定义函数时的命名参数的个数决定的。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><code>apply()</code> ==&gt; 调用一个函数, 其具有一个指定的<code>this</code>值，以及作为一个数组（或<strong>类似数组的对象</strong>）提供的参数。<br>   <strong>作用：</strong>和 call() 一样</p>
+<ol>
+<li>改变 this 值</li>
+<li><p>操作参数</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.apply(this, arguments)</span><br></pre></td></tr></table></figure>
+<p><strong>使用实例：</strong></p>
+</li>
+<li><p>实例1：<strong>不关心 this ，所以将 this 传为 null</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca8c95bbb5abd53b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="apply 实例1"></p>
+</li>
+<li><p>实例2：<strong>关心 this ，this === arr1</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-3b3a79c946e1e7c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Apply 实例2"></p>
+</li>
+</ol>
+<p><strong>说明：<code>call()</code> 和 <code>apply()</code> 的区别</strong><br>  <code>apply()</code> 与 <code>call()</code> 作用相同，不同之处在于<strong>提供参数的方式</strong>。<br>  <code>apply()</code> 使用参数数组，<strong>可以将数组里的元素拆分传入参数</strong><br>  <code>call()</code> 使用一组参数列表，一个一个传递参数<br>  <code>apply</code>可以使用数组字面量，也可以使用 <code>arguments</code>对    象， <code>arguments</code> 是一个函数的局部变量。 </p>
+</li>
+</ul>
+<ul>
+<li><p><code>bind()</code> ==&gt; 创建一个新的函数, 当被调用时，将其 <code>this</code> 关键字设置为提供的值，<strong>返回新创建的函数</strong>。在调用新函数时，在任何提供之前提供一个给定的参数序列。<br>  <strong>作用：</strong></p>
+<ol>
+<li>切换上下文（this）</li>
+<li><p>科里化</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.bind( this [ , arg1 [ , arg2 [ , ... ] ] ] )</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>**使用实例：**
+1. 实例1：**基本用法**
+![bind 基本用法](http://upload-images.jianshu.io/upload_images/9617841-f825f2fa123c4db2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+2. 实例2：**实际应用**
+![bind 实际应用](http://upload-images.jianshu.io/upload_images/9617841-71e4fff179f8a3f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+3. 实例3：**利用 this + apply 实现 bind**
+![重构 bind](http://upload-images.jianshu.io/upload_images/9617841-ca4c2e02d2132d0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+</code></pre><h1 id="new"><a href="#new" class="headerlink" title="new"></a>new</h1><ol>
+<li><p>创建一个新对象 obj ，对象 <code>__proto__</code> 指向构造函数的 <code>prototype</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象. __proto__ === 构造函数.prototype</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用 call()/apply()/bind()</p>
+</li>
+</ol>
+<h1 id="Call-Stack（调用栈）"><a href="#Call-Stack（调用栈）" class="headerlink" title="Call Stack（调用栈）"></a>Call Stack（调用栈）</h1><p>栈是一种数据结构，特点是<strong>先进后出</strong>，js 代码执行时都遵循 Call Stack 的规则。如果压栈太多会导致错误（Stack Overflow[ 栈溢出 ]）</p>
+<h1 id="作用域-和-作用域链"><a href="#作用域-和-作用域链" class="headerlink" title="作用域 和 作用域链"></a>作用域 和 作用域链</h1><p>scope（范围、视野、眼界）</p>
+<p><strong>如果在函数作用域中没有写 <code>var</code> 直接写 <code>a = 3</code></strong></p>
+<pre><code>1. 优先赋值
+2. 沿着作用域链寻找 a 的声明
+3. 若作用域链中没有 a 的声明，则声明全局变量并赋值
+</code></pre><h1 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h1><p>将作用域链中首先要做<strong>变量提升</strong></p>
+<h6 id="例子1："><a href="#例子1：" class="headerlink" title="例子1："></a>例子1：</h6><pre><code>var a = 1;
+function fn(){
+    console.log( a );
+    var a = 2;
+}
+fn.call();  //  a === undefined
+</code></pre><h6 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h6><pre><code>var a = 1;
+function fn1(){
+    console.log( a );  //  a === undefined
+    var a = 2;
+    fn2.call();
+}
+function fn2(){
+    console.log( a );  //  a === 1
+}
+fn1.call();
+</code></pre><h6 id="例子3："><a href="#例子3：" class="headerlink" title="例子3："></a>例子3：</h6><pre><code>var obj = { name: &apos; obj &apos; }
+function fn1(){
+    function fn2(){
+        console.log( this );   // this === window 
+    }
+    fn2.call();
+}
+fn1.call( obj );
+</code></pre><h6 id="例子4："><a href="#例子4：" class="headerlink" title="例子4："></a>例子4：</h6><pre><code>var liTags = document.querySelectAll( &apos; li &apos; );
+for( let i = 0, len = liTags.length; i &lt; len; i++ ){
+    liTags[ i ].onclick = function(){
+        console.log( i )  // 打印出的 i 都是最后的数字
+    }
+}
+</code></pre><h1 id="this-值"><a href="#this-值" class="headerlink" title="this 值"></a>this 值</h1><p>this 的调用主要有两种方式，一种是函数（function），另一种是作为对象的方法（methods）</p>
+<h3 id="判断-this-值就看函数怎么被调用，之后转化为-call-形式"><a href="#判断-this-值就看函数怎么被调用，之后转化为-call-形式" class="headerlink" title="判断 this 值就看函数怎么被调用，之后转化为 call 形式"></a>判断 this 值就看函数怎么被调用，之后转化为 call 形式</h3><h6 id="例子1：作为对象的方法调用"><a href="#例子1：作为对象的方法调用" class="headerlink" title="例子1：作为对象的方法调用"></a>例子1：作为对象的方法调用</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    fn: fn</span><br><span class="line">&#125;</span><br><span class="line">obj.fn()  // this === obj</span><br></pre></td></tr></table></figure>
+<h6 id="例子2：作为对象属性的深层次嵌套"><a href="#例子2：作为对象属性的深层次嵌套" class="headerlink" title="例子2：作为对象属性的深层次嵌套"></a>例子2：作为对象属性的深层次嵌套</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    wrapper: &#123;</span><br><span class="line">        b: &apos;b&apos;,</span><br><span class="line">        fn: fn</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.wrapper.fn()  // this === &#123; b: &apos;b&apos;, fn: fn &#125; === obj.wrapper</span><br></pre></td></tr></table></figure>
+<h6 id="例子3：-1"><a href="#例子3：-1" class="headerlink" title="例子3："></a>例子3：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    fn () &#123;</span><br><span class="line">        console.log(fn)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function fncb(cb)&#123;</span><br><span class="line">    cb()</span><br><span class="line">&#125;</span><br><span class="line">fncb(obj.fn)  // this === 全局变量</span><br></pre></td></tr></table></figure>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><p>如果一个函数使用了它范围外的值，那么这个函数 + 这个变量就叫做闭包。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-19f3603e86a9f96d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="声明变量"></p>
+<h1 id="立即调用函数"><a href="#立即调用函数" class="headerlink" title="立即调用函数"></a>立即调用函数</h1><p>window下有很多全局属性<br><img src="http://upload-images.jianshu.io/upload_images/9617841-e883bce645e9a47e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="window"><br>当定义变量的时候，有可能不小心覆盖了 window 的全局属性，为了避免覆盖 window 上的属性，可以：</p>
+<ol>
+<li>不用全局属性</li>
+<li>用局部变量</li>
+<li><p>使用立即调用函数，从而使用局部变量</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">() =&gt; &#123; &#125;.call()</span><br><span class="line">() =&gt; &#123; &#125;()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>但是如果像上述写法，浏览器会报错，所以要这么写：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(() =&gt; &#123; &#125;.call() )</span><br><span class="line">(() =&gt; &#123; &#125; ).call()</span><br><span class="line">-() =&gt; &#123; &#125;.call()</span><br><span class="line">+() =&gt; &#123; &#125;.call() </span><br><span class="line">！() =&gt; &#123; &#125;.call()</span><br><span class="line">～() =&gt; &#123; &#125;.call()</span><br><span class="line">&#123; let  &#125;  // let 作用域在块级作用域中</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h1><ol>
+<li><p>如果同一个函数被多次声明，后面的声明就会覆盖前面的声明</p>
+</li>
+<li><p>递归：函数调用自身</p>
+</li>
+<li><p>JavaScript将函数看做一种值，函数只是一个可以执行的值</p>
+</li>
+<li><p>当<strong>函数表达式</strong>和<strong>函数声明</strong>同时有的时候<br> <img src="http://upload-images.jianshu.io/upload_images/9617841-f712689a1b6da638.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="function"></p>
+</li>
+<li><p>不能在条件语句中声明函数（变量提升，是的 if 无效）</p>
+</li>
+<li><p><strong>函数执行时所在的作用域，是定义时的作用域，而不是调用时所在的作用域。</strong></p>
+</li>
+<li><p>参数<strong>传值传递</strong>，内存中体现<strong>原始值的拷贝</strong>。<br>参数<strong>传址传递</strong>（复杂类型的值），内存中体现<strong>原始值的地址</strong>，唯一一种不改变参数的是<strong>替换掉整个参数，这时不会影响到原始值</strong>（添加属性或方法会影响到原始值）</p>
+</li>
+<li><p>如果有同名的参数，则取最后出现的那个值</p>
+</li>
+<li><p>eval命令的作用是，<strong>将字符串当作语句执行</strong>。eval没有自己的作用域，都<strong>在当前作用域内执行</strong>，因此可能会修改当前作用域的变量的值，造成安全问题。为了防止这种风险，JavaScript 规定，如果使用<strong>严格模式</strong>，<strong>eval内部声明的变量，不会影响到外部作用域</strong></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Seite 5 | Archiv | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/archives/page/5/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">Archiv</h2>
+<p></p>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T15:00:08.000Z"><a href="/2017/12/21/JS系列 -- JavaScript 继承/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/JS系列 -- JavaScript 继承/">JS系列 -- JavaScript实现继承方式</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>JavaScript实现继承方式</p>
+<h1 id="1-new"><a href="#1-new" class="headerlink" title="1. new"></a>1. new</h1><p><code>Student.prototype = new Person();</code><br>得到一个 Person 实例，并且这个实例指向构造器的 prototype 属性和调用了构造函数，因为调用的构造函数，而 Student 只是一个类，并没有实例化，只为了继承，调用构造函数创建一个实例，参数的问题就不容易解决。</p>
+<p><strong>例如</strong>：当 Person() 中有一个 name 属性时，而 Student 上也有 name 属性时，当<br>Student.prototype = new Person(); Person 上的 name:undefined ,并且 Student 永远不会用到 Person 上的 name 性，如果 Person 上有很多这样的属性情况可想而知。</p>
+<p><strong>new 操作符所做的事情(var a = new A())</strong><br>a.首先生成一个空对象 a = {} ，它是 Object 的实例<br>b.设置 a 的原型链 a.<strong>proto</strong> = A.prototype<br>c.A.call(a), A 的 this 指向 a,并执行 A 的函数体<br>d.判断 A 的返回值类型，<br>如果   ‘没有返回值’ 或者 ‘返回值类型为值类型’ 返回 this 即 a （this === a），<br>如果有返回值，并且返回值类型为引用类型，就返回这个引用类型的对象，替换掉 a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var A = function()&#123;</span><br><span class="line">    return this.__proto__;</span><br><span class="line">&#125;</span><br><span class="line">var a = new A();</span><br><span class="line">console.log(a) //object&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解释：首先 this === a， 但是 A 返回的是 this.<strong>proto</strong> (a.<strong>proto</strong>), this.<strong>proto</strong> 指向了原型对象 Object() 构造函数创建的 object 对象，它是一个引用类型，它替换掉 a ，所以这里的变量 a 是一个指针，指向它的原型。</p>
+<p><code>console.log(A.prototype === a); //true</code></p>
+<p>此时 A 构造函数的原型和 a 指针（指向 a.<strong>proto</strong>）是同一个对象</p>
+<h1 id="2-Object-create"><a href="#2-Object-create" class="headerlink" title="2. Object.create()"></a>2. Object.create()</h1><p><code>var obj = Object.create({ x:1 });</code></p>
+<p>Object.create()是系统内置函数，参数为对象，返回新创建的对象，并且该对象的原型指向参数</p>
+<p>创建空对象，并且对象的 <strong>proto</strong> 指向参数，既继承了属性和方法，本身又有自己的空对象，对于自己添加的属性和方法不会去更改原型上的属性和方法。</p>
+<h1 id="3-call-和-apply"><a href="#3-call-和-apply" class="headerlink" title="3. call() 和 apply()"></a>3. call() 和 apply()</h1><p>call() 和 apply() 是为了动态改变 this 而出现的，当一个 Object 没有某个方法时，<br>但是其他 Object 有，可以借助 call() 和 apply() 用其他对象的方法来操作。</p>
+<p>call() 和 apply() 就是更改 this 指向<br><strong>例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">function Student(name,Klass)&#123;</span><br><span class="line">    Person.call(this,name); </span><br><span class="line">    //此时的 Person 的 this 指向了 Student（即 call 里面的 this）</span><br><span class="line">    this.klass = klass;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>call() 和 apply() 的区别：call() 的参数是扁平化参数，apply() 的第二参数放在数组中</p>
+<p><strong>例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Math.max.apply(,)</span><br><span class="line">Math.max(1,2,3); // 3</span><br><span class="line">Math.max([1,2,3]); // NaN</span><br><span class="line">Math.apply(null,[1,2,3]); // 3</span><br><span class="line">Math.max.apply(null,[1,2,3]) === Math.max(1,2,3); // true</span><br><span class="line">Math.max.call(null,1,2,3); // 3</span><br><span class="line">Math.max.call(null,1,2,3) === Math.max(1,2,3); // true</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-实现继承的套路："><a href="#4-实现继承的套路：" class="headerlink" title="4. 实现继承的套路："></a>4. 实现继承的套路：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = fucntion()&#123;</span><br><span class="line">    console.log(&apos;hi!I am &apos;+this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Student(name,Klass)&#123;</span><br><span class="line">    Person.call(this,name);  // 使用 call 继承属性</span><br><span class="line">    this.klass = klass; // 设置自身的属性</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用 Object.create() 继承方法</span><br><span class="line">Student.prototype = Object.create(Person.prototype,&#123;</span><br><span class="line">    constructor:&#123;</span><br><span class="line">    value:Student;</span><br><span class="line">     // 还可以指定 writable configurable enumerable</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 设置自身方法</span><br><span class="line">Student.prototype.learn = function(subject)&#123;</span><br><span class="line">    console.log(this.name + &apos;can learn&apos; + subject);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T12:11:41.000Z"><a href="/2017/12/21/上传源代码/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/上传源代码/">上传源代码</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><strong>注意：</strong>你的用户名 .github.io 上保存的只是你的博客，并没有保存「生成博客的程序代码」，你需要再创建一个名为 blog-generator 的空仓库，用来保存 myBlog 里面的「生成博客的程序代码」。</p>
+<ol>
+<li><p>在 GitHub 创建 blog-generator 空仓库</p>
+</li>
+<li><p>使用 SSH 创建</p>
+</li>
+</ol>
+<p>这样一来，你的博客发布在了「你的用户名.github.io」而你的「生成博客的程序代码」发布在了 blog-generator。所有数据万无一失，你就不会因为误删 myBlog 目录而痛哭了。</p>
+<p>以后每次 hexo deploy 完之后，博客就会更新；</p>
+<p>然后你还要要 add / commit / pull / push  一下「生成博客的程序代码」，以防万一。</p>
+<p>这个 blog-generator 就是用来生成博客的程序，而「你的用户名.github.io」仓库就是你的博客页面。</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/博客/">博客</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T11:54:05.000Z"><a href="/2017/12/21/更改博客主题/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/更改博客主题/">更改博客主题</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ol>
+<li><a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">主题合集</a></li>
+<li>找一个喜欢的主题，进入主题的 GitHub 首页，复制它的 SSH 地址或 HTTPS 地址</li>
+<li>git clone ‘地址’</li>
+<li>ls  复制下载的主题的名称</li>
+<li>cd ..</li>
+<li>编辑 _config.yml 文件，第 75 行改为 theme: ‘主题名称’，保存</li>
+<li>hexo generate</li>
+<li>hexo deploy</li>
+<li>end</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/博客/">博客</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T11:26:46.000Z"><a href="/2017/12/21/创建新博客并上传/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/创建新博客并上传/">创建新博客并上传</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="创建新博客并上传方法为："><a href="#创建新博客并上传方法为：" class="headerlink" title="创建新博客并上传方法为："></a>创建新博客并上传方法为：</h2><ol>
+<li>hexo new 第二篇博客</li>
+<li>start 第二篇博客.md 即编辑md文件</li>
+<li>hexo generate</li>
+<li>hexo deploy</li>
+<li>end</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/博客/">博客</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T11:26:46.000Z"><a href="/2017/12/21/第二篇博客/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/第二篇博客/">第二篇博客</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>这是我的第二篇博客，如果能上传成功，我将会很开心<br>上传方法为：</p>
+<ol>
+<li>hexo new 第二篇博客</li>
+<li>start 第二篇博客.md 即编辑md文件</li>
+<li><code>hexo generate</code></li>
+<li><code>hexo deploy</code></li>
+<li>end</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/博客/">博客</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T11:21:28.000Z"><a href="/2017/12/21/开通博客/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/开通博客/">开通博客</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>#我将开通我的个人博客</p>
+<h2 id="开通博客方法："><a href="#开通博客方法：" class="headerlink" title="开通博客方法："></a>开通博客方法：</h2><ol>
+<li>创建一个目录，并使用 git bash 进入</li>
+<li>在 GitHub 上新建一个空 repository，repository 名称是「你的用户名.github.io」（请将你的用户名替换成真正的用户名）</li>
+<li>npm install -g hexo-cli，安装 Hexo</li>
+<li>hexo init myBlog</li>
+<li>cd myBlog</li>
+<li>npm i</li>
+<li>hexo new 开博大吉</li>
+<li>start 开博大吉.md，编辑这个 md 文件</li>
+<li>start _config.yml，编辑网站配置<br> 把第 6 行的 title 改成你想要的名字<br> 把第 9 行的 author 改成你的大名<br> 把最后一行的 type 改成 type: git<br> 在最后一行后面新增一行，左边与 type 平齐，加上一行 ‘repo: 仓库地址’ （请将仓库地址改为「你的用户名.github.io」对应的仓库地址）<br> 第 4 步的 repo: 后面有个空格，不要眼瞎。</li>
+<li>npm install hexo-deployer-git –save，安装 git 部署插件</li>
+<li>hexo deploy</li>
+<li>打开 GitHub Pages 功能</li>
+<li>点击预览链接</li>
+</ol>
+<p>你现在应该看到了你的博客！</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/博客/">博客</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T11:16:46.000Z"><a href="/2017/12/21/hello-world/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/12/21/hello-world/">Hello World</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/博客/">博客</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/archives/page/4/" class="alignleft prev">Vorherige Seite</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+
+
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

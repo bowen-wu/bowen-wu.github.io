@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>总结篇（二） -- 基础知识之 CSS | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="选择器
+
+标签选择器
+类选择器
+ID 选择器
+后代选择器
+子选择器
+通用选择器
+伪类选择符
+分组选择符
+
+
+文档流 内联元素 ==&amp;gt; 从左向右依次流动 块级元素 ==&amp;gt; 从上到下依次流动，每个块级元素独占一行
+
+盒模型 box-sizing: content-box; ==&amp;gt; 标准">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="总结篇（二） -- 基础知识之 CSS"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/05/总结篇（二）-- 基础知识之 CSS/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-05T14:54:05.000Z"><a href="/2018/02/05/总结篇（二）-- 基础知识之 CSS/">2018-02-05</a></time>
+      
+      
+  
+    <h1 class="title">总结篇（二） -- 基础知识之 CSS</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ol>
+<li><p>选择器</p>
+<ul>
+<li>标签选择器</li>
+<li>类选择器</li>
+<li>ID 选择器</li>
+<li>后代选择器</li>
+<li>子选择器</li>
+<li>通用选择器</li>
+<li>伪类选择符</li>
+<li>分组选择符</li>
+</ul>
+</li>
+<li><p>文档流<br> 内联元素 ==&gt; 从左向右依次流动<br> 块级元素 ==&gt; 从上到下依次流动，每个块级元素独占一行</p>
+</li>
+<li>盒模型<br> box-sizing: content-box; ==&gt; 标准盒模型，width = contentWidth<br> box-sizing: border-box; ==&gt; width = contentWidth + padding + border</li>
+<li>伪类<br> 伪类有动态伪类、结构伪类、否定伪类等等<ul>
+<li>动态伪类：<br><code>:link</code> ==&gt; 未访问前的样式效果<br><code>:hover</code> ==&gt; 鼠标悬停时的样式效果<br><code>:active</code> ==&gt; 鼠标点击时的样式效果<br><code>:visited</code> ==&gt; 访问后的样式效果<br><code>:focus</code> ==&gt; 元素成为焦点时的样式效果</li>
+<li>结构伪类<br><code>:first-child</code> ==&gt; 第一个子元素<br><code>:last-child</code> ==&gt; 最后一个子元素<br><code>:nth-child(n)</code> ==&gt; 第 n 个子元素</li>
+<li>否定伪类<br><code>:not</code> ==&gt; 不符合参数选择器 X 描述的元素</li>
+</ul>
+</li>
+<li>伪元素<ul>
+<li><code>::before</code> ==&gt; 创建伪元素，此伪元素是元素的第一个子元素</li>
+<li><code>::after</code> ==&gt; 创建伪元素，此伪元素是元素的最后一个子元素</li>
+</ul>
+</li>
+<li><p>堆叠上下文（BFC）<br> BFC 就是块级格式化上下文。形成 BFC 条件：</p>
+<ul>
+<li>浮动</li>
+<li>绝对定位元素（<code>position: absolute;</code>）</li>
+<li>非块盒的块容器（<code>display: inline-block; | display: table-cells</code>）</li>
+<li>overflow 不为 visible 的块盒</li>
+<li><p><code>display: flow-root</code></p>
+<p>功能：</p>
+</li>
+</ul>
+<ol>
+<li>将内部浮动元素包裹起来</li>
+<li>两个相邻的 BFC 之间划清界限</li>
+</ol>
+</li>
+<li><p>媒体查询<br> <code>&lt;link&gt;</code> 标签中的媒体查询</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; metia=&quot;(max-width: 800px)&quot; href=&quot;xxx.css&quot;&gt;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">样式表中的 CSS 媒体查询</span><br></pre></td></tr></table></figure>
+<p> <style></p>
+<pre><code>@media (max-width: 800px) and (min-width: 600px) {
+    // 选择器 + 样式
+}
+</code></pre><p> </style></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8. 动态 REM</span><br><span class="line">    rem 是相对单位长度，它是根元素 ` &lt;html&gt; ` 的 ` font-size ` 的大小，网页默认的 ` font-size: 16px `，运用 JS 探取屏幕宽度，之后定义根元素的 ` </span><br><span class="line">font-size ` 与屏幕宽度相关，之后一切单位都以屏幕宽度为基准</span><br></pre></td></tr></table></figure>
+<p> <script></p>
+<pre><code>let pageWidth = window.innerWidth
+document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos;px;}&lt;/style&gt;&apos; )
+</code></pre><p> </script><br> ```</p>
+</li>
+<li>box-shadow<ul>
+<li>垂直偏移</li>
+<li>水平偏移</li>
+<li>模糊半径</li>
+<li>模糊尺寸</li>
+<li>颜色</li>
+</ul>
+</li>
+<li>transform<ul>
+<li><code>translate</code> ==&gt; 移动</li>
+<li><code>rotate</code> ==&gt; 旋转</li>
+<li><code>skew</code> ==&gt; 倾斜</li>
+<li><code>scale</code> ==&gt; 缩放</li>
+</ul>
+</li>
+<li>帧动画<ul>
+<li><code>animation-name</code> ==&gt; 动画名称</li>
+<li><code>animation-duration</code> ==&gt; 持续时间</li>
+<li><code>animation-delay</code> ==&gt; 延迟</li>
+<li><code>animation-timing-function</code> ==&gt; 动画类型</li>
+<li><code>@keyframe</code> ==&gt; 关键帧</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

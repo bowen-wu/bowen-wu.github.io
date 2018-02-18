@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS 最佳实践 + 套路（二） -- height width | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="文档流文档内元素的流动方向
+
+内联元素 ==&amp;gt; 从左向右依次流动，若 width 不足，则换行
+块级元素 ==&amp;gt; 从上到下依次流动，每个块级元素独占一行
+
+脱离文档流将会影响其祖先元素（块级元素）的 height 
+脱离文档流的三种方式：
+
+position: fixed 相对于窗口定位">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS 最佳实践 + 套路（二） -- height width"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/26/CSS-最佳实践-套路（二）-- height & width/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-26T02:53:08.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（二）-- height & width/">2018-01-26</a></time>
+      
+      
+  
+    <h1 class="title">CSS 最佳实践 + 套路（二） -- height width</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="文档流"><a href="#文档流" class="headerlink" title="文档流"></a>文档流</h1><p>文档内元素的流动方向</p>
+<ul>
+<li>内联元素 ==&gt; 从左向右依次流动，若 <code>width</code> 不足，则换行</li>
+<li>块级元素 ==&gt; 从上到下依次流动，每个块级元素独占一行</li>
+</ul>
+<h1 id="脱离文档流"><a href="#脱离文档流" class="headerlink" title="脱离文档流"></a>脱离文档流</h1><p>将会影响其祖先元素（块级元素）的 height </p>
+<p>脱离文档流的三种方式：</p>
+<ul>
+<li><code>position: fixed</code> 相对于窗口定位</li>
+<li><code>position: absolute</code> 相对于定位包含框定位（<code>position: absolute; top: 100%;</code>）</li>
+<li><code>float:</code> 浮动，可以利用 <code>.clearfix</code> 类清除浮动</li>
+</ul>
+<h1 id="height-问题"><a href="#height-问题" class="headerlink" title="height 问题"></a>height 问题</h1><ul>
+<li><code>div</code> （块级元素）==&gt; 由其内部文档流元素的 <code>height</code> 总和<strong>决定</strong>。</li>
+<li><code>span</code> （内联元素） ==&gt; <code>span</code> 的 <code>height</code> 决定于具体的字体（<strong>建议行高</strong> + 设计字体的设计师决定）。</li>
+</ul>
+<h3 id="建议行高"><a href="#建议行高" class="headerlink" title="建议行高"></a>建议行高</h3><p>字体都有一个<strong>建议行高</strong>，每种字体的<strong>建议行高</strong>是不同的。以下面的 <code>span</code> 为例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style= &apos;font-family: 字体A; font-size: 20px; line-height: 40px;&apos;&gt;字体hug&lt;/span&gt;</span><br><span class="line">&lt;span style= &apos;font-family: 字体B; font-size: 20px; line-height: 40px;&apos;&gt;字体hug&lt;/span&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>两个 <code>span</code> 的字体不同，所以两个 <code>span</code> 的 <code>height</code> 就不相同。</li>
+<li><code>font-size: 20px;</code> 指的是英文字母 <code>h</code> 的上部 <strong>距</strong> 英文字母 <code>g</code> 的下部的距离为 <code>20px</code> ，中文汉字会比 <code>20px</code> 偏小一些。</li>
+</ul>
+<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><ol>
+<li><p>将 <code>line-height</code> 设置的比 <code>font-size</code> 大一些，那么行内元素的 <code>height</code> 将会等于 <code>line-height</code> 的值</p>
+</li>
+<li><p>内联元素设置 <code>width</code> 和 <code>height</code> 时，不要使用</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display: block;</span><br><span class="line">height: </span><br><span class="line">line-height: </span><br><span class="line">text-align: center;</span><br></pre></td></tr></table></figure>
+<p> <strong>通过添加 <code>padding</code> 从而达到想要的 <code>width</code> 和 <code>height</code> （添加 <code>line-height</code> 明确 <code>height</code>），并且宽度（max-width）自适应</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">padding: </span><br><span class="line">line-height:</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h1><h3 id="设置一个-height-为-40px-（近似）的-div-其内部包含内敛元素-span-："><a href="#设置一个-height-为-40px-（近似）的-div-其内部包含内敛元素-span-：" class="headerlink" title="设置一个 height 为 40px （近似）的 div ,其内部包含内敛元素 span ："></a>设置一个 <code>height</code> 为 <code>40px</code> （近似）的 <code>div</code> ,其内部包含内敛元素 <code>span</code> ：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style= &apos;line-height: 24px; border: 1px solid green; padding: 6px 0;&apos;&gt;</span><br><span class="line">    &lt;span style= &apos;font-size: 14px; border: 1px solid red;&apos;&gt;hug&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="两个-span-两端对齐方法"><a href="#两个-span-两端对齐方法" class="headerlink" title="两个 span 两端对齐方法"></a>两个 <code>span</code> 两端对齐方法</h3><p><code>text-align: justify</code> ==&gt; 定义行内内容（例如文字）如何相对它的块父    元素对齐。<code>text-align</code> 并不控制块元素自己的对齐，只控制它的行内内容    的对齐。<strong>文字向两侧对齐（必须是多行文本）</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">span&#123; </span><br><span class="line">  display: block;</span><br><span class="line">  width:            // 设置宽度，从而让两端对齐</span><br><span class="line">  line-height:    //设置行高和高度，固定下来</span><br><span class="line">  height: </span><br><span class="line">  taxt-align: justify;  //设置两端对齐 </span><br><span class="line">  overflow: hidden;  </span><br><span class="line">&#125;</span><br><span class="line">span::after&#123;   // 设置伪类，从而有第二行。</span><br><span class="line">  content: &apos;&apos;;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong>可以将 <code>span</code> 设置为 <code>display: inline-block</code> ，之后在第一个 <code>span</code> 后面加上 <code>&lt;br&gt;</code> </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-6bb605df69f4cd63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="两端对齐"></p>
+<h3 id="文字省略溢出"><a href="#文字省略溢出" class="headerlink" title="文字省略溢出"></a>文字省略溢出</h3><h5 id="单行文本省略溢出"><a href="#单行文本省略溢出" class="headerlink" title="单行文本省略溢出"></a>单行文本省略溢出</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">white-space: nowrap;</span><br><span class="line">overflow: hidden;</span><br><span class="line">text-overflow: ellipsis</span><br></pre></td></tr></table></figure>
+<h5 id="多行文本省略溢出（css-multi-line-text-ellipsis）"><a href="#多行文本省略溢出（css-multi-line-text-ellipsis）" class="headerlink" title="多行文本省略溢出（css multi line text ellipsis）"></a>多行文本省略溢出（css multi line text ellipsis）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display: -webkit-box;</span><br><span class="line">-webkit-line-clamp: 3; //控制行数</span><br><span class="line">-webkit-box-orient: vertical;</span><br><span class="line">overflow: hidden;</span><br></pre></td></tr></table></figure>
+<h3 id="实现一个-1-1-的-div"><a href="#实现一个-1-1-的-div" class="headerlink" title="实现一个 1:1 的 div"></a>实现一个 1:1 的 div</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border: 1px solid red;</span><br><span class="line">padding-top: 100%;</span><br></pre></td></tr></table></figure>
+<h3 id="margin-合并"><a href="#margin-合并" class="headerlink" title="margin 合并"></a><code>margin</code> 合并</h3><p>一个 <code>div</code> 标签中有一个子标签 <code>div</code> ，如果父标签有以下属性，则子标签中的 <code>margin</code>（上下） 属性不会合并。</p>
+<ul>
+<li>border：</li>
+<li>padding: </li>
+<li>overflow: hidden;( 不推荐 )</li>
+</ul>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ol>
+<li><p>文字和单词、单词和单词都是以<strong>基线</strong>对齐。</p>
+</li>
+<li><p>内联元素的 <code>padding</code> 、 <code>margin</code> 和 <code>border</code> 不会影响 <code>height</code> ，但是会影响 <code>width</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

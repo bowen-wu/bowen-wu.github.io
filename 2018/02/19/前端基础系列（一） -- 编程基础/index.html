@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端基础系列（一） -- 编程基础 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述操作系统运行于硬件之上，浏览器运行于操作系统之上，HTML | CSS | JavaScript运行于浏览器之上，HTML | CSS | JavaScript 的所有数据都来自于服务器
+存储数据如何存储0和11 — 充电0 — 不充电充完电之后立刻放电cpu — 表示每秒钟可以充多少次电
+如何">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="前端基础系列（一） -- 编程基础"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/19/前端基础系列（一） -- 编程基础/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-18T23:37:54.000Z"><a href="/2018/02/19/前端基础系列（一） -- 编程基础/">2018-02-19</a></time>
+      
+      
+  
+    <h1 class="title">前端基础系列（一） -- 编程基础</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>操作系统</strong>运行于<strong>硬件</strong>之上，<strong>浏览器</strong>运行于<strong>操作系统</strong>之上，<strong>HTML | CSS | JavaScript</strong>运行于<strong>浏览器</strong>之上，HTML | CSS | JavaScript 的所有<strong>数据</strong>都来自于服务器</p>
+<h1 id="存储数据"><a href="#存储数据" class="headerlink" title="存储数据"></a>存储数据</h1><h3 id="如何存储0和1"><a href="#如何存储0和1" class="headerlink" title="如何存储0和1"></a>如何存储0和1</h3><p>1 — 充电<br>0 — 不充电<br>充完电之后立刻放电<br>cpu — 表示每秒钟可以充多少次电</p>
+<h3 id="如何储存数字"><a href="#如何储存数字" class="headerlink" title="如何储存数字"></a>如何储存数字</h3><p><strong>十进制 — 十六进制</strong></p>
+<p>0—0    1—1    2—2    3—3    4—4    5—5    6—6    7—7    8—8</p>
+<p>9—9    10—A    11—B    12—C    13—D    14—E    15—F</p>
+<p><strong>二进制 — 十六进制（4位，不足位数补0）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0000---0    0001---1    0010---2    0011---3    0100---4    </span><br><span class="line"></span><br><span class="line">0101---5    0110---6    0111---7    1000---8    1001---9    </span><br><span class="line"></span><br><span class="line">1010---A   1011---B    1100---C    1101---D    1110---E    1111-F</span><br></pre></td></tr></table></figure></p>
+<h3 id="如何存储字符（二进制）"><a href="#如何存储字符（二进制）" class="headerlink" title="如何存储字符（二进制）"></a>如何存储字符（二进制）</h3><p>ASCII</p>
+<h3 id="如何存储中文-十六进制"><a href="#如何存储中文-十六进制" class="headerlink" title="如何存储中文(十六进制)"></a>如何存储中文(十六进制)</h3><p>GB2312 ==&gt; GBK </p>
+<h3 id="如何存储所有字符（32位）"><a href="#如何存储所有字符（32位）" class="headerlink" title="如何存储所有字符（32位）"></a>如何存储所有字符（32位）</h3><p>Unicode字符集 ==&gt; UTF-8（是一种编码方式，不是字符集，减少内存使用）<br><img src="http://upload-images.jianshu.io/upload_images/9617841-668635fe2645fe2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-6edf22ac8e6ca336.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h1 id="编码问题"><a href="#编码问题" class="headerlink" title="编码问题"></a>编码问题</h1><p>javascript使用了Unicode字符集，但是没有使用UTF-8编码（ES6解决了）。ES5只能表示两个字节以内的字符</p>
+<h1 id="GitHub-的使用"><a href="#GitHub-的使用" class="headerlink" title="GitHub 的使用"></a>GitHub 的使用</h1><h3 id="新建库"><a href="#新建库" class="headerlink" title="新建库"></a>新建库</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-8deb8a7ddcda4ef3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="库的名字"><a href="#库的名字" class="headerlink" title="库的名字"></a>库的名字</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-ae36665ad523fb02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-12f6b7c2c15c713b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<ul>
+<li>在本地新建一个文件夹，之后用 git bash 打开，在 git bash 中输入<br><img src="http://upload-images.jianshu.io/upload_images/9617841-a3d89a0edd565a46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></li>
+</ul>
+<p>代表成功。此处若出现问题，则需要配置git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &apos;your username&apos; </span><br><span class="line">git config --global user.email &apos;your email&apos;</span><br><span class="line">git config --global push.default simple </span><br><span class="line">git config --global core.quotepath false </span><br><span class="line">git config --global core.editor &quot;vim&quot;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-3017859e723e5ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="若-git-push-u-origin-master出现错误，则需要进行下面的配置，点击-settings"><a href="#若-git-push-u-origin-master出现错误，则需要进行下面的配置，点击-settings" class="headerlink" title="若 git push -u origin master出现错误，则需要进行下面的配置，点击 settings"></a>若 <code>git push -u origin master</code>出现错误，则需要进行下面的配置，点击 <code>settings</code></h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-362acb3e91510047.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="点击-SSH-and-GPG-keys"><a href="#点击-SSH-and-GPG-keys" class="headerlink" title="点击  SSH and GPG keys"></a>点击  <code>SSH and GPG keys</code></h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-96e958352b0fd829.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-fdabe695803b8cc9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-92781ddcb31041a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><strong>注意添加自己的邮箱，回车。</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-45f8b29e96ea12bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="将生成的文件打印"><a href="#将生成的文件打印" class="headerlink" title="将生成的文件打印"></a>将生成的文件打印</h3><p>在 git bash 中输入 <code>cat ~/.ssh/id_rsa.pub</code> 将输出的东西复制</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-0d0209c20a027a6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="title-随意填写，将刚刚复制的粘贴到-Key-中"><a href="#title-随意填写，将刚刚复制的粘贴到-Key-中" class="headerlink" title="title 随意填写，将刚刚复制的粘贴到 Key 中"></a>title 随意填写，将刚刚复制的粘贴到 <code>Key</code> 中</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-06da618856a7d9ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="之后再一次在-git-bash-中输入git-push-u-origin-master-即可，出现下面的即表示成功。"><a href="#之后再一次在-git-bash-中输入git-push-u-origin-master-即可，出现下面的即表示成功。" class="headerlink" title="之后再一次在 git bash 中输入git push -u origin master 即可，出现下面的即表示成功。"></a>之后再一次在 git bash 中输入<code>git push -u origin master</code> 即可，出现下面的即表示成功。</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-768c35ff60764678.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-1be5010b6ee210a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-9a82d100b485c46e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="之后运用-vs-Code-编辑在本地创建的文件夹"><a href="#之后运用-vs-Code-编辑在本地创建的文件夹" class="headerlink" title="之后运用 vs Code 编辑在本地创建的文件夹"></a>之后运用 vs Code 编辑在本地创建的文件夹</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-d5f34e0530589b87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<ul>
+<li>进行提交<br><img src="http://upload-images.jianshu.io/upload_images/9617841-b25c7fae9b69d1c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"><br><img src="http://upload-images.jianshu.io/upload_images/9617841-534685159088a058.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></li>
+</ul>
+<h3 id="点击-推送，之后刷新-github-页面，即可看到更新"><a href="#点击-推送，之后刷新-github-页面，即可看到更新" class="headerlink" title="点击 推送，之后刷新 github 页面，即可看到更新"></a>点击 <code>推送</code>，之后刷新 github 页面，即可看到更新</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-a3a9e4422b103879.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-528cc4d48bc6a620.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="之后填写内容，提交推送，刷新-github"><a href="#之后填写内容，提交推送，刷新-github" class="headerlink" title="之后填写内容，提交推送，刷新 github"></a>之后填写内容，提交推送，刷新 github</h3><h3 id="在-github-上查看HTML文件"><a href="#在-github-上查看HTML文件" class="headerlink" title="在 github 上查看HTML文件"></a>在 github 上查看HTML文件</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-5cc389c5db29614b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-4053f515854eb58f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-c12e5d26330d3a2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<h3 id="先在浏览器中粘贴地址，并加上文件名，之后复制地址"><a href="#先在浏览器中粘贴地址，并加上文件名，之后复制地址" class="headerlink" title="先在浏览器中粘贴地址，并加上文件名，之后复制地址!"></a>先在浏览器中粘贴地址，并加上文件名，之后复制地址!</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-899dbd492369dc42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-88fa798f1f640992.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

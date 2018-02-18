@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP系列 -- 请求与响应 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述
+Server（服务器）：服务器作为硬件来说，通常是指那些具有较高计算能力，能够提供给多个用户使用的计算机
+
+Client（客户端）：是指与服务器相对应，为客户提供本地服务的程序
+
+
+浏览器 + 服务器 + HTTP 三者关系
+浏览器负责发起请求
+服务器在80端口接收请求
+服务器负责返回内容（响">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTTP系列 -- 请求与响应"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/15/HTTP系列 -- 请求与响应/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-15T10:27:13.000Z"><a href="/2018/01/15/HTTP系列 -- 请求与响应/">2018-01-15</a></time>
+      
+      
+  
+    <h1 class="title">HTTP系列 -- 请求与响应</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
+<li><p><strong>Server（服务器）</strong>：服务器作为硬件来说，通常是指那些具有较高计算能力，能够提供给多个用户使用的计算机</p>
+</li>
+<li><p><strong>Client（客户端）</strong>：是指与服务器相对应，为客户提供本地服务的程序</p>
+</li>
+</ol>
+<h1 id="浏览器-服务器-HTTP-三者关系"><a href="#浏览器-服务器-HTTP-三者关系" class="headerlink" title="浏览器 + 服务器 + HTTP 三者关系"></a>浏览器 + 服务器 + HTTP 三者关系</h1><ul>
+<li>浏览器负责发起请求</li>
+<li>服务器在<strong>80端口</strong>接收请求</li>
+<li>服务器负责返回内容（响应）</li>
+<li>浏览器负责下载响应内容</li>
+</ul>
+<p><strong>HTTP 的作用就是指导浏览器和服务器如何进行沟通。</strong></p>
+<h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h3 id="请求头（Request-Headers）格式"><a href="#请求头（Request-Headers）格式" class="headerlink" title="请求头（Request Headers）格式"></a>请求头（Request Headers）格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.请求类型 路径 协议/版本 // 请求行</span><br><span class="line">2.key: value  // 请求头</span><br><span class="line">3.</span><br><span class="line">4.要上传的数据  // 其他消息体</span><br></pre></td></tr></table></figure>
+<h3 id="请求类型"><a href="#请求类型" class="headerlink" title="请求类型"></a>请求类型</h3><ol>
+<li><p>GET ==&gt; 用于获取数据。</p>
+</li>
+<li><p>POST ==&gt; 用于提交数据，请求服务器进行处理。</p>
+</li>
+<li><p>PUT ==&gt; 向指定资源位置上传其最新内容（所有内容都更新）。</p>
+</li>
+<li><p>PATCH ==&gt; 用于将局部修改应用到资源。</p>
+</li>
+<li><p>DELETE ==&gt; 请求服务器删除Request-URI所标识的资源。</p>
+</li>
+<li><p>HEAD ==&gt; 向服务器发出指定资源的请求，但服务器将不传回资源的本文部分。</p>
+</li>
+<li><p>OPTIONS ==&gt; 使服务器传回该资源所支持的所有HTTP请求方法，向Web服务器发送OPTIONS请求，可以测试服务器功能是否正常运作。</p>
+</li>
+</ol>
+<h3 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h3><p>必须以 <code>/</code> 开头，如果不设置，默认为 <code>/</code> ，路径包括<strong>查询参数</strong>，但是不包括<strong>锚点</strong></p>
+<h3 id="版本："><a href="#版本：" class="headerlink" title="版本："></a>版本：</h3><p>版本大部分都是 <code>HTTP/1.1</code>，还有<code>HTTP/2</code>.</p>
+<h3 id="请求头（key-value）："><a href="#请求头（key-value）：" class="headerlink" title="请求头（key: value）："></a>请求头（key: value）：</h3><p>请求头定义一些操作参数。其中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Host: www.baidu.com  // 域名</span><br><span class="line">User-Agent:      // 用的什么软件发起的请求</span><br><span class="line">Content-Type: application/x-www-form-urlcoded    //标识了第4部分的格式，POST 请求</span><br><span class="line">Content-Length: </span><br><span class="line">Cookie:</span><br></pre></td></tr></table></figure></p>
+<h3 id="第3部分："><a href="#第3部分：" class="headerlink" title="第3部分："></a>第3部分：</h3><p>是一个空行（回车）。</p>
+<h3 id="第4部分："><a href="#第4部分：" class="headerlink" title="第4部分："></a>第4部分：</h3><p>上传的数据，可以没有 </p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li>https 协议 ==&gt; 所有数据在网络上请求和传输的时候都是加密的</li>
+<li>http 协议  ==&gt; 所有数据在网络上请求和传输的时候都是明文的</li>
+</ul>
+<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><h3 id="响应头（Response-Headers）格式"><a href="#响应头（Response-Headers）格式" class="headerlink" title="响应头（Response Headers）格式"></a>响应头（Response Headers）格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.协议/版本 状态码 状态解释</span><br><span class="line">2.key: value  </span><br><span class="line">3.</span><br><span class="line">4.要下载的数据</span><br></pre></td></tr></table></figure>
+<h3 id="状态码："><a href="#状态码：" class="headerlink" title="状态码："></a>状态码：</h3><p>表示网页服务器超文本传输协议响应状态的3位数字代码。</p>
+<ul>
+<li><p>2xx成功 ==&gt; 代表请求已成功被服务器接收、理解、并接受。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.200 OK 请求已成功，请求所希望的响应头或数据体将随此响应返回（GET）。</span><br><span class="line">b.204 No Content 服务器成功处理了请求，没有返回任何内容（创建成功 ==&gt; POST）。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3xx重定向 ==&gt; 类状态码代表需要客户端采取进一步的操作才能完成请求。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.301 Move Permanently 被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个URI之一。</span><br><span class="line">b.302 Found 要求客户端执行临时重定向。</span><br><span class="line">c.304 Not Modified 表示资源未被修改。在这种情况下，由于客户端仍然具有以前下载的副本，因此不需要重新传输资源。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4xx客户端错误 ==&gt; 这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.403 Forbidden 客户端错误，服务器已经理解请求，但是拒绝执行  它。</span><br><span class="line">b.404 Not Found 请求失败，请求所希望得到的资源未被在服务器上发    现，但允许用户的后续请求。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5xx服务器错误 ==&gt; 表示服务器无法完成明显有效的请求。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.500 Internal Server Error 通用错误消息，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。</span><br><span class="line">b.502 Bad Gateway 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="HTML-与-HTTP"><a href="#HTML-与-HTTP" class="headerlink" title="HTML 与 HTTP"></a>HTML 与 HTTP</h1><p>所有 App 都会内置一个浏览器（WebView）用来展示 HTML，而 HTML 都是通过 HTTP 下载的，而如果你要使用 HTTP 一般都会用到 URL。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

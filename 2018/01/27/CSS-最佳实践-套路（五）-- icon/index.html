@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS 最佳实践 + 套路（五） -- icon | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述icon 有很多做法，主要的做法有
+
+img 标签
+background-image 属性
+CSS Sprites 
+font
+svg
+纯 CSS 实现
+
+在这些方法中，目前最值得推荐的就是 svg 方法，其他的大家可以了解一下。
+img 标签1&amp;lt;img src=&amp;quot;./img/x">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS 最佳实践 + 套路（五） -- icon"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/27/CSS-最佳实践-套路（五）-- icon/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-26T23:58:06.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">2018-01-27</a></time>
+      
+      
+  
+    <h1 class="title">CSS 最佳实践 + 套路（五） -- icon</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>icon 有很多做法，主要的做法有</p>
+<ul>
+<li>img 标签</li>
+<li>background-image 属性</li>
+<li>CSS Sprites </li>
+<li>font</li>
+<li>svg</li>
+<li>纯 CSS 实现</li>
+</ul>
+<p>在这些方法中，目前最值得推荐的就是 <strong>svg 方法</strong>，其他的大家可以了解一下。</p>
+<h1 id="img-标签"><a href="#img-标签" class="headerlink" title="img 标签"></a>img 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;./img/xxx.png&quot; alt=&quot;icon&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>此种方法可以自适应宽高，只需要给 img 一个 width 属性或者一个 height 属性即可</p>
+<h1 id="background-image-属性"><a href="#background-image-属性" class="headerlink" title="background-image 属性"></a>background-image 属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CSS：</span><br><span class="line">    div&#123;</span><br><span class="line">        background-image: url(./image/xxx.png);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">HTML:</span><br><span class="line">    &lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="CSS-Sprites"><a href="#CSS-Sprites" class="headerlink" title="CSS Sprites"></a>CSS Sprites</h1><p>可以使用<a href="http://css.spritegen.com/" target="_blank" rel="noopener">工具自动生成 Sprites</a> ，之后进行使用，此种方法便是工具的使用</p>
+<h1 id="font"><a href="#font" class="headerlink" title="font"></a>font</h1><p>font 方法主要是使用<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里</a>的 Unicode 和 Font class 方法<br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca3bfe98993983c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Font 方法"></p>
+<h1 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h1><p>svg 方法是现在最值得推荐的方法<br><strong>SVG</strong>是可缩放矢量图形，是W3C XML的分支语言之一，用于标记可缩放的矢量图形。它支持 CSS 属性</p>
+<p>首先去<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里的 iconfont 网站</a></p>
+<ol>
+<li>选取相应的图标并加入购物车</li>
+<li>将购物车中的图标添加至项目</li>
+<li>生成 Symbol 代码</li>
+<li>拷贝生成的 Symbol 代码，放在 HTML 中</li>
+<li><p>引入通用css代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .icon &#123;</span><br><span class="line">       width: 1em; height: 1em;</span><br><span class="line">       vertical-align: -0.15em;</span><br><span class="line">       fill: currentColor;</span><br><span class="line">       overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>挑选相应图标并获取类名，应用于页面</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    &lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;#icon-xxx&quot;&gt;&lt;/use&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">    ``` </span><br><span class="line">![SVG](http://upload-images.jianshu.io/upload_images/9617841-1b6964ececccf5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">![阿里 iconfont 使用](http://upload-images.jianshu.io/upload_images/9617841-ccdc31dd20104add.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">`&lt;svg&gt;` 属性：</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>width:          // icon 宽度<br>height:          // icon 高度<br>fill:          // icon 颜色<br>stroke:    // 描边<br>vertical-align: top;   //可以用于调整上下间距。<br>```</p>
+<h1 id="纯-CSS-实现"><a href="#纯-CSS-实现" class="headerlink" title="纯 CSS 实现"></a>纯 CSS 实现</h1><p>纯 CSS 实现就是使用 CSS 去画一些图标，<a href="http://cssicon.space/#/" target="_blank" rel="noopener">推荐一个网站</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HTTP系列 -- 基础知识 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="代码链接
+脚本JavaScript 是一门动态类型、面向对象的脚本语言
+bash 脚本12345678910111213141516171819202122232425262728293031323334mkdir ~/localcd ~/localtouch demo.txtstart demo.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HTTP系列 -- 基础知识"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/15/HTTP系列 -- 基础知识/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-15T10:21:51.000Z"><a href="/2018/01/15/HTTP系列 -- 基础知识/">2018-01-15</a></time>
+      
+      
+  
+    <h1 class="title">HTTP系列 -- 基础知识</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/bowen-wu/bash-create-file-script-demo" target="_blank" rel="noopener">代码链接</a></p>
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>JavaScript 是一门动态类型、面向对象的脚本语言</p>
+<h3 id="bash-脚本"><a href="#bash-脚本" class="headerlink" title="bash 脚本"></a>bash 脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/local</span><br><span class="line">cd ~/local</span><br><span class="line">touch demo.txt</span><br><span class="line">start demo.txt</span><br><span class="line"></span><br><span class="line">    //内容如下：</span><br><span class="line">    //mkdir demo</span><br><span class="line">    //cd demo</span><br><span class="line">    //mkdir css js</span><br><span class="line">    //touch index.html css/style.css js/main.js</span><br><span class="line">    //exit</span><br><span class="line"></span><br><span class="line">    //（Windows 用户请跳过这一步）给 demo.sh 添加执行权限，加上可执行的操作</span><br><span class="line">    //chmod +x demo.txt</span><br><span class="line"></span><br><span class="line">    // 在任意位置执行 &apos;sh ~/local/demo.txt&apos; 即可运行此脚本，sh ==&gt; shell</span><br><span class="line">cd ~/desktop</span><br><span class="line">sh ~/local/demo.txt</span><br><span class="line">    // 你会看到当前目录里多出一个 demo 目录，demo 目录里面还有一些文件</span><br><span class="line">    // demo.txt 就是你写出的第一个 Bash 脚本了。</span><br><span class="line"></span><br><span class="line">    // 将 ~/local 添加到 PATH 里</span><br><span class="line">cd ~/local;pwd</span><br><span class="line">touch ~/.bashrc</span><br><span class="line">start ~/.bashrc</span><br><span class="line">    //在最后一行添加 </span><br><span class="line">export PATH=&quot;local的绝对路径:$PATH&quot;</span><br><span class="line">source ~/.bashrc</span><br><span class="line">    // 之前你要运行 sh ~/local/demo.txt，现在你只需要运行 demo.txt 就行  了</span><br><span class="line">    // 原因：将这个路径添加到 &apos;~/.bashrc&apos; 之后，就是在进入 git bash 之前就运行了 &apos;~/.bashrc&apos; </span><br><span class="line"></span><br><span class="line">    // 删掉demo.txt 的后缀 .txt </span><br><span class="line">mv ~/local/demo.txt ~/local/demo</span><br><span class="line">    // 现在只要运行 demo 就能执行该脚本了。</span><br></pre></td></tr></table></figure>
+<h5 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h5><ol>
+<li>PATH 的作用<br>你每次在 Bash 里面输入一个命令时（比如 ls、cp、demo），Bash 都会去 PATH 列表里面寻找对应的文  件，如果找到了就执行。(<code>each $PATH</code>查看PATH，’目录：目录…’)</li>
+<li><code>type demo</code> 可以看到寻找过程</li>
+<li><code>which demo</code> 可以看到寻找结果,最终结果</li>
+<li>文件后缀的作用：毫无作用，windows有一个用处，告诉计算机，用什么打开文件</li>
+<li>所有命令都是可执行文件，都是一个脚本文件，可执行文件就是命令，不可执行文件就是配置</li>
+</ol>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><p>让 demo 脚本创建的目录可变，更改 demo 的内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir $1</span><br><span class="line">cd $1   //  $1 ==&gt; 表示传递的第一个参数</span><br><span class="line">mkdir css js</span><br><span class="line">touch index.html css/style js/main.js</span><br><span class="line">exit</span><br></pre></td></tr></table></figure></p>
+<h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><p><code>exit 1</code> 表示错误代码1</p>
+<p><code>exit 0</code>表示没有错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">demo xxx &amp;&amp; echo &apos;end&apos; //表示之后 demo xxx 成功了才会执行 echo &apos;end&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Node-js-脚本"><a href="#Node-js-脚本" class="headerlink" title="Node.js 脚本"></a><a href="https://github.com/bowen-wu/node-create-file" target="_blank" rel="noopener">Node.js 脚本</a></h3><h1 id="www（World-Wide-Web）"><a href="#www（World-Wide-Web）" class="headerlink" title="www（World Wide Web）"></a>www（World Wide Web）</h1><p>1990年万维网（World Wide Web）诞生。Tim Berners-Lee 发明了第一个网页、第一个浏览器和第一个服务器</p>
+<h3 id="主要概念"><a href="#主要概念" class="headerlink" title="主要概念"></a>主要概念</h3><ol>
+<li><p><strong>URI（Uniform Resource Identifier）</strong>：统一资源标识符，是一个用于标识某一互联网资源名称的字符串，其中包括 URL 和 URN 。</p>
+<ul>
+<li><p>URL（Uniform Resource Locator）：统一资源定位符，或者称为<strong>URL地址</strong>和<strong>网页地址（网址）</strong>。统一资源定位符的标准格式如下：<br><code>协议类型:[//服务器地址[:端口号]][/资源层级UNIX文件路径]文件名[?查询][#片段ID]</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-1dd60cd247108428.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="URL地址"></p>
+</li>
+<li><p>URN（Uniform Resource Name）：统一资源名称，其目的是通过提供一种途径，用于在特定的命名空间资源的标识，以补充网址。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>HTTP（HyperText Transfer Protocol）</strong>：超文本传输协议，是一种用于分布式、协作式和超媒体信息系统的应用层协议。就是两个电脑之间传输内容的协议。</p>
+</li>
+<li><p><strong>HTML（HyperText Markup Language）</strong>：超文本标记语言，是一种用于创建网页的标准标记语言。<a href="http://info.cern.ch/" target="_blank" rel="noopener">第一个网页</a></p>
+</li>
+<li><p><strong>DNS（Domain Name System）</strong>：域名系统，是互联网的一项服务。它作为将<strong>域名和IP地址相互映射</strong>的一个分布式数据库，能够使人更方便地访问互联网。（<strong>输入一个域名，将得到一个IP</strong>）</p>
+<ul>
+<li><p>输入域名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//在命令行中输入以下任意一条，即可返回包括IP地址的一些信息</span><br><span class="line">nslookup baidu.com</span><br><span class="line">ping baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出IP</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>说明：</strong></p>
+<ul>
+<li>可以修改本地 hosts 文件从而让域名指向特定的IP</li>
+<li>URL 的作用是能让你访问一个页面</li>
+<li>HTTP 的作用是让你能下载这个页面</li>
+<li>HTML 的作用是让你能看懂这个页面。</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

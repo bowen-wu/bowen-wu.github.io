@@ -1,0 +1,1201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Seite 2 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/page/2/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-30T00:51:28.000Z"><a href="/2018/01/30/JS系列 -- 基本概念（一）基础/">2018-01-30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/30/JS系列 -- 基本概念（一）基础/">JS系列 -- 基本概念（一）基础</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h3 id="区分大小写"><a href="#区分大小写" class="headerlink" title="区分大小写"></a>区分大小写</h3><p>ECMAScript 中的一切（变量 函数名和操作符）都区分大小写</p>
+<h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><p>标识符：标识符（identifier）指的是用来识别各种值的合法名称，变量、函数、属性的名字或者是函数的参数都是标识符</p>
+<h5 id="规则："><a href="#规则：" class="headerlink" title="规则："></a>规则：</h5><ul>
+<li>第一个字符必须是一个字母、下划线（_）或一个美元符号（$）</li>
+<li>其他字符可以是字母、数字、下划线或者美元符号<br><strong>中文是合法的标识符，可以用作变量名。</strong></li>
+</ul>
+<h3 id="书写格式"><a href="#书写格式" class="headerlink" title="书写格式"></a>书写格式</h3><p>ECMAScript 中标识符 <strong>推荐</strong> 采用 “驼峰大小写（camelCase）” 书写格式。<br>还有 “短横线分隔命名（kebab-case）” 书写格式和 “单词首字母大写（PascalCase）” 书写格式。</p>
+<p>###语句<br>JavaScript 程序的执行单位为行（line），也就是一行一行地执行。一般情况下，每一行就是一个语句。</p>
+<ul>
+<li>语句（statement）是为了完成某种任务而进行的操作</li>
+<li>表达式（expression）：指一个为了得到返回值的计算式。</li>
+</ul>
+<h5 id="语句和表达式的区别："><a href="#语句和表达式的区别：" class="headerlink" title="语句和表达式的区别："></a>语句和表达式的区别：</h5><ul>
+<li>语句主要为了进行某种操作，一般情况下不需要返回值；</li>
+<li>表达式则是为了得到返回值，一定会返回一个值。</li>
+<li>语句以分号结尾，一个分号就表示一个语句结束。</li>
+<li>分号前面可以没有任何内容，JavaScript引擎将其视为空语句。</li>
+<li>表达式不需要分号结尾。一旦在表达式后面添加分号，则 JavaScript 引擎就将表达式视为语句，这样会产生一些没有任何意义的语句。</li>
+</ul>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 单行注释</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*这是一个</span><br><span class="line">*多行注释</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--  合法的单行注释   --&gt;</span><br></pre></td></tr></table></figure>
+<p>在使用编辑器时，快捷键为 <code>Ctrl</code> + <code>?</code></p>
+<h3 id="关键字和保留字"><a href="#关键字和保留字" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h3><p>关键字和保留字具有特定的用途，不能用作标识符。</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>ECMAScript 中的变量是松散类型的，所谓松散类型就是可以用来保存任何类型的数据</p>
+<h5 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h5><p>定义变量时使用 <code>var</code> 操作符，<strong>用 <code>var</code> 操作符定义的变量将成为定义该变量的作用域中的局部变量</strong>。</p>
+<h3 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = // 2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>结果：<code>a = 1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">if(a = 3)</span><br><span class="line">    console.log(&apos;a等于3&apos;)</span><br></pre></td></tr></table></figure>
+<p>结果：<code>打印出：a等于3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = </span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>结果：<code>合法，等价于  a = 1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a = /* 2 */</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>结果：<code>a = 1</code></p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-29T00:26:44.000Z"><a href="/2018/01/29/jQuery系列（四）-- 事件/">2018-01-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/29/jQuery系列（四）-- 事件/">jQuery系列（四） -- 事件</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h2><ol>
+<li><p><code>.click()</code> ==&gt; 单击事件</p>
+</li>
+<li><p><code>.dblclick()</code> ==&gt; 双击事件</p>
+</li>
+<li><p><code>.mousedown()</code> ==&gt; 鼠标按键按下时触发</p>
+</li>
+<li><p><code>.mouseup()</code> ==&gt; 鼠标按键释放时触发</p>
+</li>
+<li><p><code>.mousemove()</code> ==&gt; 鼠标指针在元素内移动时触发</p>
+</li>
+<li><p><code>.mouseover()</code> ==&gt; 当鼠标指针进入元素内触发（冒泡）</p>
+</li>
+<li><p><code>.mouseout()</code> ==&gt; 当鼠标指针离开元素时触发（冒泡）</p>
+</li>
+<li><p><code>.mouseenter()</code> ==&gt; 当鼠标移入到元素上时触发（不冒泡）</p>
+</li>
+<li><p><code>.mouseleave()</code> ==&gt; 当鼠标离开元素上时触发（不冒泡）<br><strong>说明：</strong><code>.mouseenter()</code> 和 <code>.mouseleave()</code> 事件只会在绑定它的元素上被调用，而不会在后代节点上触发</p>
+</li>
+<li><p><code>.hover()</code> ==&gt; 将两个事件函数绑定到匹配元素上，分别当鼠标指针进入和离开元素时被执行。<code>.hover()</code> === <code>.mouseenter()</code> + <code>.mouseleave()</code></p>
+</li>
+<li><p><code>.focusin()</code> ==&gt; 元素获得焦点时触发</p>
+</li>
+<li><code>focusout()</code> ==&gt; 元素失去焦点时触发</li>
+</ol>
+<h2 id="表单事件"><a href="#表单事件" class="headerlink" title="表单事件"></a>表单事件</h2><ol>
+<li><code>.focus()</code> ==&gt; 当元素获得焦点时</li>
+<li><p><code>.blur()</code> ==&gt; 当元素失去焦点时<br><strong>说明：</strong><code>.focus()</code> 和 <code>.blur()</code> 不支持冒泡事件，只有绑定自身才有效；<code>.focusin()</code> 和 <code>focusout()</code> 支持冒泡事件</p>
+</li>
+<li><p><code>.change()</code> ==&gt; 监听 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code> 和 <code>&lt;select&gt;</code> 元素值改变</p>
+</li>
+<li><p><code>.select()</code> ==&gt; 当在元素中进行文本选择时，此事件只能用在 <code>&lt;input type=&quot;text&quot;&gt;</code> 和 <code>&lt;textarea&gt;</code></p>
+</li>
+<li><p><code>.submit()</code> ==&gt; 监听表单提交事件</p>
+</li>
+</ol>
+<h2 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h2><ol>
+<li><p><code>.keydown()</code> ==&gt; 当在一个元素上第一次按下键盘上的键的时。每次获取的内容是之前输入的，当前输入的获取不到</p>
+</li>
+<li><p><code>.keyup()</code> ==&gt; 当在一个元素上释放按键的时。获取的是触发键盘事件后的文本</p>
+</li>
+<li><p><code>.keypress()</code> ==&gt; 当浏览器捕获一个元素上键盘输入时。只能捕获单个字符；无法相应系统功能键；不区分小键盘和主键盘的数字字符</p>
+</li>
+</ol>
+<p><strong>说明：</strong><code>.keypress()</code> 主要接收字母、数字等 ANSI 字符，而 <code>.keydown()</code> 和 <code>.keyup()</code> 事件过程可以处理任何不被 <code>.keypress()</code> 识别的击键</p>
+<h2 id="多事件"><a href="#多事件" class="headerlink" title="多事件"></a>多事件</h2><ol>
+<li><p><code>.on()</code> ==&gt; 多事件绑定</p>
+<ul>
+<li>多个事件绑定同一函数<br>  <code>$( &#39;ele&#39; ).on( &#39;mouseover mouseout&#39;, () =&gt; {} )</code></li>
+<li>多个事件绑定不同函数  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$( &apos;ele&apos; ).on( &#123;</span><br><span class="line">    mouseover: () =&gt; &#123;&#125;,</span><br><span class="line">    mouseout: () =&gt; &#123;&#125;</span><br><span class="line">&#125; )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>.off()</code> ==&gt; 移除绑定事件</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-29T00:24:55.000Z"><a href="/2018/01/29/jQuery系列（三）-- DOM/">2018-01-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/29/jQuery系列（三）-- DOM/">jQuery系列（三） -- DOM</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="创建元素与属性"><a href="#创建元素与属性" class="headerlink" title="创建元素与属性"></a>创建元素与属性</h1><p>JavaScript：</p>
+<ul>
+<li>创建元素：<code>document.createElement()</code></li>
+<li>设置属性：<code>setAttribute()</code></li>
+<li>添加文本：<code>innerHTML()</code></li>
+<li>加入文档：<code>append()</code></li>
+</ul>
+<p>jQuery：</p>
+<ul>
+<li>创建元素节点：<code>$( &#39;html结构&#39; )</code></li>
+<li>创建文本节点：<code>$( &#39;&lt;div&gt;text node&lt;/div&gt;&#39; )</code></li>
+<li>创建属性节点：<code>$( &#39;&lt;div id=&quot;text&quot; class=&quot;className&quot;&gt;text node&lt;/div&gt;&#39; )</code></li>
+</ul>
+<h1 id="jQuery-DOM-API"><a href="#jQuery-DOM-API" class="headerlink" title="jQuery DOM API"></a>jQuery DOM API</h1><h3 id="DOM-node-插入"><a href="#DOM-node-插入" class="headerlink" title="DOM node 插入"></a>DOM node 插入</h3><ol>
+<li><p>内部插入</p>
+<ul>
+<li><code>.append(content)</code> ==&gt; 向每个匹配的元素内部追加内容。前面是被插入的对象，后面是要在对象内插入的元素内容 </li>
+<li><code>.appendTo(obj)</code> ==&gt;  把所有的匹配元素追加到另一个指定的元素集合中。前面是要插入的元素内容，而后面是被插入的对象</li>
+</ul>
+</li>
+<li><p>外部插入</p>
+<ul>
+<li><code>.after(content)</code> ==&gt; 在匹配元素集合中的每个元素后面插入参数所指定的内容，作为其兄弟节点</li>
+<li><code>before(content)</code> ==&gt; 在匹配的元素的前面插入内容</li>
+</ul>
+</li>
+<li><p>内部插入</p>
+<ul>
+<li><code>.prepend()</code> ==&gt; 向每个匹配的元素内部前置内容</li>
+<li><code>.prependTo()</code> ==&gt; 把所有匹配的元素前置到另一个指定的元素集合中</li>
+</ul>
+</li>
+</ol>
+<p><strong>说明：</strong><code>.peopend()</code> 方法将指定元素插入到匹配元素里面作为他的第一个子元素。<code>.append()</code> 方法最为最后一个参数。</p>
+<ol>
+<li>外部插入：content 在前，() 内为元素<ul>
+<li><code>.insertAfter()</code> ==&gt; 在目标元素后面插入集合中每个匹配的元素</li>
+<li><code>.insertBefore()</code> ==&gt; 在目标元素前面插入集合中每个匹配的元素</li>
+</ul>
+</li>
+</ol>
+<h3 id="DOM-node-删除"><a href="#DOM-node-删除" class="headerlink" title="DOM node 删除"></a>DOM node 删除</h3><ul>
+<li><code>.empty()</code> ==&gt; 移除指定元素的所有子节点</li>
+<li><code>.remove()</code> ==&gt; 将自身移除，同时也会移除元素内部的一切，包括绑定的事件及与该元素相关的 jQuery 数据<br><strong>注意：</strong><code>.remove()</code> 可以传递一个选择器表达式用来过滤将被移除的匹配元素集合，可以选择性地删除节点</li>
+<li><code>.detach()</code> ==&gt; 保留数据的删除操作。让一个 web 元素托管，即从当前页面中移除该元素，但保留这个元素的内存模型对象<br><strong>注意：</strong><code>.detach()</code> 方法是 jQuery 特有的，所以它只能处理通过 jQuery 的方法绑定的事件或者数据，可以通过 <code>.append()</code> 是删除的元素重新回到文档流中</li>
+</ul>
+<h3 id="DOM-node-复制与替换"><a href="#DOM-node-复制与替换" class="headerlink" title="DOM node 复制与替换"></a>DOM node 复制与替换</h3><ul>
+<li><p><code>.clone()</code> ==&gt; 复制所有匹配的元素集合，包括所有匹配元素、匹配元素的下级元素和文字节点<br><strong>注意：</strong>若节点有事件或者数据之类的其他处理，我们需要通过 <code>.clone(true)</code> 传递一个布尔值 <code>true</code> 用来指定，这样不仅仅是简单的克隆节点结构，还把附带的事件与数据复制。</p>
+</li>
+<li><p><code>.replaceWith(newContent)</code> ==&gt; 用提供的内容替换集合中所有匹配的元素并且返回被删除元素的集合</p>
+</li>
+<li><p><code>.replaceAll(target)</code> ==&gt; 用集合的匹配元素替换每个目标元素<br><strong>注意：</strong></p>
+<ol>
+<li><code>.replaceWith()</code> 和 <code>.replaceAll()</code> 会删除与节点相关联的所有数据和 event handler</li>
+<li><code>.replaceWith()</code> 返回 jQuery 对象，可链式使用，但返回的 jQuery 对象引用的是替换前的节点，而不是通过 <code>.replaceWith() / .replaceAll()</code> 方法替换后的节点</li>
+</ol>
+</li>
+<li><p><code>.wrap()</code> ==&gt; 将元素用其他元素包裹起来，即给元素增加一个父元素，返回原始的元素集，以便以后使用链式方法</p>
+</li>
+<li><code>.unwrap()</code> ==&gt; 将匹配的元素的父级元素删除，保留自身在原来的位置</li>
+<li><code>.wrapAll()</code> ==&gt; 将集合中的元素用其他元素包裹起来，增加一个父元素（每个元素分别包裹）</li>
+<li><code>.wrapInner()</code> ==&gt; 将集合中的元素内部所有的子元素用其他元素包裹起来，并当做指定元素的子元素</li>
+</ul>
+<h3 id="jQuery-遍历"><a href="#jQuery-遍历" class="headerlink" title="jQuery 遍历"></a>jQuery 遍历</h3><ul>
+<li><p><code>.children()</code> ==&gt; 返回匹配元素集合中每个元素的所有子元素，并且可以接受一个选择器</p>
+</li>
+<li><p><code>.find()</code> ==&gt; 查找 DOM 树中元素的后代元素（只在后代中遍历，不包括自己）</p>
+</li>
+<li><code>.parent()</code> ==&gt; 查找集合中每一个元素的父元素</li>
+<li><code>.parents()</code> ==&gt; 查找集合中每一个元素的祖辈元素</li>
+<li><p><code>.closest()</code> ==&gt; 从元素本身开始，在 DOM 树上逐级向上元素匹配，并返回最先匹配的祖先元素<br><strong>注意：</strong><code>.parents()</code> 和 <code>.closest()</code> 区别</p>
+<ol>
+<li>起始位置不同：<code>.parents()</code> 开始于父元素； <code>.closest()</code> 开始于当前元素</li>
+<li>遍历的目标不同：<code>.parents()</code> 一直查找到根元素，并将匹配的元素加入集合； <code>.closest()</code> 向上查找，直到找到一个匹配的就停止查找</li>
+<li>结果不同：<code>.parents()</code> 返回的是包含0个或1个或多个元素的 jQuery 对象； <code>.closest()</code> 返回的是包含0个或1个元素的 jQuery 对象</li>
+</ol>
+</li>
+<li><p><code>.next()</code> ==&gt; 查找指定元素集合中每一个元素紧邻的后面同辈元素的元素集合</p>
+</li>
+<li><code>.prev()</code> ==&gt; 查找指定元素集合中每一个元素紧邻的前面同辈元素的元素集合</li>
+<li><code>.siblings()</code> ==&gt; 查找指定元素集合中每一个元素的同辈元素</li>
+<li><code>.add()</code> ==&gt; 创建一个新的 jQuery 对象，元素添加到匹配的元素集合中</li>
+<li><code>.each()</code> ==&gt; 一个 for 循环的迭代器，迭代 jQuery 对象中的每一个 DOM 元素，每次回调函数执行时，会传递当前循环次数作为参数（从0开始）<br> <code>.each()</code> 通过回调的方式处理，并且会有两个固定的实参 ==&gt; 索引（index）和元素（element）<br> <code>.each( (index,element) =&gt; {} )</code></li>
+</ul>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-28T01:45:02.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（十）-- 混合篇/">2018-01-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/28/CSS-最佳实践-套路（十）-- 混合篇/">CSS 最佳实践 + 套路（十） -- 混合篇</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文章主要就是将之前几篇文章中没有提到的，但是个人认为比较重要的 CSS 的最佳实践和套路</p>
+<h2 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h2><h4 id="水平居中："><a href="#水平居中：" class="headerlink" title="水平居中："></a>水平居中：</h4><ul>
+<li>内联元素：父元素加 <code>text-align:center;</code> </li>
+<li>块级元素（<strong>固定宽度</strong>）：<code>margin: 0 auto;</code></li>
+<li>元素不是上述两种情况：<pre><code>1. 将元素变成内联元素　` display: inline-block; ` + ` text-align:center; ` + ` vertical-align: top `
+2. 固定宽度（不推荐）
+</code></pre></li>
+</ul>
+<h4 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h4><ul>
+<li>内联元素：<code>line-height: height;</code></li>
+<li>块级元素：<code>line-height</code> + <code>padding</code> 构造高度，达到垂直居中（凑高度）</li>
+</ul>
+<h4 id="定位居中法"><a href="#定位居中法" class="headerlink" title="定位居中法"></a>定位居中法</h4><ul>
+<li><p>宽度固定</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line">left: 50%;</span><br><span class="line">top: 50%;</span><br><span class="line">margin-top: -width/2;</span><br><span class="line">margin-left: -heigth/2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>宽度不固定</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line">left: 50%;</span><br><span class="line">top: 50%;</span><br><span class="line">transform: translate(-50%,-50%)   // CSS3 属性</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="弹出层或者-loading-定位居中"><a href="#弹出层或者-loading-定位居中" class="headerlink" title="弹出层或者 loading 定位居中"></a>弹出层或者 loading 定位居中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">position: absolute; // 此种方法需要配合定宽定高</span><br><span class="line">top: 0;</span><br><span class="line">bottom: 0;</span><br><span class="line">left: 0;</span><br><span class="line">right: 0;</span><br><span class="line">margin: auto;</span><br></pre></td></tr></table></figure>
+<h4 id="Flex-布局居中"><a href="#Flex-布局居中" class="headerlink" title="Flex 布局居中"></a>Flex 布局居中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;</span><br><span class="line">justify-content: center;</span><br><span class="line">align-items: center;</span><br></pre></td></tr></table></figure>
+<h2 id="滚动但是不显示滚动条"><a href="#滚动但是不显示滚动条" class="headerlink" title="滚动但是不显示滚动条"></a>滚动但是不显示滚动条</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow: auto;</span><br><span class="line">&#125;</span><br><span class="line">selector::-webkit-scrollbar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="纯-CSS-实现三角形"><a href="#纯-CSS-实现三角形" class="headerlink" title="纯 CSS 实现三角形"></a>纯 CSS 实现三角形</h2><ul>
+<li><p>first</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div.first&#123;</span><br><span class="line">  border:10px solid transparent;</span><br><span class="line">  width:0;</span><br><span class="line">  border-top-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-077b0d7ad37b7982.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三角形-first.png"></p>
+</li>
+<li><p>second</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div.second&#123;</span><br><span class="line">  border:40px solid transparent;</span><br><span class="line">  width:0;</span><br><span class="line">  border-top-width:0;</span><br><span class="line">  border-left-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-cd63ba6dd15b2ba9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三角形-second.png"></p>
+</li>
+<li><p>third</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div.third&#123;</span><br><span class="line">  border:20px solid transparent;</span><br><span class="line">  width:0;</span><br><span class="line">  border-top-color: red;</span><br><span class="line">  border-left-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-fc99fb26421f7ca5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三角形-third.png"></p>
+</li>
+</ul>
+<p>这里推荐一个<a href="https://css-tricks.com/examples/ShapesOfCSS/" target="_blank" rel="noopener">使用纯 CSS 实现各种图形</a>的网站</p>
+<h2 id="两个元素重叠一部分"><a href="#两个元素重叠一部分" class="headerlink" title="两个元素重叠一部分"></a>两个元素重叠一部分</h2><p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-64958b12dd693d58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"><br><strong>方法：</strong></p>
+<ul>
+<li><code>margin</code> 负值法： <code>margin-top: -</code></li>
+<li>CSS3 transform属性： <code>transform: translate(- )</code> [ 原始位置保留不变，下方元素和 <code>transform</code> 元素有<strong>间隔</strong> ]</li>
+<li>相对定位：<code>position: relative; top(- )</code> [ 原始位置保留不变，下方元素和相对定位元素有<strong>间隔</strong> ]</li>
+</ul>
+<h2 id="内联元素消除空隙"><a href="#内联元素消除空隙" class="headerlink" title="内联元素消除空隙"></a>内联元素消除空隙</h2><p>当元素为内联元素 | 内联块级元素时，该元素下方会有小空隙，消除空隙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display: inline | inline-block;</span><br><span class="line">vertical-align: top;</span><br></pre></td></tr></table></figure></p>
+<h2 id="如果想要整个页面的遮罩层，需要使用"><a href="#如果想要整个页面的遮罩层，需要使用" class="headerlink" title="如果想要整个页面的遮罩层，需要使用"></a>如果想要整个页面的遮罩层，需要使用</h2><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    position: fixed;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%; </span><br><span class="line">    ``` </span><br><span class="line">    不能使用 ` position: absolute; ` ，其高度不是页面的高度，是窗口的高度。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##伪类</span><br><span class="line">CSS伪类是添加到选择器的关键字，指定要选择的元素的特殊状态。</span><br><span class="line">- 动态伪类</span><br></pre></td></tr></table></figure>
+</code></pre><p>:link ==&gt; 未访问前的样式效果<br>:hover ==&gt; 鼠标悬停时的样式效果<br>:active ==&gt; 鼠标点击时的样式效果<br>:visited ==&gt; 访问后的样式效果<br>:focus ==&gt; 元素成为焦点时的样式效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 结构伪类（CSS选择符）</span><br></pre></td></tr></table></figure></p>
+<p>:first-child ==&gt; 第一个子元素<br>:last-child ==&gt; 最后一个子元素<br>:nth-child(n) ==&gt; 第 n 个子元素<br>:nth-child(2n) === :nth-child(even) ==&gt; 偶数元素<br>:nth-child(2n+1) === :nth-child(odd) ==&gt; 奇数元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 否定伪类（CSS选择符）</span><br></pre></td></tr></table></figure></p>
+<p>:not() ==&gt; 不符合参数选择器 X 描述的元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 伪元素</span><br><span class="line">伪元素添加到选择器，但不是描述特殊状态，它们可以为元素（**非空元素**）的某些部分设置样式。</span><br><span class="line">- `::before` 为当前元素创建一个**伪元素**，做为已选中元素的**第一个**子元素。常通过 `content` 属性来为该元素添加修饰性的内容。 这个**虚拟元素**默认是行内元素。</span><br><span class="line">- `::after` 为当前元素创建一个**伪元素**，做为已选中元素的**最后一个**子元素。常通过 `content` 属性来为该元素添加修饰性的内容。这个**虚拟元素**默认是行内元素。</span><br></pre></td></tr></table></figure></p>
+<p>div::before{<br>    content: ‘’;  // 必须有，才能显示出内容。<br>}<br>div::after{<br>    content: ‘’;   // 必须有，才能显示出内容。<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">## CSS 属性</span><br><span class="line">1. `work-break: break-all` 打断所有的单词，从而使得词语（单词）换行</span><br><span class="line"></span><br><span class="line">2. 圆：`border-radius: 50%;` </span><br><span class="line"></span><br><span class="line">3. `position` 属性：用于指定一个元素在文档中的定位方式。值：</span><br></pre></td></tr></table></figure></p>
+<pre><code>static：该关键字指定元素使用正常的布局行为，即元素在文档常规流中当前的布局位置。
+relative  
+absolute  
+fixed
+sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）：盒位置根据正常流计算(这称为正常流动中的位置)，然后相对于该元素在流中的 flow root（BFC）和 containing block（最近的块级祖先元素）定位
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. `box-sizing` 属性：用于更改用于计算元素宽度和高度的默认的 CSS 盒子模型。</span><br><span class="line">**值：**</span><br><span class="line">    - `content-box`：默认值，标准盒子模型。`width` 与 `height`只包括内容的宽和高， 不包括边框（border），内边距（padding），外边距（margin）。</span><br><span class="line">    **维度计算：**</span><br><span class="line">    `width` = 内容的  width</span><br><span class="line">    `height` = 内容的 height。</span><br><span class="line">    - `border-box`： `width` 和 `height`属性包括内容，内边距和边框，但不包括外边距。</span><br><span class="line">    **维度计算：**</span><br><span class="line">    `width` = border + padding + 内容的  width</span><br><span class="line">    `height` = border + padding + 内容的 height</span><br><span class="line"></span><br><span class="line">5. `display: inline` 元素</span><br><span class="line">    - 设置 `width` 和 `height` 是无效的</span><br><span class="line">    - 设置 `margin-top` 和 `margin-bottom` 是无效的（解决方案：设置为 `display: inline-block; vertical-align: top;` ，如果此时该元素要居中，给其设置一个**行内父元素**，之后此**行内父元素** `text-align: center;`）</span><br><span class="line">    - 设置 `margin-left` 和 `margin-right` 是**有效**的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 小技巧 &amp; 注意点</span><br><span class="line"></span><br><span class="line">1. `img` 的 `height` 和 `width` 写在 `img` 标签中，作为标签属性，这样可以避免重排的发生从而浪费了 CPU 性能（页面性能优化）。</span><br></pre></td></tr></table></figure>
+
+&lt;img src= &apos;&apos; width= 200 height= 300 alt= &apos;&apos;&gt;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. `hr` 的**最佳实践**</span><br></pre></td></tr></table></figure>
+
+.hr{
+    border: none;
+    border-top: 1px solid color;
+}
+```
+</code></pre><ol>
+<li><p><code>span</code> 元素内可以包裹 <code>span</code> ，不能包裹块级元素 <code>div</code> ，可以为 <code>span</code> 设置 <code>display: block</code> 从而达到效果</p>
+</li>
+<li><p><code>li</code> 里面有 <code>a</code> 元素时，如果 <code>a</code> 元素有 <code>padding</code> ，则 <code>li</code> 不能完全包裹 <code>a</code> ，此时需要给 <code>a</code> 添加 <code>display: block;</code> 属性即可。</p>
+</li>
+<li><p>CSS中 <code>width</code> 的默认值是 <strong><code>auto</code></strong></p>
+</li>
+<li><p>如果要继承父元素的颜色，要声明 <code>color: inherit;</code></p>
+</li>
+<li><p><code>animation</code> 动画的时候要注意使用 <code>opacity</code></p>
+</li>
+<li><p>vh（viewport height）：视图高度单位，100vh：表示整个视图高度</p>
+</li>
+<li><p>属性 <code>text-transform: uppercase</code> 将小写字母转化为大写字母</p>
+</li>
+<li><p>position: absolute; 时，使用 <strong>top: 100%;</strong>，而不使用 bottom: 0;</p>
+</li>
+<li><p>注意使用 <code>white-space: nowrap</code> ，强制文本不换行，从而避免使用 <code>width</code> （在创建二级菜单时尤其注意）</p>
+</li>
+<li><p>有时父元素不能完全包裹住带有 <code>padding</code> 的子元素，此时可以尝试给子元素添加 <code>display: inline-block; vertical-align: top;</code> 或者 <code>display: block;</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-28T01:42:23.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（九）-- Bootstrap/">2018-01-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/28/CSS-最佳实践-套路（九）-- Bootstrap/">CSS 最佳实践 + 套路（九） -- Bootstrap</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Bootstrap 是一个用于前端开发的开源工具包，Bootstrap 可以适配所有设备，主要就是采用了媒体查询功能，当我们知道它是怎么实现的了，那么它也就不那么神秘了。当我们在使用 Bootstrap 时，主要需要掌握的就是<strong>栅格布局</strong>，剩下的就是复制粘贴了。<br><a href="https://getbootstrap.com/" target="_blank" rel="noopener">英文官网</a><br><a href="http://www.bootcss.com/" target="_blank" rel="noopener">中文官网</a></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>开始使用 Bootstrap 之前我们需要引入 Bootstrap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; &gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>之后我们还需要引入一个 meta 标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximun-scale=1, minimum-scale=1, user-scalable=no&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="栅格系统"><a href="#栅格系统" class="headerlink" title="栅格系统"></a>栅格系统</h1><p>栅格系统主要就是将屏幕分成12等份。栅格系统主要创建在布局容器中，布局容器中存放行（row）和列（column），每行只能有12列，超出元素将作为一个整体存放在下一行中</p>
+<h3 id="布局容器"><a href="#布局容器" class="headerlink" title="布局容器"></a>布局容器</h3><p>布局容器主要有两个类<br><code>.container</code> ==&gt; 固定宽度并支持响应式布局的容器，主要用于 PC 端<br><code>.container-fluid</code> ==&gt; 100% 宽度，占据全部视口 viewport 的容器，主要用于移动端<br><strong>注意：</strong>我们所要做的就是将我们的所有内容都使用布局容器盛放</p>
+<h3 id="行"><a href="#行" class="headerlink" title="行"></a>行</h3><p>行表示在水平方向上创建一行，它的类只有一个<code>.row</code> </p>
+<h3 id="栅格参数"><a href="#栅格参数" class="headerlink" title="栅格参数"></a>栅格参数</h3><p>栅格参数主要就是表示栅格系统是如何在页面中显示的<br><img src="http://upload-images.jianshu.io/upload_images/9617841-8ed0166a152ca66a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="栅格参数"></p>
+<p>在使用的时候我们需要将我们的内容放在每个行中，如果我们需要加一些 CSS 属性，此时需要做的便是加一层 div ，用来添加自己的样式<br><strong>示例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div style=&quot;padding: 10px;&quot;&gt;  // 这个就是我们添加的 div，用来添加我们自己的样式</span><br><span class="line">            我们的内容</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ul>
+<li>生产环境：程序所在的机器 | 操作系统面向真实的用户</li>
+<li>开发环境：只给自己 | 内部人员使用的程序，例如 <code>http-server</code></li>
+</ul>
+<p>以上便是 Bootstrap 需要了解的知识，剩下的便是去官方网站粘贴复制，个人推荐：不要去使用 Bootstrap，因为 CSS 是一个牵一发而动全身的技术，如果你选择了 Bootstrap，那么你的想象力将会受到限制</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-28T01:38:32.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（八）-- BFC/">2018-01-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/28/CSS-最佳实践-套路（八）-- BFC/">CSS 最佳实践 + 套路（八） -- BFC</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>BFC（Block Formatting Context）块级格式化上下文。我并不知道 BFC 是什么，但是只要写出样式，我就知道这是不是 BFC。BFC 没有明确的定义，只有特征或功能。</p>
+<h1 id="形成-BFC-条件"><a href="#形成-BFC-条件" class="headerlink" title="形成 BFC 条件"></a>形成 BFC 条件</h1><ol>
+<li><p>浮动（<code>float: left | right</code>）</p>
+</li>
+<li><p>绝对定位元素（<code>position: absolute</code>）</p>
+</li>
+<li><p>非块盒的块容器（<code>display: inline-block | table-cells | table-captions</code>）</p>
+</li>
+<li><p>overflow 不为 visible 的块盒（<code>visible: auto | hidden | scroll</code>）</p>
+</li>
+<li><p><code>display: flow-root</code> ==&gt; 专门用于使得当前元素触发 BFC</p>
+</li>
+</ol>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
+<li>将内部浮动元素包裹起来<br>使用 BFC 将其内部浮动元素包裹起来<br><img src="http://upload-images.jianshu.io/upload_images/9617841-747425ae0fda01ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BFC 将内部浮动元素包裹起来"></li>
+</ol>
+<p><a href="http://js.jirengu.com/kazusiciwo/1/edit" target="_blank" rel="noopener">代码地址</a></p>
+<ol>
+<li>两个相邻的 BFC 划清界限<br>float + div 左右自适应布局<br><img src="http://upload-images.jianshu.io/upload_images/9617841-fd7b91203b1d28b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BFC 两个相邻 BFC 划清界限"></li>
+</ol>
+<p><a href="http://js.jirengu.com/suyowimizi/1/edit" target="_blank" rel="noopener">代码地址</a></p>
+<h1 id="BFC-与-文档流"><a href="#BFC-与-文档流" class="headerlink" title="BFC 与 文档流"></a>BFC 与 文档流</h1><p><strong>BFC</strong> 是本身特性，它会影响元素的宽高<br><strong>文档流</strong>指内联元素从左到右排列，块级元素从上到下排列。它会影响元素的排列顺序<br>二者没有关系<br>BFC 里面有文档流，BFC 本身也可以是文档流</p>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><p>不要去使用 BFC</p>
+<ol>
+<li><p>清除浮动使用 <code>clearfix</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>划清界限使用 <code>display: flex</code><br>使用 <code>display: flex + flex: 1</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-10a88b81f6380059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="display: flex + flex: 1"></p>
+</li>
+</ol>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>BFC 内部相邻块级元素竖直 margin 合并</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-27T00:02:20.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（七）-- 布局/">2018-01-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（七）-- 布局/">CSS 最佳实践 + 套路（七） -- 布局</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在我们平时布局的时候，一般都是选择 Float 布局和 Flex 布局。如果项目需要支持 IE8 ，那么推荐选择 Float 布局，如果不需要支持 IE8 ，那么尽量选择 Flex 布局，当我们不需要支持 IE8 的时候，那么我们就能使用很多高级的语法，例如：calc()</p>
+<h1 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h1><ol>
+<li>不要写死 <code>width</code> 和 <code>height</code></li>
+<li>尽量选择 flex、calc</li>
+<li>如果是 IE ，那么上述两点全部推翻，能写死就写死</li>
+</ol>
+<h1 id="Float-布局"><a href="#Float-布局" class="headerlink" title="Float 布局"></a>Float 布局</h1><ol>
+<li>子元素：<code>float: left | right</code></li>
+<li>父元素：添加 <code>clearfix</code> 类 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h1><p>在 <a href="https://www.jianshu.com/p/f3a85c014952" target="_blank" rel="noopener">CSS 最佳实践 + 套路（六） – flex</a> 一文中已经详细介绍了关于 FLex 的相关属性。Flex 布局主要是</p>
+<ol>
+<li>父元素： <code>display: flex;</code> + 弹性容器相关属性</li>
+<li>子元素：弹性项目相关属性</li>
+</ol>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><p>实现这种布局<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c9e504af91cce8b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="布局"><br>每个模块都是一样的，四个模块占据一行，中间有 margin ，四个模块占据的宽度是一定的。</p>
+<ol>
+<li><p>float + margin 负值法<br>HTML：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;</span><br><span class="line">        &lt;ol class=&quot;clearfix&quot;&gt;</span><br><span class="line">            li*10</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p> CSS:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br><span class="line">.inner&#123;</span><br><span class="line">    margin: 0 -间距/2px；</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">    width: </span><br><span class="line">    float: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>flex + margin负值法<br>HTML：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;</span><br><span class="line">        &lt;ol&gt;</span><br><span class="line">            li*10</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p> CSS:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">ol&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">    margin: 0 -间距/2px；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>flex + calc<br>HTML：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;</span><br><span class="line">        &lt;ol&gt;</span><br><span class="line">            li*10</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p> CSS:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">ol&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">    calc(25% - 8px)     //20%*父元素宽度 - 8px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-27T00:00:35.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（六）-- flex/">2018-01-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（六）-- flex/">CSS 最佳实践 + 套路（六） -- flex</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>CSS 弹性盒子（Flexible box 或 Flexbox）</strong>是一种用于在页面上布置元素的布局模式，它的目的是允许容器可以让其子项目（子元素）能够改变宽度、高度、顺序等等，以最佳的方式填充空间（父元素）</p>
+<p><strong>弹性盒布局</strong>是指通过调整其内元素的宽高，从而在任何显示设备上实现对可用的显示空间最佳的填充能力</p>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ul>
+<li>与方向无关</li>
+<li>实现空间的自动分配，自动对齐</li>
+<li>适用于简单的线性布局</li>
+</ul>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><img src="http://upload-images.jianshu.io/upload_images/9617841-c483db96d0c1e6bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="flexbox 基本概念"></p>
+<h3 id="弹性容器（Flex-container）"><a href="#弹性容器（Flex-container）" class="headerlink" title="弹性容器（Flex container）"></a>弹性容器（Flex container）</h3><p>包含这弹性项目的父元素，通过设置 <code>display: flex | inline-flex</code> 定义弹性容器</p>
+<h3 id="弹性项目（Flex-item）"><a href="#弹性项目（Flex-item）" class="headerlink" title="弹性项目（Flex item）"></a>弹性项目（Flex item）</h3><p>弹性容器中的每个子元素都被称为弹性项目</p>
+<h3 id="轴（Axis）"><a href="#轴（Axis）" class="headerlink" title="轴（Axis）"></a>轴（Axis）</h3><p>每个弹性框包含两个轴。弹性项目延其依次排列的那根轴称为<strong>主轴（main axis）</strong>，垂直于主轴的那根轴称为<strong>侧轴（cross axis）</strong></p>
+<h3 id="方向（direction）"><a href="#方向（direction）" class="headerlink" title="方向（direction）"></a>方向（direction）</h3><hr>
+<p><strong>很重要，知道方向才能了解弹性容器上的属性</strong></p>
+<hr>
+<p><strong>主轴方向</strong>：弹性容器的<strong>主轴起点（main start）</strong>到<strong>主轴终点（main end）</strong>的方向<br><strong>侧轴方向</strong>：弹性容器的<strong>侧轴起点（cross start）</strong>到<strong>侧轴终点（cross end）</strong>的方向</p>
+<h1 id="弹性容器属性"><a href="#弹性容器属性" class="headerlink" title="弹性容器属性"></a>弹性容器属性</h1><h3 id="定义弹性容器"><a href="#定义弹性容器" class="headerlink" title="定义弹性容器"></a>定义弹性容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;            // 弹性容器是块级元素</span><br><span class="line">或者</span><br><span class="line">display: inline-flex;  // 弹性容器是行内元素</span><br></pre></td></tr></table></figure>
+<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>确立<strong>主轴</strong>方向，可以改变 main start 到 main end 的方向</p>
+<p>值:</p>
+<ul>
+<li><p><code>flex-direction: row</code> ==&gt; 横向排列弹性项目，方向与内容方向相同（<strong>main start 到 main end 的方向与内容方向相同</strong>）</p>
+</li>
+<li><p><code>flex-direction: row-reverse</code> ==&gt; 横向排列弹性项目，方向与内容方向相反（<strong>main start 到 main end 的方向与内容方向相反</strong>）</p>
+</li>
+<li><p><code>flex-direction: column</code> ==&gt; 纵向排列弹性项目，方向与内容方向相同（<strong>main start 到 main end 的方向与内容方向相同</strong>）</p>
+</li>
+<li><p><code>flex-direction: column-reverse</code> ==&gt; 纵向排列弹性项目，方向与内容方向相反（<strong>main start 到 main end 的方向与内容方向相反</strong>）</p>
+</li>
+</ul>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>指定 flex 元素是单行显示还是多行显示，可以改变 cross start 到 cross end 的方向</p>
+<p>值：</p>
+<ul>
+<li><p><code>flex-wrap: nowrap</code> ==&gt; 不允许弹性项目换行</p>
+</li>
+<li><p><code>flex-wrap: wrap</code> ==&gt; 允许弹性项目换行</p>
+</li>
+<li><p><code>flex-wrap: wrap-server</code> ==&gt; 允许弹性项目换行，cross start 到cross end 的方向颠倒</p>
+</li>
+</ul>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>这是一个集合属性<br>flex-flow === flex-direction + flex-wrap</p>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p><strong>主轴方向</strong>上伸缩项目的对齐方式</p>
+<p>值：</p>
+<ul>
+<li><p><code>justify-content: space-between</code> ==&gt; 在主轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上的第一个弹性项目和行首对齐，主轴方向上的最后一个弹性项目和行尾对齐</p>
+</li>
+<li><p><code>justify-content: space-around</code> ==&gt; 在主轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上第一个弹性项目到行首的距离和主轴方向上最后一个弹性项目到行尾的距离等于相邻元素距离的一半</p>
+</li>
+<li><p><code>justify-content: flex-start</code> ==&gt; 弹性项目与主轴起点对齐</p>
+</li>
+<li><p><code>justify-content: flex-end</code> ==&gt; 弹性项目与主轴终点对齐</p>
+</li>
+<li><p><code>justify-content: center</code> ==&gt; 弹性项目在主轴起点到主轴终点距离的中点</p>
+</li>
+</ul>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><strong>侧轴方向</strong>上伸缩项目的对齐方式</p>
+<p>值：</p>
+<ul>
+<li><p><code>align-items: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
+</li>
+<li><p><code>align-items: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
+</li>
+<li><p><code>align-items: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点</p>
+</li>
+</ul>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行或者多列的对齐方式</p>
+<p>值：</p>
+<ul>
+<li><code>align-content: space-between</code> ==&gt; 在侧轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上的第一个弹性项目和行首对齐，主轴方向上的最后一个弹性项目和行尾对齐</li>
+</ul>
+<ul>
+<li><p><code>align-content: space-around</code> ==&gt; 在侧轴方向上均匀分配弹性项目，相邻弹性项目距离相同。侧轴方向上第一个弹性项目到行首的距离和侧轴方向上最后一个弹性项目到行尾的距离等于相邻元素距离的一半</p>
+</li>
+<li><p><code>align-content: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
+</li>
+<li><p><code>align-content: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
+</li>
+<li><p><code>align-content: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点<br><img src="http://upload-images.jianshu.io/upload_images/9617841-797dc91fac60e84f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="align-content 属性全解"></p>
+</li>
+</ul>
+<h1 id="弹性项目属性"><a href="#弹性项目属性" class="headerlink" title="弹性项目属性"></a>弹性项目属性</h1><h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><p>主轴方向上增长比例。指空间过多时，多余空间分配比例<br>值： <number> ，负值无效</number></p>
+<h3 id="flex-shirk"><a href="#flex-shirk" class="headerlink" title="flex-shirk"></a>flex-shirk</h3><p>主轴方向上收缩比例。指空间不足时，溢出空间在每个伸缩项目的收缩比例<br>值： <number> ，负值无效</number></p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>主轴方向上伸缩项目的初始大小<br>值： </p>
+<ul>
+<li><number> ，负值无效</number></li>
+<li><code>content</code> ==&gt; 基于 flex 的伸缩项目的内容自动调整大小</li>
+</ul>
+<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>flex 是一个复合属性<br>flex === flex-grow + flex-shirk + flex-basis</p>
+<h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>主轴方向上弹性项目布局时的顺序<br>值：<number> ，负值有效</number></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>自身的对齐方式<br>值：</p>
+<ul>
+<li><p><code>align-self: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
+</li>
+<li><p><code>align-self: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
+</li>
+<li><p><code>align-self: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点</p>
+</li>
+</ul>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><ol>
+<li>垂直水平居中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;</span><br><span class="line">justify-content: center;</span><br><span class="line">align-items: center;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>这里有两个小游戏，可以练习 flex 属性<br><a href="http://flexboxfroggy.com/#zh-cn" target="_blank" rel="noopener">网站一</a><br><a href="http://www.flexboxdefense.com/" target="_blank" rel="noopener">网站二</a> </p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-26T23:58:06.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">2018-01-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">CSS 最佳实践 + 套路（五） -- icon</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>icon 有很多做法，主要的做法有</p>
+<ul>
+<li>img 标签</li>
+<li>background-image 属性</li>
+<li>CSS Sprites </li>
+<li>font</li>
+<li>svg</li>
+<li>纯 CSS 实现</li>
+</ul>
+<p>在这些方法中，目前最值得推荐的就是 <strong>svg 方法</strong>，其他的大家可以了解一下。</p>
+<h1 id="img-标签"><a href="#img-标签" class="headerlink" title="img 标签"></a>img 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;./img/xxx.png&quot; alt=&quot;icon&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>此种方法可以自适应宽高，只需要给 img 一个 width 属性或者一个 height 属性即可</p>
+<h1 id="background-image-属性"><a href="#background-image-属性" class="headerlink" title="background-image 属性"></a>background-image 属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CSS：</span><br><span class="line">    div&#123;</span><br><span class="line">        background-image: url(./image/xxx.png);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">HTML:</span><br><span class="line">    &lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="CSS-Sprites"><a href="#CSS-Sprites" class="headerlink" title="CSS Sprites"></a>CSS Sprites</h1><p>可以使用<a href="http://css.spritegen.com/" target="_blank" rel="noopener">工具自动生成 Sprites</a> ，之后进行使用，此种方法便是工具的使用</p>
+<h1 id="font"><a href="#font" class="headerlink" title="font"></a>font</h1><p>font 方法主要是使用<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里</a>的 Unicode 和 Font class 方法<br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca3bfe98993983c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Font 方法"></p>
+<h1 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h1><p>svg 方法是现在最值得推荐的方法<br><strong>SVG</strong>是可缩放矢量图形，是W3C XML的分支语言之一，用于标记可缩放的矢量图形。它支持 CSS 属性</p>
+<p>首先去<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里的 iconfont 网站</a></p>
+<ol>
+<li>选取相应的图标并加入购物车</li>
+<li>将购物车中的图标添加至项目</li>
+<li>生成 Symbol 代码</li>
+<li>拷贝生成的 Symbol 代码，放在 HTML 中</li>
+<li><p>引入通用css代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .icon &#123;</span><br><span class="line">       width: 1em; height: 1em;</span><br><span class="line">       vertical-align: -0.15em;</span><br><span class="line">       fill: currentColor;</span><br><span class="line">       overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>挑选相应图标并获取类名，应用于页面</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    &lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;#icon-xxx&quot;&gt;&lt;/use&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">    ``` </span><br><span class="line">![SVG](http://upload-images.jianshu.io/upload_images/9617841-1b6964ececccf5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">![阿里 iconfont 使用](http://upload-images.jianshu.io/upload_images/9617841-ccdc31dd20104add.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">`&lt;svg&gt;` 属性：</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>width:          // icon 宽度<br>height:          // icon 高度<br>fill:          // icon 颜色<br>stroke:    // 描边<br>vertical-align: top;   //可以用于调整上下间距。<br>```</p>
+<h1 id="纯-CSS-实现"><a href="#纯-CSS-实现" class="headerlink" title="纯 CSS 实现"></a>纯 CSS 实现</h1><p>纯 CSS 实现就是使用 CSS 去画一些图标，<a href="http://cssicon.space/#/" target="_blank" rel="noopener">推荐一个网站</a></p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-26T02:57:26.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">2018-01-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">CSS 最佳实践 + 套路（四） -- 移动端适配</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/bowen-wu/node-create-file" target="_blank" rel="noopener">脚本实现自动创建移动端适配的相关文件</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>手机上显示网页是将整个网页缩小，模拟页面宽度 980px ，可以使用 <code>document.documentElement.clientWidth</code> 来获取到页面宽度为 980px。在移动端加上 <code>&lt;meta&gt;</code> 标签才是自适应，否则就是 980px ，即网页整体缩小。</p>
+<h1 id="meta-标签"><a href="#meta-标签" class="headerlink" title="meta 标签"></a>meta 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&apos; viewport &apos; content=&apos; width=device-width user-scalable=no initial-scale=1.0 maximum=1.0 minimum-scale=1.0 &apos;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>说明：</strong></p>
+<ul>
+<li><code>width=device-width</code> ==&gt; 网页宽度默认等于屏幕宽度</li>
+<li><code>user-scalable=no</code> ==&gt; 用户是否可以缩放</li>
+<li><code>initial-scale=1.0</code> ==&gt; 原始缩放比例为 1.0 ，即网页初始大小占屏幕面积的 100%</li>
+<li><code>maximum=1.0</code> ==&gt; 最大缩放比例</li>
+<li><code>minimum-scale=1.0</code> ==&gt; 最小缩放比例</li>
+</ul>
+<p><code>&lt;meta&gt;</code> 标签可以防止手机模拟 980px，防止页面在用户双击的时候放大和防止用户横屏</p>
+<h1 id="Media-Query-（媒体查询）模块"><a href="#Media-Query-（媒体查询）模块" class="headerlink" title="Media Query （媒体查询）模块"></a>Media Query （媒体查询）模块</h1><p>由一个可选的媒体类型和零个或多个使用媒体功能的限制了样式表范围的表达式组成，即<strong>对媒体进行某些条件的查询</strong></p>
+<ol>
+<li><p>目前来说只用两种模式 ：</p>
+<ul>
+<li>移动端 </li>
+<li>PC 端 </li>
+</ul>
+</li>
+<li><p>两种技术：</p>
+<ul>
+<li><strong>mobiles-first</strong> ==&gt; 先做移动端页面后做 PC 端页面（推荐）</li>
+<li>desktop-first ==&gt; 先做 PC 端页面后做移动端页面</li>
+</ul>
+</li>
+<li><p>两种方案：</p>
+<ul>
+<li>移动端和 PC 端分别跳转不同网站（京东、淘宝）</li>
+<li>渲染不同的 HTML+CSS（知乎）</li>
+</ul>
+</li>
+</ol>
+<h3 id="元素中的-CSS-媒体查询"><a href="#元素中的-CSS-媒体查询" class="headerlink" title=" 元素中的 CSS 媒体查询"></a><link> 元素中的 CSS 媒体查询</h3><p>满足查询条件，则生效，否则不生效。但是无论生效与否<strong>都会下载</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; media=&quot;(max-width: 800px)&quot; href=&quot;example.css&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="样式表中的CSS媒体查询"><a href="#样式表中的CSS媒体查询" class="headerlink" title="样式表中的CSS媒体查询"></a>样式表中的CSS媒体查询</h3><p>满足查询条件，则生效，否则不生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">@media (max-width: 600px) &#123;</span><br><span class="line">  .facet_sidebar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h3><ul>
+<li><p>and 操作符 ==&gt; 把多个媒体属性组合成一条媒体查询，对成链式的特征进行请求，只有当每个属性都为真时，结果才为真</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(min-width: 700px) and (max-width: 960px) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逗号分隔列表 ==&gt; 使用逗号分隔效果等同于<strong>or逻辑操作符</strong>。当使用逗号分隔的媒体查询时，如果<strong>任何一个媒体查询返回真</strong>，<strong>样式</strong>就是<strong>有效</strong>的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@media (min-width: 700px), handheld and (orientation: landscape) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>not 操作符 ==&gt; 应用于整个媒体查询，在媒体查询为假时返回真</p>
+</li>
+<li><p>only 操作符 ==&gt; 防止老旧的浏览器不支持带媒体属性的查询而应用到给定的样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; media=&quot;only screen and (color)&quot; href=&quot;example.css&quot; /&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>说明：</strong>若使用了not或only操作符，必须明确指定一个媒体类型。</p>
+<h3 id="媒体特征"><a href="#媒体特征" class="headerlink" title="媒体特征"></a>媒体特征</h3><ul>
+<li>device-width ==&gt; 设备宽度</li>
+<li>width ==&gt; 宽度。描述了输出设备渲染区域的宽度。接受 <strong>mix/min</strong> 前缀</li>
+</ul>
+<h3 id="响应式"><a href="#响应式" class="headerlink" title="响应式"></a>响应式</h3><p>响应式即不同的屏幕得到不同的样式</p>
+<h1 id="长度单位"><a href="#长度单位" class="headerlink" title="长度单位"></a>长度单位</h1><ul>
+<li>px ==&gt; 绝对长度单位，像素</li>
+<li>em ==&gt; 相对长度单位，这个单位表示<strong>元素的 <code>font-size</code> 的计算值</strong>。</li>
+<li>rem ==&gt; 相对长度单位，这个单位代表<strong>根元素（<html>）</html></strong>的 <code>font-size</code> 大小<br><strong>说明：网页默认的 <code>font-size: 16px</code></strong></li>
+<li>vh ==&gt; viewport hight，相对长度单位，视口高度的 1/100。</li>
+<li>vw ==&gt; viewport width，相对长度单位，视口宽度的 1/100。<br><strong>说明：vh 和 vw 的兼容性比较差，使用较少</strong></li>
+</ul>
+<h1 id="动态-REM"><a href="#动态-REM" class="headerlink" title="动态 REM"></a>动态 REM</h1><p>由于手机上分辨率太多，不是做响应式，只能退而求其次</p>
+<ul>
+<li><strong>百分比布局</strong>：高度问题，宽度不知道具体大小，仅仅知道百分比。造成了宽度不确定导致高度和宽度不能做任何配合</li>
+<li><strong>动态REM</strong>：一切单位以宽度为基准（vw 啊，但是 vw 兼容性较差），退而求其次：<strong>rem</strong></li>
+</ul>
+<p><strong>rem ==&gt; html font-size   =（JS实现）=&gt; page width（页面宽度）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        var pageWidth = window.innerWidth</span><br><span class="line">        document.write( &apos;&lt;style&gt;html&#123;font-size:&apos; + pageWidth/10 + &apos;px;&#125;&lt;/style&gt;&apos; )</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body&#123;</span><br><span class="line">            font-size: 16px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure></p>
+<p>将 rem 变为 pageWidth/100 即可以表示 vw（视口宽度的 1/100），<strong>Chrome 浏览器默认最小字号 12px</strong>，此时的 <code>font-size</code> 被 Chrome 浏览器强制为 <strong>12px</strong>。所以将 rem 变为 pageWidth/10 。</p>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><h3 id="SASS-实现将-px-自动变为-rem"><a href="#SASS-实现将-px-自动变为-rem" class="headerlink" title="SASS 实现将 px 自动变为 rem"></a>SASS 实现将 px 自动变为 rem</h3><p><a href="https://www.jianshu.com/p/f1fccdb53f8a" target="_blank" rel="noopener">LUNIX 安装SASS</a><br>SASS 文件内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@function px( $px )&#123;</span><br><span class="line">  @return $px/$designWidth*10 + rem; // 此处的 10 是 html&#123;font-size:&apos; + pageWidth/10 + &apos;px;&#125; 中的10 </span><br><span class="line">&#125;</span><br><span class="line">$designWidth : 640; // 640 是设计稿的宽度，需要根据设计稿的宽度填写</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ol>
+<li>移动端中没有 hover 事件，但是有 <strong><a href="https://www.jianshu.com/p/f0df9575a101" target="_blank" rel="noopener">touch 事件</a></strong></li>
+<li>移动端中<strong>没有 resize 事件</strong>，并且没有滚动条（隐藏滚动条）</li>
+<li>使用相对大小的字体 rem</li>
+<li>流动布局，各个区块都是浮动的</li>
+<li>选择加载 CSS ，Media Query 模块（CSS3）自动探测屏幕宽度，然后加载相应的 CSS 文件</li>
+<li>CSS 的 @media 规则</li>
+<li>图片自适应 max-width: 100%;</li>
+<li>很小很小的地方使用 px ==&gt; 1px</li>
+<li>rem 单位和其他单位混用，例如：<code>font-size: 16px</code></li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="pagination">
+  
+    <a href="/" class="alignleft prev">Vorherige Seite</a>
+  
+  
+    <a href="/page/3/" class="alignright next">Nächste Seite</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

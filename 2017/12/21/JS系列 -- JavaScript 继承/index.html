@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS系列 -- JavaScript实现继承方式 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="JavaScript实现继承方式
+1. newStudent.prototype = new Person();得到一个 Person 实例，并且这个实例指向构造器的 prototype 属性和调用了构造函数，因为调用的构造函数，而 Student 只是一个类，并没有实例化，只为了继承，调用构造函数">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JS系列 -- JavaScript实现继承方式"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2017/12/21/JS系列 -- JavaScript 继承/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-12-21T15:00:08.000Z"><a href="/2017/12/21/JS系列 -- JavaScript 继承/">2017-12-21</a></time>
+      
+      
+  
+    <h1 class="title">JS系列 -- JavaScript实现继承方式</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>JavaScript实现继承方式</p>
+<h1 id="1-new"><a href="#1-new" class="headerlink" title="1. new"></a>1. new</h1><p><code>Student.prototype = new Person();</code><br>得到一个 Person 实例，并且这个实例指向构造器的 prototype 属性和调用了构造函数，因为调用的构造函数，而 Student 只是一个类，并没有实例化，只为了继承，调用构造函数创建一个实例，参数的问题就不容易解决。</p>
+<p><strong>例如</strong>：当 Person() 中有一个 name 属性时，而 Student 上也有 name 属性时，当<br>Student.prototype = new Person(); Person 上的 name:undefined ,并且 Student 永远不会用到 Person 上的 name 性，如果 Person 上有很多这样的属性情况可想而知。</p>
+<p><strong>new 操作符所做的事情(var a = new A())</strong><br>a.首先生成一个空对象 a = {} ，它是 Object 的实例<br>b.设置 a 的原型链 a.<strong>proto</strong> = A.prototype<br>c.A.call(a), A 的 this 指向 a,并执行 A 的函数体<br>d.判断 A 的返回值类型，<br>如果   ‘没有返回值’ 或者 ‘返回值类型为值类型’ 返回 this 即 a （this === a），<br>如果有返回值，并且返回值类型为引用类型，就返回这个引用类型的对象，替换掉 a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var A = function()&#123;</span><br><span class="line">    return this.__proto__;</span><br><span class="line">&#125;</span><br><span class="line">var a = new A();</span><br><span class="line">console.log(a) //object&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解释：首先 this === a， 但是 A 返回的是 this.<strong>proto</strong> (a.<strong>proto</strong>), this.<strong>proto</strong> 指向了原型对象 Object() 构造函数创建的 object 对象，它是一个引用类型，它替换掉 a ，所以这里的变量 a 是一个指针，指向它的原型。</p>
+<p><code>console.log(A.prototype === a); //true</code></p>
+<p>此时 A 构造函数的原型和 a 指针（指向 a.<strong>proto</strong>）是同一个对象</p>
+<h1 id="2-Object-create"><a href="#2-Object-create" class="headerlink" title="2. Object.create()"></a>2. Object.create()</h1><p><code>var obj = Object.create({ x:1 });</code></p>
+<p>Object.create()是系统内置函数，参数为对象，返回新创建的对象，并且该对象的原型指向参数</p>
+<p>创建空对象，并且对象的 <strong>proto</strong> 指向参数，既继承了属性和方法，本身又有自己的空对象，对于自己添加的属性和方法不会去更改原型上的属性和方法。</p>
+<h1 id="3-call-和-apply"><a href="#3-call-和-apply" class="headerlink" title="3. call() 和 apply()"></a>3. call() 和 apply()</h1><p>call() 和 apply() 是为了动态改变 this 而出现的，当一个 Object 没有某个方法时，<br>但是其他 Object 有，可以借助 call() 和 apply() 用其他对象的方法来操作。</p>
+<p>call() 和 apply() 就是更改 this 指向<br><strong>例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">function Student(name,Klass)&#123;</span><br><span class="line">    Person.call(this,name); </span><br><span class="line">    //此时的 Person 的 this 指向了 Student（即 call 里面的 this）</span><br><span class="line">    this.klass = klass;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>call() 和 apply() 的区别：call() 的参数是扁平化参数，apply() 的第二参数放在数组中</p>
+<p><strong>例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Math.max.apply(,)</span><br><span class="line">Math.max(1,2,3); // 3</span><br><span class="line">Math.max([1,2,3]); // NaN</span><br><span class="line">Math.apply(null,[1,2,3]); // 3</span><br><span class="line">Math.max.apply(null,[1,2,3]) === Math.max(1,2,3); // true</span><br><span class="line">Math.max.call(null,1,2,3); // 3</span><br><span class="line">Math.max.call(null,1,2,3) === Math.max(1,2,3); // true</span><br></pre></td></tr></table></figure></p>
+<h1 id="4-实现继承的套路："><a href="#4-实现继承的套路：" class="headerlink" title="4. 实现继承的套路："></a>4. 实现继承的套路：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">function Person(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = fucntion()&#123;</span><br><span class="line">    console.log(&apos;hi!I am &apos;+this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Student(name,Klass)&#123;</span><br><span class="line">    Person.call(this,name);  // 使用 call 继承属性</span><br><span class="line">    this.klass = klass; // 设置自身的属性</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 使用 Object.create() 继承方法</span><br><span class="line">Student.prototype = Object.create(Person.prototype,&#123;</span><br><span class="line">    constructor:&#123;</span><br><span class="line">    value:Student;</span><br><span class="line">     // 还可以指定 writable configurable enumerable</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 设置自身方法</span><br><span class="line">Student.prototype.learn = function(subject)&#123;</span><br><span class="line">    console.log(this.name + &apos;can learn&apos; + subject);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

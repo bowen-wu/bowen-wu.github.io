@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS 最佳实践 + 套路（八） -- BFC | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述BFC（Block Formatting Context）块级格式化上下文。我并不知道 BFC 是什么，但是只要写出样式，我就知道这是不是 BFC。BFC 没有明确的定义，只有特征或功能。
+形成 BFC 条件
+浮动（float: left | right）
+
+绝对定位元素（position: a">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS 最佳实践 + 套路（八） -- BFC"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/01/28/CSS-最佳实践-套路（八）-- BFC/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-28T01:38:32.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（八）-- BFC/">2018-01-28</a></time>
+      
+      
+  
+    <h1 class="title">CSS 最佳实践 + 套路（八） -- BFC</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>BFC（Block Formatting Context）块级格式化上下文。我并不知道 BFC 是什么，但是只要写出样式，我就知道这是不是 BFC。BFC 没有明确的定义，只有特征或功能。</p>
+<h1 id="形成-BFC-条件"><a href="#形成-BFC-条件" class="headerlink" title="形成 BFC 条件"></a>形成 BFC 条件</h1><ol>
+<li><p>浮动（<code>float: left | right</code>）</p>
+</li>
+<li><p>绝对定位元素（<code>position: absolute</code>）</p>
+</li>
+<li><p>非块盒的块容器（<code>display: inline-block | table-cells | table-captions</code>）</p>
+</li>
+<li><p>overflow 不为 visible 的块盒（<code>visible: auto | hidden | scroll</code>）</p>
+</li>
+<li><p><code>display: flow-root</code> ==&gt; 专门用于使得当前元素触发 BFC</p>
+</li>
+</ol>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
+<li>将内部浮动元素包裹起来<br>使用 BFC 将其内部浮动元素包裹起来<br><img src="http://upload-images.jianshu.io/upload_images/9617841-747425ae0fda01ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BFC 将内部浮动元素包裹起来"></li>
+</ol>
+<p><a href="http://js.jirengu.com/kazusiciwo/1/edit" target="_blank" rel="noopener">代码地址</a></p>
+<ol>
+<li>两个相邻的 BFC 划清界限<br>float + div 左右自适应布局<br><img src="http://upload-images.jianshu.io/upload_images/9617841-fd7b91203b1d28b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BFC 两个相邻 BFC 划清界限"></li>
+</ol>
+<p><a href="http://js.jirengu.com/suyowimizi/1/edit" target="_blank" rel="noopener">代码地址</a></p>
+<h1 id="BFC-与-文档流"><a href="#BFC-与-文档流" class="headerlink" title="BFC 与 文档流"></a>BFC 与 文档流</h1><p><strong>BFC</strong> 是本身特性，它会影响元素的宽高<br><strong>文档流</strong>指内联元素从左到右排列，块级元素从上到下排列。它会影响元素的排列顺序<br>二者没有关系<br>BFC 里面有文档流，BFC 本身也可以是文档流</p>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><p>不要去使用 BFC</p>
+<ol>
+<li><p>清除浮动使用 <code>clearfix</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>划清界限使用 <code>display: flex</code><br>使用 <code>display: flex + flex: 1</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-10a88b81f6380059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="display: flex + flex: 1"></p>
+</li>
+</ol>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>BFC 内部相邻块级元素竖直 margin 合并</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>1</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>
