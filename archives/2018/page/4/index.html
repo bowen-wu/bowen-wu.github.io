@@ -82,6 +82,126 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-19T00:01:38.000Z"><a href="/2018/01/19/HTTP系列 -- Node.js/">2018-01-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/19/HTTP系列 -- Node.js/">HTTP系列 -- Node.js</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/blob/master/server.js" target="_blank" rel="noopener">Node.js 服务器代码</a></p>
+<h1 id="精华"><a href="#精华" class="headerlink" title="精华"></a>精华</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let string = fs.readFileSync( &apos;路径&apos;, &apos;UTF-8&apos; )</span><br><span class="line">response.setHeader( &apos;Content-Type&apos;, &apos;类型&apos; )</span><br><span class="line">response.statusCode = 200</span><br><span class="line">response.write()</span><br><span class="line">response.end()</span><br></pre></td></tr></table></figure>
+<h3 id="response-setHeader-‘Content-Type’-‘类型’"><a href="#response-setHeader-‘Content-Type’-‘类型’" class="headerlink" title="response.setHeader( ‘Content-Type’, ‘类型’ )"></a>response.setHeader( ‘Content-Type’, ‘类型’ )</h3><p>类型：</p>
+<ul>
+<li>HTML ==&gt; response.setHeader( ‘Content-Type’, ‘text/html; charset = utf-8’ )</li>
+<li>CSS ==&gt; response.setHeader( ‘Content-Type’, ‘text/css’ )</li>
+<li>JavaScript ==&gt; response.setHeader( ‘Content-Type’, ‘application/javascript’ )</li>
+</ul>
+<h1 id="创建-Node-js-服务器"><a href="#创建-Node-js-服务器" class="headerlink" title="创建 Node.js 服务器"></a>创建 Node.js 服务器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&apos;http&apos;)</span><br><span class="line">var fs = require(&apos;fs&apos;)</span><br><span class="line">var url = require(&apos;url&apos;)</span><br><span class="line">var port = process.argv[2]</span><br><span class="line"></span><br><span class="line">if(!port)&#123;</span><br><span class="line">  console.log(&apos;请指定端口号好不啦？\nnode server.js 8888 这样不会吗？&apos;)</span><br><span class="line">  process.exit(1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var server = http.createServer(function(request, response)&#123;</span><br><span class="line">  var parsedUrl = url.parse(request.url, true)</span><br><span class="line">  var path = request.url </span><br><span class="line">  var query = &apos;&apos;</span><br><span class="line">  if(path.indexOf(&apos;?&apos;) &gt;= 0)&#123; query = path.substring(path.indexOf(&apos;?&apos;)) &#125;</span><br><span class="line">  var pathNoQuery = parsedUrl.pathname</span><br><span class="line">  var queryObject = parsedUrl.query</span><br><span class="line">  var method = request.method</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  console.log(&apos;HTTP 路径为\n&apos; + path)</span><br><span class="line">  if(path == &apos;/style&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/css; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;body&#123;background-color: #ddd;&#125;h1&#123;color: red;&#125;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;else if(path == &apos;/script&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/javascript; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;alert(&quot;这是JS执行的&quot;)&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;else if(path == &apos;/index&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;&lt;!DOCTYPE&gt;\n&lt;html&gt;&apos;  + </span><br><span class="line">      &apos;&lt;head&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/style&quot;&gt;&apos; +</span><br><span class="line">      &apos;&lt;/head&gt;&lt;body&gt;&apos;  +</span><br><span class="line">      &apos;&lt;h1&gt;你好&lt;/h1&gt;&apos; +</span><br><span class="line">      &apos;&lt;script src=&quot;/script&quot;&gt;&lt;/script&gt;&apos; +</span><br><span class="line">      &apos;&lt;/body&gt;&lt;/html&gt;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    response.statusCode = 404</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(port)</span><br><span class="line">console.log(&apos;监听 &apos; + port + &apos; 成功\n请用在空中转体720度然后用电饭煲打开 http://localhost:&apos; + port)</span><br></pre></td></tr></table></figure>
+<h1 id="解析-Node-js-服务器"><a href="#解析-Node-js-服务器" class="headerlink" title="解析 Node.js 服务器"></a>解析 Node.js 服务器</h1><ol>
+<li><p><code>console.log(&#39;HTTP 路径为\n&#39; + path)</code> 表示在命令行中或者<code>Console</code>面板中打印出当前请求的 HTTP 路径</p>
+</li>
+<li><p>下方代码表示如果请求路径为<code>/style</code>，设置响应头信息为<code>&#39;Content-Type&#39;, &#39;text/css; charset=utf-8&#39;</code>（即响应内容 [ 第四部分 ] 的类型 [ css ] 和编码 [ utf-8 ]），响应内容( 第四部分 )为 <code>body{background-color: #ddd;}h1{color: red;}</code> ，之后完成响应</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(path == &apos;/style&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/css; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;body&#123;background-color: #ddd;&#125;h1&#123;color: red;&#125;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下方代码表示如果请求路径为 <code>/script</code> ，设置响应头信息为 <code>&#39;Content-Type&#39;, &#39;text/javascript; charset=utf-8&#39;</code> （即响应内容 [ 第四部分 ] 的类型 [ javascript ] 和编码 [ utf-8 ]），响应内容( 第四部分 )为 <code>alert(&quot;这是JS执行的&quot;)</code>，之后完成响应</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(path == &apos;/script&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/javascript; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;alert(&quot;这是JS执行的&quot;)&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下方代码表示如果请求路径为 <code>/index</code> ，设置响应头信息为 <code>(&#39;Content-Type&#39;, &#39;text/html; charset=utf-8&#39;</code> （即响应内容 [ 第四部分 ] 的类型 [ html ] 和编码 [ utf-8 ]），响应内容( 第四部分 )为 HTML 页面，之后完成响应</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if(path == &apos;/index&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;&lt;!DOCTYPE&gt;\n&lt;html&gt;&apos;  + </span><br><span class="line">      &apos;&lt;head&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/style&quot;&gt;&apos; +</span><br><span class="line">      &apos;&lt;/head&gt;&lt;body&gt;&apos;  +</span><br><span class="line">      &apos;&lt;h1&gt;你好&lt;/h1&gt;&apos; +</span><br><span class="line">      &apos;&lt;script src=&quot;/script&quot;&gt;&lt;/script&gt;&apos; +</span><br><span class="line">      &apos;&lt;/body&gt;&lt;/html&gt;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下方代码表示如果请求的路径不是上述路径，则返回状态码为 <code>404</code> ，之后完成响应。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">else&#123;</span><br><span class="line">    response.statusCode = 404</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="创建过程"><a href="#创建过程" class="headerlink" title="创建过程"></a>创建过程</h1><ol>
+<li><p>新建目录和进入</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir node-demo</span><br><span class="line">cd node-demo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建文件并编辑</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch server.js</span><br><span class="line">start server.js //内容如上</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行文件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node server.js 端口号</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>#使用 Node.js 发起请求</p>
+<ol>
+<li><p>在新的 Bash 窗口运行 <code>curl http://localhost:你的指定的端口/xxx</code> 或者 <code>curl http://127.0.0.1:你指定的端口/xxx</code>即可发起请求</p>
+</li>
+<li><p>在浏览器窗口地址栏中输入 <code>http://localhost:你的指定的端口/xxx</code> 或者 <code>http://127.0.0.1:你指定的端口/xxx</code> 回车，即可发起请求。</p>
+</li>
+<li><p><code>curl -s -v -- &quot;http://localhost:port/xxx&quot;</code>可以查看完整的请求体和响应体。</p>
+</li>
+</ol>
+<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><ul>
+<li><p>在运行 <code>node server.js 端口号</code> Bash 窗口中可以查看到打印出来的路径（<code>console.log(&#39;HTTP 路径为\n&#39; + path)</code>），并且在发起请求的 Bash 窗口中可以查看请求体和响应体</p>
+</li>
+<li><p>在浏览器窗口中可以看到实际运行效果</p>
+</li>
+</ul>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ol>
+<li><p>任意一台电脑都是服务器</p>
+</li>
+<li><p>创建的<em>Node.js服务器</em>提供 HTTP 服务，所以需要提供 HTTP 服务的程序</p>
+</li>
+<li><p>用脚本可以提供 HTTP 服务</p>
+</li>
+</ol>
+<h1 id="当在浏览器地址栏输入地址回车后发生的事情"><a href="#当在浏览器地址栏输入地址回车后发生的事情" class="headerlink" title="当在浏览器地址栏输入地址回车后发生的事情"></a>当在浏览器地址栏输入地址回车后发生的事情</h1><ol>
+<li><p>DNS 域名解析。首先浏览器会查找缓存，如果没有，就向运营商查找，运营商会提供 DNS 服务，从而得到域名所对应的 IP 地址。DNS 域名解析就是一个域名到 IP 地址的转换</p>
+</li>
+<li><p>TCP 连接。浏览器根据 IP 地址向服务器发起 TCP 连接，与服务器建立 TCP 三次握手，浏览器对服务器说：“您好，我可以链接你么？”，服务器对浏览器说：“您好，你可以连接我”，浏览器对服务器说：“好的，那我连接你了！”，通过 TCP 的三次握手，从而确定双方都有收发文件的能力，自此浏览器和服务器建立了链接</p>
+</li>
+<li><p>浏览器发送 HTTP 请求。请求包括了请求行、请求头和请求正文</p>
+</li>
+<li><p>浏览器拿到响应、解析并渲染页面。浏览器是一个边解析边渲染的过程，首先浏览器解析HTML文件构建 DOM 树，然后解析 CSS 文件构建渲染树，等到渲染树构建完成后，浏览器开始布局渲染树并将其绘制到屏幕上</p>
+</li>
+<li><p>通过四次挥手关闭 TCP 连接。浏览器对服务器说：“不早了，我该走了”，服务器对浏览器说：“知道了”，之后服务器又对浏览器说：“我也该走了”，浏览器回应服务器：“好的”，至此 TCP 连接结束</p>
+</li>
+</ol>
+<p><strong>注意</strong>：后缀是没有用的。HTTP 路径不是文件路径。</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/HTTP/">HTTP</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-18T23:59:03.000Z"><a href="/2018/01/19/HTTP系列 -- 网络与 IP /">2018-01-19</a></time>
       
       
@@ -1495,104 +1615,6 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-10T04:52:55.000Z"><a href="/2018/01/10/JS系列 -- JavaScript 对象基础 + 遍历 + 原型链/">2018-01-10</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/10/JS系列 -- JavaScript 对象基础 + 遍历 + 原型链/">JS系列 -- JavaScript 对象基础 + 遍历 + 原型链</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>对象就是一组数据和功能的集合。它相当于哈希（键值对），使用对象属性有 <code>[ ]</code> 操作（<code>obj[ &#39;name&#39; ]</code>）和点操作（<code>obj.name</code>）</p>
-<ul>
-<li>键名 ==&gt; <strong>字符串</strong>（ES6 又引入了 Symbol 值也可以作为键值）</li>
-<li>键名 ==&gt; <strong>数值</strong> ==(自动转为)==&gt; <strong>字符串</strong></li>
-<li><p>键名 ==&gt; 不符合标识名的条件（比如第一个字符为数字，或者含有空格或运算符），且也不是数字，则必须加上<strong>引号</strong>，否则会报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj[&quot;name&quot;]   // 必须带有 &quot; &quot; ，如果不带 &quot; &quot; JS 首先会找 name 的值，但是 name === undefined ，自然就报错了</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>键名 ==&gt; 满足标识符（变量名）的规则 ==&gt; <code>obj.name</code>(可以使用点操作符)</p>
-</li>
-<li>delete 操作符删除对象属性  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delect obj[&quot;name&quot;]</span><br><span class="line">obj.name   // undefined(无value)</span><br><span class="line">name in obj   // false(无key)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="对象声明"><a href="#对象声明" class="headerlink" title="对象声明"></a>对象声明</h1><ol>
-<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj2 = new Object();  //obj1 和 obj2 没有区别，但是 obj1 === obj2     是 false ，因为存储在 Stsck(栈内存) 中的地址不同</span><br></pre></td></tr></table></figure>
-</li>
-<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj3 = Object.create(Object.prototype)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="基本包装类型：Boolean-Number-String"><a href="#基本包装类型：Boolean-Number-String" class="headerlink" title="基本包装类型：Boolean()  Number()  String()"></a><a href="https://bowen-wu.github.io/2018/01/10/JS%E7%B3%BB%E5%88%97%20--%20%E5%9F%BA%E6%9C%AC%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B/" target="_blank" rel="noopener">基本包装类型：Boolean()  Number()  String()</a></h1><p>基本包装类型有属性 <code>__proto__</code> ，这个属性引用（指向）了在 Heap( 堆内存 ) 的一个地址，这个地址表示<strong>基本包装类型对应的 prototype（原型）</strong>。基本包装类型有<strong>重写属性</strong>（表示重写属性从而覆盖 <strong>Object 的 prototype</strong>）</p>
-<ul>
-<li><p>Number()<br><img src="http://upload-images.jianshu.io/upload_images/9617841-6e664f59886709f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Number"></p>
-</li>
-<li><p>String()<br><img src="http://upload-images.jianshu.io/upload_images/9617841-5c889bdc59874e0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 String"></p>
-</li>
-<li><p>Boolean()<br><img src="http://upload-images.jianshu.io/upload_images/9617841-4911258278ef065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Boolean"></p>
-</li>
-</ul>
-<h1 id="遍历对象"><a href="#遍历对象" class="headerlink" title="遍历对象"></a>遍历对象</h1><h3 id="for-…-in-…-遍历-自身-原型"><a href="#for-…-in-…-遍历-自身-原型" class="headerlink" title="for … in … 遍历 自身 + 原型"></a>for … in … 遍历 自身 + 原型</h3><p>通过 Objct.prototype.hasOwnProprety 筛选出自身属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for( let key in obj )&#123;</span><br><span class="line">    if( obj.hasOwnProperty( key ) )&#123;</span><br><span class="line">        console.log( obj[ key ] )  // 此时必须使用 [] ，key 表示的是字符串</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>### </p>
-<p><img src="http://upload-images.jianshu.io/upload_images/9617841-c3c19ca702bb6cbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object for...in 遍历"></p>
-<h3 id="Object-keys-Object-values-遍历-自身可枚举属性"><a href="#Object-keys-Object-values-遍历-自身可枚举属性" class="headerlink" title="Object.keys() + Object.values() 遍历 自身可枚举属性"></a>Object.keys() + Object.values() 遍历 自身可枚举属性</h3><p><code>Object.keys()</code> + <code>Object.values()</code> 这两种方法的返回值都是一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object.keys(obj).forEach( ( item ) =&gt; &#123;</span><br><span class="line">    console.log( item )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/9617841-fd35328e99b0a602.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object.keys() + Object.values() 遍历"></p>
-<h3 id="Object-getOwnPropertyNames-遍历-自身可枚举-自身不可枚举"><a href="#Object-getOwnPropertyNames-遍历-自身可枚举-自身不可枚举" class="headerlink" title="Object.getOwnPropertyNames() 遍历 自身可枚举 + 自身不可枚举"></a>Object.getOwnPropertyNames() 遍历 自身可枚举 + 自身不可枚举</h3><p>返回由指定对象的所有自身属性的属性名（包括不可枚举但不包括 Symbol 值作为名称的属性）组成的数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyNames( obj ).forEach( (item) =&gt; &#123;</span><br><span class="line">    console.log( obj[ item ] )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<h1 id="proto-prototype"><a href="#proto-prototype" class="headerlink" title="proto + prototype"></a><strong>proto</strong> + prototype</h1><p>实例化对象的 <code>__proto__</code> 指向构造函数的 <code>prototype</code>，即<strong><code>对象.__proto__  ===  函数.prototype</code></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;1&quot;.__proto__ === String.prototype</span><br><span class="line">1.__proto__ === Number.prototype</span><br><span class="line">true.__proto__ === Boolean.prototype</span><br></pre></td></tr></table></figure></p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">arr.__proto__ === ??? </span><br><span class="line">Array.__proto__ === ???</span><br><span class="line">typeof Array.prototype  ???</span><br><span class="line">Array.prototype.__proto__ === ???</span><br></pre></td></tr></table></figure>
-<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr.__proto__ === Array.prototype</span><br><span class="line">Array.__proto__ === Function.prototype</span><br><span class="line">typeof Array.prototype  // &apos;Object&apos;</span><br><span class="line">Array.prototype.__proto__ === Object.prototype</span><br></pre></td></tr></table></figure>
-<h2 id="对象属性赋值-查找"><a href="#对象属性赋值-查找" class="headerlink" title="对象属性赋值 + 查找"></a>对象属性赋值 + 查找</h2><p>对象属性赋值是在自身属性赋值，不会修改原型链，而查找会在原型链中查找</p>
-<h1 id="new-的实现"><a href="#new-的实现" class="headerlink" title="new 的实现"></a>new 的实现</h1><p>var 对象 = new 函数</p>
-<h3 id="方法一：Object-create"><a href="#方法一：Object-create" class="headerlink" title="方法一：Object.create()"></a>方法一：Object.create()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = Object.create( constructor.prototype )</span><br><span class="line">    constructor.apply( obj, [].slice.call( argumnets, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="方法二：Object-setPrototypeOf"><a href="#方法二：Object-setPrototypeOf" class="headerlink" title="方法二：Object.setPrototypeOf()"></a>方法二：Object.setPrototypeOf()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = &#123;&#125;</span><br><span class="line">    Object.setPrototypeOf( obj, constructor )</span><br><span class="line">    constructor.apply( obj, [].slice.call( argumnets, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h1><p><code>instanceof</code> 是在原型链中查找是否是其实例（instance）</p>
-<h3 id="instanceof-实现"><a href="#instanceof-实现" class="headerlink" title="instanceof 实现"></a>instanceof 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function _instanceof( instance, fn )&#123;</span><br><span class="line">    let i = instance.__proto__</span><br><span class="line">    while( i )&#123;</span><br><span class="line">        if( i === fn.prototype )&#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">        i = i.__proto__</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>实现继承主要是要实现原型的属性 + 方法</p>
-<h3 id="属性继承"><a href="#属性继承" class="headerlink" title="属性继承"></a>属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call</span><br></pre></td></tr></table></figure>
-<h3 id="方法继承"><a href="#方法继承" class="headerlink" title="方法继承"></a>方法继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.create()</span><br><span class="line">Object.setPrototypeOf()</span><br></pre></td></tr></table></figure>
-<h3 id="属性-方法继承"><a href="#属性-方法继承" class="headerlink" title="属性 + 方法继承"></a>属性 + 方法继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.jianshu.com/p/912335a9a175" target="_blank" rel="noopener">继承示例</a></p>
-<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p>最简单的克隆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = JSON.parse( JSON.stringify( obj ) )</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/JavaScript/">JavaScript</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1633,7 +1655,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

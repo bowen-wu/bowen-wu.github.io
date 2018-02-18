@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端基础系列（四） -- 内存 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述电脑开机之后就把硬盘中的数据传输到内存中，例如操作系统，把硬盘中的操作系统读到内存中即是开机。内存特点是：存储数据快，一旦断电，数据就丢失了。与内存相对应的是外存，表示无论断电与否，数据都存在，外存的存储速度慢。
+示例Chrome 浏览器打开之后大约占用了 1G 的内存，分别分配给每个页面，每个">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="前端基础系列（四） -- 内存"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/19/前端基础系列（四） -- 内存/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-18T23:43:26.000Z"><a href="/2018/02/19/前端基础系列（四） -- 内存/">2018-02-19</a></time>
+      
+      
+  
+    <h1 class="title">前端基础系列（四） -- 内存</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>电脑开机之后就把硬盘中的数据传输到内存中，例如操作系统，把硬盘中的操作系统读到内存中即是开机。内存特点是：存储数据快，一旦断电，数据就丢失了。与内存相对应的是外存，表示无论断电与否，数据都存在，外存的存储速度慢。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>Chrome 浏览器打开之后大约占用了 1G 的内存，分别分配给每个页面，每个页面大约占用 100M ，其中包括了：</p>
+<pre><code>1. HTML + CSS
+2. JavaScript
+3. 网络 HTTP
+4. 其他
+</code></pre><p>所以 JavaScript 最多占用约 100M 的内存。</p>
+<h2 id="内存分类"><a href="#内存分类" class="headerlink" title="内存分类"></a>内存分类</h2><p>JS 将内存划分为两个大区，分别是<strong>代码区（存储代码）</strong>和<strong>数据区（存储数据）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let  a = 1  // 变量 a 存储在代码区  数字 1 存储在数据区 二者以 JS 引擎关联</span><br></pre></td></tr></table></figure></p>
+<h4 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a>数据区</h4><p>数据区分为 <strong>Stack(栈内存)</strong> 和 <strong>Heap(堆内存)</strong>。</p>
+<ul>
+<li><p><strong>Stack（栈内存）</strong>存储方式是以一行一行存储，类似栈，故而叫做栈内存</p>
+</li>
+<li><p><strong>Heap（堆内存）</strong>存储方式是以堆存储</p>
+</li>
+</ul>
+<h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><ol>
+<li>数字是以 64 位浮点数进行存储</li>
+<li>字符是以 16 位的进行存储。</li>
+</ol>
+<ul>
+<li><p>存储 <code>var a = 1</code> 时，a 在代码区，1 以64位浮点数存储在栈内存。</p>
+</li>
+<li><p>存储 <code>var b = 2</code> 时，b 在代码区，2 以64位浮点数存储在栈内存。</p>
+</li>
+</ul>
+<p><strong>注意：</strong>当 <code>b = a</code> 时，将 a 中的数据复制并覆盖到 b 的数据上。</p>
+<ul>
+<li><p>存储 <code>var a = true</code> 时，a 在代码区，true 转化为 1 ，之后以64位浮点数存储在栈内存。</p>
+</li>
+<li><p>存储 <code>var obj1 = {}</code> 时，obj1 在代码区，在栈内存中会存有一个以64位浮点数的地址，<strong>引用</strong>的是堆内存中的一个地址，obj1 中的数据将存储在堆内存中的一个地址，如果在后面在 <strong>添加 obj1 的属性</strong> ，继续放在堆内存中。</p>
+</li>
+<li><p>存储 <code>var obj2 = {}</code> 时，obj2 在代码区，在栈内存中会存有一个以64位浮点数的地址，<strong>引用</strong>的是堆内存中的一个地址，obj2 中的数据将存储在堆内存中的一个地址。</p>
+</li>
+</ul>
+<p><strong>注意：</strong>当 <code>obj2 = obj1</code> 时，和 <code>b = a</code> 做的事情完全相同，即将 obj1 中的数据地址复制并覆盖到 obj2 的数据地址上。</p>
+<h2 id="数据类型存储方法："><a href="#数据类型存储方法：" class="headerlink" title="数据类型存储方法："></a>数据类型存储方法：</h2><p>JavaScript 中有 7 种数据类型</p>
+<ol>
+<li><p>简单数据类型（6种）直接存储在 <strong>Stack（栈内存）</strong>中</p>
+</li>
+<li><p>复杂数据类型（Object）在 <strong>Stack（栈内存）</strong>中存储 <strong>Heap（堆内存）</strong>的地址</p>
+<p><strong>所有的变量和对象的关系都是引用关系。</strong></p>
+</li>
+</ol>
+<h2 id="套路："><a href="#套路：" class="headerlink" title="套路："></a>套路：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; n: 1 &#125;;  </span><br><span class="line">var b = a;</span><br><span class="line">a.x = a = &#123; n:2 &#125;;  //当浏览器运行这句话时，首先确定 a 的值，之后执行    &#123; n:2 &#125;，之后执行 a = &#123;  n:2 &#125;，之后执行 a.x (此时的 a 是之前确定的 a )。</span><br><span class="line">alert( a.x );  //undefined</span><br><span class="line">alert( b.x );  //[object Object]</span><br></pre></td></tr></table></figure>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-f91366eefddfc88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存图"></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>如果一个对象没有被引用，就是垃圾，将会被回收（释放内存）。</p>
+<h4 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h4><p>由于浏览器的 BUG ，使得应该被标记为垃圾的东西，没有被标记为垃圾，造成内存被永久占用，除非把浏览器关闭。<br><strong>解决方法</strong>：在关闭页面之前把所有的事件设置为 null 。</p>
+<h4 id="浅拷贝-amp-深拷贝"><a href="#浅拷贝-amp-深拷贝" class="headerlink" title="浅拷贝&amp;深拷贝"></a>浅拷贝&amp;深拷贝</h4><h6 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var b = a;  </span><br><span class="line">b = 2;        // b 变不影响 a，即是深拷贝</span><br><span class="line">alert( a );  // 1</span><br></pre></td></tr></table></figure>
+<p>对于<strong>基本类型</strong>，所有的赋值 “ = “ 都是深拷贝</p>
+<p>所以在谈及深拷贝和浅拷贝时是不考虑基本类型的，因为基本类型的赋值都是深拷贝</p>
+<h6 id="复杂数据类型（Object）"><a href="#复杂数据类型（Object）" class="headerlink" title="复杂数据类型（Object）"></a>复杂数据类型（Object）</h6><p>浅拷贝：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; name : &apos;a&apos; &#125;;</span><br><span class="line">var b = a;</span><br><span class="line">b.name = &apos;b&apos; ;   // b 变致 a 变，即是浅拷贝</span><br><span class="line">alert( a.name );  // &apos;b&apos;</span><br></pre></td></tr></table></figure></p>
+<p>深拷贝：b 复制 a 的所有数据，但是地址不同，最终的结果就是 b 变是 b 自己的事情，与 a 无关，即 b 变不影响 a </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>6</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

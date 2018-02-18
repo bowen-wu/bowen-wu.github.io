@@ -78,6 +78,155 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-27T00:00:35.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（六）-- flex/">2018-01-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（六）-- flex/">CSS 最佳实践 + 套路（六） -- flex</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>CSS 弹性盒子（Flexible box 或 Flexbox）</strong>是一种用于在页面上布置元素的布局模式，它的目的是允许容器可以让其子项目（子元素）能够改变宽度、高度、顺序等等，以最佳的方式填充空间（父元素）</p>
+<p><strong>弹性盒布局</strong>是指通过调整其内元素的宽高，从而在任何显示设备上实现对可用的显示空间最佳的填充能力</p>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ul>
+<li>与方向无关</li>
+<li>实现空间的自动分配，自动对齐</li>
+<li>适用于简单的线性布局</li>
+</ul>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><img src="http://upload-images.jianshu.io/upload_images/9617841-c483db96d0c1e6bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="flexbox 基本概念"></p>
+<h3 id="弹性容器（Flex-container）"><a href="#弹性容器（Flex-container）" class="headerlink" title="弹性容器（Flex container）"></a>弹性容器（Flex container）</h3><p>包含这弹性项目的父元素，通过设置 <code>display: flex | inline-flex</code> 定义弹性容器</p>
+<h3 id="弹性项目（Flex-item）"><a href="#弹性项目（Flex-item）" class="headerlink" title="弹性项目（Flex item）"></a>弹性项目（Flex item）</h3><p>弹性容器中的每个子元素都被称为弹性项目</p>
+<h3 id="轴（Axis）"><a href="#轴（Axis）" class="headerlink" title="轴（Axis）"></a>轴（Axis）</h3><p>每个弹性框包含两个轴。弹性项目延其依次排列的那根轴称为<strong>主轴（main axis）</strong>，垂直于主轴的那根轴称为<strong>侧轴（cross axis）</strong></p>
+<h3 id="方向（direction）"><a href="#方向（direction）" class="headerlink" title="方向（direction）"></a>方向（direction）</h3><hr>
+<p><strong>很重要，知道方向才能了解弹性容器上的属性</strong></p>
+<hr>
+<p><strong>主轴方向</strong>：弹性容器的<strong>主轴起点（main start）</strong>到<strong>主轴终点（main end）</strong>的方向<br><strong>侧轴方向</strong>：弹性容器的<strong>侧轴起点（cross start）</strong>到<strong>侧轴终点（cross end）</strong>的方向</p>
+<h1 id="弹性容器属性"><a href="#弹性容器属性" class="headerlink" title="弹性容器属性"></a>弹性容器属性</h1><h3 id="定义弹性容器"><a href="#定义弹性容器" class="headerlink" title="定义弹性容器"></a>定义弹性容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;            // 弹性容器是块级元素</span><br><span class="line">或者</span><br><span class="line">display: inline-flex;  // 弹性容器是行内元素</span><br></pre></td></tr></table></figure>
+<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>确立<strong>主轴</strong>方向，可以改变 main start 到 main end 的方向</p>
+<p>值:</p>
+<ul>
+<li><p><code>flex-direction: row</code> ==&gt; 横向排列弹性项目，方向与内容方向相同（<strong>main start 到 main end 的方向与内容方向相同</strong>）</p>
+</li>
+<li><p><code>flex-direction: row-reverse</code> ==&gt; 横向排列弹性项目，方向与内容方向相反（<strong>main start 到 main end 的方向与内容方向相反</strong>）</p>
+</li>
+<li><p><code>flex-direction: column</code> ==&gt; 纵向排列弹性项目，方向与内容方向相同（<strong>main start 到 main end 的方向与内容方向相同</strong>）</p>
+</li>
+<li><p><code>flex-direction: column-reverse</code> ==&gt; 纵向排列弹性项目，方向与内容方向相反（<strong>main start 到 main end 的方向与内容方向相反</strong>）</p>
+</li>
+</ul>
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>指定 flex 元素是单行显示还是多行显示，可以改变 cross start 到 cross end 的方向</p>
+<p>值：</p>
+<ul>
+<li><p><code>flex-wrap: nowrap</code> ==&gt; 不允许弹性项目换行</p>
+</li>
+<li><p><code>flex-wrap: wrap</code> ==&gt; 允许弹性项目换行</p>
+</li>
+<li><p><code>flex-wrap: wrap-server</code> ==&gt; 允许弹性项目换行，cross start 到cross end 的方向颠倒</p>
+</li>
+</ul>
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>这是一个集合属性<br>flex-flow === flex-direction + flex-wrap</p>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p><strong>主轴方向</strong>上伸缩项目的对齐方式</p>
+<p>值：</p>
+<ul>
+<li><p><code>justify-content: space-between</code> ==&gt; 在主轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上的第一个弹性项目和行首对齐，主轴方向上的最后一个弹性项目和行尾对齐</p>
+</li>
+<li><p><code>justify-content: space-around</code> ==&gt; 在主轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上第一个弹性项目到行首的距离和主轴方向上最后一个弹性项目到行尾的距离等于相邻元素距离的一半</p>
+</li>
+<li><p><code>justify-content: flex-start</code> ==&gt; 弹性项目与主轴起点对齐</p>
+</li>
+<li><p><code>justify-content: flex-end</code> ==&gt; 弹性项目与主轴终点对齐</p>
+</li>
+<li><p><code>justify-content: center</code> ==&gt; 弹性项目在主轴起点到主轴终点距离的中点</p>
+</li>
+</ul>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><strong>侧轴方向</strong>上伸缩项目的对齐方式</p>
+<p>值：</p>
+<ul>
+<li><p><code>align-items: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
+</li>
+<li><p><code>align-items: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
+</li>
+<li><p><code>align-items: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点</p>
+</li>
+</ul>
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行或者多列的对齐方式</p>
+<p>值：</p>
+<ul>
+<li><code>align-content: space-between</code> ==&gt; 在侧轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上的第一个弹性项目和行首对齐，主轴方向上的最后一个弹性项目和行尾对齐</li>
+</ul>
+<ul>
+<li><p><code>align-content: space-around</code> ==&gt; 在侧轴方向上均匀分配弹性项目，相邻弹性项目距离相同。侧轴方向上第一个弹性项目到行首的距离和侧轴方向上最后一个弹性项目到行尾的距离等于相邻元素距离的一半</p>
+</li>
+<li><p><code>align-content: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
+</li>
+<li><p><code>align-content: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
+</li>
+<li><p><code>align-content: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点<br><img src="http://upload-images.jianshu.io/upload_images/9617841-797dc91fac60e84f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="align-content 属性全解"></p>
+</li>
+</ul>
+<h1 id="弹性项目属性"><a href="#弹性项目属性" class="headerlink" title="弹性项目属性"></a>弹性项目属性</h1><h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><p>主轴方向上增长比例。指空间过多时，多余空间分配比例<br>值： <number> ，负值无效</number></p>
+<h3 id="flex-shirk"><a href="#flex-shirk" class="headerlink" title="flex-shirk"></a>flex-shirk</h3><p>主轴方向上收缩比例。指空间不足时，溢出空间在每个伸缩项目的收缩比例<br>值： <number> ，负值无效</number></p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>主轴方向上伸缩项目的初始大小<br>值： </p>
+<ul>
+<li><number> ，负值无效</number></li>
+<li><code>content</code> ==&gt; 基于 flex 的伸缩项目的内容自动调整大小</li>
+</ul>
+<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>flex 是一个复合属性<br>flex === flex-grow + flex-shirk + flex-basis</p>
+<h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>主轴方向上弹性项目布局时的顺序<br>值：<number> ，负值有效</number></p>
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>自身的对齐方式<br>值：</p>
+<ul>
+<li><p><code>align-self: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
+</li>
+<li><p><code>align-self: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
+</li>
+<li><p><code>align-self: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点</p>
+</li>
+</ul>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><ol>
+<li>垂直水平居中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;</span><br><span class="line">justify-content: center;</span><br><span class="line">align-items: center;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>这里有两个小游戏，可以练习 flex 属性<br><a href="http://flexboxfroggy.com/#zh-cn" target="_blank" rel="noopener">网站一</a><br><a href="http://www.flexboxdefense.com/" target="_blank" rel="noopener">网站二</a> </p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-26T23:58:06.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">2018-01-27</a></time>
       
       
@@ -923,126 +1072,6 @@
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-19T00:01:38.000Z"><a href="/2018/01/19/HTTP系列 -- Node.js/">2018-01-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/19/HTTP系列 -- Node.js/">HTTP系列 -- Node.js</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/blob/master/server.js" target="_blank" rel="noopener">Node.js 服务器代码</a></p>
-<h1 id="精华"><a href="#精华" class="headerlink" title="精华"></a>精华</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let string = fs.readFileSync( &apos;路径&apos;, &apos;UTF-8&apos; )</span><br><span class="line">response.setHeader( &apos;Content-Type&apos;, &apos;类型&apos; )</span><br><span class="line">response.statusCode = 200</span><br><span class="line">response.write()</span><br><span class="line">response.end()</span><br></pre></td></tr></table></figure>
-<h3 id="response-setHeader-‘Content-Type’-‘类型’"><a href="#response-setHeader-‘Content-Type’-‘类型’" class="headerlink" title="response.setHeader( ‘Content-Type’, ‘类型’ )"></a>response.setHeader( ‘Content-Type’, ‘类型’ )</h3><p>类型：</p>
-<ul>
-<li>HTML ==&gt; response.setHeader( ‘Content-Type’, ‘text/html; charset = utf-8’ )</li>
-<li>CSS ==&gt; response.setHeader( ‘Content-Type’, ‘text/css’ )</li>
-<li>JavaScript ==&gt; response.setHeader( ‘Content-Type’, ‘application/javascript’ )</li>
-</ul>
-<h1 id="创建-Node-js-服务器"><a href="#创建-Node-js-服务器" class="headerlink" title="创建 Node.js 服务器"></a>创建 Node.js 服务器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&apos;http&apos;)</span><br><span class="line">var fs = require(&apos;fs&apos;)</span><br><span class="line">var url = require(&apos;url&apos;)</span><br><span class="line">var port = process.argv[2]</span><br><span class="line"></span><br><span class="line">if(!port)&#123;</span><br><span class="line">  console.log(&apos;请指定端口号好不啦？\nnode server.js 8888 这样不会吗？&apos;)</span><br><span class="line">  process.exit(1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var server = http.createServer(function(request, response)&#123;</span><br><span class="line">  var parsedUrl = url.parse(request.url, true)</span><br><span class="line">  var path = request.url </span><br><span class="line">  var query = &apos;&apos;</span><br><span class="line">  if(path.indexOf(&apos;?&apos;) &gt;= 0)&#123; query = path.substring(path.indexOf(&apos;?&apos;)) &#125;</span><br><span class="line">  var pathNoQuery = parsedUrl.pathname</span><br><span class="line">  var queryObject = parsedUrl.query</span><br><span class="line">  var method = request.method</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  console.log(&apos;HTTP 路径为\n&apos; + path)</span><br><span class="line">  if(path == &apos;/style&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/css; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;body&#123;background-color: #ddd;&#125;h1&#123;color: red;&#125;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;else if(path == &apos;/script&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/javascript; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;alert(&quot;这是JS执行的&quot;)&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;else if(path == &apos;/index&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;&lt;!DOCTYPE&gt;\n&lt;html&gt;&apos;  + </span><br><span class="line">      &apos;&lt;head&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/style&quot;&gt;&apos; +</span><br><span class="line">      &apos;&lt;/head&gt;&lt;body&gt;&apos;  +</span><br><span class="line">      &apos;&lt;h1&gt;你好&lt;/h1&gt;&apos; +</span><br><span class="line">      &apos;&lt;script src=&quot;/script&quot;&gt;&lt;/script&gt;&apos; +</span><br><span class="line">      &apos;&lt;/body&gt;&lt;/html&gt;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    response.statusCode = 404</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(port)</span><br><span class="line">console.log(&apos;监听 &apos; + port + &apos; 成功\n请用在空中转体720度然后用电饭煲打开 http://localhost:&apos; + port)</span><br></pre></td></tr></table></figure>
-<h1 id="解析-Node-js-服务器"><a href="#解析-Node-js-服务器" class="headerlink" title="解析 Node.js 服务器"></a>解析 Node.js 服务器</h1><ol>
-<li><p><code>console.log(&#39;HTTP 路径为\n&#39; + path)</code> 表示在命令行中或者<code>Console</code>面板中打印出当前请求的 HTTP 路径</p>
-</li>
-<li><p>下方代码表示如果请求路径为<code>/style</code>，设置响应头信息为<code>&#39;Content-Type&#39;, &#39;text/css; charset=utf-8&#39;</code>（即响应内容 [ 第四部分 ] 的类型 [ css ] 和编码 [ utf-8 ]），响应内容( 第四部分 )为 <code>body{background-color: #ddd;}h1{color: red;}</code> ，之后完成响应</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(path == &apos;/style&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/css; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;body&#123;background-color: #ddd;&#125;h1&#123;color: red;&#125;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下方代码表示如果请求路径为 <code>/script</code> ，设置响应头信息为 <code>&#39;Content-Type&#39;, &#39;text/javascript; charset=utf-8&#39;</code> （即响应内容 [ 第四部分 ] 的类型 [ javascript ] 和编码 [ utf-8 ]），响应内容( 第四部分 )为 <code>alert(&quot;这是JS执行的&quot;)</code>，之后完成响应</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(path == &apos;/script&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/javascript; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;alert(&quot;这是JS执行的&quot;)&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下方代码表示如果请求路径为 <code>/index</code> ，设置响应头信息为 <code>(&#39;Content-Type&#39;, &#39;text/html; charset=utf-8&#39;</code> （即响应内容 [ 第四部分 ] 的类型 [ html ] 和编码 [ utf-8 ]），响应内容( 第四部分 )为 HTML 页面，之后完成响应</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if(path == &apos;/index&apos;)&#123;</span><br><span class="line">    response.setHeader(&apos;Content-Type&apos;, &apos;text/html; charset=utf-8&apos;)</span><br><span class="line">    response.write(&apos;&lt;!DOCTYPE&gt;\n&lt;html&gt;&apos;  + </span><br><span class="line">      &apos;&lt;head&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;/style&quot;&gt;&apos; +</span><br><span class="line">      &apos;&lt;/head&gt;&lt;body&gt;&apos;  +</span><br><span class="line">      &apos;&lt;h1&gt;你好&lt;/h1&gt;&apos; +</span><br><span class="line">      &apos;&lt;script src=&quot;/script&quot;&gt;&lt;/script&gt;&apos; +</span><br><span class="line">      &apos;&lt;/body&gt;&lt;/html&gt;&apos;)</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下方代码表示如果请求的路径不是上述路径，则返回状态码为 <code>404</code> ，之后完成响应。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">else&#123;</span><br><span class="line">    response.statusCode = 404</span><br><span class="line">    response.end()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="创建过程"><a href="#创建过程" class="headerlink" title="创建过程"></a>创建过程</h1><ol>
-<li><p>新建目录和进入</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir node-demo</span><br><span class="line">cd node-demo</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建文件并编辑</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch server.js</span><br><span class="line">start server.js //内容如上</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行文件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node server.js 端口号</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>#使用 Node.js 发起请求</p>
-<ol>
-<li><p>在新的 Bash 窗口运行 <code>curl http://localhost:你的指定的端口/xxx</code> 或者 <code>curl http://127.0.0.1:你指定的端口/xxx</code>即可发起请求</p>
-</li>
-<li><p>在浏览器窗口地址栏中输入 <code>http://localhost:你的指定的端口/xxx</code> 或者 <code>http://127.0.0.1:你指定的端口/xxx</code> 回车，即可发起请求。</p>
-</li>
-<li><p><code>curl -s -v -- &quot;http://localhost:port/xxx&quot;</code>可以查看完整的请求体和响应体。</p>
-</li>
-</ol>
-<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><ul>
-<li><p>在运行 <code>node server.js 端口号</code> Bash 窗口中可以查看到打印出来的路径（<code>console.log(&#39;HTTP 路径为\n&#39; + path)</code>），并且在发起请求的 Bash 窗口中可以查看请求体和响应体</p>
-</li>
-<li><p>在浏览器窗口中可以看到实际运行效果</p>
-</li>
-</ul>
-<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ol>
-<li><p>任意一台电脑都是服务器</p>
-</li>
-<li><p>创建的<em>Node.js服务器</em>提供 HTTP 服务，所以需要提供 HTTP 服务的程序</p>
-</li>
-<li><p>用脚本可以提供 HTTP 服务</p>
-</li>
-</ol>
-<h1 id="当在浏览器地址栏输入地址回车后发生的事情"><a href="#当在浏览器地址栏输入地址回车后发生的事情" class="headerlink" title="当在浏览器地址栏输入地址回车后发生的事情"></a>当在浏览器地址栏输入地址回车后发生的事情</h1><ol>
-<li><p>DNS 域名解析。首先浏览器会查找缓存，如果没有，就向运营商查找，运营商会提供 DNS 服务，从而得到域名所对应的 IP 地址。DNS 域名解析就是一个域名到 IP 地址的转换</p>
-</li>
-<li><p>TCP 连接。浏览器根据 IP 地址向服务器发起 TCP 连接，与服务器建立 TCP 三次握手，浏览器对服务器说：“您好，我可以链接你么？”，服务器对浏览器说：“您好，你可以连接我”，浏览器对服务器说：“好的，那我连接你了！”，通过 TCP 的三次握手，从而确定双方都有收发文件的能力，自此浏览器和服务器建立了链接</p>
-</li>
-<li><p>浏览器发送 HTTP 请求。请求包括了请求行、请求头和请求正文</p>
-</li>
-<li><p>浏览器拿到响应、解析并渲染页面。浏览器是一个边解析边渲染的过程，首先浏览器解析HTML文件构建 DOM 树，然后解析 CSS 文件构建渲染树，等到渲染树构建完成后，浏览器开始布局渲染树并将其绘制到屏幕上</p>
-</li>
-<li><p>通过四次挥手关闭 TCP 连接。浏览器对服务器说：“不早了，我该走了”，服务器对浏览器说：“知道了”，之后服务器又对浏览器说：“我也该走了”，浏览器回应服务器：“好的”，至此 TCP 连接结束</p>
-</li>
-</ol>
-<p><strong>注意</strong>：后缀是没有用的。HTTP 路径不是文件路径。</p>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/HTTP/">HTTP</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
@@ -1080,7 +1109,7 @@
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

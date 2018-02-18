@@ -82,6 +82,126 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-31T10:46:51.000Z"><a href="/2018/01/31/总结篇（一）-- 基础知识/">2018-01-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/31/总结篇（一）-- 基础知识/">总结篇（一） -- 基础知识</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h2><ol>
+<li><p>使用 <code>&lt;meta&gt;</code> 标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&apos;viewport&apos; content=&apos; width=device-width user-scalable=no initial-scale=1.0 maximun-scale=1.0 minimum=1.0 &apos; &gt;</span><br></pre></td></tr></table></figure>
+<p>这个标签主要作用是网页宽度默认等于屏幕宽度，用户不可以缩放，缩放比例1。</p>
+</li>
+<li><p>使用 Media Query（媒体查询） 模块<br>通过媒体查询，从而判断采用的样式<br>主要是有两种方式：</p>
+<ul>
+<li><p><link> 元素中的媒体查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&apos;stylesheet&apos; href=&apos;./css/style.css&apos; media=&apos;(min-width: 800px) and (max-width: 1400px)&apos; &gt;</span><br></pre></td></tr></table></figure>
+<p>这个标签表示只有 width 在 800px-1400px 时才采用 style.css 这个样式表</p>
+</li>
+<li><p>样式表中的媒体查询<br>在样式表中书写媒体查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@media (max-width: 414px)&#123;</span><br><span class="line">    .button&#123;</span><br><span class="line">        display: block;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码表示：当宽度小于 414px 的时候，button 元素显示在页面中</p>
+</li>
+</ul>
+</li>
+<li><p>动态rem<br>一切以宽度为基准。<br>rem是根元素（html）的 <code>font-size</code> 的值，我们可以使用 JS 实现将 html 的 <code>font-size</code> 设置为屏幕宽度，之后 rem 就和屏幕宽度有一定的映射，当然也可以设置为屏幕宽度的 1/2 ，之后使用 rem 实现元素的宽高 margin padding 等需求。</p>
+</li>
+<li><p>在做移动端适配的时候还要注意一些小问题</p>
+<ul>
+<li>移动端没有 hover 事件，但是有 touch 事件</li>
+<li>移动端没有 resize 事件，没有滚动条</li>
+<li>rem 单位可以和其他单位混用，例如：<code>border: 1px solid red</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><ol>
+<li><p>闭包指一个函数或函数的引用与一个引用环境绑定在一起，这个引用环境是一个存储该函数每个自由变量的表。简单的说就是自由变量和引用这个自由变量的函数就是闭包。闭包可以读取其上作用域链中的值。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">fn.call(undefined)   // 调用之后，会打印出1</span><br></pre></td></tr></table></figure>
+<p> 上述的变量 a 和函数 fn 即是闭包</p>
+</li>
+<li><p>当我们在写代码的时候，会在无形之中就使用到了闭包。</p>
+</li>
+</ol>
+<ul>
+<li><p>用途一：读取其上作用域链中的值。例如在全局作用域中定义了 a 和函数 fn，在 fn 中并没有定义 a ，但是却可以使用全局变量 a。参照上面例子。</p>
+</li>
+<li><p>用途二：让自由变量保存在内存中，即封装变量<br>在全局代码执行的时候，会产生一个全局执行上下文环境（Execution Context）。调用函数的时候，会产生一个函数执行上下文环境（Execution Context）。当函数调用结束后，函数执行上下文环境和其中的数据将被消除，重新回到全局执行上下文环境。但是当在函数执行上下文的环境中存在闭包，那么即使这个函数调用完成，其执行上下文环境也不会被消除，因为还有闭包被引用着。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function fn1()&#123;</span><br><span class="line">   var a = 1</span><br><span class="line">   addA = function()&#123;  // 此处不用 var 声明，从而创建一个全局变量，但是其可以引用局部变量 a </span><br><span class="line">       a++</span><br><span class="line">   &#125;</span><br><span class="line">   function fn2()&#123;</span><br><span class="line">       console.log(a)</span><br><span class="line">   &#125;</span><br><span class="line">   return fn2</span><br><span class="line">&#125;</span><br><span class="line">result = fn1.call(undefined)</span><br><span class="line">result()  // 打印出 1</span><br><span class="line">addA()</span><br><span class="line">result()  // 打印出 1</span><br></pre></td></tr></table></figure>
+<p>  当调用完 fn1 之后，局部变量 a 并不能被垃圾回收，因为 fn1 返回的函数仍然调用局部变量 a ，此时的局部变量 a 就被保存在内存中</p>
+<p>  在函数内部定义局部变量，外部不能访问，但是闭包仍能访问到这个局部变量，外部如果要访问局部变量，只能通过函数 return 出来的接口。</p>
+</li>
+</ul>
+<h2 id="call、apply、bind"><a href="#call、apply、bind" class="headerlink" title="call、apply、bind"></a>call、apply、bind</h2><p>这三个方法都挂载在 Function.prototype 上，都是函数的方法，可以调用函数</p>
+<h4 id="call"><a href="#call" class="headerlink" title="call()"></a>call()</h4><ul>
+<li><p>作用：<br>  切换上下文（this）<br>  操作参数</p>
+</li>
+<li><p>当使用 call() 调用一个函数的时候，call() 的第一个参数是 this ，第二个参数是需要传递给函数的实参（arguments）。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn.call( this , arguments )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h4><ul>
+<li><p>作用：</p>
+<p>  切换上下文（this）<br>  操作参数</p>
+</li>
+<li><p>当使用 apply() 调用一个函数的时候，apply() 的第一个参数是 this，第二个参数是一个数组，apply() 方法会将数组中的元素拆分依次传入到函数中。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn.apply( this , [ 1,2,3 ] )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h4><ul>
+<li><p>作用：</p>
+<p>  切换上下文（this）<br>  科里化，即部分求值，函数调用是可以传递参数，之后返回的函数（闭包）也可以接收参数</p>
+</li>
+<li><p>当使用 bind() 调用一个函数的时候，bind() 方法会返回一个函数，他的第一个参数是 this ，第二个参数是需要传递给函数的实参</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let curryFn = fn.bind( this , param1 , param2 )</span><br><span class="line">curryFn( param3 , param4 )</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="HTTP-POST-请求"><a href="#HTTP-POST-请求" class="headerlink" title="HTTP POST 请求"></a>HTTP POST 请求</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 POST /path HTTP/1.1</span><br><span class="line">2 Host: passport.baidu.com</span><br><span class="line">2 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36</span><br><span class="line">2 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span><br><span class="line">2 Content-Length: 24</span><br><span class="line">2 Content-Type: application/x-www-form-urlencoded</span><br><span class="line">3</span><br><span class="line">4 username=ff&amp;password=123</span><br></pre></td></tr></table></figure>
+<h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><h4 id="对象键值对法。遍历数组时看对象中是否有-key"><a href="#对象键值对法。遍历数组时看对象中是否有-key" class="headerlink" title="对象键值对法。遍历数组时看对象中是否有 key"></a>对象键值对法。遍历数组时看对象中是否有 key</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">     var newArray = []</span><br><span class="line">     var obj = &#123;&#125;</span><br><span class="line">     for( var i = 0, len = arr.length; i &lt; len; i++ )&#123;</span><br><span class="line">         if( !obj[ arr[ i ] ] )&#123;</span><br><span class="line">             obj[ arr[ i ] ] = 1</span><br><span class="line">             newArray.push( arr[ i ] )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     return newArray</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Set-对象"><a href="#Set-对象" class="headerlink" title="Set 对象"></a>Set 对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">    return newArr = Array.from(new Set(arr))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="数组下标判断。遍历数组是看相应值的下标是否和索引相同"><a href="#数组下标判断。遍历数组是看相应值的下标是否和索引相同" class="headerlink" title="数组下标判断。遍历数组是看相应值的下标是否和索引相同"></a>数组下标判断。遍历数组是看相应值的下标是否和索引相同</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">     let newArray = []</span><br><span class="line">     arr.forEach( (value,index) =&gt; &#123;</span><br><span class="line">         if( array.indexOf( value ) === index )&#123;</span><br><span class="line">             newArray.push( value )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125; )</span><br><span class="line">     return newArray</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="遍历数组法。遍历数组时看新数组中有没有该值"><a href="#遍历数组法。遍历数组时看新数组中有没有该值" class="headerlink" title="遍历数组法。遍历数组时看新数组中有没有该值"></a>遍历数组法。遍历数组时看新数组中有没有该值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">     let newArray = []</span><br><span class="line">     arr.forEach( (value,index) =&gt; &#123;</span><br><span class="line">         if( !newArray.includes( value ) )&#123;</span><br><span class="line">             newArray.push( value )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125; )</span><br><span class="line">     return newArray</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/总结/">总结</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-30T01:02:22.000Z"><a href="/2018/01/30/JS系列 -- Array-浅析之相关-API/">2018-01-30</a></time>
       
       
@@ -930,155 +1050,6 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-27T00:00:35.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（六）-- flex/">2018-01-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（六）-- flex/">CSS 最佳实践 + 套路（六） -- flex</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>CSS 弹性盒子（Flexible box 或 Flexbox）</strong>是一种用于在页面上布置元素的布局模式，它的目的是允许容器可以让其子项目（子元素）能够改变宽度、高度、顺序等等，以最佳的方式填充空间（父元素）</p>
-<p><strong>弹性盒布局</strong>是指通过调整其内元素的宽高，从而在任何显示设备上实现对可用的显示空间最佳的填充能力</p>
-<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><ul>
-<li>与方向无关</li>
-<li>实现空间的自动分配，自动对齐</li>
-<li>适用于简单的线性布局</li>
-</ul>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p><img src="http://upload-images.jianshu.io/upload_images/9617841-c483db96d0c1e6bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="flexbox 基本概念"></p>
-<h3 id="弹性容器（Flex-container）"><a href="#弹性容器（Flex-container）" class="headerlink" title="弹性容器（Flex container）"></a>弹性容器（Flex container）</h3><p>包含这弹性项目的父元素，通过设置 <code>display: flex | inline-flex</code> 定义弹性容器</p>
-<h3 id="弹性项目（Flex-item）"><a href="#弹性项目（Flex-item）" class="headerlink" title="弹性项目（Flex item）"></a>弹性项目（Flex item）</h3><p>弹性容器中的每个子元素都被称为弹性项目</p>
-<h3 id="轴（Axis）"><a href="#轴（Axis）" class="headerlink" title="轴（Axis）"></a>轴（Axis）</h3><p>每个弹性框包含两个轴。弹性项目延其依次排列的那根轴称为<strong>主轴（main axis）</strong>，垂直于主轴的那根轴称为<strong>侧轴（cross axis）</strong></p>
-<h3 id="方向（direction）"><a href="#方向（direction）" class="headerlink" title="方向（direction）"></a>方向（direction）</h3><hr>
-<p><strong>很重要，知道方向才能了解弹性容器上的属性</strong></p>
-<hr>
-<p><strong>主轴方向</strong>：弹性容器的<strong>主轴起点（main start）</strong>到<strong>主轴终点（main end）</strong>的方向<br><strong>侧轴方向</strong>：弹性容器的<strong>侧轴起点（cross start）</strong>到<strong>侧轴终点（cross end）</strong>的方向</p>
-<h1 id="弹性容器属性"><a href="#弹性容器属性" class="headerlink" title="弹性容器属性"></a>弹性容器属性</h1><h3 id="定义弹性容器"><a href="#定义弹性容器" class="headerlink" title="定义弹性容器"></a>定义弹性容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;            // 弹性容器是块级元素</span><br><span class="line">或者</span><br><span class="line">display: inline-flex;  // 弹性容器是行内元素</span><br></pre></td></tr></table></figure>
-<h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>确立<strong>主轴</strong>方向，可以改变 main start 到 main end 的方向</p>
-<p>值:</p>
-<ul>
-<li><p><code>flex-direction: row</code> ==&gt; 横向排列弹性项目，方向与内容方向相同（<strong>main start 到 main end 的方向与内容方向相同</strong>）</p>
-</li>
-<li><p><code>flex-direction: row-reverse</code> ==&gt; 横向排列弹性项目，方向与内容方向相反（<strong>main start 到 main end 的方向与内容方向相反</strong>）</p>
-</li>
-<li><p><code>flex-direction: column</code> ==&gt; 纵向排列弹性项目，方向与内容方向相同（<strong>main start 到 main end 的方向与内容方向相同</strong>）</p>
-</li>
-<li><p><code>flex-direction: column-reverse</code> ==&gt; 纵向排列弹性项目，方向与内容方向相反（<strong>main start 到 main end 的方向与内容方向相反</strong>）</p>
-</li>
-</ul>
-<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h3><p>指定 flex 元素是单行显示还是多行显示，可以改变 cross start 到 cross end 的方向</p>
-<p>值：</p>
-<ul>
-<li><p><code>flex-wrap: nowrap</code> ==&gt; 不允许弹性项目换行</p>
-</li>
-<li><p><code>flex-wrap: wrap</code> ==&gt; 允许弹性项目换行</p>
-</li>
-<li><p><code>flex-wrap: wrap-server</code> ==&gt; 允许弹性项目换行，cross start 到cross end 的方向颠倒</p>
-</li>
-</ul>
-<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h3><p>这是一个集合属性<br>flex-flow === flex-direction + flex-wrap</p>
-<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p><strong>主轴方向</strong>上伸缩项目的对齐方式</p>
-<p>值：</p>
-<ul>
-<li><p><code>justify-content: space-between</code> ==&gt; 在主轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上的第一个弹性项目和行首对齐，主轴方向上的最后一个弹性项目和行尾对齐</p>
-</li>
-<li><p><code>justify-content: space-around</code> ==&gt; 在主轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上第一个弹性项目到行首的距离和主轴方向上最后一个弹性项目到行尾的距离等于相邻元素距离的一半</p>
-</li>
-<li><p><code>justify-content: flex-start</code> ==&gt; 弹性项目与主轴起点对齐</p>
-</li>
-<li><p><code>justify-content: flex-end</code> ==&gt; 弹性项目与主轴终点对齐</p>
-</li>
-<li><p><code>justify-content: center</code> ==&gt; 弹性项目在主轴起点到主轴终点距离的中点</p>
-</li>
-</ul>
-<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p><strong>侧轴方向</strong>上伸缩项目的对齐方式</p>
-<p>值：</p>
-<ul>
-<li><p><code>align-items: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
-</li>
-<li><p><code>align-items: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
-</li>
-<li><p><code>align-items: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点</p>
-</li>
-</ul>
-<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h3><p>多行或者多列的对齐方式</p>
-<p>值：</p>
-<ul>
-<li><code>align-content: space-between</code> ==&gt; 在侧轴方向上均匀分配弹性项目，相邻弹性项目距离相同。主轴方向上的第一个弹性项目和行首对齐，主轴方向上的最后一个弹性项目和行尾对齐</li>
-</ul>
-<ul>
-<li><p><code>align-content: space-around</code> ==&gt; 在侧轴方向上均匀分配弹性项目，相邻弹性项目距离相同。侧轴方向上第一个弹性项目到行首的距离和侧轴方向上最后一个弹性项目到行尾的距离等于相邻元素距离的一半</p>
-</li>
-<li><p><code>align-content: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
-</li>
-<li><p><code>align-content: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
-</li>
-<li><p><code>align-content: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点<br><img src="http://upload-images.jianshu.io/upload_images/9617841-797dc91fac60e84f.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="align-content 属性全解"></p>
-</li>
-</ul>
-<h1 id="弹性项目属性"><a href="#弹性项目属性" class="headerlink" title="弹性项目属性"></a>弹性项目属性</h1><h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><p>主轴方向上增长比例。指空间过多时，多余空间分配比例<br>值： <number> ，负值无效</number></p>
-<h3 id="flex-shirk"><a href="#flex-shirk" class="headerlink" title="flex-shirk"></a>flex-shirk</h3><p>主轴方向上收缩比例。指空间不足时，溢出空间在每个伸缩项目的收缩比例<br>值： <number> ，负值无效</number></p>
-<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>主轴方向上伸缩项目的初始大小<br>值： </p>
-<ul>
-<li><number> ，负值无效</number></li>
-<li><code>content</code> ==&gt; 基于 flex 的伸缩项目的内容自动调整大小</li>
-</ul>
-<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>flex 是一个复合属性<br>flex === flex-grow + flex-shirk + flex-basis</p>
-<h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><p>主轴方向上弹性项目布局时的顺序<br>值：<number> ，负值有效</number></p>
-<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h3><p>自身的对齐方式<br>值：</p>
-<ul>
-<li><p><code>align-self: flex-start</code> ==&gt; 弹性项目项与侧轴起点对齐</p>
-</li>
-<li><p><code>align-self: flex-end</code> ==&gt; 弹性项目与侧轴终点对齐</p>
-</li>
-<li><p><code>align-self: center</code> ==&gt; 弹性项目在侧轴起点到侧轴终点距离的中点</p>
-</li>
-</ul>
-<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><ol>
-<li>垂直水平居中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;</span><br><span class="line">justify-content: center;</span><br><span class="line">align-items: center;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>这里有两个小游戏，可以练习 flex 属性<br><a href="http://flexboxfroggy.com/#zh-cn" target="_blank" rel="noopener">网站一</a><br><a href="http://www.flexboxdefense.com/" target="_blank" rel="noopener">网站二</a> </p>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1119,7 +1090,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

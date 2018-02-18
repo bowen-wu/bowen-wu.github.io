@@ -78,6 +78,106 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-18T23:43:26.000Z"><a href="/2018/02/19/前端基础系列（四） -- 内存/">2018-02-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/19/前端基础系列（四） -- 内存/">前端基础系列（四） -- 内存</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>电脑开机之后就把硬盘中的数据传输到内存中，例如操作系统，把硬盘中的操作系统读到内存中即是开机。内存特点是：存储数据快，一旦断电，数据就丢失了。与内存相对应的是外存，表示无论断电与否，数据都存在，外存的存储速度慢。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>Chrome 浏览器打开之后大约占用了 1G 的内存，分别分配给每个页面，每个页面大约占用 100M ，其中包括了：</p>
+<pre><code>1. HTML + CSS
+2. JavaScript
+3. 网络 HTTP
+4. 其他
+</code></pre><p>所以 JavaScript 最多占用约 100M 的内存。</p>
+<h2 id="内存分类"><a href="#内存分类" class="headerlink" title="内存分类"></a>内存分类</h2><p>JS 将内存划分为两个大区，分别是<strong>代码区（存储代码）</strong>和<strong>数据区（存储数据）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let  a = 1  // 变量 a 存储在代码区  数字 1 存储在数据区 二者以 JS 引擎关联</span><br></pre></td></tr></table></figure></p>
+<h4 id="数据区"><a href="#数据区" class="headerlink" title="数据区"></a>数据区</h4><p>数据区分为 <strong>Stack(栈内存)</strong> 和 <strong>Heap(堆内存)</strong>。</p>
+<ul>
+<li><p><strong>Stack（栈内存）</strong>存储方式是以一行一行存储，类似栈，故而叫做栈内存</p>
+</li>
+<li><p><strong>Heap（堆内存）</strong>存储方式是以堆存储</p>
+</li>
+</ul>
+<h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><ol>
+<li>数字是以 64 位浮点数进行存储</li>
+<li>字符是以 16 位的进行存储。</li>
+</ol>
+<ul>
+<li><p>存储 <code>var a = 1</code> 时，a 在代码区，1 以64位浮点数存储在栈内存。</p>
+</li>
+<li><p>存储 <code>var b = 2</code> 时，b 在代码区，2 以64位浮点数存储在栈内存。</p>
+</li>
+</ul>
+<p><strong>注意：</strong>当 <code>b = a</code> 时，将 a 中的数据复制并覆盖到 b 的数据上。</p>
+<ul>
+<li><p>存储 <code>var a = true</code> 时，a 在代码区，true 转化为 1 ，之后以64位浮点数存储在栈内存。</p>
+</li>
+<li><p>存储 <code>var obj1 = {}</code> 时，obj1 在代码区，在栈内存中会存有一个以64位浮点数的地址，<strong>引用</strong>的是堆内存中的一个地址，obj1 中的数据将存储在堆内存中的一个地址，如果在后面在 <strong>添加 obj1 的属性</strong> ，继续放在堆内存中。</p>
+</li>
+<li><p>存储 <code>var obj2 = {}</code> 时，obj2 在代码区，在栈内存中会存有一个以64位浮点数的地址，<strong>引用</strong>的是堆内存中的一个地址，obj2 中的数据将存储在堆内存中的一个地址。</p>
+</li>
+</ul>
+<p><strong>注意：</strong>当 <code>obj2 = obj1</code> 时，和 <code>b = a</code> 做的事情完全相同，即将 obj1 中的数据地址复制并覆盖到 obj2 的数据地址上。</p>
+<h2 id="数据类型存储方法："><a href="#数据类型存储方法：" class="headerlink" title="数据类型存储方法："></a>数据类型存储方法：</h2><p>JavaScript 中有 7 种数据类型</p>
+<ol>
+<li><p>简单数据类型（6种）直接存储在 <strong>Stack（栈内存）</strong>中</p>
+</li>
+<li><p>复杂数据类型（Object）在 <strong>Stack（栈内存）</strong>中存储 <strong>Heap（堆内存）</strong>的地址</p>
+<p><strong>所有的变量和对象的关系都是引用关系。</strong></p>
+</li>
+</ol>
+<h2 id="套路："><a href="#套路：" class="headerlink" title="套路："></a>套路：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; n: 1 &#125;;  </span><br><span class="line">var b = a;</span><br><span class="line">a.x = a = &#123; n:2 &#125;;  //当浏览器运行这句话时，首先确定 a 的值，之后执行    &#123; n:2 &#125;，之后执行 a = &#123;  n:2 &#125;，之后执行 a.x (此时的 a 是之前确定的 a )。</span><br><span class="line">alert( a.x );  //undefined</span><br><span class="line">alert( b.x );  //[object Object]</span><br></pre></td></tr></table></figure>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-f91366eefddfc88f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="内存图"></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>如果一个对象没有被引用，就是垃圾，将会被回收（释放内存）。</p>
+<h4 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h4><p>由于浏览器的 BUG ，使得应该被标记为垃圾的东西，没有被标记为垃圾，造成内存被永久占用，除非把浏览器关闭。<br><strong>解决方法</strong>：在关闭页面之前把所有的事件设置为 null 。</p>
+<h4 id="浅拷贝-amp-深拷贝"><a href="#浅拷贝-amp-深拷贝" class="headerlink" title="浅拷贝&amp;深拷贝"></a>浅拷贝&amp;深拷贝</h4><h6 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var b = a;  </span><br><span class="line">b = 2;        // b 变不影响 a，即是深拷贝</span><br><span class="line">alert( a );  // 1</span><br></pre></td></tr></table></figure>
+<p>对于<strong>基本类型</strong>，所有的赋值 “ = “ 都是深拷贝</p>
+<p>所以在谈及深拷贝和浅拷贝时是不考虑基本类型的，因为基本类型的赋值都是深拷贝</p>
+<h6 id="复杂数据类型（Object）"><a href="#复杂数据类型（Object）" class="headerlink" title="复杂数据类型（Object）"></a>复杂数据类型（Object）</h6><p>浅拷贝：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; name : &apos;a&apos; &#125;;</span><br><span class="line">var b = a;</span><br><span class="line">b.name = &apos;b&apos; ;   // b 变致 a 变，即是浅拷贝</span><br><span class="line">alert( a.name );  // &apos;b&apos;</span><br></pre></td></tr></table></figure></p>
+<p>深拷贝：b 复制 a 的所有数据，但是地址不同，最终的结果就是 b 变是 b 自己的事情，与 a 无关，即 b 变不影响 a </p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/前端基础/">前端基础</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-18T23:41:25.000Z"><a href="/2018/02/19/前端基础系列（三） -- 算法 + 数据结构基础/">2018-02-19</a></time>
       
       
@@ -1214,126 +1314,6 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-31T10:46:51.000Z"><a href="/2018/01/31/总结篇（一）-- 基础知识/">2018-01-31</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/31/总结篇（一）-- 基础知识/">总结篇（一） -- 基础知识</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h2 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h2><ol>
-<li><p>使用 <code>&lt;meta&gt;</code> 标签</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&apos;viewport&apos; content=&apos; width=device-width user-scalable=no initial-scale=1.0 maximun-scale=1.0 minimum=1.0 &apos; &gt;</span><br></pre></td></tr></table></figure>
-<p>这个标签主要作用是网页宽度默认等于屏幕宽度，用户不可以缩放，缩放比例1。</p>
-</li>
-<li><p>使用 Media Query（媒体查询） 模块<br>通过媒体查询，从而判断采用的样式<br>主要是有两种方式：</p>
-<ul>
-<li><p><link> 元素中的媒体查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&apos;stylesheet&apos; href=&apos;./css/style.css&apos; media=&apos;(min-width: 800px) and (max-width: 1400px)&apos; &gt;</span><br></pre></td></tr></table></figure>
-<p>这个标签表示只有 width 在 800px-1400px 时才采用 style.css 这个样式表</p>
-</li>
-<li><p>样式表中的媒体查询<br>在样式表中书写媒体查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@media (max-width: 414px)&#123;</span><br><span class="line">    .button&#123;</span><br><span class="line">        display: block;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上述代码表示：当宽度小于 414px 的时候，button 元素显示在页面中</p>
-</li>
-</ul>
-</li>
-<li><p>动态rem<br>一切以宽度为基准。<br>rem是根元素（html）的 <code>font-size</code> 的值，我们可以使用 JS 实现将 html 的 <code>font-size</code> 设置为屏幕宽度，之后 rem 就和屏幕宽度有一定的映射，当然也可以设置为屏幕宽度的 1/2 ，之后使用 rem 实现元素的宽高 margin padding 等需求。</p>
-</li>
-<li><p>在做移动端适配的时候还要注意一些小问题</p>
-<ul>
-<li>移动端没有 hover 事件，但是有 touch 事件</li>
-<li>移动端没有 resize 事件，没有滚动条</li>
-<li>rem 单位可以和其他单位混用，例如：<code>border: 1px solid red</code></li>
-</ul>
-</li>
-</ol>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><ol>
-<li><p>闭包指一个函数或函数的引用与一个引用环境绑定在一起，这个引用环境是一个存储该函数每个自由变量的表。简单的说就是自由变量和引用这个自由变量的函数就是闭包。闭包可以读取其上作用域链中的值。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1</span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log(a)</span><br><span class="line">&#125;</span><br><span class="line">fn.call(undefined)   // 调用之后，会打印出1</span><br></pre></td></tr></table></figure>
-<p> 上述的变量 a 和函数 fn 即是闭包</p>
-</li>
-<li><p>当我们在写代码的时候，会在无形之中就使用到了闭包。</p>
-</li>
-</ol>
-<ul>
-<li><p>用途一：读取其上作用域链中的值。例如在全局作用域中定义了 a 和函数 fn，在 fn 中并没有定义 a ，但是却可以使用全局变量 a。参照上面例子。</p>
-</li>
-<li><p>用途二：让自由变量保存在内存中，即封装变量<br>在全局代码执行的时候，会产生一个全局执行上下文环境（Execution Context）。调用函数的时候，会产生一个函数执行上下文环境（Execution Context）。当函数调用结束后，函数执行上下文环境和其中的数据将被消除，重新回到全局执行上下文环境。但是当在函数执行上下文的环境中存在闭包，那么即使这个函数调用完成，其执行上下文环境也不会被消除，因为还有闭包被引用着。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function fn1()&#123;</span><br><span class="line">   var a = 1</span><br><span class="line">   addA = function()&#123;  // 此处不用 var 声明，从而创建一个全局变量，但是其可以引用局部变量 a </span><br><span class="line">       a++</span><br><span class="line">   &#125;</span><br><span class="line">   function fn2()&#123;</span><br><span class="line">       console.log(a)</span><br><span class="line">   &#125;</span><br><span class="line">   return fn2</span><br><span class="line">&#125;</span><br><span class="line">result = fn1.call(undefined)</span><br><span class="line">result()  // 打印出 1</span><br><span class="line">addA()</span><br><span class="line">result()  // 打印出 1</span><br></pre></td></tr></table></figure>
-<p>  当调用完 fn1 之后，局部变量 a 并不能被垃圾回收，因为 fn1 返回的函数仍然调用局部变量 a ，此时的局部变量 a 就被保存在内存中</p>
-<p>  在函数内部定义局部变量，外部不能访问，但是闭包仍能访问到这个局部变量，外部如果要访问局部变量，只能通过函数 return 出来的接口。</p>
-</li>
-</ul>
-<h2 id="call、apply、bind"><a href="#call、apply、bind" class="headerlink" title="call、apply、bind"></a>call、apply、bind</h2><p>这三个方法都挂载在 Function.prototype 上，都是函数的方法，可以调用函数</p>
-<h4 id="call"><a href="#call" class="headerlink" title="call()"></a>call()</h4><ul>
-<li><p>作用：<br>  切换上下文（this）<br>  操作参数</p>
-</li>
-<li><p>当使用 call() 调用一个函数的时候，call() 的第一个参数是 this ，第二个参数是需要传递给函数的实参（arguments）。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn.call( this , arguments )</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h4><ul>
-<li><p>作用：</p>
-<p>  切换上下文（this）<br>  操作参数</p>
-</li>
-<li><p>当使用 apply() 调用一个函数的时候，apply() 的第一个参数是 this，第二个参数是一个数组，apply() 方法会将数组中的元素拆分依次传入到函数中。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn.apply( this , [ 1,2,3 ] )</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="bind"><a href="#bind" class="headerlink" title="bind()"></a>bind()</h4><ul>
-<li><p>作用：</p>
-<p>  切换上下文（this）<br>  科里化，即部分求值，函数调用是可以传递参数，之后返回的函数（闭包）也可以接收参数</p>
-</li>
-<li><p>当使用 bind() 调用一个函数的时候，bind() 方法会返回一个函数，他的第一个参数是 this ，第二个参数是需要传递给函数的实参</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let curryFn = fn.bind( this , param1 , param2 )</span><br><span class="line">curryFn( param3 , param4 )</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="HTTP-POST-请求"><a href="#HTTP-POST-请求" class="headerlink" title="HTTP POST 请求"></a>HTTP POST 请求</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 POST /path HTTP/1.1</span><br><span class="line">2 Host: passport.baidu.com</span><br><span class="line">2 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36</span><br><span class="line">2 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span><br><span class="line">2 Content-Length: 24</span><br><span class="line">2 Content-Type: application/x-www-form-urlencoded</span><br><span class="line">3</span><br><span class="line">4 username=ff&amp;password=123</span><br></pre></td></tr></table></figure>
-<h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><h4 id="对象键值对法。遍历数组时看对象中是否有-key"><a href="#对象键值对法。遍历数组时看对象中是否有-key" class="headerlink" title="对象键值对法。遍历数组时看对象中是否有 key"></a>对象键值对法。遍历数组时看对象中是否有 key</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">     var newArray = []</span><br><span class="line">     var obj = &#123;&#125;</span><br><span class="line">     for( var i = 0, len = arr.length; i &lt; len; i++ )&#123;</span><br><span class="line">         if( !obj[ arr[ i ] ] )&#123;</span><br><span class="line">             obj[ arr[ i ] ] = 1</span><br><span class="line">             newArray.push( arr[ i ] )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     return newArray</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Set-对象"><a href="#Set-对象" class="headerlink" title="Set 对象"></a>Set 对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">    return newArr = Array.from(new Set(arr))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="数组下标判断。遍历数组是看相应值的下标是否和索引相同"><a href="#数组下标判断。遍历数组是看相应值的下标是否和索引相同" class="headerlink" title="数组下标判断。遍历数组是看相应值的下标是否和索引相同"></a>数组下标判断。遍历数组是看相应值的下标是否和索引相同</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">     let newArray = []</span><br><span class="line">     arr.forEach( (value,index) =&gt; &#123;</span><br><span class="line">         if( array.indexOf( value ) === index )&#123;</span><br><span class="line">             newArray.push( value )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125; )</span><br><span class="line">     return newArray</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="遍历数组法。遍历数组时看新数组中有没有该值"><a href="#遍历数组法。遍历数组时看新数组中有没有该值" class="headerlink" title="遍历数组法。遍历数组时看新数组中有没有该值"></a>遍历数组法。遍历数组时看新数组中有没有该值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function unique(arr)&#123;</span><br><span class="line">     let newArray = []</span><br><span class="line">     arr.forEach( (value,index) =&gt; &#123;</span><br><span class="line">         if( !newArray.includes( value ) )&#123;</span><br><span class="line">             newArray.push( value )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125; )</span><br><span class="line">     return newArray</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/总结/">总结</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
@@ -1369,7 +1349,7 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   
