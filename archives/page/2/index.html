@@ -82,6 +82,71 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-30T01:02:22.000Z"><a href="/2018/01/30/JS系列 -- Array-浅析之相关-API/">2018-01-30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/30/JS系列 -- Array-浅析之相关-API/">JS系列 -- Array 浅析之相关 API</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="判断数组"><a href="#判断数组" class="headerlink" title="判断数组"></a>判断数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Array.isArray( arguments )</span><br></pre></td></tr></table></figure>
+<h2 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h2><p><strong>实例化对象的 <code>__proto__</code> 指向构造函数的 <code>prototype</code></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">typeof Array === &apos;function&apos;</span><br><span class="line"></span><br><span class="line">Array instanceof Function === true</span><br><span class="line">Array.__proto__ === Function.prototype</span><br><span class="line"></span><br><span class="line">Array instanceof Object === true</span><br><span class="line">Array.__proto__.__proto__ === Object.prototype </span><br><span class="line"></span><br><span class="line">let arr = []</span><br><span class="line">arr.__proto__ === Arr.prototype</span><br><span class="line">arr.__proto__.__proto__ === Object.prototype</span><br><span class="line">arr.__proto__.constructor === Array</span><br></pre></td></tr></table></figure></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><h4 id="需求一"><a href="#需求一" class="headerlink" title="需求一"></a>需求一</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr1 = [&apos;a&apos;]</span><br><span class="line">let arr2 = [ &apos;b&apos; , &apos;c&apos; ]</span><br><span class="line">数组 arr1 ==&gt; [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]</span><br><span class="line">数组 arr2 不变</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. arr1 = arr.concat(arr2)</span><br><span class="line">2. arr2.forEach( (item) =&gt; &#123;arr1.push(item)&#125; )</span><br><span class="line">3. arr1.push( ...arr2 )</span><br><span class="line">4. [].push.apply( arr1, arr2 )</span><br></pre></td></tr></table></figure>
+<h4 id="需求二"><a href="#需求二" class="headerlink" title="需求二"></a>需求二</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function max()&#123;</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br><span class="line">max(1,2,3) // 3</span><br><span class="line">max( 1,4 ) // 4</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. return Math.max(...arguments)</span><br><span class="line">2. return Math.max.apply( null, arguments )</span><br></pre></td></tr></table></figure>
+<h4 id="需求三"><a href="#需求三" class="headerlink" title="需求三"></a>需求三</h4><p>将 <code>arguments</code> 转化为 <code>Array</code></p>
+<h6 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. args = Array.from( arguments )</span><br><span class="line">2. args = [].slice.call( arguments )</span><br></pre></td></tr></table></figure>
+<h4 id="需求四"><a href="#需求四" class="headerlink" title="需求四"></a>需求四</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function repeat( str, num )&#123;</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br><span class="line">repeat( &apos;abc&apos;, 3 ) // &apos;abcabcabc&apos;</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-3"><a href="#解决方法-3" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return Array( num + 1 ).join( str )</span><br></pre></td></tr></table></figure>
+<h4 id="需求五"><a href="#需求五" class="headerlink" title="需求五"></a>需求五</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [ &apos;a&apos;, &apos;b&apos;, &apos;c&apos; ]</span><br><span class="line">判断 &apos;b&apos; 在不在 arr 里面</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-4"><a href="#解决方法-4" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr.indexOf( &apos;b&apos; ) !== -1  // true ==&gt; 在   false ==&gt; 不在</span><br><span class="line">arr.includes( &apos;b&apos; )   // 直接返回 true | false</span><br></pre></td></tr></table></figure>
+<h4 id="需求五升级"><a href="#需求五升级" class="headerlink" title="需求五升级"></a>需求五升级</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = [ &#123;name: &apos;xiaoming&apos;&#125;, &#123;name: &apos;xiaozhang&apos;&#125; ]</span><br><span class="line">查看数组中是否有叫小明的人</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-5"><a href="#解决方法-5" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. arr.forEach((item) =&gt; &#123;</span><br><span class="line">	if(item.name === &apos;xiaoming&apos;)&#123;</span><br><span class="line">		console.log(&apos;true&apos;)</span><br><span class="line">	&#125;</span><br><span class="line">   &#125;)</span><br><span class="line">// forEach 方法返回 undefined ，没有想到怎么取得它的结果，目前只能 console.log(&apos;true&apos;)</span><br><span class="line">2. let it = arr.find( (item) =&gt; &#123;</span><br><span class="line">    return item.name === &apos;xiaoming&apos;</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(it)  // &#123;name: &quot;xiaoming&quot;&#125;</span><br><span class="line">3. let it = arr.findIndex((item) =&gt; &#123;</span><br><span class="line">	return item.name === &apos;xiaoming&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">    console.log(it)  // 0</span><br></pre></td></tr></table></figure>
+<h4 id="需求六"><a href="#需求六" class="headerlink" title="需求六"></a>需求六</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [ 20, 30, 40 ]</span><br><span class="line">使得 arr 中每个元素 +5</span><br><span class="line">arr ==&gt; [ 25, 35, 45 ]</span><br></pre></td></tr></table></figure>
+<h6 id="解决方法-6"><a href="#解决方法-6" class="headerlink" title="解决方法"></a>解决方法</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. arr.map( (item) =&gt; &#123;</span><br><span class="line">    return item + 5</span><br><span class="line">  &#125;)</span><br><span class="line">2. arr.forEach( (item, index, ctx) =&gt; &#123;</span><br><span class="line">    ctx[ index ] = item + 5</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="需求七"><a href="#需求七" class="headerlink" title="需求七"></a>需求七</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; name: &apos;xiaoming&apos;, age: 20, id: 123456789 &#125;</span><br><span class="line">function validPerson( person )&#123;</span><br><span class="line">    // 如果有 名字 | id 就有效</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1. if(person.hasOwnProperty( &apos;name&apos; ) || person.hasOwnProperty( &apos;id&apos; ))&#123;</span><br><span class="line">      return true</span><br><span class="line">   &#125;</span><br><span class="line">    return false</span><br><span class="line">2. </span><br><span class="line">let obj = &#123; name: &apos;xiaoming&apos;, age: 20, id: 123456789 &#125;</span><br><span class="line">let validFileds = [ &apos;name&apos;, &apos;id&apos; ]</span><br><span class="line">function validPerson( person )&#123;</span><br><span class="line">    return validFileds.some( (item) =&gt; &#123;</span><br><span class="line">        return person.hasOwnProperty( item )</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">3. </span><br><span class="line">let obj = &#123; name: &apos;xiaoming&apos;, age: 20, id: 123456789 &#125;</span><br><span class="line">let validFileds = [ &apos;name&apos;, &apos;id&apos; ]</span><br><span class="line">function validPerson( person )&#123;</span><br><span class="line">    return validFileds.some( Object.prototype.hasOwnProperty, person )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-30T00:53:32.000Z"><a href="/2018/01/30/JS系列 -- 基本概念（二）数据类型/">2018-01-30</a></time>
       
       
@@ -1014,85 +1079,6 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-26T23:58:06.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">2018-01-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">CSS 最佳实践 + 套路（五） -- icon</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>icon 有很多做法，主要的做法有</p>
-<ul>
-<li>img 标签</li>
-<li>background-image 属性</li>
-<li>CSS Sprites </li>
-<li>font</li>
-<li>svg</li>
-<li>纯 CSS 实现</li>
-</ul>
-<p>在这些方法中，目前最值得推荐的就是 <strong>svg 方法</strong>，其他的大家可以了解一下。</p>
-<h1 id="img-标签"><a href="#img-标签" class="headerlink" title="img 标签"></a>img 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;./img/xxx.png&quot; alt=&quot;icon&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>此种方法可以自适应宽高，只需要给 img 一个 width 属性或者一个 height 属性即可</p>
-<h1 id="background-image-属性"><a href="#background-image-属性" class="headerlink" title="background-image 属性"></a>background-image 属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CSS：</span><br><span class="line">    div&#123;</span><br><span class="line">        background-image: url(./image/xxx.png);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">HTML:</span><br><span class="line">    &lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="CSS-Sprites"><a href="#CSS-Sprites" class="headerlink" title="CSS Sprites"></a>CSS Sprites</h1><p>可以使用<a href="http://css.spritegen.com/" target="_blank" rel="noopener">工具自动生成 Sprites</a> ，之后进行使用，此种方法便是工具的使用</p>
-<h1 id="font"><a href="#font" class="headerlink" title="font"></a>font</h1><p>font 方法主要是使用<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里</a>的 Unicode 和 Font class 方法<br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca3bfe98993983c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Font 方法"></p>
-<h1 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h1><p>svg 方法是现在最值得推荐的方法<br><strong>SVG</strong>是可缩放矢量图形，是W3C XML的分支语言之一，用于标记可缩放的矢量图形。它支持 CSS 属性</p>
-<p>首先去<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里的 iconfont 网站</a></p>
-<ol>
-<li>选取相应的图标并加入购物车</li>
-<li>将购物车中的图标添加至项目</li>
-<li>生成 Symbol 代码</li>
-<li>拷贝生成的 Symbol 代码，放在 HTML 中</li>
-<li><p>引入通用css代码</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .icon &#123;</span><br><span class="line">       width: 1em; height: 1em;</span><br><span class="line">       vertical-align: -0.15em;</span><br><span class="line">       fill: currentColor;</span><br><span class="line">       overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>挑选相应图标并获取类名，应用于页面</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    &lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;#icon-xxx&quot;&gt;&lt;/use&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">    ``` </span><br><span class="line">![SVG](http://upload-images.jianshu.io/upload_images/9617841-1b6964ececccf5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">![阿里 iconfont 使用](http://upload-images.jianshu.io/upload_images/9617841-ccdc31dd20104add.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">`&lt;svg&gt;` 属性：</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>width:          // icon 宽度<br>height:          // icon 高度<br>fill:          // icon 颜色<br>stroke:    // 描边<br>vertical-align: top;   //可以用于调整上下间距。<br>```</p>
-<h1 id="纯-CSS-实现"><a href="#纯-CSS-实现" class="headerlink" title="纯 CSS 实现"></a>纯 CSS 实现</h1><p>纯 CSS 实现就是使用 CSS 去画一些图标，<a href="http://cssicon.space/#/" target="_blank" rel="noopener">推荐一个网站</a></p>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1133,7 +1119,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>2</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

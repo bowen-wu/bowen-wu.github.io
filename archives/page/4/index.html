@@ -82,6 +82,125 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-18T23:59:03.000Z"><a href="/2018/01/19/HTTP系列 -- 网络与 IP /">2018-01-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/19/HTTP系列 -- 网络与 IP /">HTTP系列 -- 网络 与 IP</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>HTTP协议的底层是由 <strong>TCP 协议</strong>和 <strong>IP 协议</strong>（简称<strong>TCP/IP</strong>）构建的。HTTP只规定了请求格式和相应格式，即如何书写内容的协议。</p>
+<h1 id="TCP（Transmission-Control-Protocol）"><a href="#TCP（Transmission-Control-Protocol）" class="headerlink" title="TCP（Transmission Control Protocol）"></a>TCP（Transmission Control Protocol）</h1><p>TCP 是传输控制协议，它规定了如何传输协议。</p>
+<h3 id="TCP-和-UDP-的区别是什么"><a href="#TCP-和-UDP-的区别是什么" class="headerlink" title="TCP 和 UDP 的区别是什么"></a>TCP 和 UDP 的区别是什么</h3><ul>
+<li>TCP 可靠、面向连接、相对 UDP 较慢</li>
+<li>UDP 不可靠，不面向连接、相对 TCP 较快。</li>
+</ul>
+<h3 id="TCP-的三次握手指的是什么"><a href="#TCP-的三次握手指的是什么" class="headerlink" title="TCP 的三次握手指的是什么"></a>TCP 的三次握手指的是什么</h3><p>每次建立连接前，客户端和服务端之前都要先进行三次对话才开始正式传输内容，三次对话大概是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 客户端：我要连接你了，可以吗</span><br><span class="line">2. 服务端：嗯，我准备好了，连接我吧</span><br><span class="line">3. 客户端：那我连接你咯。</span><br><span class="line">4. 开始后面步骤</span><br></pre></td></tr></table></figure></p>
+<p>通过上述对话，从而确定了双方都可以收发内容。</p>
+<h1 id="IP（Internet-Protocol）"><a href="#IP（Internet-Protocol）" class="headerlink" title="IP（Internet Protocol）"></a>IP（Internet Protocol）</h1><p>IP 是网络协议，它规定了如何联网协议。</p>
+<h3 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h3><ol>
+<li><p>只要在互联网中，那么就会有一个 IP。IP 分为<strong>内网 IP</strong> 和<strong>外网 IP</strong>。</p>
+</li>
+<li><p>内网：以路由器为核心的以及所有连接路由器的设备统称为内网</p>
+</li>
+<li><p>外网：以路由器为出口的外面的网络都是外网</p>
+</li>
+<li><p>服务商提供 DNS 服务（告知你你想要请求的域名所对应的 IP<br>地址）</p>
+</li>
+<li><p>路由器可以广播出来 WIFI ，连接之后便可以上网</p>
+</li>
+<li><p>路由器连接服务商的服务器，那么路由器就会有一个<strong>外网IP</strong>，表示用户在<strong>互联网</strong>中的地址</p>
+</li>
+<li><p>如果重启路由器，则有可能会重新分配<strong>外网IP</strong>，所以<strong>路由器没有固定的外网IP</strong></p>
+</li>
+<li><p>可以租用<strong>固定的外网IP</strong>，从而为用户提供稳定的服务（eg. 阿里、腾讯等公司）</p>
+</li>
+<li><p>内网中的设备使用<strong>内网IP</strong>，一般来说这个 IP 的格式都是<strong>192.168.xxx.xxx</strong></p>
+</li>
+<li><p>一般路由会给自己分配一个好记的<strong>内网 IP</strong>，如<em>192.168.1.1</em>。之后给每个设备分配不同的<strong>内网IP</strong></p>
+</li>
+<li><p>路由器会有两个IP，分别是<strong>内网IP</strong>和<strong>外网IP</strong></p>
+</li>
+<li><p>内网中的设备可以互相访问（比如你可以用电脑或手机进入<a href="http://192.168.1.1/" title="null" target="_blank" rel="noopener">http://192.168.1.1</a>来查看你的路由器<strong>「因为路由器内置一个HTTP服务器」</strong>），但是不能<strong>直接</strong>访问外网，内网设备想要访问外网，就必须经过路由器中转</p>
+</li>
+<li><p>外网中的设备可以互相访问（比如 qq.com 可以把首页发送给你的路由器，你的路由器有<strong>外网 IP</strong>），但是外网中的设备无法访问你的内网设备（这很好理解，内网是一个封闭的网络，外人进不来，所以实际上 qq.com 无法直接把首页放送给你的电脑和手机）</p>
+</li>
+<li><p>路，就是「必由之路」中的路。由，就是「必由之路」中的由（由是经过、缘由的意思）。所有的信息都要经过路由器，然后被指向一条它该去的路</p>
+</li>
+<li><p><strong>内网</strong>和<strong>外网</strong>通过<strong>路由器</strong>连接</p>
+</li>
+<li><p><strong>本地IP：127.0.0.1</strong>：表示设备本身</p>
+</li>
+<li><p>hosts：可以设置任意域名对应的IP</p>
+</li>
+<li><p>hosts文件中会有一行<code>127.0.0.1 localhost</code>，意思就是 <strong>localhost</strong> 指向 <strong>127.0.0.1</strong>，所以 <strong>localhost</strong> 也表示设备本身</p>
+</li>
+<li><p>特别特殊的 IP：<code>0.0.0.0</code>，它不表示任何设备。这个 IP 不同的地方含义不同</p>
+</li>
+<li><p>使用 HTTP 协议访问另一个 IP 时，比如同时提供 IP 和端口号，缺一不可。如果没有提供，浏览器会加上默认端口号80。</p>
+</li>
+</ol>
+<h1 id="端口（port）"><a href="#端口（port）" class="headerlink" title="端口（port）"></a>端口（port）</h1><p>端口其实就是一个编号。一个服务器（硬件）不一定只提供一种服务，比如一个服务器既提供 HTTP 服务（网页服务），又提供 FTP 服务（文件下载服务），还提供 SMTP 服务（邮件服务），那么只用一个 IP 是无法告诉服务器你想要使用哪种服务，所以<strong>一个端口对应一个服务</strong>，是固定的。</p>
+<h3 id="端口服务"><a href="#端口服务" class="headerlink" title="端口服务"></a>端口服务</h3><ol>
+<li><p>提供 <strong>HTTP 服务</strong> ==&gt; <strong>80 端口</strong></p>
+</li>
+<li><p>提供 <strong>HTTPS 服务</strong> ==&gt; <strong>443 端口</strong></p>
+</li>
+<li><p>提供 <strong>FTP 服务</strong> ==&gt; <strong>21 端口</strong></p>
+</li>
+<li><p>提供<strong>代理服务器端口</strong> ==&gt; <strong>1080端口</strong></p>
+</li>
+</ol>
+<h3 id="端口基础"><a href="#端口基础" class="headerlink" title="端口基础"></a>端口基础</h3><p>每个机器一共有 65535（2的16次方减1）个端口（这是协议规定的）。不过这些端口的使用有一些规定</p>
+<ol>
+<li><p>0 到 1023（2的10次方减1）号端口是留给系统使用的，你只有拥有了管理员权限后，才能使用这 1024 个端口</p>
+</li>
+<li><p>其他端口可以给普通用户使用</p>
+</li>
+<li><p>如果一个端口正在提供服务，也就是被占用了，那么就不能再使用这个端口。除非你先停掉正在占用这个端口的服务。以后你们会经常遇到这个问题</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/HTTP/">HTTP</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-15T10:27:13.000Z"><a href="/2018/01/15/HTTP系列 -- 请求与响应/">2018-01-15</a></time>
       
       
@@ -1474,285 +1593,6 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-08T10:37:51.000Z"><a href="/2018/01/08/JS系列 -- JavaScript DOM API/">2018-01-08</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/08/JS系列 -- JavaScript DOM API/">JS系列 -- JavaScript DOM API</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
-<li><p>DOM（Document Object Model）文档对象模型，指的是 XML 文档，需要说明的是，HTML 是 XML 的衍生品，如果要操作 HTML 可以使用关于 XML 的文档 DOM。</p>
-</li>
-<li><p>JS 中的对象继承自 Object ，页面中的对象继承自 Node 函数。<br>Model 将页面中的 Document（html、head、body）和内存中的 Object 一一映射。</p>
-</li>
-<li><p>DOM 就是把文档变成对象的一种模型。</p>
-</li>
-<li><p>内存中的 Object 是一个个 node （构造函数），其包括：</p>
-<ul>
-<li>Element Node（元素节点）</li>
-<li>Text Node（文本节点）</li>
-<li>Comment Node（注释节点）</li>
-<li>Document Node（文档节点）</li>
-</ul>
-</li>
-<li><p>DOM 功能：页面中的节点通过构造函数构造出对应的对象</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Element.__proto__ === Node.prototype</span><br><span class="line">Document.__proto__ === Node.prototype</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><h3 id="Node-接口"><a href="#Node-接口" class="headerlink" title="Node 接口"></a>Node 接口</h3><p><strong>Node 派生自Object</strong><br>Node是一个接口，许多DOM类型从这个接口继承，并允许类似地处理（或测试）这些各种类型。</p>
-<h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><ul>
-<li><p><code>.childNodes</code>  ==&gt;    返回包含指定节点的子节点的集合，该集合为即时更新的集合（live collection）</p>
-</li>
-<li><p><code>.firstChild</code>  ==&gt;     只读属性返回树中节点的第一个子节点，如果节点是无子节点，则返回 null</p>
-</li>
-<li><p><code>.lastChild</code>  ==&gt;     只读属性，返回当前节点的最后一个子节点。如果没有子节点，则返回 null</p>
-</li>
-<li><p><code>.nextSibling</code>  ==&gt;     只读属性，返回其父节点的 <code>childNodes</code> 列表中紧跟在其后面的节点，如果指定的节点为最后一个节点，则返回 <code>null</code>。<strong>可能会获取到文本节点</strong></p>
-</li>
-<li><p><code>.previouSibling</code>  ==&gt;     返回当前节点的前一个兄弟节点,没有则返回null。<strong>可能会获取到文本节点</strong></p>
-</li>
-<li><p><code>.nodeName</code> ==&gt; 返回当前节点的节点名称（<strong>svg 标签返回小写字母，其余返回大写字母</strong>）</p>
-</li>
-<li><p><code>.nodeValue</code> ==&gt; 返回或设置当前节点的值</p>
-</li>
-<li><p><code>.nodeType</code> ==&gt; 只读属性，表示的是该节点的类型</p>
-<ul>
-<li>元素节点（Node.ELEMENT_NODE） ==&gt; nodeType === 1</li>
-<li>文本节点（Node.TEXT_NODE） ==&gt; nodeType === 3</li>
-<li>注释节点（Node.COMMENT_NODE） ==&gt; nodeType === 8</li>
-<li>文档节点（Node.DOCUMENT_NODE） ==&gt; nodeType === 9</li>
-<li>描述文档类型的 <code>DocumentType</code>节点（Node.DOCUMENT_TYPE_NODE） ==&gt; nodeType === 10</li>
-<li>一个 <code>DocumentFragment</code> 节点（Node.DOCUMENT_FRAGMENT_NODE） ==&gt; nodeType === 11（<strong>使用 <code>DocumentFragment</code> 进行性能优化</strong>）</li>
-</ul>
-</li>
-<li><p><code>.parentElement</code>  ==&gt;     返回当前节点的父元素节点,如果该元素没有父节点,或者父节点不是一个元素节点.则 返回null</p>
-</li>
-<li><p><code>.parentNode</code>  ==&gt;     返回指定的节点在DOM树中的父节点</p>
-</li>
-<li><p><code>.innerText</code> ==&gt; 表示一个节点及其后代的“渲染”文本内容的属性</p>
-</li>
-<li><code>.textContent</code> ==&gt; 表示一个节点及其后代的文本内容<br><strong>说明：<code>.innerText</code> 和 <code>.textContent</code> 的区别</strong><ul>
-<li><strong><code>textContent</code></strong> 会获取所有元素的内容，包括 <code>&lt;script&gt;</code> 和 <code>&lt;style&gt;</code>元素，然而 <strong>innerText </strong>不会</li>
-<li>innerText意识到样式，并且不会返回隐藏元素的文本，而textContent会</li>
-<li>由于 <code>innerText</code> 受 CSS 样式的影响，它会触发重排（reflow），但<code>textContent</code> 不会</li>
-</ul>
-</li>
-</ul>
-<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><ul>
-<li><p><code>.appendChild(  );</code>  ==&gt; 添加子元素</p>
-</li>
-<li><p><code>.cloneNode( deep );</code>  ==&gt; 返回调用该方法的节点的一个副本<br>  <strong>参数deep</strong> 表示是否采用深度克隆，如果为 true，则该节点的所有后代节点也都会被克隆，如果为 false，则只克隆该节点本身。默认为 false。</p>
-</li>
-<li><p><code>Node.contains()</code> ==&gt; 返回一个布尔值，表示传入的节点是否为该节点的后代节点。</p>
-</li>
-<li><p><code>.insertBefore( newDiv, currentDiv );</code>  ==&gt; 在元素前插入元素</p>
-</li>
-<li><p><code>.removeChild( child );</code>  ==&gt; 移除一个节点（在页面中移除，但是仍在内存中）</p>
-</li>
-<li><p><code>.replace( newChild, oldChild );</code>  ==&gt; 用指定的节点替换当前节点的一个子节点，并返回被替换掉的节点。</p>
-</li>
-<li><p><code>.hasChildNodes(  );</code>  ==&gt; 返回一个布尔值,表明当前节点是否包含有子节点</p>
-</li>
-<li><p><code>.isEqualNode(  );</code>  ==&gt; 可以判断两个节点是否相等</p>
-</li>
-<li><p><code>.normalize()</code> ==&gt; 将当前节点和它的后代节点”规范化“（normalized）。在一个”规范化”后的DOM树中，不存在一个空的文本节点，或者两个相邻的文本节点</p>
-</li>
-</ul>
-<h3 id="Document-接口"><a href="#Document-接口" class="headerlink" title="Document 接口"></a>Document 接口</h3><p><strong>Document</strong> 接口提供了一些在浏览器服务中作为页面内容入口点而加载的一些页面，也就是 DOM 树</p>
-<h5 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h5><ul>
-<li><p><code>.body</code> ==&gt; 返回当前文档的 <code>&lt;body&gt;</code> 元素</p>
-</li>
-<li><p><code>.characterSet</code> ==&gt; 只读属性返回当前文档的字符编码</p>
-</li>
-<li><p><code>.childElementCount</code> ==&gt; 只读属性，返回一个无符号长整型数字，表示给定元素的子元素数</p>
-</li>
-<li><p><code>.children</code>  ==&gt;   只读属性，返回 一个Node的子<code>elements</code> ，是一个动态更新的 <code>HTMLCollection</code></p>
-</li>
-<li><p><code>.documentElement</code> 是一个会返回文档对象（<code>document</code>）的根元素（如HTML文档的 <html> 元素）</html></p>
-</li>
-<li><p><code>.domain</code> ==&gt; 获取/设置当前文档的原始域部分, 用于同源策略</p>
-</li>
-<li><p><code>.firstElementChild</code> ==&gt; 只读属性，返回对象的第一个孩子 <code>Element</code>， 如果没有子元素，则为null</p>
-<ul>
-<li><code>.lastElementChild</code> ==&gt; 只读属性，返回对象的最后一个孩子<code>Element</code>，如果没有子元素，则返回null</li>
-</ul>
-</li>
-<li><p><code>.readyState</code> ==&gt; 描述了文档的加载状态</p>
-</li>
-<li><p><code>.referrer</code> ==&gt; 返回跳转或打开到当前页面的那个页面的URI</p>
-</li>
-<li><p><code>.onkeypress</code> ==&gt;  用来获取或设置当前元素的keypress事件的事件处理函数</p>
-</li>
-<li><p><code>.onclick</code>  ==&gt;     返回当前元素的 click 事件句柄代码</p>
-</li>
-<li><p><code>.onmouseover</code>  ==&gt;    当指针设备移动到存在监听器的元素或其子元素的时候，mouseover事件就会被触发。（冒泡）</p>
-</li>
-<li><p><code>.onmouseout</code>  ==&gt;     当指针设备移出存在监听器的元素或其子元素的时候，mouseover事件就会被触发。（冒泡）</p>
-</li>
-<li><p><code>.onmouseenter</code>  ==&gt;     当定点设备（通常指鼠标）移动到元素上时就会触发 mouseenter 事件.类似 <code>mouseover</code> ，它们两者之间的差别是 <code>mouseenter</code><strong>不会冒泡</strong></p>
-</li>
-<li><p><code>.onmouseleave</code>  ==&gt;     当定点设备（通常指鼠标）移出元素时就会触发 mouseleave 事件.类似 <code>mouseout ，它们两者之间的差别是</code>mouseleave `<strong>不会冒泡</strong></p>
-</li>
-</ul>
-<h6 id="PC端："><a href="#PC端：" class="headerlink" title="PC端："></a>PC端：</h6><ul>
-<li><p><code>.onmousedown</code>  ==&gt;    用来获取或设置当前元素的mousedown事件的事件处理函数</p>
-</li>
-<li><p><code>.onmousemove</code>  ==&gt;    用来获取或设置当前元素的mousemove事件的事件处理函数。（当用户在当前元素上移动鼠标时会触发mousemove事件.）。mdn上有 1.显示”提示层”时onmousemove的用法.  2.在进行拖拽操作时onmousemove的用法</p>
-</li>
-<li><p><code>.onmouseup</code>  ==&gt;     用来获取或设置当前元素的mouseup事件的事件处理函数</p>
-</li>
-</ul>
-<h6 id="移动端："><a href="#移动端：" class="headerlink" title="移动端："></a>移动端：</h6><ul>
-<li><p><code>.ontouchstart</code>  ==&gt;    当触点与触控设备表面<strong>接触</strong>时触发 ontouchstart  事件</p>
-</li>
-<li><p><code>.ontouchmove</code>  ==&gt;    当触点与触控设备表面<strong>移动</strong>时触发 ontouchstart  事件</p>
-</li>
-<li><p><code>.ontouchend</code>  ==&gt;    当触点<strong>离开</strong>触控平面时触发touchend事件.<br>特性检测：如果设备不支持 touch 事件，那么元素的 ontouchstart 为undefined ，表示未定义。如果设备支持 touch 事件，那么元素的 onstarttouch 为 null ，表示初始化了</p>
-</li>
-<li><p><code>.onerror</code>  ==&gt;     错误(<code>error</code>)事件的一个事件处理程序(event handler)。针对各种目标的不同类型的错误触发了 Error 事件：</p>
-<ul>
-<li><p>当<strong>JavaScript运行时错误</strong>（包括语法错误）发生时，<code>window</code>会触发一个<code>ErrorEvent</code>接口的<code>error</code>事件，并执行<code>window.onerror()</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.onerror = function(message, source, lineno, colno, error) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当一项资源（如<code>&lt;img&gt;</code>或<code>&lt;script&gt;</code>）<strong>加载失败</strong>，加载资源的元素会触发一个<code>Event</code>接口的<code>error</code>事件，并执行该元素上的<code>onerror()</code>处理函数。这些error事件不会向上冒泡到window，不过（至少在Firefox中）能被单一的<code>window.addEventListener</code>捕获。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.onerror = function(event) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p><code>onscroll</code> ==&gt; 当用户滚动某个元素的内容时 scroll 事件将会被触发</p>
-</li>
-<li><p><code>scrollTo</code> ==&gt; 滚动到文档中的某个坐标</p>
-</li>
-</ul>
-<h5 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h5><ul>
-<li><p><code>.querySelectorAll()</code> ==&gt; 返回与指定的选择器组匹配的文档中的元素列表 (使用深度优先的先序遍历文档的节点)。返回的对象是 NodeList </p>
-</li>
-<li><p><code>.querySelector()</code> ==&gt; 返回文档中匹配指定的选择器组的第一个元素(使用深度优先先序遍历文档的节点 | 并且通过文档标记中的第一个元素，并按照子节点数量的顺序迭代顺序节点)。 如果没有找到匹配元素，则返回 null，如果找到多个匹配元素，则返回第一个匹配到的元素。CSS 伪类不会返回任何元素 //直接可以传入带有 # 的 href ，也会返回正确的标签。参数是一个字符串，包含一个或是多个 CSS 选择器 ，多个则以逗号分隔</p>
-</li>
-<li><p><code>.getElementById()</code> ==&gt;  </p>
-</li>
-<li><p><code>.getElementsByName()</code> ==&gt;  </p>
-</li>
-<li><p><code>.getElementsByClassName()</code> ==&gt;  </p>
-</li>
-<li><p><code>.getElementsByTagName()</code> ==&gt;  </p>
-</li>
-<li><p><code>.createElement();</code> ==&gt; 创建由tagName 指定的HTML元素</p>
-</li>
-<li><p><code>.createTextNode();</code> ==&gt; 创建一个新的文本节点</p>
-</li>
-<li><p><code>.open()</code> ==&gt; 打开一个要写入的文档。</p>
-</li>
-<li><code>.write()</code> ==&gt; 将一个文本字符串写入由 <code>document.open()</code> 打开的一个文档流。<br>  <strong>注意：</strong> 因为 <code>document.write</code> 写入<strong>文档流</strong>，在关闭(已加载)的文档上调用 <code>document.write</code> 会自动调用 <code>document.open</code>，<strong>这将清除该文档</strong></li>
-<li><code>.close()</code> ==&gt; 关闭向当前文档的数据写入</li>
-</ul>
-<h3 id="Element-接口"><a href="#Element-接口" class="headerlink" title="Element 接口"></a>Element 接口</h3><p><strong>Element</strong>（元素）接口是 <code>Document</code> 的一个对象. 这个接口描述了所有相同种类的元素所普遍具有的方法和属性</p>
-<h5 id="属性-2"><a href="#属性-2" class="headerlink" title="属性"></a>属性</h5><ul>
-<li><p><code>.clientHeight</code>  ==&gt;  只读属性，表示元素的内部高度，以像素计。该属性包括内边距，但不包括垂直滚动条（如果有）、边框和外边距</p>
-</li>
-<li><p><code>.clientWidth</code>  ==&gt;  只读属性，表示元素的内部宽度，以像素计。该属性包括内边距，但不包括垂直滚动条（如果有）、边框和外边距</p>
-</li>
-<li><p><code>.clientLeft</code>  ==&gt;  只读属性，表示一个元素的左边框的宽度，以像素表示。不包括左外边距和左内边距</p>
-</li>
-<li><p><code>.clientTop</code>  ==&gt;  只读属性，表示一个元素顶部边框的宽度，以像素表示。不包括顶部外边距或内边距</p>
-</li>
-<li><p><code>.innerHTML</code>  ==&gt;  设置或获取描述元素后代的HTML语法</p>
-</li>
-<li><p><code>.scrollHeight</code>  ==&gt;  只读属性，表示一个元素的内容高度，包括由于溢出导致的视图中不可见内容。包括元素的padding，但不包括元素的border和margin</p>
-</li>
-<li><p><code>.scrollWidth</code>  ==&gt;  只读属性，表示一个元素的内容宽度，包括由于溢出导致的视图中不可见内容。包括元素的padding，但不包括元素的border和margin</p>
-</li>
-<li><p><code>.scrollLeft</code>  ==&gt;  读取或设置元素滚动条到元素左边的距离</p>
-</li>
-<li><p><code>.scrollTop</code>  ==&gt;   读取或设置元素滚动条到元素顶部的距离</p>
-</li>
-<li><p><code>Element.className</code>  ==&gt;  获取并设置指定元素的class属性的值。可以是由<strong>空格</strong>分隔的多个class属性值</p>
-</li>
-</ul>
-<p><strong>Element.classList</strong>：只读属性，返回一个元素的类属性的实时 <code>DOMTokenList</code>集合。<br><strong>方法：</strong></p>
-<ul>
-<li><code>.add()</code>  ==&gt;    添加指定的类值。如果这些类已经存在于元素的属性中，那么它们将被忽略。</li>
-<li><code>remove()</code>  ==&gt;   删除指定的类值。 </li>
-<li><code>contains()</code>  ==&gt;   检查元素的类属性中是否存在指定的类值。</li>
-<li><code>item( Number )</code>  ==&gt;   按集合中的索引返回类值。</li>
-<li><code>toggle( String )</code>  ==&gt;   当只有一个参数时：切换 class value; 即如果类存在，则删除它并返回false，如果不存在，则添加它并返回true。  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  // div是具有class =“foo bar”的&lt;div&gt;元素的对象引用</span><br><span class="line">div.classList.remove(&quot;foo&quot;);</span><br><span class="line"></span><br><span class="line">// 如果visible被设置则删除它，否则添加它</span><br><span class="line">div.classList.toggle(&quot;visible&quot;);</span><br><span class="line"></span><br><span class="line">//添加或删除多个类</span><br><span class="line">div.classList.add(&quot;foo&quot;,&quot;bar&quot;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h5><ul>
-<li><p><code>.getAttribute()</code> ==&gt;  返回元素上一个指定的属性值。如果指定的属性不存在，则返回  null 或 “” （空字符串）<br><strong>注意：</strong></p>
-<ol>
-<li>a.href ==&gt; 获取 a 的 href，带有 <a href="http://，是被浏览器处理过了" target="_blank" rel="noopener">http://，是被浏览器处理过了</a></li>
-<li>a.getAttribute() ==&gt; 获取 a 的 href ，不带有 <a href="http://，用户的写入" target="_blank" rel="noopener">http://，用户的写入</a></li>
-</ol>
-</li>
-<li><p><code>.setAttribute()</code> ==&gt; 设置指定元素上的一个属性值。如果属性已经存在，则更新该值; 否则将添加一个新的属性用指定的名称和值。</p>
-</li>
-<li><p><code>.removeAttribute()</code> ==&gt; 从指定的元素中删除一个属性。</p>
-</li>
-</ul>
-<h3 id="HTMLElement-接口"><a href="#HTMLElement-接口" class="headerlink" title="HTMLElement 接口"></a>HTMLElement 接口</h3><p>HTMLElement 接口表示所有的 HTML 元素。一些 HTML 元素直接实现了 HTMLElement 接口，其它的间接实现 HTMLElement 接口</p>
-<h5 id="属性-3"><a href="#属性-3" class="headerlink" title="属性"></a>属性</h5><ul>
-<li><p><code>HTMLElement.offsetHeight</code>  ==&gt;  只读属性，它返回该元素的像素高度，包含该元素的垂直内边距（padding）和边框（border）</p>
-</li>
-<li><p><code>HTMLElement.offsetWidth</code>  ==&gt;   只读属性，它返回该元素的像素宽度，包含该元素的垂直内边距（padding）和边框（border）</p>
-</li>
-<li><p><code>HTMLElement.offsetTop</code> ==&gt; 为只读属性，它返回当前元素相对于其 offsetParent 元素的顶部的距离</p>
-</li>
-<li><p><code>HTMLElement.offsetLeft</code> ==&gt; 为只读属性，返回当前元素左上角相对于  HTMLElement.offsetParent 节点的左边界偏移的像素值。</p>
-</li>
-<li><p><code>HTMLElement.offsetParent</code>  ==&gt;  只读属性，返回一个指向最近的包含该元素的定位元素。</p>
-</li>
-</ul>
-<h5 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h5><ul>
-<li><p><code>HTMLElement.blur()</code>  ==&gt;  移除当前元素所获得的键盘焦点</p>
-</li>
-<li><p><code>HTMLElement.click</code>  ==&gt;  模拟鼠标左键单击一个元素</p>
-</li>
-<li><p><code>HTMLElement.focus</code>  ==&gt;  设置指定元素获取焦点</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/JavaScript/">JavaScript</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1793,7 +1633,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>2</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   

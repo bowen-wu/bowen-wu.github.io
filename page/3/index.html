@@ -78,6 +78,85 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-26T23:58:06.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">2018-01-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（五）-- icon/">CSS 最佳实践 + 套路（五） -- icon</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>icon 有很多做法，主要的做法有</p>
+<ul>
+<li>img 标签</li>
+<li>background-image 属性</li>
+<li>CSS Sprites </li>
+<li>font</li>
+<li>svg</li>
+<li>纯 CSS 实现</li>
+</ul>
+<p>在这些方法中，目前最值得推荐的就是 <strong>svg 方法</strong>，其他的大家可以了解一下。</p>
+<h1 id="img-标签"><a href="#img-标签" class="headerlink" title="img 标签"></a>img 标签</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;./img/xxx.png&quot; alt=&quot;icon&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>此种方法可以自适应宽高，只需要给 img 一个 width 属性或者一个 height 属性即可</p>
+<h1 id="background-image-属性"><a href="#background-image-属性" class="headerlink" title="background-image 属性"></a>background-image 属性</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CSS：</span><br><span class="line">    div&#123;</span><br><span class="line">        background-image: url(./image/xxx.png);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">HTML:</span><br><span class="line">    &lt;div&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="CSS-Sprites"><a href="#CSS-Sprites" class="headerlink" title="CSS Sprites"></a>CSS Sprites</h1><p>可以使用<a href="http://css.spritegen.com/" target="_blank" rel="noopener">工具自动生成 Sprites</a> ，之后进行使用，此种方法便是工具的使用</p>
+<h1 id="font"><a href="#font" class="headerlink" title="font"></a>font</h1><p>font 方法主要是使用<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里</a>的 Unicode 和 Font class 方法<br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca3bfe98993983c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Font 方法"></p>
+<h1 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h1><p>svg 方法是现在最值得推荐的方法<br><strong>SVG</strong>是可缩放矢量图形，是W3C XML的分支语言之一，用于标记可缩放的矢量图形。它支持 CSS 属性</p>
+<p>首先去<a href="http://www.iconfont.cn/" target="_blank" rel="noopener">阿里的 iconfont 网站</a></p>
+<ol>
+<li>选取相应的图标并加入购物车</li>
+<li>将购物车中的图标添加至项目</li>
+<li>生成 Symbol 代码</li>
+<li>拷贝生成的 Symbol 代码，放在 HTML 中</li>
+<li><p>引入通用css代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    .icon &#123;</span><br><span class="line">       width: 1em; height: 1em;</span><br><span class="line">       vertical-align: -0.15em;</span><br><span class="line">       fill: currentColor;</span><br><span class="line">       overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>挑选相应图标并获取类名，应用于页面</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    &lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;</span><br><span class="line">        &lt;use xlink:href=&quot;#icon-xxx&quot;&gt;&lt;/use&gt;</span><br><span class="line">    &lt;/svg&gt;</span><br><span class="line">    ``` </span><br><span class="line">![SVG](http://upload-images.jianshu.io/upload_images/9617841-1b6964ececccf5f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">![阿里 iconfont 使用](http://upload-images.jianshu.io/upload_images/9617841-ccdc31dd20104add.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)</span><br><span class="line"></span><br><span class="line">`&lt;svg&gt;` 属性：</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>width:          // icon 宽度<br>height:          // icon 高度<br>fill:          // icon 颜色<br>stroke:    // 描边<br>vertical-align: top;   //可以用于调整上下间距。<br>```</p>
+<h1 id="纯-CSS-实现"><a href="#纯-CSS-实现" class="headerlink" title="纯 CSS 实现"></a>纯 CSS 实现</h1><p>纯 CSS 实现就是使用 CSS 去画一些图标，<a href="http://cssicon.space/#/" target="_blank" rel="noopener">推荐一个网站</a></p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-26T02:57:26.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（四）-- 移动端适配/">2018-01-26</a></time>
       
       
@@ -964,125 +1043,6 @@
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-18T23:59:03.000Z"><a href="/2018/01/19/HTTP系列 -- 网络与 IP /">2018-01-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/19/HTTP系列 -- 网络与 IP /">HTTP系列 -- 网络 与 IP</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>HTTP协议的底层是由 <strong>TCP 协议</strong>和 <strong>IP 协议</strong>（简称<strong>TCP/IP</strong>）构建的。HTTP只规定了请求格式和相应格式，即如何书写内容的协议。</p>
-<h1 id="TCP（Transmission-Control-Protocol）"><a href="#TCP（Transmission-Control-Protocol）" class="headerlink" title="TCP（Transmission Control Protocol）"></a>TCP（Transmission Control Protocol）</h1><p>TCP 是传输控制协议，它规定了如何传输协议。</p>
-<h3 id="TCP-和-UDP-的区别是什么"><a href="#TCP-和-UDP-的区别是什么" class="headerlink" title="TCP 和 UDP 的区别是什么"></a>TCP 和 UDP 的区别是什么</h3><ul>
-<li>TCP 可靠、面向连接、相对 UDP 较慢</li>
-<li>UDP 不可靠，不面向连接、相对 TCP 较快。</li>
-</ul>
-<h3 id="TCP-的三次握手指的是什么"><a href="#TCP-的三次握手指的是什么" class="headerlink" title="TCP 的三次握手指的是什么"></a>TCP 的三次握手指的是什么</h3><p>每次建立连接前，客户端和服务端之前都要先进行三次对话才开始正式传输内容，三次对话大概是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 客户端：我要连接你了，可以吗</span><br><span class="line">2. 服务端：嗯，我准备好了，连接我吧</span><br><span class="line">3. 客户端：那我连接你咯。</span><br><span class="line">4. 开始后面步骤</span><br></pre></td></tr></table></figure></p>
-<p>通过上述对话，从而确定了双方都可以收发内容。</p>
-<h1 id="IP（Internet-Protocol）"><a href="#IP（Internet-Protocol）" class="headerlink" title="IP（Internet Protocol）"></a>IP（Internet Protocol）</h1><p>IP 是网络协议，它规定了如何联网协议。</p>
-<h3 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h3><ol>
-<li><p>只要在互联网中，那么就会有一个 IP。IP 分为<strong>内网 IP</strong> 和<strong>外网 IP</strong>。</p>
-</li>
-<li><p>内网：以路由器为核心的以及所有连接路由器的设备统称为内网</p>
-</li>
-<li><p>外网：以路由器为出口的外面的网络都是外网</p>
-</li>
-<li><p>服务商提供 DNS 服务（告知你你想要请求的域名所对应的 IP<br>地址）</p>
-</li>
-<li><p>路由器可以广播出来 WIFI ，连接之后便可以上网</p>
-</li>
-<li><p>路由器连接服务商的服务器，那么路由器就会有一个<strong>外网IP</strong>，表示用户在<strong>互联网</strong>中的地址</p>
-</li>
-<li><p>如果重启路由器，则有可能会重新分配<strong>外网IP</strong>，所以<strong>路由器没有固定的外网IP</strong></p>
-</li>
-<li><p>可以租用<strong>固定的外网IP</strong>，从而为用户提供稳定的服务（eg. 阿里、腾讯等公司）</p>
-</li>
-<li><p>内网中的设备使用<strong>内网IP</strong>，一般来说这个 IP 的格式都是<strong>192.168.xxx.xxx</strong></p>
-</li>
-<li><p>一般路由会给自己分配一个好记的<strong>内网 IP</strong>，如<em>192.168.1.1</em>。之后给每个设备分配不同的<strong>内网IP</strong></p>
-</li>
-<li><p>路由器会有两个IP，分别是<strong>内网IP</strong>和<strong>外网IP</strong></p>
-</li>
-<li><p>内网中的设备可以互相访问（比如你可以用电脑或手机进入<a href="http://192.168.1.1/" title="null" target="_blank" rel="noopener">http://192.168.1.1</a>来查看你的路由器<strong>「因为路由器内置一个HTTP服务器」</strong>），但是不能<strong>直接</strong>访问外网，内网设备想要访问外网，就必须经过路由器中转</p>
-</li>
-<li><p>外网中的设备可以互相访问（比如 qq.com 可以把首页发送给你的路由器，你的路由器有<strong>外网 IP</strong>），但是外网中的设备无法访问你的内网设备（这很好理解，内网是一个封闭的网络，外人进不来，所以实际上 qq.com 无法直接把首页放送给你的电脑和手机）</p>
-</li>
-<li><p>路，就是「必由之路」中的路。由，就是「必由之路」中的由（由是经过、缘由的意思）。所有的信息都要经过路由器，然后被指向一条它该去的路</p>
-</li>
-<li><p><strong>内网</strong>和<strong>外网</strong>通过<strong>路由器</strong>连接</p>
-</li>
-<li><p><strong>本地IP：127.0.0.1</strong>：表示设备本身</p>
-</li>
-<li><p>hosts：可以设置任意域名对应的IP</p>
-</li>
-<li><p>hosts文件中会有一行<code>127.0.0.1 localhost</code>，意思就是 <strong>localhost</strong> 指向 <strong>127.0.0.1</strong>，所以 <strong>localhost</strong> 也表示设备本身</p>
-</li>
-<li><p>特别特殊的 IP：<code>0.0.0.0</code>，它不表示任何设备。这个 IP 不同的地方含义不同</p>
-</li>
-<li><p>使用 HTTP 协议访问另一个 IP 时，比如同时提供 IP 和端口号，缺一不可。如果没有提供，浏览器会加上默认端口号80。</p>
-</li>
-</ol>
-<h1 id="端口（port）"><a href="#端口（port）" class="headerlink" title="端口（port）"></a>端口（port）</h1><p>端口其实就是一个编号。一个服务器（硬件）不一定只提供一种服务，比如一个服务器既提供 HTTP 服务（网页服务），又提供 FTP 服务（文件下载服务），还提供 SMTP 服务（邮件服务），那么只用一个 IP 是无法告诉服务器你想要使用哪种服务，所以<strong>一个端口对应一个服务</strong>，是固定的。</p>
-<h3 id="端口服务"><a href="#端口服务" class="headerlink" title="端口服务"></a>端口服务</h3><ol>
-<li><p>提供 <strong>HTTP 服务</strong> ==&gt; <strong>80 端口</strong></p>
-</li>
-<li><p>提供 <strong>HTTPS 服务</strong> ==&gt; <strong>443 端口</strong></p>
-</li>
-<li><p>提供 <strong>FTP 服务</strong> ==&gt; <strong>21 端口</strong></p>
-</li>
-<li><p>提供<strong>代理服务器端口</strong> ==&gt; <strong>1080端口</strong></p>
-</li>
-</ol>
-<h3 id="端口基础"><a href="#端口基础" class="headerlink" title="端口基础"></a>端口基础</h3><p>每个机器一共有 65535（2的16次方减1）个端口（这是协议规定的）。不过这些端口的使用有一些规定</p>
-<ol>
-<li><p>0 到 1023（2的10次方减1）号端口是留给系统使用的，你只有拥有了管理员权限后，才能使用这 1024 个端口</p>
-</li>
-<li><p>其他端口可以给普通用户使用</p>
-</li>
-<li><p>如果一个端口正在提供服务，也就是被占用了，那么就不能再使用这个端口。除非你先停掉正在占用这个端口的服务。以后你们会经常遇到这个问题</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/HTTP/">HTTP</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
@@ -1120,7 +1080,7 @@
   
     <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
   
-    <li><a href="/tags/前端基础/">前端基础</a><small>2</small></li>
+    <li><a href="/tags/前端基础/">前端基础</a><small>3</small></li>
   
     <li><a href="/tags/博客/">博客</a><small>6</small></li>
   
