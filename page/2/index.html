@@ -78,6 +78,133 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-05T14:54:05.000Z"><a href="/2018/02/05/总结篇（二）-- 基础知识之 CSS/">2018-02-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/05/总结篇（二）-- 基础知识之 CSS/">总结篇（二） -- 基础知识之 CSS</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ol>
+<li><p>选择器</p>
+<ul>
+<li>标签选择器</li>
+<li>类选择器</li>
+<li>ID 选择器</li>
+<li>后代选择器</li>
+<li>子选择器</li>
+<li>通用选择器</li>
+<li>伪类选择符</li>
+<li>分组选择符</li>
+</ul>
+</li>
+<li><p>文档流<br> 内联元素 ==&gt; 从左向右依次流动<br> 块级元素 ==&gt; 从上到下依次流动，每个块级元素独占一行</p>
+</li>
+<li>盒模型<br> box-sizing: content-box; ==&gt; 标准盒模型，width = contentWidth<br> box-sizing: border-box; ==&gt; width = contentWidth + padding + border</li>
+<li>伪类<br> 伪类有动态伪类、结构伪类、否定伪类等等<ul>
+<li>动态伪类：<br><code>:link</code> ==&gt; 未访问前的样式效果<br><code>:hover</code> ==&gt; 鼠标悬停时的样式效果<br><code>:active</code> ==&gt; 鼠标点击时的样式效果<br><code>:visited</code> ==&gt; 访问后的样式效果<br><code>:focus</code> ==&gt; 元素成为焦点时的样式效果</li>
+<li>结构伪类<br><code>:first-child</code> ==&gt; 第一个子元素<br><code>:last-child</code> ==&gt; 最后一个子元素<br><code>:nth-child(n)</code> ==&gt; 第 n 个子元素</li>
+<li>否定伪类<br><code>:not</code> ==&gt; 不符合参数选择器 X 描述的元素</li>
+</ul>
+</li>
+<li>伪元素<ul>
+<li><code>::before</code> ==&gt; 创建伪元素，此伪元素是元素的第一个子元素</li>
+<li><code>::after</code> ==&gt; 创建伪元素，此伪元素是元素的最后一个子元素</li>
+</ul>
+</li>
+<li><p>堆叠上下文（BFC）<br> BFC 就是块级格式化上下文。形成 BFC 条件：</p>
+<ul>
+<li>浮动</li>
+<li>绝对定位元素（<code>position: absolute;</code>）</li>
+<li>非块盒的块容器（<code>display: inline-block; | display: table-cells</code>）</li>
+<li>overflow 不为 visible 的块盒</li>
+<li><p><code>display: flow-root</code></p>
+<p>功能：</p>
+</li>
+</ul>
+<ol>
+<li>将内部浮动元素包裹起来</li>
+<li>两个相邻的 BFC 之间划清界限</li>
+</ol>
+</li>
+<li><p>媒体查询<br> <code>&lt;link&gt;</code> 标签中的媒体查询</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; metia=&quot;(max-width: 800px)&quot; href=&quot;xxx.css&quot;&gt;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">样式表中的 CSS 媒体查询</span><br></pre></td></tr></table></figure>
+<p> <style></p>
+<pre><code>@media (max-width: 800px) and (min-width: 600px) {
+    // 选择器 + 样式
+}
+</code></pre><p> </style></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8. 动态 REM</span><br><span class="line">    rem 是相对单位长度，它是根元素 ` &lt;html&gt; ` 的 ` font-size ` 的大小，网页默认的 ` font-size: 16px `，运用 JS 探取屏幕宽度，之后定义根元素的 ` </span><br><span class="line">font-size ` 与屏幕宽度相关，之后一切单位都以屏幕宽度为基准</span><br></pre></td></tr></table></figure>
+<p> <script></p>
+<pre><code>let pageWidth = window.innerWidth
+document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos;px;}&lt;/style&gt;&apos; )
+</code></pre><p> </script><br> ```</p>
+</li>
+<li>box-shadow<ul>
+<li>垂直偏移</li>
+<li>水平偏移</li>
+<li>模糊半径</li>
+<li>模糊尺寸</li>
+<li>颜色</li>
+</ul>
+</li>
+<li>transform<ul>
+<li><code>translate</code> ==&gt; 移动</li>
+<li><code>rotate</code> ==&gt; 旋转</li>
+<li><code>skew</code> ==&gt; 倾斜</li>
+<li><code>scale</code> ==&gt; 缩放</li>
+</ul>
+</li>
+<li>帧动画<ul>
+<li><code>animation-name</code> ==&gt; 动画名称</li>
+<li><code>animation-duration</code> ==&gt; 持续时间</li>
+<li><code>animation-delay</code> ==&gt; 延迟</li>
+<li><code>animation-timing-function</code> ==&gt; 动画类型</li>
+<li><code>@keyframe</code> ==&gt; 关键帧</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/总结/">总结</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-05T14:34:07.000Z"><a href="/2018/02/05/JS系列 -- Array 浅析/">2018-02-05</a></time>
       
       
@@ -1000,85 +1127,6 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-28T01:38:32.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（八）-- BFC/">2018-01-28</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/28/CSS-最佳实践-套路（八）-- BFC/">CSS 最佳实践 + 套路（八） -- BFC</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>BFC（Block Formatting Context）块级格式化上下文。我并不知道 BFC 是什么，但是只要写出样式，我就知道这是不是 BFC。BFC 没有明确的定义，只有特征或功能。</p>
-<h1 id="形成-BFC-条件"><a href="#形成-BFC-条件" class="headerlink" title="形成 BFC 条件"></a>形成 BFC 条件</h1><ol>
-<li><p>浮动（<code>float: left | right</code>）</p>
-</li>
-<li><p>绝对定位元素（<code>position: absolute</code>）</p>
-</li>
-<li><p>非块盒的块容器（<code>display: inline-block | table-cells | table-captions</code>）</p>
-</li>
-<li><p>overflow 不为 visible 的块盒（<code>visible: auto | hidden | scroll</code>）</p>
-</li>
-<li><p><code>display: flow-root</code> ==&gt; 专门用于使得当前元素触发 BFC</p>
-</li>
-</ol>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
-<li>将内部浮动元素包裹起来<br>使用 BFC 将其内部浮动元素包裹起来<br><img src="http://upload-images.jianshu.io/upload_images/9617841-747425ae0fda01ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BFC 将内部浮动元素包裹起来"></li>
-</ol>
-<p><a href="http://js.jirengu.com/kazusiciwo/1/edit" target="_blank" rel="noopener">代码地址</a></p>
-<ol>
-<li>两个相邻的 BFC 划清界限<br>float + div 左右自适应布局<br><img src="http://upload-images.jianshu.io/upload_images/9617841-fd7b91203b1d28b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="BFC 两个相邻 BFC 划清界限"></li>
-</ol>
-<p><a href="http://js.jirengu.com/suyowimizi/1/edit" target="_blank" rel="noopener">代码地址</a></p>
-<h1 id="BFC-与-文档流"><a href="#BFC-与-文档流" class="headerlink" title="BFC 与 文档流"></a>BFC 与 文档流</h1><p><strong>BFC</strong> 是本身特性，它会影响元素的宽高<br><strong>文档流</strong>指内联元素从左到右排列，块级元素从上到下排列。它会影响元素的排列顺序<br>二者没有关系<br>BFC 里面有文档流，BFC 本身也可以是文档流</p>
-<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><p>不要去使用 BFC</p>
-<ol>
-<li><p>清除浮动使用 <code>clearfix</code></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>划清界限使用 <code>display: flex</code><br>使用 <code>display: flex + flex: 1</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-10a88b81f6380059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="display: flex + flex: 1"></p>
-</li>
-</ol>
-<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>BFC 内部相邻块级元素竖直 margin 合并</p>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
@@ -1120,7 +1168,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/博客/">博客</a><small>1</small></li>
   
-    <li><a href="/tags/总结/">总结</a><small>3</small></li>
+    <li><a href="/tags/总结/">总结</a><small>4</small></li>
   
   </ul>
 </div>

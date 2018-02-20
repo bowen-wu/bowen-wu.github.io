@@ -82,6 +82,133 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-05T14:54:05.000Z"><a href="/2018/02/05/总结篇（二）-- 基础知识之 CSS/">2018-02-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/05/总结篇（二）-- 基础知识之 CSS/">总结篇（二） -- 基础知识之 CSS</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <ol>
+<li><p>选择器</p>
+<ul>
+<li>标签选择器</li>
+<li>类选择器</li>
+<li>ID 选择器</li>
+<li>后代选择器</li>
+<li>子选择器</li>
+<li>通用选择器</li>
+<li>伪类选择符</li>
+<li>分组选择符</li>
+</ul>
+</li>
+<li><p>文档流<br> 内联元素 ==&gt; 从左向右依次流动<br> 块级元素 ==&gt; 从上到下依次流动，每个块级元素独占一行</p>
+</li>
+<li>盒模型<br> box-sizing: content-box; ==&gt; 标准盒模型，width = contentWidth<br> box-sizing: border-box; ==&gt; width = contentWidth + padding + border</li>
+<li>伪类<br> 伪类有动态伪类、结构伪类、否定伪类等等<ul>
+<li>动态伪类：<br><code>:link</code> ==&gt; 未访问前的样式效果<br><code>:hover</code> ==&gt; 鼠标悬停时的样式效果<br><code>:active</code> ==&gt; 鼠标点击时的样式效果<br><code>:visited</code> ==&gt; 访问后的样式效果<br><code>:focus</code> ==&gt; 元素成为焦点时的样式效果</li>
+<li>结构伪类<br><code>:first-child</code> ==&gt; 第一个子元素<br><code>:last-child</code> ==&gt; 最后一个子元素<br><code>:nth-child(n)</code> ==&gt; 第 n 个子元素</li>
+<li>否定伪类<br><code>:not</code> ==&gt; 不符合参数选择器 X 描述的元素</li>
+</ul>
+</li>
+<li>伪元素<ul>
+<li><code>::before</code> ==&gt; 创建伪元素，此伪元素是元素的第一个子元素</li>
+<li><code>::after</code> ==&gt; 创建伪元素，此伪元素是元素的最后一个子元素</li>
+</ul>
+</li>
+<li><p>堆叠上下文（BFC）<br> BFC 就是块级格式化上下文。形成 BFC 条件：</p>
+<ul>
+<li>浮动</li>
+<li>绝对定位元素（<code>position: absolute;</code>）</li>
+<li>非块盒的块容器（<code>display: inline-block; | display: table-cells</code>）</li>
+<li>overflow 不为 visible 的块盒</li>
+<li><p><code>display: flow-root</code></p>
+<p>功能：</p>
+</li>
+</ul>
+<ol>
+<li>将内部浮动元素包裹起来</li>
+<li>两个相邻的 BFC 之间划清界限</li>
+</ol>
+</li>
+<li><p>媒体查询<br> <code>&lt;link&gt;</code> 标签中的媒体查询</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; metia=&quot;(max-width: 800px)&quot; href=&quot;xxx.css&quot;&gt;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">样式表中的 CSS 媒体查询</span><br></pre></td></tr></table></figure>
+<p> <style></p>
+<pre><code>@media (max-width: 800px) and (min-width: 600px) {
+    // 选择器 + 样式
+}
+</code></pre><p> </style></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8. 动态 REM</span><br><span class="line">    rem 是相对单位长度，它是根元素 ` &lt;html&gt; ` 的 ` font-size ` 的大小，网页默认的 ` font-size: 16px `，运用 JS 探取屏幕宽度，之后定义根元素的 ` </span><br><span class="line">font-size ` 与屏幕宽度相关，之后一切单位都以屏幕宽度为基准</span><br></pre></td></tr></table></figure>
+<p> <script></p>
+<pre><code>let pageWidth = window.innerWidth
+document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos;px;}&lt;/style&gt;&apos; )
+</code></pre><p> </script><br> ```</p>
+</li>
+<li>box-shadow<ul>
+<li>垂直偏移</li>
+<li>水平偏移</li>
+<li>模糊半径</li>
+<li>模糊尺寸</li>
+<li>颜色</li>
+</ul>
+</li>
+<li>transform<ul>
+<li><code>translate</code> ==&gt; 移动</li>
+<li><code>rotate</code> ==&gt; 旋转</li>
+<li><code>skew</code> ==&gt; 倾斜</li>
+<li><code>scale</code> ==&gt; 缩放</li>
+</ul>
+</li>
+<li>帧动画<ul>
+<li><code>animation-name</code> ==&gt; 动画名称</li>
+<li><code>animation-duration</code> ==&gt; 持续时间</li>
+<li><code>animation-delay</code> ==&gt; 延迟</li>
+<li><code>animation-timing-function</code> ==&gt; 动画类型</li>
+<li><code>@keyframe</code> ==&gt; 关键帧</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/总结/">总结</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-05T14:34:07.000Z"><a href="/2018/02/05/JS系列 -- Array 浅析/">2018-02-05</a></time>
       
       
@@ -220,7 +347,7 @@
   
     <li><a href="/tags/博客/">博客</a><small>1</small></li>
   
-    <li><a href="/tags/总结/">总结</a><small>3</small></li>
+    <li><a href="/tags/总结/">总结</a><small>4</small></li>
   
   </ul>
 </div>

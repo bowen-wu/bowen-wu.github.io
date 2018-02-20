@@ -82,6 +82,137 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-11T11:58:39.000Z"><a href="/2018/01/11/Tween-js/">2018-01-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/11/Tween-js/">Tween.js</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>tweenjs 是使用 JavaScript 中的一个简单的补间动画库，支持数字、对象的属性和 CSS 样式属性的赋值。</p>
+<p>tweenjs 以平滑的方式修改元素的属性值，需要传递给 tween 要修改的值、动画结束时的最终值和动画花费时间（duration），之后 tween 引擎就可以计算从开始动画点到结束动画点之间值，从而产生平滑的动画效果。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ul>
+<li><p>tweenjs CDN </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.1.1/Tween.min.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>tweenjs <a href="https://pan.baidu.com/s/1nvoXev3" target="_blank" rel="noopener">下载到本地</a>，密码是 <code>ywoq</code>。</p>
+</li>
+<li><p><a href="https://github.com/tweenjs/tween.js" target="_blank" rel="noopener">tweenjs github</a></p>
+</li>
+<li><p>tweenjs 实例</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var box = document.createElement(&apos;div&apos;);</span><br><span class="line">box.style.setProperty(&apos;background-color&apos;, &apos;#008800&apos;);</span><br><span class="line">box.style.setProperty(&apos;width&apos;, &apos;100px&apos;);</span><br><span class="line">box.style.setProperty(&apos;height&apos;, &apos;100px&apos;);</span><br><span class="line">document.body.appendChild(box);</span><br><span class="line"></span><br><span class="line">function animate(time) &#123;</span><br><span class="line">    requestAnimationFrame(animate);</span><br><span class="line">    TWEEN.update(time);</span><br><span class="line">&#125;</span><br><span class="line">requestAnimationFrame(animate);</span><br><span class="line"></span><br><span class="line">var coords = &#123; x: 0, y: 0 &#125;;</span><br><span class="line">var tween = new TWEEN.Tween(coords) </span><br><span class="line">        .to(&#123; x: 300, y: 200 &#125;, 1000) </span><br><span class="line">        .easing(TWEEN.Easing.Quadratic.Out) </span><br><span class="line">        .onUpdate(function() &#123; </span><br><span class="line">            box.style.setProperty(&apos;transform&apos;, &apos;translate(&apos; + coords.x + &apos;px, &apos;     + coords.y + &apos;px)&apos;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .start();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="示例说明"><a href="#示例说明" class="headerlink" title="示例说明"></a>示例说明</h1><ol>
+<li><p>假设有一个对象 position ，它的坐标为 x 和 y</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var position = &#123; x: 100, y: 0 &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改变 x 的值从 100 到 200 ，持续时间为 1s</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var tween = new TWEEN.Tween(position)</span><br><span class="line">tween.to(&#123;x: 200&#125;, 1000)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建 tween 对象后，激活它，从而让它开始动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tween.start();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了平滑的动画效果，需要在同一个循环动画中调用 TWEEN.update 方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">animate();</span><br><span class="line">function animate()&#123;</span><br><span class="line">    requestAnimationFrame(animate);</span><br><span class="line">    TWEEN.update();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个动作将会更新所有被激活的 tweens ，在 1s 内 position.x 将变为 200 。</p>
+<ol>
+<li>可以使用 onUpdate 回调函数将结果打印到控制台上<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tween.onUpdate(function()&#123;</span><br><span class="line">    console.log( this.x );</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个函数在每次 tween 被更新时都会被调用</p>
+<h1 id="tweenjs-动画"><a href="#tweenjs-动画" class="headerlink" title="tweenjs 动画"></a>tweenjs 动画</h1><p>Tween.js 本身不会运行，你需要通过 update 方法明确告诉它什么时候开始运行，推荐在动画主循环中使用该动画，可以调用 <code>requestAnimationFrame</code> 方法来获得良好的图像性能</p>
+<p>使用无参数的调用方法，update 将明确当前时间。也可以为 update 方法法明确一个时间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TWEEN.update(100);</span><br></pre></td></tr></table></figure></p>
+<p>update 的时间为 100毫秒 ，可以使用这种方法来明确代码中所有随时间变化的函数。</p>
+<h1 id="控制-tween-动画"><a href="#控制-tween-动画" class="headerlink" title="控制 tween 动画"></a>控制 tween 动画</h1><ul>
+<li><p><code>start</code> 和 <code>stop</code> ==&gt; <code>Tween.start</code> 和 <code>Tween.stop</code> 分别用来控制 tween 动画的开始和结束<br>对于已经结束和没有开始的动画，Tween.stop 方法不起作用。 Tween.start 可以方法接收一个时间参数，若使用了该参数，tween 动画将在延迟该时间数后才开始动画，否则他将立刻开始动画。</p>
+</li>
+<li><p><code>update</code> ==&gt; 通过 <code>TWEEN.update</code> 方法执行动画的更新</p>
+</li>
+<li><p><code>chain</code> ==&gt; 制作多个多行，例如一个动画在另一个动画结束后开始，可以通过 <code>chain</code> 来实现</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tweenA.chain(tweenB);  //tweenB 在 tweenA 之后开始动画，故可以制作一个无线循环的动画</span><br><span class="line">tweenB.chain(tweenA);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>repeat</code> ==&gt; 制作循环动画，优于 <code>chain</code>，接收一个用于描述循环次数的参数</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tween.repeat(10);</span><br><span class="line">tween.repeat(infinity);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>delay</code> ==&gt; 用于控制动画之间的延迟</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tween.delay(1000);</span><br><span class="line">tween.start()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h1><p>可以在每次 tween 循环周期的指定时间点调用自定义的函数</p>
+<ul>
+<li><code>onStart</code> ==&gt; tween 动画开始前的回调函数</li>
+<li><code>onStop</code> ==&gt; tween 动画结束后的回调函数</li>
+<li><code>onUpdate</code> ==&gt; 在 tween 动画每次更新后执行</li>
+<li><code>onComplete</code> ==&gt; 在 tween 动画全部结束后执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var tween = new TWEEN.Tween(&#123;</span><br><span class="line"></span><br><span class="line">&#125;).to(&#123;</span><br><span class="line"></span><br><span class="line">&#125;).onStart(function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;).onUpdate(function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="动画运动算法（缓动函数）easing函数"><a href="#动画运动算法（缓动函数）easing函数" class="headerlink" title="动画运动算法（缓动函数）easing函数"></a>动画运动算法（缓动函数）easing函数</h1><ul>
+<li>Linear ==&gt; 线性匀速运动效果</li>
+<li>Quadratic ==&gt; 二次方的缓动（t^2）</li>
+<li>Cubic ==&gt; 三次方的缓动（）</li>
+<li>Quartic ==&gt; 四次方的缓动（）</li>
+<li>Quintic ==&gt; 五次方的缓动</li>
+<li>Sinusoidal ==&gt; 正弦曲线的缓动（）</li>
+<li>Exponential ==&gt; 指数曲线的缓动（）</li>
+<li>Circular ==&gt; 圆形曲线的缓动（）</li>
+<li>Elastic ==&gt; 指数衰减的正弦曲线缓动（）</li>
+<li>Back ==&gt; 超过范围的三次方的缓动</li>
+<li>Bounce ==&gt; 指数衰减的反弹缓动</li>
+</ul>
+<h1 id="缓动方式（效果）easing类型"><a href="#缓动方式（效果）easing类型" class="headerlink" title="缓动方式（效果）easing类型"></a>缓动方式（效果）easing类型</h1><ul>
+<li>easeIn（In） ==&gt; 加速，先慢后快</li>
+<li>easeOut（Out） ==&gt; 减速，先快后慢</li>
+<li>easeInOut（InOut） ==&gt; 前半段加速，后半段减速</li>
+</ul>
+<h1 id="使用公式"><a href="#使用公式" class="headerlink" title="使用公式"></a>使用公式</h1> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.easing(TWEEN.Easing.easing函数.easing类型)</span><br></pre></td></tr></table></figure>
+<h1 id="tweenjs-源码"><a href="#tweenjs-源码" class="headerlink" title="tweenjs 源码"></a>tweenjs 源码</h1><p><img src="http://upload-images.jianshu.io/upload_images/9617841-82e90227e99697b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-8846f1fe98dec1d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="控制动画方法"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-5db818a1c9c6e0f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="缓动函数"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-c9678e2fab0b0c59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/Plugin/">Plugin</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-10T04:56:16.000Z"><a href="/2018/01/10/JS系列 -- 基本包装类型/">2018-01-10</a></time>
       
       
@@ -620,7 +751,7 @@
   
     <li><a href="/tags/博客/">博客</a><small>1</small></li>
   
-    <li><a href="/tags/总结/">总结</a><small>3</small></li>
+    <li><a href="/tags/总结/">总结</a><small>4</small></li>
   
   </ul>
 </div>
