@@ -82,6 +82,120 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-05T14:34:07.000Z"><a href="/2018/02/05/JS系列 -- Array 浅析/">2018-02-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/05/JS系列 -- Array 浅析/">JS系列 -- Array 浅析</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>数组是按次序排列的一组值的集合，它是一个<strong>对象</strong>。<br>数组可以存储任何类型的数据（数字，字符串，布尔值或者对象）</p>
+<h3 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h3><h5 id="使用-Array-构造函数"><a href="#使用-Array-构造函数" class="headerlink" title="使用 Array 构造函数"></a>使用 Array 构造函数</h5><p><img src="http://upload-images.jianshu.io/upload_images/9617841-6ea1c407cf635857.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 构造函数"></p>
+<h5 id="使用数组字面量表示法"><a href="#使用数组字面量表示法" class="headerlink" title="使用数组字面量表示法"></a>使用数组字面量表示法</h5><p>数组字面量由一对包含数组项的方括号表示，多个数组之间以逗号隔开。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-335e259acf5fba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 字面量"></p>
+<h1 id="属性-length"><a href="#属性-length" class="headerlink" title="属性 length"></a>属性 length</h1><p>表示数组的长度，即数组中元素的个数。<br>数组索引从 0 开始，索引上下限为 0 到 length-1 。<br>数组的 length 属性<strong>不是只读</strong>的，可以进行设置<br><img src="http://upload-images.jianshu.io/upload_images/9617841-def1e376a8012efe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array length 修改"></p>
+<p><strong>注意：</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-7e72fd6106cc9701.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array length"><br><code>arr02</code> 中 <code>arr02[ 1 ] === undefined</code>，这个元素是存在的，只不过值为 undefined。</p>
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p>Array 是对象，所以 Array 有对象的一些方法<br><img src="http://upload-images.jianshu.io/upload_images/9617841-b4189f737381258e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 原型"><br>可以为数组添加属性，因为数组是对象。</p>
+<h1 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h1><ul>
+<li><code>Array.isArray()</code> ==&gt; 用于确定传递的值是否是一个 Array</li>
+<li><code>value instanceof Array</code> ==&gt; 使用 instanceof 操作符检测数组</li>
+<li><code>value.push()</code> ==&gt; 使用数组的特有方法，从而检测数组</li>
+</ul>
+<h1 id="方法-API"><a href="#方法-API" class="headerlink" title="方法 API"></a>方法 API</h1><h3 id="Object-原型上的-API"><a href="#Object-原型上的-API" class="headerlink" title="Object 原型上的 API"></a>Object 原型上的 API</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-94e2302778e6f341.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object 原型上的 API"></p>
+<h3 id="Array-prototype-API"><a href="#Array-prototype-API" class="headerlink" title="Array.prototype API"></a>Array.prototype API</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-ebda095a9826c3f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 原型上的 API"></p>
+<h4 id="栈方法"><a href="#栈方法" class="headerlink" title="栈方法"></a>栈方法</h4><p>栈是一种可以限制插入和删除项的数据结构。它是一种 LIFO（Last-In-First -Out，后进先出）的数据结构，栈中项的插入（推入）和移除（弹出）只发生在一个位置 —- 栈的顶部。</p>
+<ul>
+<li><code>push()</code> ==&gt; 将一个或多个元素添加到数组的末尾，并<strong>返回新数组的长度</strong>。</li>
+<li><code>pop()</code> ==&gt; 从数组中删除最后一个元素，并<strong>返回该元素的值</strong>。此方法更改数组的长度。</li>
+</ul>
+<h4 id="队列方法"><a href="#队列方法" class="headerlink" title="队列方法"></a>队列方法</h4><p>队列数据结构的访问规则是 FIFO（Fitst-In-Fitst-Out，先进先出），队列在列表的末端添加项，在列表前端移除项。</p>
+<ul>
+<li><code>shift()</code> ==&gt; 从数组中删除第一个元素，并<strong>返回该元素的值</strong>。此方法更改数组的长度。</li>
+<li><code>unshift()</code> ==&gt; 将一个或多个元素添加到数组的开头，并<strong>返回新数组的长度</strong>。</li>
+</ul>
+<h4 id="重排序方法"><a href="#重排序方法" class="headerlink" title="重排序方法"></a>重排序方法</h4><p>重排序方法 <code>sort()</code> 和<code>reverse()</code> 的<strong>返回值是经过排序之后的数组</strong>，这两种方法都会<strong>改变原数组</strong>。</p>
+<ul>
+<li><p><code>sort()</code> ==&gt; 在适当的位置对数组的元素进行排序，并<strong>返回数组</strong>。默认排序顺序是根据<strong>字符串Unicode码点</strong>。<br> <img src="http://upload-images.jianshu.io/upload_images/9617841-4bd79d3863269eaf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array sort 排序"><br> <img src="http://upload-images.jianshu.io/upload_images/9617841-b07b786adcc4b08e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array sort 排序"></p>
+</li>
+<li><p><code>reverse()</code> ==&gt; 将数组中元素的位置颠倒，并<strong>返回该数组的引用</strong>。第一个数组元素成为最后一个数组元素，最后一个数组元素成为第一个。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-03c659fb37fe7170.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array reverse"></p>
+</li>
+</ul>
+<h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><ul>
+<li><p><code>concat()</code> ==&gt; 用于合并两个或多个数组。此方法不会更改现有数组，而是<strong>返回一个新数组</strong>。</p>
+</li>
+<li><p><code>slice()</code> ==&gt; <strong>返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象</strong>，原数组不会被修改。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-f46d0e64ba879c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array slice()"></p>
+</li>
+<li><p><code>splice()</code> ==&gt; 通过删除现有元素和/或添加新元素来更改一个数组的内容。<br><strong>返回由被删除的元素组成的一个数组</strong>。<br><strong>删除了一个元素</strong> ==&gt; <strong>返回只包含一个元素的数组</strong>。<br><strong>没有删除元素</strong> ==&gt; <strong>返回空数组</strong>。<br><strong>参数：</strong> <code>array.splice(start [ , deleteCount [, item1 [, item2, ... ] ] ])</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-5d25a212665cf00a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array splice API"></p>
+</li>
+</ul>
+<h4 id="位置方法"><a href="#位置方法" class="headerlink" title="位置方法"></a>位置方法</h4><ul>
+<li><code>indexOf()</code> ==&gt; <strong>返回在数组中可以找到一个给定元素的第一个索引</strong>，如果不存在，则<strong>返回-1</strong></li>
+<li><code>LastIndexOf()</code> ==&gt; <strong>返回指定元素在数组中的最后一个的索引</strong>，如果不存在则<strong>返回 -1</strong>。从数组的后面向前查找</li>
+</ul>
+<h4 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h4><ul>
+<li><p><code>forEach()</code> ==&gt; 对数组的每个元素执行一次提供的函数。<strong>返回 undefined</strong><br>参数：<strong>回调函数</strong>和可选的执行回调函数时用作this的值，<strong>回调函数</strong>接受三个值：</p>
+<ol>
+<li>数组中正在处理的当前元素</li>
+<li>数组中正在处理的当前元素的索引</li>
+<li>forEach()方法正在操作的数组<br><img src="http://upload-images.jianshu.io/upload_images/9617841-2ecfa4be91a212d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array forEach"></li>
+</ol>
+</li>
+<li><p><code>map()</code> ==&gt; 创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。<strong>返回一个新数组，每个元素都是回调函数的结果</strong><br><strong>和 <code>forEach</code> 作用一样，只是返回一个新数组</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-596d0557d2e52a1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array map"></p>
+</li>
+<li><p><code>every()</code> ==&gt; 测试数组的所有元素是否都通过了指定函数的测试。<strong>返回布尔值</strong></p>
+</li>
+<li><p><code>some()</code> ==&gt; 测试数组中的某些元素是否通过由提供的函数实现的测试。<strong>返回布尔值</strong></p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-f3f669c4e73662af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array every + some"></p>
+<ul>
+<li><code>filter()</code> ==&gt; 创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 <strong>返回一个新的通过测试的元素的集合的数组</strong></li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-36de13831ddd2bf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array filter"></p>
+<h4 id="归并方法"><a href="#归并方法" class="headerlink" title="归并方法"></a>归并方法</h4><ul>
+<li><code>reduce()</code> ==&gt; 对累加器和数组中的每个元素（从左到右）应用一个函数，将其减少为单个值。<strong>返回函数累计处理的结果</strong></li>
+<li><code>reduceRight()</code> ==&gt; 接受一个函数作为累加器（accumulator）和数组的每个值（从右到左）将其减少为单个值。<strong>返回函数累计处理的结果</strong></li>
+</ul>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-31T10:46:51.000Z"><a href="/2018/01/31/总结篇（一）-- 基础知识/">2018-01-31</a></time>
       
       
@@ -969,87 +1083,6 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-27T00:02:20.000Z"><a href="/2018/01/27/CSS-最佳实践-套路（七）-- 布局/">2018-01-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/27/CSS-最佳实践-套路（七）-- 布局/">CSS 最佳实践 + 套路（七） -- 布局</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在我们平时布局的时候，一般都是选择 Float 布局和 Flex 布局。如果项目需要支持 IE8 ，那么推荐选择 Float 布局，如果不需要支持 IE8 ，那么尽量选择 Flex 布局，当我们不需要支持 IE8 的时候，那么我们就能使用很多高级的语法，例如：calc()</p>
-<h1 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h1><ol>
-<li>不要写死 <code>width</code> 和 <code>height</code></li>
-<li>尽量选择 flex、calc</li>
-<li>如果是 IE ，那么上述两点全部推翻，能写死就写死</li>
-</ol>
-<h1 id="Float-布局"><a href="#Float-布局" class="headerlink" title="Float 布局"></a>Float 布局</h1><ol>
-<li>子元素：<code>float: left | right</code></li>
-<li>父元素：添加 <code>clearfix</code> 类 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h1><p>在 <a href="https://www.jianshu.com/p/f3a85c014952" target="_blank" rel="noopener">CSS 最佳实践 + 套路（六） – flex</a> 一文中已经详细介绍了关于 FLex 的相关属性。Flex 布局主要是</p>
-<ol>
-<li>父元素： <code>display: flex;</code> + 弹性容器相关属性</li>
-<li>子元素：弹性项目相关属性</li>
-</ol>
-<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><p>实现这种布局<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c9e504af91cce8b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="布局"><br>每个模块都是一样的，四个模块占据一行，中间有 margin ，四个模块占据的宽度是一定的。</p>
-<ol>
-<li><p>float + margin 负值法<br>HTML：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;</span><br><span class="line">        &lt;ol class=&quot;clearfix&quot;&gt;</span><br><span class="line">            li*10</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p> CSS:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br><span class="line">.inner&#123;</span><br><span class="line">    margin: 0 -间距/2px；</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">    width: </span><br><span class="line">    float: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>flex + margin负值法<br>HTML：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;</span><br><span class="line">        &lt;ol&gt;</span><br><span class="line">            li*10</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p> CSS:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">ol&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">    margin: 0 -间距/2px；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>flex + calc<br>HTML：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;inner&quot;&gt;</span><br><span class="line">        &lt;ol&gt;</span><br><span class="line">            li*10</span><br><span class="line">        &lt;/ol&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p> CSS:</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    width: 960px;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line">ol&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line">li&#123;</span><br><span class="line">    calc(25% - 8px)     //20%*父元素宽度 - 8px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1094,7 +1127,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/博客/">博客</a><small>1</small></li>
   
-    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+    <li><a href="/tags/总结/">总结</a><small>3</small></li>
   
   </ul>
 </div>

@@ -78,6 +78,87 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-20T08:56:11.000Z"><a href="/2018/01/20/HTTP系列 -- JSONP/">2018-01-20</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/20/HTTP系列 -- JSONP/">HTTP系列 -- JSONP</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><a href="https://github.com/bowen-wu/server-Node.js-demo/tree/master/JSONP" target="_blank" rel="noopener">参考代码</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>数据库是用来长久储存数据的。</p>
+<h2 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h2><h4 id="form-表单提交"><a href="#form-表单提交" class="headerlink" title="form 表单提交"></a><code>form</code> 表单提交</h4><p>缺点：刷新页面 + 用户后退 + 用户刷新 = 数据变动</p>
+<h4 id="form-iframe-提交"><a href="#form-iframe-提交" class="headerlink" title="form + iframe 提交"></a><code>form</code> + <code>iframe</code> 提交</h4><p><code>form</code> 表单提交到 <code>iframe</code> 中，页面不会刷新。<br>缺点：用户刷新页面  ==&gt;  数据变动</p>
+<h4 id="JS动态创建-img-标签"><a href="#JS动态创建-img-标签" class="headerlink" title="JS动态创建 img 标签"></a>JS动态创建 <code>img</code> 标签</h4><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let img = document.createElement(&apos;img&apos;);</span><br><span class="line">img.src = &apos;路径&apos;</span><br><span class="line">img.onload = function()&#123;&#125;  ==&gt;  HTTP状态码</span><br><span class="line">img.onerror = function()&#123;&#125;  ==&gt;  HTTP状态码</span><br></pre></td></tr></table></figure>
+</code></pre><p>通过路径，在 Nodejs 中设置成功或者失败，之后返回状态码，前端通过返回的HTTP状态码，进而来判断成功失败。</p>
+<h4 id="动态创建-script-标签"><a href="#动态创建-script-标签" class="headerlink" title="动态创建 script 标签"></a>动态创建 <code>script</code> 标签</h4><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let script = document.createElement(&apos;script&apos;);</span><br><span class="line">script.src = &apos;路径&apos;;</span><br><span class="line">document.body.appendChild(script);</span><br><span class="line">script.onload = function()&#123;&#125;</span><br><span class="line">script.onerror = function()&#123;&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>通过设置响应头中的类型进而来确定返回内容的格式（第四部分），从而保证返回的是 JavaScript 代码。</li>
+<li>当创建  <code>script</code> 标签插入 <code>body</code> 后，返回的内容会立即执行，之后再去执行 <code>onload</code> 和 <code>onerror</code> 事件，所以说  <code>onload</code> 可以进行删除， 之后将处理逻辑交给后端（处理逻辑中应该包括使用完 <code>script</code> 标签之后立刻删除），但是此时前后端耦合。</li>
+<li><code>script</code> 的 <code>src</code> 属性可以访问其他地址</li>
+</ul>
+<h1 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h1><p>动态创建 <code>script</code> 并调用前端传给后端的 callback 技术</p>
+<h3 id="版本一"><a href="#版本一" class="headerlink" title="版本一"></a>版本一</h3><p>#####Nodejs：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.write(` callback.call(undefined,&apos; success &apos;) `);</span><br></pre></td></tr></table></figure></p>
+<h5 id="JS"><a href="#JS" class="headerlink" title="JS:"></a>JS:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.callback = function()&#123;&#125;  //返回之后进行处理</span><br><span class="line">script.src = http://....../路径?callback = xxx</span><br></pre></td></tr></table></figure>
+<h3 id="版本二"><a href="#版本二" class="headerlink" title="版本二"></a>版本二</h3><h5 id="Nodejs"><a href="#Nodejs" class="headerlink" title="Nodejs"></a>Nodejs</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">response.write(` $&#123; query.callback &#125;.call(undefined,&#123;</span><br><span class="line">    &quot;success&quot;: true,</span><br><span class="line">    &quot;left&quot;: $&#123; newAmount &#125;</span><br><span class="line">&#125;) `)</span><br></pre></td></tr></table></figure>
+<p>返回的数据是 JSON 数据<br><strong>特点：</strong></p>
+<ul>
+<li>请求方创建 <code>script</code> ，<code>src</code> 属性指向响应方</li>
+<li>响应方根据查询参数，构造形如 xxx.call(undefined,”传给前端的数据”) 这样的响应。</li>
+</ul>
+<h1 id="JSONP-1"><a href="#JSONP-1" class="headerlink" title="JSONP"></a>JSONP</h1><h3 id="什么是-JSONP"><a href="#什么是-JSONP" class="headerlink" title="什么是 JSONP"></a>什么是 JSONP</h3><p>请求方：前端（浏览器）<br>响应方：后端（服务器）</p>
+<ol>
+<li>请求方创建 <code>script</code> ，<code>src</code> 指向响应方，同时传入一个查询参数 ?callback = 随机数</li>
+<li>响应方根据查询参数 callback ，构造形如 <code>随机数.call(undefined,&quot;传给前端的数据&quot;)</code> 这样的响应</li>
+<li>浏览器接收到响应，就会执行 <code>随机数.call(undefined,&quot;传给前端的数据&quot;)</code> </li>
+<li>请求方获取到数据<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><h5 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">button.addEventlistener(&apos;click&apos;, (e) =&gt; &#123;</span><br><span class="line">    let script = document.createElement(&apos;script&apos;);</span><br><span class="line">    let functionName = &apos;bowen&apos; + parseInt(Math.random()*100000,10);</span><br><span class="line">    window[ functionName ] = function(result)&#123;</span><br><span class="line">        if( result === &apos;success&apos; )&#123;</span><br><span class="line">            // do something</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            // do something</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    script.src = &apos;http://....../路径?callback = &apos; + functionName</span><br><span class="line">    document.body.appendChild( script );</span><br><span class="line">    script.onload = function(event)&#123;</span><br><span class="line">        event.currentTarget.remove();</span><br><span class="line">        delete window[ functionName ]</span><br><span class="line">    &#125;</span><br><span class="line">    script.onerror = function()&#123;</span><br><span class="line">        alert(&apos;fail&apos;);</span><br><span class="line">        event.currentTarget.remove();</span><br><span class="line">        delete window[ functionName ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="jQ"><a href="#jQ" class="headerlink" title="jQ:"></a>jQ:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">button.addEventListener(&apos;click&apos;,(event) =&gt; &#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: &apos;http://....../路径&apos;，</span><br><span class="line">        dataType: &apos;jsonp&apos;,</span><br><span class="line">        success: function( response )&#123;</span><br><span class="line">            // do something</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="套路：为什么-JSONP-不支持-POST-请求"><a href="#套路：为什么-JSONP-不支持-POST-请求" class="headerlink" title="套路：为什么 JSONP 不支持 POST 请求"></a>套路：为什么 JSONP 不支持 POST 请求</h3><p>JSONP 是动态创建 <code>script</code> 标签 + 传入 callback 查询参数，<code>script</code> 标签，只能发送 GET 请求，不能使用 POST。</p>
+<h3 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h3><p>如果后端没有写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">response.write(` $&#123; query.callback &#125;.call(undefined,&#123;</span><br><span class="line">    &quot;success&quot;: true,</span><br><span class="line">    &quot;left&quot;: $&#123; newAmount &#125;</span><br><span class="line">&#125;) `)</span><br></pre></td></tr></table></figure></p>
+<p>前端虽然有响应内容，但是使用不到</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/HTTP/">HTTP</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-19T00:01:38.000Z"><a href="/2018/01/19/HTTP系列 -- Node.js/">2018-01-19</a></time>
       
       
@@ -1474,143 +1555,6 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-10T04:56:16.000Z"><a href="/2018/01/10/JS系列 -- 基本包装类型/">2018-01-10</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/10/JS系列 -- 基本包装类型/">JS系列 -- 基本包装类型</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>ECMAScript 提供了 3 个特殊的引用类型：Boolean()  Number()  String() ，以便于操作基本类型值。</p>
-<h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><p>当创建基本包装类型时，相对应的变量会有 <strong>proto</strong> 的属性，此属性是基本包装类型指向 Object 类型的 prototype 。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c47b07b10819e131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型"></p>
-<h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-4911258278ef065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Boolean"></p>
-<h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><ul>
-<li>valueof() ==&gt; 返回基本类型值 true 或 false (重写)</li>
-<li>toString() ==&gt; 返回字符串 ‘true’ 和 ‘false’ (重写)</li>
-</ul>
-<p><strong>套路：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var f1 = false;</span><br><span class="line">var f2 = new Boolean(false);</span><br><span class="line">if(f1)&#123;console.log(1)&#125; //不打印</span><br><span class="line">if(f2)&#123;console.log(2)&#125; //打印2，因为在调用 f2 的时候，f2 对应的包装类型是对象，所有的对象都是真值。</span><br></pre></td></tr></table></figure></p>
-<h3 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-6e664f59886709f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Number"></p>
-<h5 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h5><ul>
-<li>valueof() ==&gt; 返回对象表示的基本类型的数值 （重写）</li>
-<li>toString() ==&gt; 返回字符串形式的数值 （重写）</li>
-<li>toLocaleString() ==&gt; 返回字符串形式的数值 （重写）</li>
-<li>toFixed() ==&gt; 按照指定的小数位返回数值的字符串表示，参数为小数位数</li>
-<li>toExponential() ==&gt; 返回以指数表示法表示的数值的字符串形式，参数为指定输出结果中的小数位数</li>
-<li>toPrecision() ==&gt; 可能返回固定大小格式，也可能返回指数格式；具体规则看哪种格式更加合适，参数为表示数值的所有数字的位数（不包括指数部分）。</li>
-</ul>
-<h3 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-5c889bdc59874e0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 String"></p>
-<h5 id="API-2"><a href="#API-2" class="headerlink" title="API"></a>API</h5><ul>
-<li><p>length ==&gt; 属性，表示字符串中包含多少个字符</p>
-</li>
-<li><p>valueof()  ==&gt; 返回对象所表示的基本字符串值</p>
-</li>
-<li><p>toLocaleString() ==&gt; 返回对象所表示的基本字符串值</p>
-</li>
-<li><p>toString() ==&gt; 返回对象所表示的基本字符串值</p>
-</li>
-<li><p>chatAt() ==&gt; 以单字符字符串的形式返回给定位置的那个字符，参数为指定位置</p>
-</li>
-<li><p>charCodeAt() ==&gt; 以字符编码的形式返回给定位置的那个字符，参数为指定位置</p>
-</li>
-<li><p>concat() ==&gt; 将一个或多个字符串拼接起来，返回拼接得到的新字符串，可以接受任意多个参数（实践中可以使用加号操作符）</p>
-</li>
-<li><p>slice() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将传入的负值<strong>与字符串的长度相加</strong>。</p>
-</li>
-<li><p>substr() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将负的第一个参数加上字符串的长度，将负的第二个参数转换为0。</p>
-</li>
-<li><p>substring() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串返回的个数，<strong>[ 开始位置，个数 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将所有负值转换为0。</p>
-</li>
-<li><p>indexOf() ==&gt; 在一个字符串中从前向后搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
-</li>
-<li><p>lastIndexOf() ==&gt; 在一个字符串中从后向前搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
-</li>
-<li><p>trim() ==&gt; 创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。</p>
-</li>
-<li><p>toLowerCase() ==&gt; 字符串大小写转换</p>
-</li>
-<li><p>toLocaleLowerCase() ==&gt; 字符串大小写转换</p>
-</li>
-<li><p>toUpperCase() ==&gt; 字符串大小写转换</p>
-</li>
-<li><p>toLocalUpperCase() ==&gt; 字符串大小写转换</p>
-</li>
-<li><p>match() ==&gt; 在字符串中匹配模式，接受一个参数，正则或者 RegExp 对象。</p>
-</li>
-<li><p>search() ==&gt; 在字符串中从前向后查找模式，返回字符串中第一个匹配项的索引，如果没有找到匹配项，则返回 -1，接受一个参数，正则或者 RegExp 对象。</p>
-</li>
-<li><p>replace() ==&gt; 替换子字符串，接受两个参数，第一个参数可以是一个 RegExp 对象或者一个字符串，第二个参数可以是一个字符串或者一个函数</p>
-</li>
-<li><p>split() ==&gt; 基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中，接受一个或两个参数，第一个参数表示分隔符，第二个参数表示数组的长度。</p>
-</li>
-</ul>
-<h5 id="当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成"><a href="#当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成" class="headerlink" title="当在读取模式中访问 Boolean Number 和 String 类型时，后台会自动完成"></a>当在<strong>读取</strong>模式中访问 Boolean Number 和 String 类型时，后台会自动完成</h5><ol>
-<li>创建相应的基本类型的一个实例 <strong>( var temp = new 基本包装类型; )</strong></li>
-<li>在实例上调用制定的方法 <strong>( var 变量 = temp.方法; )</strong></li>
-<li>销毁这个实例 <strong>( temp = null; )</strong></li>
-</ol>
-<h1 id="基本类型-和-基本包装类型-区别"><a href="#基本类型-和-基本包装类型-区别" class="headerlink" title="基本类型 和 基本包装类型 区别"></a>基本类型 和 基本包装类型 区别</h1><p>基本类型 和 基本包装类型 区别在于<strong>存储的路径</strong></p>
-<ul>
-<li><p>基本类型存储在 <strong>Stack(栈内存)</strong> 中</p>
-</li>
-<li><p>基本包装类型在 <strong>Stack(栈内存) 存储一个地址</strong>，之后对应在 <strong>Heap(堆内存) 中的一个对象</strong>，其中有很多方法，可以进行操作数据。</p>
-</li>
-<li><p>例子：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var n1 = 1;</span><br><span class="line">var n2 = new Number(1);</span><br></pre></td></tr></table></figure>
-<p>  两者区别在于：</p>
-<ul>
-<li>n1 类型是 Number(基本数据类型) ，直接储存在 Stack(栈内存) 中</li>
-<li>n2 类型是<strong>基本包装类型</strong>，在 Stack(栈内存) 存储一个地址，之后    对应在 Heap(堆内存) 中的一个对象，其中有很多方法，可以进行操作数据。</li>
-</ul>
-</li>
-</ul>
-<h1 id="引用类型-和-基本包装类型-区别"><a href="#引用类型-和-基本包装类型-区别" class="headerlink" title="引用类型 和 基本包装类型 区别"></a>引用类型 和 基本包装类型 区别</h1><p>引用类型 和 基本包装类型 区别在于<strong>对象的生存期</strong></p>
-<ul>
-<li><p>使用 new 操作符创建的引用类型的实例，在执行流离开当前作用域之前都一直保存在内存中</p>
-</li>
-<li><p>自动创建的基本包装类型的对象，只存在与一行代码的执行瞬间，然后立即被销毁</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/JavaScript/">JavaScript</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
@@ -1652,7 +1596,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
   
     <li><a href="/tags/博客/">博客</a><small>1</small></li>
   
-    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+    <li><a href="/tags/总结/">总结</a><small>3</small></li>
   
   </ul>
 </div>

@@ -82,6 +82,105 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-20T00:39:41.000Z"><a href="/2018/02/20/总结篇（三）-- 你知道-log-出来的-this-是什么么/">2018-02-20</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/20/总结篇（三）-- 你知道-log-出来的-this-是什么么/">总结篇（三） -- 你知道 log 出来的 this 是什么么</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>函数中的 <code>this</code> 是一个很重要的知识点，如果能清楚的知道各种场景下函数中 <code>this</code> 所代表的值，那么对于我们去理解库 | 框架是很有帮助的，也可以让我们去运用一些更加高级的思想</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p><code>this</code> 的使用情况大致分为两种</p>
+<ul>
+<li>函数中</li>
+<li>对象的方法中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this === call | apply | bind 的第一个参数</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在判断 <code>this</code> 的值的时候，进行相应的转化是很有必要的</p>
+<h4 id="严格模式-非严格模式"><a href="#严格模式-非严格模式" class="headerlink" title="严格模式 + 非严格模式"></a>严格模式 + 非严格模式</h4><h2 id="示例一"><a href="#示例一" class="headerlink" title="示例一"></a>示例一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;</span><br><span class="line">function fn( a, b )&#123;</span><br><span class="line">    console.log( this )</span><br><span class="line">&#125;</span><br><span class="line">fn( 1, 2 )</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn( 1, 2 ) === fn.call( undefined, 1, 2 ) === fn.apply( undefined, [1, 2] )</span><br></pre></td></tr></table></figure></p>
+<p>答案</p>
+<ul>
+<li>严格模式 ==&gt; <code>this === undefined</code></li>
+<li>非严格模式 ==&gt; <code>this === undefined == 浏览器转化 ==&gt; window</code></li>
+</ul>
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><h2 id="示例二"><a href="#示例二" class="headerlink" title="示例二"></a>示例二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    fn: function( a, b )&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;,</span><br><span class="line">    child: &#123;</span><br><span class="line">        fn2: function()&#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn( 1, 2 )</span><br><span class="line">obj.child.fn2()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj.fn( 1, 2 ) === obj.fn.call( obj, 1, 2 ) === obj.fn.apply( undefined, [ 1, 2 ] )  ==&gt; this === obj</span><br><span class="line">obj.child.fn2() === obj.child.fn2.call( obj.child )  ==&gt; this === obj.child</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例三"><a href="#示例三" class="headerlink" title="示例三"></a>示例三</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">for( let i = 0; i &lt; 3; i++ )&#123;</span><br><span class="line">    arr[ i ] = function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let fn = arr[ 0 ]</span><br><span class="line">arr[ 0 ]</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr[ 0 ] ==&gt; arr 对象&#123; 0: fn, 1: fn, 2: fn &#125; ==&gt; arr.0 ==&gt; arr.0.call( this ) ==&gt; this === arr</span><br><span class="line">fn() ==&gt; fn.call( undefined ) ==&gt; this === undefined == 浏览器转化 ==&gt; window</span><br></pre></td></tr></table></figure></p>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><p><code>bind</code> 的<a href="https://www.jianshu.com/p/e8ad9fdf8e07" target="_blank" rel="noopener">用法</a>在之前有讲过，这个 API 就是返回一个函数 + 绑定 <code>this</code> </p>
+<h2 id="示例四"><a href="#示例四" class="headerlink" title="示例四"></a>示例四</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; a: 1 &#125;</span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log( this )</span><br><span class="line">    console.log( this.a )</span><br><span class="line">&#125;</span><br><span class="line">let newFn = fn.bind( obj )</span><br><span class="line">newFn()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newFn() === fn.bind( obj )() ==&gt; this === obj ==&gt; this.a === 1</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例五"><a href="#示例五" class="headerlink" title="示例五"></a>示例五</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    container: document.querySeletor( &apos;body&apos; )</span><br><span class="line">    bind: function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        this.container.addEventListener( &apos;click&apos;, this.sayHello )</span><br><span class="line">        this.container.addEventListener( &apos;click&apos;, this.sayHello.bind( this ) )</span><br><span class="line">    &#125;,</span><br><span class="line">    sayHello: function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.bind()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bind 中的 ` this ` ==&gt; obj.bind.call( obj ) ==&gt; this === obj</span><br><span class="line">this.container.addEventListener( &apos;click&apos;, this.sayHello ) 当点击事件触发时，sayHello 打印出的 this ==&gt; this === 绑定事件的元素（this.container） ==&gt; this === obj.container</span><br><span class="line">this.container.addEventListener( &apos;click&apos;, this.sayHello.bind( this ) ) 当点击事件触发时，sayHello 打印出的 this ==&gt;  bind 绑定了 this[ this === obj ] ==&gt; sayHello 打印出的 this === obj</span><br></pre></td></tr></table></figure></p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数没有 this + arguments</p>
+<h2 id="示例六"><a href="#示例六" class="headerlink" title="示例六"></a>示例六</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    fn1: function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn2() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn3: () =&gt; &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn1()</span><br><span class="line">obj.fn2()</span><br><span class="line">obj.fn3()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj.fn1() === obj.fn1.call( obj ) ==&gt; this === obj</span><br><span class="line">obj.fn2() === obj.fn2.call( obj ) ==&gt; this === obj</span><br><span class="line">fn1 的写法 === fn2 的写法</span><br><span class="line">obj.fn3() === obj.fn3.call( 与 obj 同级 this ) ==&gt; this === window</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例七"><a href="#示例七" class="headerlink" title="示例七"></a>示例七</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        let prop = &#123;</span><br><span class="line">            init: () =&gt; &#123;</span><br><span class="line">                console.log( this )</span><br><span class="line">            &#125;,</span><br><span class="line">            bind() &#123;</span><br><span class="line">                console.log( this )</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        prop.init()</span><br><span class="line">        prop.bind()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.init()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">        console.log( this )  // 2.  this === obj</span><br><span class="line">        let prop = &#123;</span><br><span class="line">            init: () =&gt; &#123;</span><br><span class="line">                console.log( this )  // 4. this === prop 同级 this ==&gt; this === obj </span><br><span class="line">            &#125;,</span><br><span class="line">            bind() &#123;</span><br><span class="line">                console.log( this )  // 6. this === prop</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        prop.init()  // 3. init() 是箭头函数 ==&gt; prop.init.call( prop 同级 this )</span><br><span class="line">        prop.bind()  // 5. bind 不是箭头函数 ==&gt; prop.bind.call( prop )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.init()  // 1.  === obj.init.call( obj )</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例八"><a href="#示例八" class="headerlink" title="示例八"></a>示例八</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    x: console.log( this )</span><br><span class="line">    fn1() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( function()&#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;, 10 )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn2() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( () =&gt; &#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;, 20 )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn3() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( function()&#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;.bind( this ), 30 )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn4: () =&gt; &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( () =&gt; &#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;, 40 )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn1()</span><br><span class="line">obj.fn2()</span><br><span class="line">obj.fn3()</span><br><span class="line">obj.fn4()</span><br></pre></td></tr></table></figure>
+<p><strong>obj.x 的值是什么？</strong></p>
+<p>上述中的 <code>this</code> 会打印出什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    x: console.log( this )  // console.log( this ) 的值是 undefined ==&gt; obj.x === undefined  其中的 this === window</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>fn1()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn1() &#123;</span><br><span class="line">    console.log( this )   // 2. this === obj</span><br><span class="line">    setTimeout( function()&#123;</span><br><span class="line">        console.log( this )  </span><br><span class="line">    &#125;, 10 )</span><br><span class="line">    // 3. 等价于</span><br><span class="line">    // function fn()&#123;</span><br><span class="line">    //     console.log( this )  // 5. this === undefined == 浏览器转化 ==&gt; window</span><br><span class="line">    // &#125;</span><br><span class="line">    // 过 10s 执行函数 fn</span><br><span class="line">    // fn()   // 4. fn 非箭头函数  fn.call( undefined ) </span><br><span class="line">&#125;</span><br><span class="line">obj.fn1()  // 1. fn1 非箭头函数  obj.fn1.call( obj )</span><br></pre></td></tr></table></figure></p>
+<p><strong>fn2()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn2() &#123;</span><br><span class="line">    console.log( this )   // 2. this === obj</span><br><span class="line">    setTimeout( () =&gt; &#123;</span><br><span class="line">        console.log( this )  // 5. this === 上级 this  ==&gt; this === obj</span><br><span class="line">    &#125;, 20 )</span><br><span class="line">    // 3. 等价于</span><br><span class="line">    // () =&gt; &#123;</span><br><span class="line">    //     console.log( this )</span><br><span class="line">    // &#125;</span><br><span class="line">    // 过 20s 执行箭头函数</span><br><span class="line">    // 箭头函数()  // 4. 箭头函数 箭头函数.call( 上级this )</span><br><span class="line">&#125;</span><br><span class="line">obj.fn2()  // 1. fn2 非箭头函数  obj.fn2.call( obj )</span><br></pre></td></tr></table></figure></p>
+<p><strong>fn3()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn3() &#123;</span><br><span class="line">    console.log( this )  // 2.  this === obj</span><br><span class="line">    setTimeout( function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;.bind( this ), 30 )</span><br><span class="line">    // 3.  等价于</span><br><span class="line">    // function fn()&#123;</span><br><span class="line">    //     console.log( this )  // 5. this === obj</span><br><span class="line">    // &#125;.bind( this )</span><br><span class="line">    // 过 30s 执行函数 fn</span><br><span class="line">    // fn.bind(this)  // 4. fn 非箭头函数 + bind 绑定 this[ this === obj ]</span><br><span class="line">&#125;</span><br><span class="line">obj.fn3()  // 1. fn3 非箭头函数  obj.fn3.call( obj )</span><br></pre></td></tr></table></figure></p>
+<p><strong>fn4()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn4: () =&gt; &#123;</span><br><span class="line">    console.log( this )  // 2. this === obj 同级 this  ==&gt; this === window</span><br><span class="line">    setTimeout( () =&gt; &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;, 40 )</span><br><span class="line">    // 3. 等价于</span><br><span class="line">    // () =&gt; &#123;</span><br><span class="line">    //     console.log( this )  // 5. this === window</span><br><span class="line">    // &#125;</span><br><span class="line">    // 过 40s 后执行箭头函数</span><br><span class="line">    // 箭头函数()   // 4. 箭头函数  箭头函数.call( 上级 this )</span><br><span class="line">&#125;</span><br><span class="line">obj.fn4() // 1. fn4 箭头函数  obj.fn4.call( obj 同级 this )</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>判断函数中 <code>this</code> 步骤</p>
+<ol>
+<li>查看调用函数的类型</li>
+<li>箭头函数<ul>
+<li>箭头函数.call( 上级 this )</li>
+<li>obj.箭头函数.call( obj 同级 this )</li>
+</ul>
+</li>
+<li>非箭头函数<ul>
+<li>非箭头函数.call( undefined )</li>
+<li>obj.非箭头函数.call( obj )</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/总结/">总结</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-18T23:43:26.000Z"><a href="/2018/02/19/前端基础系列（四） -- 内存/">2018-02-19</a></time>
       
       
@@ -475,8 +574,7 @@
 <h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ul>
 <li>绝对路径： 以 <code>/</code> 开头的路径就是绝对路径</li>
 <li>隐藏文件以 <code>.</code> 开头</li>
-<li>d — 目录、r — 可读、w — 可写、x — 可执行<br>rwx（管理员权限）<br>r-x（用户所在组权限）<br>r-x（任意用户权限）<pre><code>![更多信息](http://upload-images.jianshu.io/upload_images/9617841-96efb0bf3fef1021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre></li>
+<li>d — 目录、r — 可读、w — 可写、x — 可执行<br>rwx（管理员权限）<br>r-x（用户所在组权限）<br>r-x（任意用户权限）<br><img src="http://upload-images.jianshu.io/upload_images/9617841-96efb0bf3fef1021.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="更多信息"></li>
 </ul>
 
       
@@ -1204,120 +1302,6 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-02-05T14:34:07.000Z"><a href="/2018/02/05/JS系列 -- Array 浅析/">2018-02-05</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/02/05/JS系列 -- Array 浅析/">JS系列 -- Array 浅析</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>数组是按次序排列的一组值的集合，它是一个<strong>对象</strong>。<br>数组可以存储任何类型的数据（数字，字符串，布尔值或者对象）</p>
-<h3 id="创建方法"><a href="#创建方法" class="headerlink" title="创建方法"></a>创建方法</h3><h5 id="使用-Array-构造函数"><a href="#使用-Array-构造函数" class="headerlink" title="使用 Array 构造函数"></a>使用 Array 构造函数</h5><p><img src="http://upload-images.jianshu.io/upload_images/9617841-6ea1c407cf635857.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 构造函数"></p>
-<h5 id="使用数组字面量表示法"><a href="#使用数组字面量表示法" class="headerlink" title="使用数组字面量表示法"></a>使用数组字面量表示法</h5><p>数组字面量由一对包含数组项的方括号表示，多个数组之间以逗号隔开。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-335e259acf5fba52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 字面量"></p>
-<h1 id="属性-length"><a href="#属性-length" class="headerlink" title="属性 length"></a>属性 length</h1><p>表示数组的长度，即数组中元素的个数。<br>数组索引从 0 开始，索引上下限为 0 到 length-1 。<br>数组的 length 属性<strong>不是只读</strong>的，可以进行设置<br><img src="http://upload-images.jianshu.io/upload_images/9617841-def1e376a8012efe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array length 修改"></p>
-<p><strong>注意：</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-7e72fd6106cc9701.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array length"><br><code>arr02</code> 中 <code>arr02[ 1 ] === undefined</code>，这个元素是存在的，只不过值为 undefined。</p>
-<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p>Array 是对象，所以 Array 有对象的一些方法<br><img src="http://upload-images.jianshu.io/upload_images/9617841-b4189f737381258e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 原型"><br>可以为数组添加属性，因为数组是对象。</p>
-<h1 id="检测数组"><a href="#检测数组" class="headerlink" title="检测数组"></a>检测数组</h1><ul>
-<li><code>Array.isArray()</code> ==&gt; 用于确定传递的值是否是一个 Array</li>
-<li><code>value instanceof Array</code> ==&gt; 使用 instanceof 操作符检测数组</li>
-<li><code>value.push()</code> ==&gt; 使用数组的特有方法，从而检测数组</li>
-</ul>
-<h1 id="方法-API"><a href="#方法-API" class="headerlink" title="方法 API"></a>方法 API</h1><h3 id="Object-原型上的-API"><a href="#Object-原型上的-API" class="headerlink" title="Object 原型上的 API"></a>Object 原型上的 API</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-94e2302778e6f341.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object 原型上的 API"></p>
-<h3 id="Array-prototype-API"><a href="#Array-prototype-API" class="headerlink" title="Array.prototype API"></a>Array.prototype API</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-ebda095a9826c3f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array 原型上的 API"></p>
-<h4 id="栈方法"><a href="#栈方法" class="headerlink" title="栈方法"></a>栈方法</h4><p>栈是一种可以限制插入和删除项的数据结构。它是一种 LIFO（Last-In-First -Out，后进先出）的数据结构，栈中项的插入（推入）和移除（弹出）只发生在一个位置 —- 栈的顶部。</p>
-<ul>
-<li><code>push()</code> ==&gt; 将一个或多个元素添加到数组的末尾，并<strong>返回新数组的长度</strong>。</li>
-<li><code>pop()</code> ==&gt; 从数组中删除最后一个元素，并<strong>返回该元素的值</strong>。此方法更改数组的长度。</li>
-</ul>
-<h4 id="队列方法"><a href="#队列方法" class="headerlink" title="队列方法"></a>队列方法</h4><p>队列数据结构的访问规则是 FIFO（Fitst-In-Fitst-Out，先进先出），队列在列表的末端添加项，在列表前端移除项。</p>
-<ul>
-<li><code>shift()</code> ==&gt; 从数组中删除第一个元素，并<strong>返回该元素的值</strong>。此方法更改数组的长度。</li>
-<li><code>unshift()</code> ==&gt; 将一个或多个元素添加到数组的开头，并<strong>返回新数组的长度</strong>。</li>
-</ul>
-<h4 id="重排序方法"><a href="#重排序方法" class="headerlink" title="重排序方法"></a>重排序方法</h4><p>重排序方法 <code>sort()</code> 和<code>reverse()</code> 的<strong>返回值是经过排序之后的数组</strong>，这两种方法都会<strong>改变原数组</strong>。</p>
-<ul>
-<li><p><code>sort()</code> ==&gt; 在适当的位置对数组的元素进行排序，并<strong>返回数组</strong>。默认排序顺序是根据<strong>字符串Unicode码点</strong>。<br> <img src="http://upload-images.jianshu.io/upload_images/9617841-4bd79d3863269eaf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array sort 排序"><br> <img src="http://upload-images.jianshu.io/upload_images/9617841-b07b786adcc4b08e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array sort 排序"></p>
-</li>
-<li><p><code>reverse()</code> ==&gt; 将数组中元素的位置颠倒，并<strong>返回该数组的引用</strong>。第一个数组元素成为最后一个数组元素，最后一个数组元素成为第一个。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-03c659fb37fe7170.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array reverse"></p>
-</li>
-</ul>
-<h4 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h4><ul>
-<li><p><code>concat()</code> ==&gt; 用于合并两个或多个数组。此方法不会更改现有数组，而是<strong>返回一个新数组</strong>。</p>
-</li>
-<li><p><code>slice()</code> ==&gt; <strong>返回一个从开始到结束（不包括结束）选择的数组的一部分浅拷贝到一个新数组对象</strong>，原数组不会被修改。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-f46d0e64ba879c47.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array slice()"></p>
-</li>
-<li><p><code>splice()</code> ==&gt; 通过删除现有元素和/或添加新元素来更改一个数组的内容。<br><strong>返回由被删除的元素组成的一个数组</strong>。<br><strong>删除了一个元素</strong> ==&gt; <strong>返回只包含一个元素的数组</strong>。<br><strong>没有删除元素</strong> ==&gt; <strong>返回空数组</strong>。<br><strong>参数：</strong> <code>array.splice(start [ , deleteCount [, item1 [, item2, ... ] ] ])</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-5d25a212665cf00a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array splice API"></p>
-</li>
-</ul>
-<h4 id="位置方法"><a href="#位置方法" class="headerlink" title="位置方法"></a>位置方法</h4><ul>
-<li><code>indexOf()</code> ==&gt; <strong>返回在数组中可以找到一个给定元素的第一个索引</strong>，如果不存在，则<strong>返回-1</strong></li>
-<li><code>LastIndexOf()</code> ==&gt; <strong>返回指定元素在数组中的最后一个的索引</strong>，如果不存在则<strong>返回 -1</strong>。从数组的后面向前查找</li>
-</ul>
-<h4 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h4><ul>
-<li><p><code>forEach()</code> ==&gt; 对数组的每个元素执行一次提供的函数。<strong>返回 undefined</strong><br>参数：<strong>回调函数</strong>和可选的执行回调函数时用作this的值，<strong>回调函数</strong>接受三个值：</p>
-<ol>
-<li>数组中正在处理的当前元素</li>
-<li>数组中正在处理的当前元素的索引</li>
-<li>forEach()方法正在操作的数组<br><img src="http://upload-images.jianshu.io/upload_images/9617841-2ecfa4be91a212d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array forEach"></li>
-</ol>
-</li>
-<li><p><code>map()</code> ==&gt; 创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。<strong>返回一个新数组，每个元素都是回调函数的结果</strong><br><strong>和 <code>forEach</code> 作用一样，只是返回一个新数组</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-596d0557d2e52a1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array map"></p>
-</li>
-<li><p><code>every()</code> ==&gt; 测试数组的所有元素是否都通过了指定函数的测试。<strong>返回布尔值</strong></p>
-</li>
-<li><p><code>some()</code> ==&gt; 测试数组中的某些元素是否通过由提供的函数实现的测试。<strong>返回布尔值</strong></p>
-</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/9617841-f3f669c4e73662af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array every + some"></p>
-<ul>
-<li><code>filter()</code> ==&gt; 创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。 <strong>返回一个新的通过测试的元素的集合的数组</strong></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/9617841-36de13831ddd2bf4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Array filter"></p>
-<h4 id="归并方法"><a href="#归并方法" class="headerlink" title="归并方法"></a>归并方法</h4><ul>
-<li><code>reduce()</code> ==&gt; 对累加器和数组中的每个元素（从左到右）应用一个函数，将其减少为单个值。<strong>返回函数累计处理的结果</strong></li>
-<li><code>reduceRight()</code> ==&gt; 接受一个函数作为累加器（accumulator）和数组的每个值（从右到左）将其减少为单个值。<strong>返回函数累计处理的结果</strong></li>
-</ul>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/JavaScript/">JavaScript</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1360,7 +1344,7 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
   
     <li><a href="/tags/博客/">博客</a><small>1</small></li>
   
-    <li><a href="/tags/总结/">总结</a><small>2</small></li>
+    <li><a href="/tags/总结/">总结</a><small>3</small></li>
   
   </ul>
 </div>

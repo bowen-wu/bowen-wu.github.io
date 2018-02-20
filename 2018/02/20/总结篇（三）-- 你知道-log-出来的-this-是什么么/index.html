@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>总结篇（三） -- 你知道 log 出来的 this 是什么么 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述函数中的 this 是一个很重要的知识点，如果能清楚的知道各种场景下函数中 this 所代表的值，那么对于我们去理解库 | 框架是很有帮助的，也可以让我们去运用一些更加高级的思想
+thisthis 的使用情况大致分为两种
+
+函数中
+对象的方法中1this === call | apply | b">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="总结篇（三） -- 你知道 log 出来的 this 是什么么"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/20/总结篇（三）-- 你知道-log-出来的-this-是什么么/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-20T00:39:41.000Z"><a href="/2018/02/20/总结篇（三）-- 你知道-log-出来的-this-是什么么/">2018-02-20</a></time>
+      
+      
+  
+    <h1 class="title">总结篇（三） -- 你知道 log 出来的 this 是什么么</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>函数中的 <code>this</code> 是一个很重要的知识点，如果能清楚的知道各种场景下函数中 <code>this</code> 所代表的值，那么对于我们去理解库 | 框架是很有帮助的，也可以让我们去运用一些更加高级的思想</p>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><p><code>this</code> 的使用情况大致分为两种</p>
+<ul>
+<li>函数中</li>
+<li>对象的方法中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this === call | apply | bind 的第一个参数</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在判断 <code>this</code> 的值的时候，进行相应的转化是很有必要的</p>
+<h4 id="严格模式-非严格模式"><a href="#严格模式-非严格模式" class="headerlink" title="严格模式 + 非严格模式"></a>严格模式 + 非严格模式</h4><h2 id="示例一"><a href="#示例一" class="headerlink" title="示例一"></a>示例一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;</span><br><span class="line">function fn( a, b )&#123;</span><br><span class="line">    console.log( this )</span><br><span class="line">&#125;</span><br><span class="line">fn( 1, 2 )</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fn( 1, 2 ) === fn.call( undefined, 1, 2 ) === fn.apply( undefined, [1, 2] )</span><br></pre></td></tr></table></figure></p>
+<p>答案</p>
+<ul>
+<li>严格模式 ==&gt; <code>this === undefined</code></li>
+<li>非严格模式 ==&gt; <code>this === undefined == 浏览器转化 ==&gt; window</code></li>
+</ul>
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><h2 id="示例二"><a href="#示例二" class="headerlink" title="示例二"></a>示例二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    fn: function( a, b )&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;,</span><br><span class="line">    child: &#123;</span><br><span class="line">        fn2: function()&#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn( 1, 2 )</span><br><span class="line">obj.child.fn2()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj.fn( 1, 2 ) === obj.fn.call( obj, 1, 2 ) === obj.fn.apply( undefined, [ 1, 2 ] )  ==&gt; this === obj</span><br><span class="line">obj.child.fn2() === obj.child.fn2.call( obj.child )  ==&gt; this === obj.child</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例三"><a href="#示例三" class="headerlink" title="示例三"></a>示例三</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">for( let i = 0; i &lt; 3; i++ )&#123;</span><br><span class="line">    arr[ i ] = function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let fn = arr[ 0 ]</span><br><span class="line">arr[ 0 ]</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr[ 0 ] ==&gt; arr 对象&#123; 0: fn, 1: fn, 2: fn &#125; ==&gt; arr.0 ==&gt; arr.0.call( this ) ==&gt; this === arr</span><br><span class="line">fn() ==&gt; fn.call( undefined ) ==&gt; this === undefined == 浏览器转化 ==&gt; window</span><br></pre></td></tr></table></figure></p>
+<h4 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h4><p><code>bind</code> 的<a href="https://www.jianshu.com/p/e8ad9fdf8e07" target="_blank" rel="noopener">用法</a>在之前有讲过，这个 API 就是返回一个函数 + 绑定 <code>this</code> </p>
+<h2 id="示例四"><a href="#示例四" class="headerlink" title="示例四"></a>示例四</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; a: 1 &#125;</span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log( this )</span><br><span class="line">    console.log( this.a )</span><br><span class="line">&#125;</span><br><span class="line">let newFn = fn.bind( obj )</span><br><span class="line">newFn()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newFn() === fn.bind( obj )() ==&gt; this === obj ==&gt; this.a === 1</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例五"><a href="#示例五" class="headerlink" title="示例五"></a>示例五</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    container: document.querySeletor( &apos;body&apos; )</span><br><span class="line">    bind: function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        this.container.addEventListener( &apos;click&apos;, this.sayHello )</span><br><span class="line">        this.container.addEventListener( &apos;click&apos;, this.sayHello.bind( this ) )</span><br><span class="line">    &#125;,</span><br><span class="line">    sayHello: function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.bind()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bind 中的 ` this ` ==&gt; obj.bind.call( obj ) ==&gt; this === obj</span><br><span class="line">this.container.addEventListener( &apos;click&apos;, this.sayHello ) 当点击事件触发时，sayHello 打印出的 this ==&gt; this === 绑定事件的元素（this.container） ==&gt; this === obj.container</span><br><span class="line">this.container.addEventListener( &apos;click&apos;, this.sayHello.bind( this ) ) 当点击事件触发时，sayHello 打印出的 this ==&gt;  bind 绑定了 this[ this === obj ] ==&gt; sayHello 打印出的 this === obj</span><br></pre></td></tr></table></figure></p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数没有 this + arguments</p>
+<h2 id="示例六"><a href="#示例六" class="headerlink" title="示例六"></a>示例六</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    fn1: function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn2() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn3: () =&gt; &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn1()</span><br><span class="line">obj.fn2()</span><br><span class="line">obj.fn3()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj.fn1() === obj.fn1.call( obj ) ==&gt; this === obj</span><br><span class="line">obj.fn2() === obj.fn2.call( obj ) ==&gt; this === obj</span><br><span class="line">fn1 的写法 === fn2 的写法</span><br><span class="line">obj.fn3() === obj.fn3.call( 与 obj 同级 this ) ==&gt; this === window</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例七"><a href="#示例七" class="headerlink" title="示例七"></a>示例七</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        let prop = &#123;</span><br><span class="line">            init: () =&gt; &#123;</span><br><span class="line">                console.log( this )</span><br><span class="line">            &#125;,</span><br><span class="line">            bind() &#123;</span><br><span class="line">                console.log( this )</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        prop.init()</span><br><span class="line">        prop.bind()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.init()</span><br></pre></td></tr></table></figure>
+<p>上述中的 <code>this</code> 会打印出什么呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    init() &#123;</span><br><span class="line">        console.log( this )  // 2.  this === obj</span><br><span class="line">        let prop = &#123;</span><br><span class="line">            init: () =&gt; &#123;</span><br><span class="line">                console.log( this )  // 4. this === prop 同级 this ==&gt; this === obj </span><br><span class="line">            &#125;,</span><br><span class="line">            bind() &#123;</span><br><span class="line">                console.log( this )  // 6. this === prop</span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">        prop.init()  // 3. init() 是箭头函数 ==&gt; prop.init.call( prop 同级 this )</span><br><span class="line">        prop.bind()  // 5. bind 不是箭头函数 ==&gt; prop.bind.call( prop )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.init()  // 1.  === obj.init.call( obj )</span><br></pre></td></tr></table></figure></p>
+<h2 id="示例八"><a href="#示例八" class="headerlink" title="示例八"></a>示例八</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    x: console.log( this )</span><br><span class="line">    fn1() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( function()&#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;, 10 )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn2() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( () =&gt; &#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;, 20 )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn3() &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( function()&#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;.bind( this ), 30 )</span><br><span class="line">    &#125;,</span><br><span class="line">    fn4: () =&gt; &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">        setTimeout( () =&gt; &#123;</span><br><span class="line">            console.log( this )</span><br><span class="line">        &#125;, 40 )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn1()</span><br><span class="line">obj.fn2()</span><br><span class="line">obj.fn3()</span><br><span class="line">obj.fn4()</span><br></pre></td></tr></table></figure>
+<p><strong>obj.x 的值是什么？</strong></p>
+<p>上述中的 <code>this</code> 会打印出什么呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    x: console.log( this )  // console.log( this ) 的值是 undefined ==&gt; obj.x === undefined  其中的 this === window</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>fn1()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn1() &#123;</span><br><span class="line">    console.log( this )   // 2. this === obj</span><br><span class="line">    setTimeout( function()&#123;</span><br><span class="line">        console.log( this )  </span><br><span class="line">    &#125;, 10 )</span><br><span class="line">    // 3. 等价于</span><br><span class="line">    // function fn()&#123;</span><br><span class="line">    //     console.log( this )  // 5. this === undefined == 浏览器转化 ==&gt; window</span><br><span class="line">    // &#125;</span><br><span class="line">    // 过 10s 执行函数 fn</span><br><span class="line">    // fn()   // 4. fn 非箭头函数  fn.call( undefined ) </span><br><span class="line">&#125;</span><br><span class="line">obj.fn1()  // 1. fn1 非箭头函数  obj.fn1.call( obj )</span><br></pre></td></tr></table></figure></p>
+<p><strong>fn2()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn2() &#123;</span><br><span class="line">    console.log( this )   // 2. this === obj</span><br><span class="line">    setTimeout( () =&gt; &#123;</span><br><span class="line">        console.log( this )  // 5. this === 上级 this  ==&gt; this === obj</span><br><span class="line">    &#125;, 20 )</span><br><span class="line">    // 3. 等价于</span><br><span class="line">    // () =&gt; &#123;</span><br><span class="line">    //     console.log( this )</span><br><span class="line">    // &#125;</span><br><span class="line">    // 过 20s 执行箭头函数</span><br><span class="line">    // 箭头函数()  // 4. 箭头函数 箭头函数.call( 上级this )</span><br><span class="line">&#125;</span><br><span class="line">obj.fn2()  // 1. fn2 非箭头函数  obj.fn2.call( obj )</span><br></pre></td></tr></table></figure></p>
+<p><strong>fn3()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn3() &#123;</span><br><span class="line">    console.log( this )  // 2.  this === obj</span><br><span class="line">    setTimeout( function()&#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;.bind( this ), 30 )</span><br><span class="line">    // 3.  等价于</span><br><span class="line">    // function fn()&#123;</span><br><span class="line">    //     console.log( this )  // 5. this === obj</span><br><span class="line">    // &#125;.bind( this )</span><br><span class="line">    // 过 30s 执行函数 fn</span><br><span class="line">    // fn.bind(this)  // 4. fn 非箭头函数 + bind 绑定 this[ this === obj ]</span><br><span class="line">&#125;</span><br><span class="line">obj.fn3()  // 1. fn3 非箭头函数  obj.fn3.call( obj )</span><br></pre></td></tr></table></figure></p>
+<p><strong>fn4()</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn4: () =&gt; &#123;</span><br><span class="line">    console.log( this )  // 2. this === obj 同级 this  ==&gt; this === window</span><br><span class="line">    setTimeout( () =&gt; &#123;</span><br><span class="line">        console.log( this )</span><br><span class="line">    &#125;, 40 )</span><br><span class="line">    // 3. 等价于</span><br><span class="line">    // () =&gt; &#123;</span><br><span class="line">    //     console.log( this )  // 5. this === window</span><br><span class="line">    // &#125;</span><br><span class="line">    // 过 40s 后执行箭头函数</span><br><span class="line">    // 箭头函数()   // 4. 箭头函数  箭头函数.call( 上级 this )</span><br><span class="line">&#125;</span><br><span class="line">obj.fn4() // 1. fn4 箭头函数  obj.fn4.call( obj 同级 this )</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>判断函数中 <code>this</code> 步骤</p>
+<ol>
+<li>查看调用函数的类型</li>
+<li>箭头函数<ul>
+<li>箭头函数.call( 上级 this )</li>
+<li>obj.箭头函数.call( obj 同级 this )</li>
+</ul>
+</li>
+<li>非箭头函数<ul>
+<li>非箭头函数.call( undefined )</li>
+<li>obj.非箭头函数.call( obj )</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>
