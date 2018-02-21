@@ -78,6 +78,87 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-02-21T23:41:17.000Z"><a href="/2018/02/22/JS进阶 -- 面向对象（一）代码 + 函数 + this + new/">2018-02-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/22/JS进阶 -- 面向对象（一）代码 + 函数 + this + new/">JS进阶 -- 面向对象（一）代码 + 函数 + this + new</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本篇我们借助 MVC 来初步理解面向对象，之后理解一下 函数 + <code>this</code> + <code>new</code></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h4 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h4><p>当我们使用 MVC 思想将代码模块化后，每个 js 文件中代码没有重复，很精简，但是当我们跨文件观察我们的 js 时，发现每个 js 文件都有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let view = document.querySelect( &apos;xxx&apos; )</span><br><span class="line">let model = &#123;</span><br><span class="line">    init: function()&#123;&#125;,</span><br><span class="line">    fetch: function()&#123;&#125;,</span><br><span class="line">    save: function()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">let controller = &#123;</span><br><span class="line">    view: null,</span><br><span class="line">    model: null,</span><br><span class="line">    init: function()&#123;</span><br><span class="line">        this.view = view</span><br><span class="line">        this.model = model</span><br><span class="line">        this.model.init()</span><br><span class="line">        this.init()</span><br><span class="line">        this.bingEvents()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这是一种跨文件的重复，如果我们抽丝剥茧便可以对重复的地方进行分类，在全局范围内创造一个模板，每一个重复的地方都是由全局<strong>模板</strong>制造出来的</p>
+<h4 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h4><p>我们创建一个 base 文件目录，里面有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">base/View.js</span><br><span class="line">    window.View = function()&#123;&#125;</span><br><span class="line">base/Model.js</span><br><span class="line">    window.Model = function()&#123;&#125;</span><br><span class="line">base/Controller.js</span><br><span class="line">    window.Controller = function()&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>之后每个文件的重复的地方都使用全局变量 View()、Model() 和 Controller()</p>
+<h2 id="函数-this"><a href="#函数-this" class="headerlink" title="函数 + this"></a>函数 + this</h2><p>函数是一种可执行代码组成的对象，<code>this</code> 仅仅是函数的一个<strong>参数</strong>而已</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>I/O + 一顿操作 + 隐藏细节，所有的 I( input ) === <code>this + arguments</code></p>
+<h4 id="函数-lt-gt-this-lt-gt-对象"><a href="#函数-lt-gt-this-lt-gt-对象" class="headerlink" title="函数 &lt;==&gt; this &lt;==&gt; 对象"></a>函数 &lt;==&gt; this &lt;==&gt; 对象</h4><p>JavaScript 通过 <code>this</code> 连接 <code>Object</code> 和 <code>Function</code>，函数和对象没有一丢丢关系<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    name: &apos;xxx&apos;,</span><br><span class="line">    sayName: function() &#123;</span><br><span class="line">        console.log( this.name )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>obj.sayName 仅仅存储了函数的地址而已 ==&gt; 函数是一等公民 ==&gt; 函数是一个独立的，既不是附属品，也不是方法</p>
+<h4 id="判断-this-的值"><a href="#判断-this-的值" class="headerlink" title="判断 this 的值"></a><a href="https://www.jianshu.com/p/66a32662e920" target="_blank" rel="noopener">判断 this 的值</a></h4><h2 id="new-操作符"><a href="#new-操作符" class="headerlink" title="new 操作符"></a>new 操作符</h2><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>new 操作符主要是一个语法，它主要做了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function Person(name) &#123;</span><br><span class="line">    this.name = name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">当使用 let xiaoming = new Person( &apos;xiaoming&apos; ) 时，等价于</span><br><span class="line"></span><br><span class="line">let xiaoming = function(options) &#123;</span><br><span class="line">    // 1. var temp = &#123;&#125;</span><br><span class="line">    // 2. this = temp</span><br><span class="line">    this.name = &apos;xiaoming&apos;</span><br><span class="line">    // 3. 构造函数.prototype = &#123; constructor: 构造函数 &#125;</span><br><span class="line">    // 4. this.__proto__ = 构造函数.prototype</span><br><span class="line">    // 5. return this</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>请注意：new 返回值的类型是 Object</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-75082f65d6acfe94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="浏览器运行结果"></p>
+<p><strong>说明</strong>：如果人为在 Person 中增加 <code>return</code>，两种情况</p>
+<ul>
+<li><code>return 基本类型</code> ==&gt; 无效 + 无视</li>
+<li><code>return 复杂类型（对象）</code> ==&gt; 返回复杂类型（对象）</li>
+</ul>
+<h4 id="new-的实现"><a href="#new-的实现" class="headerlink" title="new 的实现"></a>new 的实现</h4><p><strong><code>var 对象 = new 函数</code></strong></p>
+<h5 id="方法一：通过-Object-create-实现-new"><a href="#方法一：通过-Object-create-实现-new" class="headerlink" title="方法一：通过 Object.create() 实现 new"></a>方法一：通过 Object.create() 实现 new</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = Object.create( constructor.prototype )</span><br><span class="line">    constructor.apply( obj, [].slice.call( auguments, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-ad27b22da142fdae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过 Object.create() 实现 new"></p>
+<h5 id="方法二：通过-Object-setPrototypeOf-实现-new"><a href="#方法二：通过-Object-setPrototypeOf-实现-new" class="headerlink" title="方法二：通过 Object.setPrototypeOf() 实现 new"></a>方法二：通过 Object.setPrototypeOf() 实现 new</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = &#123;&#125;</span><br><span class="line">    Object.setPrototypeOf( obj, constructor.prototype )</span><br><span class="line">    constructor.apply( obj, [].slice.call( arguments, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-b73dae67e0ce13ad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="通过 Object.setPrototypeOf() 实现 new"></p>
+<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p>创建一个函数过程</p>
+<ol>
+<li><p>创建一个函数对象</p>
+</li>
+<li><p>创建一个原型对象</p>
+</li>
+<li><p>函数对象会有一个 <code>prototype</code> 属性，指向对应的原型对象</p>
+</li>
+<li><p>原型对象中有一个 <code>constructer</code> 属性，指向对应的构造函数</p>
+</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/9617841-0d655d27ee7edf46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="函数"></p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript-进阶/">JavaScript 进阶</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-02-20T23:36:20.000Z"><a href="/2018/02/21/总结篇（四）-- 进阶/">2018-02-21</a></time>
       
       
@@ -956,86 +1037,6 @@
   
   <div class="tags">
     <a href="/tags/HTTP/">HTTP</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-02-07T23:35:39.000Z"><a href="/2018/02/08/JS进阶 -- 面向对象（Object-Oriented）/">2018-02-08</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/02/08/JS进阶 -- 面向对象（Object-Oriented）/">JS进阶 -- 面向对象（Object-Oriented）</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>面向对象是一种前端前辈们总结出的一套经验，因为它是一种经验，所以每个前端都对其有自己的理解，但毫不保留的说它可以使我们更快、更好的进行开发。它的中心思想可以理解为 <strong>你办事，我放心</strong></p>
-<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p><strong>面向对象</strong>是把一组数据结构和处理它们的方法组成<strong>对象（Object）</strong>，把相同行为的对象归纳为<strong>类（Class）</strong>，通过类的<strong>封装（Encapsulation）</strong>隐藏内部细节，通过<strong>继承（Inheritance）</strong>实现类的<strong>特化（Specialization）</strong>/<strong>泛化（Generalization）</strong>，通过<strong>多态（Polymorphism）</strong>实现基于对象类型的<strong>动态分派（Dunamic Dispatch）</strong></p>
-<h6 id="注意：现在看不懂没有关系，先往下看。"><a href="#注意：现在看不懂没有关系，先往下看。" class="headerlink" title="注意：现在看不懂没有关系，先往下看。"></a>注意：现在看不懂没有关系，先往下看。</h6><h1 id="技术术语"><a href="#技术术语" class="headerlink" title="技术术语"></a>技术术语</h1><h3 id="Namespace-命名空间"><a href="#Namespace-命名空间" class="headerlink" title="Namespace 命名空间"></a>Namespace 命名空间</h3><p>它是一种可以捆绑功能的容器，经常是一个对象，可以为这个对象添加属性和方法，这个对象就是命名空间，例如 window.jQuery</p>
-<h3 id="Class-类"><a href="#Class-类" class="headerlink" title="Class 类"></a>Class 类</h3><p>定义对象的特征，它是对象属性和方法的模板定义</p>
-<h3 id="Object-对象"><a href="#Object-对象" class="headerlink" title="Object 对象"></a>Object 对象</h3><p>类的一个实例</p>
-<h3 id="Property-属性"><a href="#Property-属性" class="headerlink" title="Property 属性"></a>Property 属性</h3><p>对象的特征，比如大小</p>
-<h3 id="Method-方法"><a href="#Method-方法" class="headerlink" title="Method 方法"></a>Method 方法</h3><p>对象的能力，比如行走</p>
-<h3 id="Constructor-构造函数"><a href="#Constructor-构造函数" class="headerlink" title="Constructor 构造函数"></a>Constructor 构造函数</h3><p>对象初始化的瞬间，被调用的方法，通常它的名字和包含它的类一致</p>
-<h3 id="Inheritance-继承"><a href="#Inheritance-继承" class="headerlink" title="Inheritance 继承"></a>Inheritance 继承</h3><p>一个类可以继承另一个类的特征</p>
-<h3 id="Encapsulation-封装"><a href="#Encapsulation-封装" class="headerlink" title="Encapsulation 封装"></a>Encapsulation 封装</h3><p>把数据和相关的方法绑定在一起使用的方法</p>
-<h3 id="Abstraction-抽象"><a href="#Abstraction-抽象" class="headerlink" title="Abstraction 抽象"></a>Abstraction 抽象</h3><p>结合复杂的继承、方法和属性的对象可以模拟现实的模型</p>
-<h3 id="Polymorphism-多态"><a href="#Polymorphism-多态" class="headerlink" title="Polymorphism 多态"></a>Polymorphism 多态</h3><p>不同的类可以定义为相同的方法或属性</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>当我们使用 MVC 思想将代码模块化后，每个 js 文件中代码没有重复，很精简，但是当我们跨文件观察我们的 js 时，发现每个 js 文件都有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let view = document.querySelect( &apos;xxx&apos; )</span><br><span class="line">let model = &#123;</span><br><span class="line">    init: function()&#123;&#125;,</span><br><span class="line">    fetch: function()&#123;&#125;,</span><br><span class="line">    save: function()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">let controller = &#123;</span><br><span class="line">    view: null,</span><br><span class="line">    model: null,</span><br><span class="line">    init: function()&#123;</span><br><span class="line">        this.view = view</span><br><span class="line">        this.model = model</span><br><span class="line">        this.model.init()</span><br><span class="line">        this.init()</span><br><span class="line">        this.bingEvents()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这是一种跨文件的重复，如果我们抽丝剥茧便可以对重复的地方进行分类，在全局范围内创造一个模板，每一个重复的地方都是有全局模板制造出来的，这个模板就是之前提到的 <strong>类</strong>。</p>
-<p>我们创建一个 base 文件目录，里面有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">base/View.js</span><br><span class="line">    window.View = function()&#123;&#125;</span><br><span class="line">base/Model.js</span><br><span class="line">    window.Model = function()&#123;&#125;</span><br><span class="line">base/Controller.js</span><br><span class="line">    window.Controller = function()&#123;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>之后每个文件的重复的地方都使用全局变量 View()、Model() 和 Controller() ，这三个全局变量便是之前提到的 <strong>构造函数</strong></p>
-<h1 id="new-操作符"><a href="#new-操作符" class="headerlink" title="new 操作符"></a>new 操作符</h1><p>new 操作符主要是一个语法，它主要做了：</p>
-<ol>
-<li><code>var temp = {}</code></li>
-<li><code>this = temp</code></li>
-<li><code>构造函数.prototype = { constructor: 构造函数 }</code></li>
-<li><code>this.__proto__ = 构造函数.prototype</code></li>
-<li><code>return this</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">构造函数.prototype = &#123;</span><br><span class="line">    constructor: 构造函数,</span><br><span class="line">    // 共有属性</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="制作一个简单的-new"><a href="#制作一个简单的-new" class="headerlink" title="制作一个简单的 new"></a>制作一个简单的 new</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Human(options)&#123;</span><br><span class="line">    this.name = options.name</span><br><span class="line">    this.city = options.city</span><br><span class="line">&#125;</span><br><span class="line">Human.prototype.constroctor = Human</span><br><span class="line">Human.prototype.species = &apos;person&apos;</span><br><span class="line">Human.prototype.walk = function()&#123;</span><br><span class="line">    console.log( &apos; I can walk &apos; )</span><br><span class="line">&#125;</span><br><span class="line">Human.prototype.useTools = function()&#123;</span><br><span class="line">    console.log( &apos; I can use tool &apos; )</span><br><span class="line">&#125;</span><br><span class="line">var human = new Human(&#123;name:&apos;xxx&apos;,city:&apos;hangzhou&apos;&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/9617841-d04e85a5e0576d2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="new"></p>
-<h1 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h1><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var app = app || &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>我们先来了解下 &amp;&amp; 和 || 这两个操作符的含义。这两个操作符返回的是一个 truey | falsey 值</p>
-<h5 id="amp-amp-操作符"><a href="#amp-amp-操作符" class="headerlink" title="&amp;&amp; 操作符"></a>&amp;&amp; 操作符</h5><p><img src="http://upload-images.jianshu.io/upload_images/9617841-ec8819c975b440dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="&amp;&amp; 操作符"></p>
-<h5 id="操作符"><a href="#操作符" class="headerlink" title="|| 操作符"></a>|| 操作符</h5><p><img src="http://upload-images.jianshu.io/upload_images/9617841-2b30afb11d2718ea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="|| 操作符"></p>
-<p>所以当我们使用 <code>var app = app || {}</code> 这种写法是最佳实践，因为如果在这个语句之前，<code>app</code> 就有了定义，那么这个语句不会覆盖之前的定义。</p>
-<h6 id="注意：-现在再去回头看一眼那个概念，相信你会有深入的理解"><a href="#注意：-现在再去回头看一眼那个概念，相信你会有深入的理解" class="headerlink" title="注意： 现在再去回头看一眼那个概念，相信你会有深入的理解"></a>注意： 现在再去回头看一眼那个概念，相信你会有深入的理解</h6>
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/JavaScript-进阶/">JavaScript 进阶</a>
   </div>
 
                 
