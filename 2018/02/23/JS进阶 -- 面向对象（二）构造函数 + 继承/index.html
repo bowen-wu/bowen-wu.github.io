@@ -1,0 +1,282 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS进阶 -- 面向对象（二）构造函数 + 继承 | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="概述本篇主要讲述构造函数和继承
+构造函数编程编程主要分为函数式编程和面向对象编程
+
+函数式编程 ==&amp;gt; 推崇函数
+
+面向对象编程 ==&amp;gt; 推崇类，没有函数概念
+JavaScriptJavaScript 中的类可以理解为构造函数
+
+类 ==&amp;gt; 如果一个东西返回一个 Object 就叫">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JS进阶 -- 面向对象（二）构造函数 + 继承"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/23/JS进阶 -- 面向对象（二）构造函数 + 继承/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-23T00:13:53.000Z"><a href="/2018/02/23/JS进阶 -- 面向对象（二）构造函数 + 继承/">2018-02-23</a></time>
+      
+      
+  
+    <h1 class="title">JS进阶 -- 面向对象（二）构造函数 + 继承</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本篇主要讲述构造函数和继承</p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><h4 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h4><p>编程主要分为<strong>函数式编程</strong>和<strong>面向对象编程</strong></p>
+<ul>
+<li><p>函数式编程 ==&gt; 推崇函数</p>
+</li>
+<li><p>面向对象编程 ==&gt; 推崇<strong>类</strong>，没有函数概念</p>
+<h4 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h4><p>JavaScript 中的<strong>类</strong>可以理解为<strong>构造函数</strong></p>
+</li>
+<li><p>类 ==&gt; 如果一个东西返回一个 <code>Object</code> 就叫做类</p>
+</li>
+<li><p>构造函数 ==&gt; 如果一个函数返回一个 <code>Object</code> 就叫做<strong>构造函数</strong></p>
+</li>
+</ul>
+<p>因为 JavaScript 中没有类的概念，所以 JavaScript 中的构造函数即可以看做是类，JavaScript 中 <code>new</code> 是构造函数的典范</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承可以实现<strong>代码复用</strong>，JavaScript 中使用原型（<code>__proto__</code>，原型链）实现继承，实例化对象的 <code>__proto__</code> 指向构造函数的 <code>prototype</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象.__proto__ === 函数.prototype   // 很重要</span><br></pre></td></tr></table></figure></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ol>
+<li><p>对象之间的继承 ==&gt; <code>__proto__</code></p>
+</li>
+<li><p>函数与对象之间的继承通过 <code>this</code> 参数（关键字）传导</p>
+</li>
+<li><p>关键字 <code>new</code> 形成构造函数，从而使用函数创建对象，使得新创建的对象可以继承构造函数上的属性</p>
+</li>
+</ol>
+<h3 id="模拟继承的具体方式"><a href="#模拟继承的具体方式" class="headerlink" title="模拟继承的具体方式"></a>模拟继承的具体方式</h3><ul>
+<li>共有属性 ==&gt; <code>prototype</code> 属性</li>
+<li>私有属性 ==&gt; 构造函数上的属性</li>
+</ul>
+<p>==&gt; 继承 === 共有属性 + 私有属性 === <code>prototype</code> 属性 + 构造函数上的属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Person( name )&#123;</span><br><span class="line">    this.name = name</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.think = true</span><br><span class="line">Person.prototype.foot = &apos;two&apos;</span><br><span class="line">Person.prototype.say = function()&#123;</span><br><span class="line">    console.log( &apos;I can say&apos; )</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.walk = function()&#123;</span><br><span class="line">    console.log( &apos;I can walk&apos; )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="new-模拟继承"><a href="#new-模拟继承" class="headerlink" title="new 模拟继承"></a>new 模拟继承</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let xiaoming = new Person( &apos;xiaoming&apos; )</span><br><span class="line">xiaoming.a = 1</span><br><span class="line">xiaoming.xxx = function()&#123;</span><br><span class="line">    console.log( &apos;xxx&apos; )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对象 <code>xiaoming</code> 具有 <code>Person</code> 的私有属性 + 共有属性，还有自身的属性<br><img src="http://upload-images.jianshu.io/upload_images/9617841-61fa30713fb1959e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="new 模拟继承"></p>
+<h5 id="call-Object-create-new-模拟继承"><a href="#call-Object-create-new-模拟继承" class="headerlink" title="call + Object.create() + new 模拟继承"></a>call + Object.create() + new 模拟继承</h5><p>new 模拟的继承仅仅有一层，如果我们要模拟多层，即 <code>xiaoming</code> 继承 <code>Student</code>，<code>Student</code> 继承 <code>Person</code><br><img src="http://upload-images.jianshu.io/upload_images/9617841-195820e44e5b350f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="示例图"><br>其中 <code>Student</code> 继承 <code>Person</code> 是<strong>构造函数与构造函数的继承（类与类的继承）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Student( name, school )&#123;</span><br><span class="line">    Person.call( this, name )   // 继承 Person 属性  === Person.bind( this ).( name )</span><br><span class="line">    this.school = school</span><br><span class="line">&#125;</span><br><span class="line">Student.prototype = Object.create( Person.prototype )   // 继承 Person 方法</span><br><span class="line">Student.prototype.learn = function()&#123;</span><br><span class="line">    console.log( `$&#123; this.name &#125; learn in $&#123; this.school &#125;` )</span><br><span class="line">&#125;</span><br><span class="line">let xiaoming = new Student( &apos;xiaoming&apos;, &apos;qinghua&apos; )</span><br><span class="line">xiaoming.a = 1</span><br><span class="line">xiaoming.xxx = function()&#123;</span><br><span class="line">    console.log( &apos;xxx&apos; )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对象 <code>xiaoming</code> 既继承了 <code>Student</code> 的共有属性 + 私有属性，又继承了 <code>Person</code> 的共有属性 + 私有属性，还有自己的属性<br><img src="http://upload-images.jianshu.io/upload_images/9617841-1caaa8c9aa72cd21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="call + Object.create() + new 实现继承"></p>
+<h6 id="模拟构造函数与构造函数的继承（类与类的继承）"><a href="#模拟构造函数与构造函数的继承（类与类的继承）" class="headerlink" title="模拟构造函数与构造函数的继承（类与类的继承）"></a>模拟构造函数与构造函数的继承（类与类的继承）</h6><p>上面中模拟构造函数与构造函数的继承（类与类的继承）使用了 <code>Object.create()</code>。模拟构造函数与构造函数的继承（类与类的继承）即是实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student.prototype.__proto__ = Person.prototype</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>方案1：前提 ==&gt; <code>Person</code> 为空（没有私有属性），若 <code>Person</code> 不为空，则 <code>Student</code> 上会多出 <code>Person</code> 上的私有属性</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Student.prototype = new Person()</span><br><span class="line">==&gt; Student.prototype === this</span><br><span class="line">==&gt; Student.prototype.__proto__ === Person.prototype</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方案2：ES3 ==&gt; not care Person 上的私有属性</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function emptyPerson() &#123;&#125;</span><br><span class="line">emptyPerson.prototype = Person.prototype</span><br><span class="line">Student.prototype = new emptyPerson()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方案3：ES5 API</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student.prototype = Object.create( Proson.prototype )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方案4：ES6 ==&gt; class + extends ==&gt; prototype(共有属性)必须是函数</p>
+<ol>
+<li><p><code>class</code> 用法：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Example&#123;</span><br><span class="line">    constructor(options)&#123;</span><br><span class="line">        this.name = options.name</span><br><span class="line">    &#125;</span><br><span class="line">    say() &#123;  &#125;</span><br><span class="line">    walk() &#123;  &#125;</span><br><span class="line">&#125;</span><br><span class="line">== 等价于 ==</span><br><span class="line">function Example(options) &#123;</span><br><span class="line">    this.name = options.name</span><br><span class="line">&#125;</span><br><span class="line">Example.prototype.say = function() &#123;  &#125;</span><br><span class="line">Example.prototype.walk = function() &#123;  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>extends 用法：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    class Student extends Person === Student.prototype = Object.create(Person.prototype)</span><br><span class="line">    super(options) === Example.call(this,options)</span><br><span class="line">    ``` </span><br><span class="line">3. 具体实现</span><br></pre></td></tr></table></figure>
+<p> class Student extends Person{</p>
+<pre><code>constructor(options){
+    super(options)   // 继承私有属性
+}
+</code></pre><p> }</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    4. ` class + extends ` 不伦不类</span><br><span class="line">        ` Student ` 是 ` class `（类） ==&gt; JavaScript 中没有类这个数据类型</span><br><span class="line">        ` Student ` 是函数 ==&gt; Student 并不能 ` call `</span><br><span class="line"></span><br><span class="line">## 相关知识点</span><br><span class="line">` Object.create() ` 的实现</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<p>function inherit( base ){<br>    function fn(){}<br>    fn.prototype = base<br>    return new fn()<br>}<br>```</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>3</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>

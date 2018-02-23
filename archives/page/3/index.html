@@ -82,6 +82,67 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2018-01-28T01:42:23.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（九）-- Bootstrap/">2018-01-28</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/28/CSS-最佳实践-套路（九）-- Bootstrap/">CSS 最佳实践 + 套路（九） -- Bootstrap</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Bootstrap 是一个用于前端开发的开源工具包，Bootstrap 可以适配所有设备，主要就是采用了媒体查询功能，当我们知道它是怎么实现的了，那么它也就不那么神秘了。当我们在使用 Bootstrap 时，主要需要掌握的就是<strong>栅格布局</strong>，剩下的就是复制粘贴了。<br><a href="https://getbootstrap.com/" target="_blank" rel="noopener">英文官网</a><br><a href="http://www.bootcss.com/" target="_blank" rel="noopener">中文官网</a></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>开始使用 Bootstrap 之前我们需要引入 Bootstrap<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; &gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>之后我们还需要引入一个 meta 标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximun-scale=1, minimum-scale=1, user-scalable=no&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="栅格系统"><a href="#栅格系统" class="headerlink" title="栅格系统"></a>栅格系统</h1><p>栅格系统主要就是将屏幕分成12等份。栅格系统主要创建在布局容器中，布局容器中存放行（row）和列（column），每行只能有12列，超出元素将作为一个整体存放在下一行中</p>
+<h3 id="布局容器"><a href="#布局容器" class="headerlink" title="布局容器"></a>布局容器</h3><p>布局容器主要有两个类<br><code>.container</code> ==&gt; 固定宽度并支持响应式布局的容器，主要用于 PC 端<br><code>.container-fluid</code> ==&gt; 100% 宽度，占据全部视口 viewport 的容器，主要用于移动端<br><strong>注意：</strong>我们所要做的就是将我们的所有内容都使用布局容器盛放</p>
+<h3 id="行"><a href="#行" class="headerlink" title="行"></a>行</h3><p>行表示在水平方向上创建一行，它的类只有一个<code>.row</code> </p>
+<h3 id="栅格参数"><a href="#栅格参数" class="headerlink" title="栅格参数"></a>栅格参数</h3><p>栅格参数主要就是表示栅格系统是如何在页面中显示的<br><img src="http://upload-images.jianshu.io/upload_images/9617841-8ed0166a152ca66a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="栅格参数"></p>
+<p>在使用的时候我们需要将我们的内容放在每个行中，如果我们需要加一些 CSS 属性，此时需要做的便是加一层 div ，用来添加自己的样式<br><strong>示例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div style=&quot;padding: 10px;&quot;&gt;  // 这个就是我们添加的 div，用来添加我们自己的样式</span><br><span class="line">            我们的内容</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><ul>
+<li>生产环境：程序所在的机器 | 操作系统面向真实的用户</li>
+<li>开发环境：只给自己 | 内部人员使用的程序，例如 <code>http-server</code></li>
+</ul>
+<p>以上便是 Bootstrap 需要了解的知识，剩下的便是去官方网站粘贴复制，个人推荐：不要去使用 Bootstrap，因为 CSS 是一个牵一发而动全身的技术，如果你选择了 Bootstrap，那么你的想象力将会受到限制</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2018-01-28T01:38:32.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（八）-- BFC/">2018-01-28</a></time>
       
       
@@ -918,87 +979,6 @@
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-20T09:10:21.000Z"><a href="/2018/01/20/HTTP系列 -- AJAX 进阶/">2018-01-20</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/20/HTTP系列 -- AJAX 进阶/">HTTP系列 -- AJAX 进阶</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/master/AJAX-%E8%BF%9B%E9%98%B6" target="_blank" rel="noopener">相关代码链接</a></p>
-<h1 id="AJAX-设置响应-和-获取请求"><a href="#AJAX-设置响应-和-获取请求" class="headerlink" title="AJAX 设置响应 和 获取请求"></a>AJAX 设置响应 和 获取请求</h1><h3 id="AJAX-设置请求-header"><a href="#AJAX-设置请求-header" class="headerlink" title="AJAX 设置请求 header"></a>AJAX 设置请求 header</h3><p>第一部分：<code>request.open( &#39;POST&#39;, &#39;http://www.baidu.com/search&#39; )</code><br>第二部分：<code>request.setRequestHeader( hander, value )</code><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request.setRequestHeader( &apos;Content-Type&apos;, &apos;application/x-www-form-urlencoded&apos; )</span><br><span class="line">request.setRequestHeader( &apos;who&apos;, &apos;bowen&apos; )</span><br></pre></td></tr></table></figure></p>
-<p>第四部分：<code>request.send( &#39;a=1&amp;b=2&#39; )</code></p>
-<h5 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. POST /search HTTP/1.1</span><br><span class="line">2. Host: www.baidu.com</span><br><span class="line">   Content-Type: application/x-www-form-urlencoded</span><br><span class="line">   who: bowen</span><br><span class="line">   Content-Length: </span><br><span class="line">   Cookie: </span><br><span class="line">3. </span><br><span class="line">4. a=1&amp;b=2</span><br></pre></td></tr></table></figure>
-<h3 id="AJAX-获取响应-header"><a href="#AJAX-获取响应-header" class="headerlink" title="AJAX 获取响应 header"></a>AJAX 获取响应 header</h3><p>第一部分：<code>request.status</code> 和 <code>request.statusText</code><br>第二部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request.getResponseHeader( headerName ) </span><br><span class="line">request.getAllResponseHeaders()</span><br></pre></td></tr></table></figure></p>
-<p>第四部分：<code>request.responseText</code></p>
-<h5 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. HTTP/1.1 200 ok</span><br><span class="line">2. key: value</span><br><span class="line">3. </span><br><span class="line">4. 数据</span><br></pre></td></tr></table></figure>
-<h3 id="Node-js（后端）设置响应-header"><a href="#Node-js（后端）设置响应-header" class="headerlink" title="Node.js（后端）设置响应 header"></a>Node.js（后端）设置响应 header</h3><p><a href="https://bowen-wu.github.io/2018/01/19/HTTP%E7%B3%BB%E5%88%97-Node-js/" target="_blank" rel="noopener">详解</a></p>
-<h1 id="callback（回调）"><a href="#callback（回调）" class="headerlink" title="callback（回调）"></a>callback（回调）</h1><p>callback 就是一个回调函数，如下图所示。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-580ea1a7bb64c8af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="callback 示例"></p>
-<ol>
-<li>给 window 添加一个方法 fn123 ，这个方法接受一个对象 options 。</li>
-<li>使用 window 下的方法 fn123 ，并传入一个对象，这个对象有一个方法 fn456 ，它是一个函数。</li>
-<li>window 下的 fn123 接受到对象后将调用 fn456，将其 call back</li>
-<li>fn456 中接受的 this 就是 window 下的方法中 call 时传的第一个参数，x 就是 call 时传的第二个参数</li>
-</ol>
-<h1 id="实现-jQuery-ajax"><a href="#实现-jQuery-ajax" class="headerlink" title="实现 jQuery.ajax"></a>实现 jQuery.ajax</h1><ol>
-<li><p>首先回顾下 <a href="https://www.jianshu.com/p/3eb5f1c7937e" target="_blank" rel="noopener">window.jQuery</a></p>
-</li>
-<li><p>将 AJAX-基础 的<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/master/AJAX-%E5%9F%BA%E7%A1%80" target="_blank" rel="noopener">代码</a> 进行封装，封装为 window.jQuery.ajax，<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/da549df5393a229f1d3e878d27b491755e6e99bb" target="_blank" rel="noopener">代码地址</a></p>
-</li>
-<li><p>将封装的 window.jQuery.ajax 进行代码优化（给参数命名）。由于传入参数过多，将其参数设置为有结构的数据 ==&gt; 对象，<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/80c6de9166b9efb60b2c34a5fb115aa9d0f61fcf" target="_blank" rel="noopener">代码地址</a></p>
-</li>
-<li><p>实现传入不定个参数的优化。既可以传入一个对象，也可以传入 url + 对象。<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/3ca84506652fa89c4f3854da77420d7f6094e240" target="_blank" rel="noopener">代码地址</a>。此时由于要使用 arguments ，所以不能使用箭头函数。</p>
-</li>
-<li><p>优化代码，使用 ES6 解构赋值达到优化代码的目的，并增加 request.setRequestHeader() 功能。<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/5118accb4c21f0ed2b8da6f2c5677867d238bf51" target="_blank" rel="noopener">代码地址</a>。</p>
-</li>
-<li><p>如果不实现传入不定个参数，还可以进一步使用 ES6 解构赋值优化。<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/88436fc2378cec3a814a96cc3260a5de133038da/AJAX-%E8%BF%9B%E9%98%B6" target="_blank" rel="noopener">代码地址</a></p>
-</li>
-<li><p>使用 Promise 规范进行优化，<code>return new Promise(function(resolve,reject){})</code>，成功 === 调用 resolve，失败 === 调用 reject，之后在调用时使用 <code>.then</code> 方法。<a href="https://github.com/bowen-wu/Node.js-server-JSONP-AJAX/tree/1ea0e7728b98f008f077e7b7f77b2eb80ec77e6b/AJAX-%E8%BF%9B%E9%98%B6" target="_blank" rel="noopener">代码地址</a></p>
-</li>
-<li><p>Promise 实现原理</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">window.Promise = function(fn)&#123;</span><br><span class="line">  // ......</span><br><span class="line">   return &#123;</span><br><span class="line">        then: function()&#123;&#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/HTTP/">HTTP</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
@@ -1033,7 +1013,7 @@
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>2</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>3</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   
