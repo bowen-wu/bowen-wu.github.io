@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Seite 2 | Archiv | 吴博文</title>
+  <title>Page 2 | Archives | 吴博文</title>
   <meta name="author" content="吴博文">
   
   
@@ -60,8 +60,95 @@
   <div id="content" class="inner">
     
       <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title">Archiv</h2>
+<h2 class="archive-title">Archives</h2>
 <p></p>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-07T11:17:07.000Z"><a href="/2018/02/07/JS系列 -- JavaScript 对象之 API/">2018-02-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/07/JS系列 -- JavaScript 对象之 API/">JS系列 -- JavaScript 对象之 API</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>之前介绍了 <a href="https://bowen-wu.github.io/2018/01/10/JS%E7%B3%BB%E5%88%97%20--%20JavaScript%20%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">《JavaScript 对象基础》 </a>，现在我们来介绍一下挂载在 <code>Object.prototype</code> 上的属性</p>
+<h1 id="Object-prototype-API"><a href="#Object-prototype-API" class="headerlink" title="Object.prototype API"></a>Object.prototype API</h1><p><code>Object.prototype</code> 表示对象的原型对象<br><code>Object.prototype</code> 属性的属性特征<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writable ==&gt; 是否可写 ==&gt; false(默认)</span><br><span class="line">enumerable ==&gt; 是否可枚举 ==&gt; false(默认)</span><br><span class="line">configurable ==&gt; 是否可配置 ==&gt; false(默认)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><p>用于将所有可枚举属性的值从一个或多个源对象复制到目标对象并返回目标对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object.assign(target, ...sources)  // target 目标对象， sources 源对象</span><br><span class="line"></span><br><span class="line">Object.assign( &#123; a: 2, b: 1 &#125;, &#123; a: 1 &#125; )   // &#123; a: 1, b: 1 &#125;</span><br><span class="line">Object.assign( &#123; a: 1, b: 2 &#125;, &#123; a: &apos;a&apos; &#125;, &#123; c: 3 &#125;, &#123; a: 4 &#125; )  // &#123; a: 4, b: 2, c: 3 &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h3><p>创建一个空对象，空对象的原型指向参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.create( proto[, propertiesObject] ) // 第二参数为一个对象，可以写入新对象的属性 + 描述符</span><br></pre></td></tr></table></figure></p>
+<h5 id="使用-Object-create-实现继承"><a href="#使用-Object-create-实现继承" class="headerlink" title="使用 Object.create() 实现继承"></a>使用 Object.create() 实现继承</h5><p><img src="http://upload-images.jianshu.io/upload_images/9617841-985125c7f108b498.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object.create 实现继承"></p>
+<h3 id="Object-setPrototypeOf"><a href="#Object-setPrototypeOf" class="headerlink" title="Object.setPrototypeOf()"></a>Object.setPrototypeOf()</h3><p>设置一个指定的对象的原型到另一个对象或 <code>null</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.setPrototypeOf( obj, prototype ) // 将对象 obj 的原型设置为 prototype（原型 | null）</span><br><span class="line">obj = Object.create( prototype )  === Object.setPrototypeOf( obj, prototype )</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-defineProperty-Object-defineProperties"><a href="#Object-defineProperty-Object-defineProperties" class="headerlink" title="Object.defineProperty() | Object.defineProperties()"></a>Object.defineProperty() | Object.defineProperties()</h3><p>这两个方法都是在一个对象上定义新属性或修改现有属性，并返回对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty( obj, prop, descriptor )</span><br><span class="line">Object.defineProperties( obj, props )</span><br></pre></td></tr></table></figure></p>
+<h5 id="属性描述符"><a href="#属性描述符" class="headerlink" title="属性描述符"></a>属性描述符</h5><p>属性描述符分为<strong>数据描述符</strong> 和 <strong>存取描述符</strong>。描述符必须是二者之一</p>
+<ul>
+<li>数据描述符 ==&gt; value + writable ==&gt; 具有值的属性，该值可能是可写的，也可能是不可写的</li>
+<li>存取描述符 ==&gt; set + get<h6 id="描述符可选键值"><a href="#描述符可选键值" class="headerlink" title="描述符可选键值"></a>描述符可选键值</h6></li>
+<li><p>configurable ==&gt; 是否可配置 ==&gt; false(默认)</p>
+</li>
+<li><p>enumerable ==&gt; 是否可枚举 ==&gt; false(默认)</p>
+</li>
+<li><p>writable ==&gt; 是否可写 ==&gt; false(默认)</p>
+</li>
+<li><p>value ==&gt; 属性对应的值</p>
+</li>
+<li><p>get ==&gt; 一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值，默认为 undefined</p>
+</li>
+<li><p>set ==&gt; 一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法接受唯一参数，并将该参数的新值分配给该属性，默认为 undefined<br><img src="http://upload-images.jianshu.io/upload_images/9617841-3a71e414e2343590.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="属性描述符"><br>如果对象属性有 getter + setter ，那么调用时走 getter，赋值时走 setter，getter + setter 作用：</p>
+<ol>
+<li>保护私有变量</li>
+<li>响应式开发 | 双向数据绑定 | MVVM （<code>Object.definedProperty() + get + set</code>）</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">let person = &#123;&#125;</span><br><span class="line">let ageValue = 18</span><br><span class="line">Object.definePrototype( person, &apos;name&apos;, &#123;</span><br><span class="line">    value: xxx,</span><br><span class="line">    configurable: false,  // 如果不写默认 false</span><br><span class="line">    writable: true,</span><br><span class="line">    enumerable: true</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Object.definePrototype( person, &apos;age&apos;, &#123;</span><br><span class="line">    configurable: false,  // 如果不写默认 false</span><br><span class="line">    enumerable: true,</span><br><span class="line">    get : function()&#123;</span><br><span class="line">        return ageValue;</span><br><span class="line">    &#125;,</span><br><span class="line">    set : function( newValue )&#123;</span><br><span class="line">        ageValue = newValue;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br><span class="line">person.age   // 18</span><br><span class="line">person.age = 19</span><br><span class="line">person.age  // 19</span><br><span class="line"></span><br><span class="line">Object.defineProperties( person, &#123;</span><br><span class="line">    &apos;property1&apos; : &#123;</span><br><span class="line">        value: xxx,</span><br><span class="line">        configurable: false,  // 如果不写默认 false</span><br><span class="line">        writable: true,</span><br><span class="line">        enumerable: true</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;property2&apos; : &#123;</span><br><span class="line">        value: xxx,</span><br><span class="line">        configurable: false,  // 如果不写默认 false</span><br><span class="line">        writable: true,</span><br><span class="line">        enumerable: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Object-getOwnPropertyDescriptor"><a href="#Object-getOwnPropertyDescriptor" class="headerlink" title="Object.getOwnPropertyDescriptor()"></a>Object.getOwnPropertyDescriptor()</h3><p>返回制定对象上一个自有属性对应的属性描述符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.getOwnPropertyDescriptor( obj, prop )</span><br></pre></td></tr></table></figure></p>
+<h3 id="Object-getOwnPropertyNames"><a href="#Object-getOwnPropertyNames" class="headerlink" title="Object.getOwnPropertyNames()"></a>Object.getOwnPropertyNames()</h3><p>返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括 Symbol 值作为名称的属性）组成的数组</p>
+<h3 id="Object-keys-Object-values"><a href="#Object-keys-Object-values" class="headerlink" title="Object.keys() | Object.values()"></a><a href="https://bowen-wu.github.io/2018/01/10/JS%E7%B3%BB%E5%88%97%20--%20JavaScript%20%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">Object.keys() | Object.values()</a></h3><h3 id="Object-prototype-hasOwnProperty"><a href="#Object-prototype-hasOwnProperty" class="headerlink" title="Object.prototype.hasOwnProperty()"></a>Object.prototype.hasOwnProperty()</h3><p>返回一个布尔值，指示对象自身属性中是否具有指定的属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj.hasOwnProperty( prop )</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用-get-set-实现需求"><a href="#使用-get-set-实现需求" class="headerlink" title="使用 get + set 实现需求"></a>使用 get + set 实现需求</h1><p>给定一个对象 obj，返回一个新对象，新对象具有对象 obj 的所有属性，并且给新对象每个属性重新赋值都会触发修改函数，在下方代码处填写代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getReactiveObj( obj, cb )&#123;</span><br><span class="line">    // 代码 code</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123; a: &apos;a&apos;, b: &apos;b&apos; &#125;</span><br><span class="line">function fn( prop,val )&#123;</span><br><span class="line">    console.log( `$&#123; prop &#125;属性的值变为$&#123; val &#125;` )</span><br><span class="line">&#125;</span><br><span class="line">let newObj = getReactiveObj( obj, fn )</span><br><span class="line">console.log( newObj.a )  // a</span><br><span class="line">console.log( newObj.b )  // b</span><br><span class="line">newObj.a = &apos;d&apos;  // a属性的值变为d</span><br><span class="line">console.log( newObj.a )  // d</span><br><span class="line">console.log( obj )  // &#123; a: &apos;a&apos;, b: &apos;b&apos; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>解决方案<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function getReactiveObj( obj, cb )&#123;</span><br><span class="line">    let result = &#123;&#125;</span><br><span class="line">    Object.keys( obj ).forEach( ( item ) =&gt; &#123;</span><br><span class="line">        let value = obj[ item ]</span><br><span class="line">        Object.defineProperty( result, item, &#123;</span><br><span class="line">            get() &#123;</span><br><span class="line">                return value</span><br><span class="line">            &#125;,</span><br><span class="line">            set( val ) &#123;</span><br><span class="line">                cb.call( null, item, val )</span><br><span class="line">                value = val</span><br><span class="line">            &#125; </span><br><span class="line">        &#125; )</span><br><span class="line">    &#125;)</span><br><span class="line">    return reault</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="实现查询参数"><a href="#实现查询参数" class="headerlink" title="实现查询参数"></a>实现查询参数</h1><p>把一个 JS 对象转化成符合查询参数的字符串<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery()&#123;</span><br><span class="line">    // 代码</span><br><span class="line">&#125;</span><br><span class="line">parseToQuery(&#123; id: 100, name: &apos;hello&apos;, groups: &apos;xxx&apos; &#125;)  // &apos;id=100&amp;name=hello&amp;groups=xxx&apos; </span><br><span class="line">parseToQuery(&#123; id: 100, name: &apos;hello&apos;, groups: [ &apos;xxx&apos;, &apos;yyy&apos; ] &#125;)  // &apos;id=100&amp;name=hello&amp;groups=xxx&amp;groups=yyy&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现无数组方法一"><a href="#实现无数组方法一" class="headerlink" title="实现无数组方法一"></a>实现无数组方法一</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    let arr = []</span><br><span class="line">    for( let key in obj )&#123;</span><br><span class="line">        arr.push( encodeURIComponent( key ) + &apos;=&apos; + encodeURIComponent( obj[ key ] ) )</span><br><span class="line">    &#125;</span><br><span class="line">    return arr.join( &apos;&amp;&apos; )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="encodeURIComponent"><a href="#encodeURIComponent" class="headerlink" title="encodeURIComponent()"></a>encodeURIComponent()</h5><p>对统一资源标识符（URI）的组成部分进行编码的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">encodeURIComponent( str )   // URI 的组成部分</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现无数组方法二"><a href="#实现无数组方法二" class="headerlink" title="实现无数组方法二"></a>实现无数组方法二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    let str = &apos;&apos;</span><br><span class="line">    Object.keys( obj ).forEach( ( item ) =&gt; &#123;</span><br><span class="line">        var str1 = ` $&#123; item &#125;=$&#123; obj[ item ] &#125;&amp; `</span><br><span class="line">        str = str.concat( str1 )</span><br><span class="line">    &#125;)</span><br><span class="line">    return str.slice( 0, str.length-1 )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现无数组方法三"><a href="#实现无数组方法三" class="headerlink" title="实现无数组方法三"></a>实现无数组方法三</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    return Object.keys( obj ).map( ( key ) =&gt; &#123;</span><br><span class="line">        `$&#123; key &#125;=$&#123; obj[ key ] &#125;`).join( &apos;&amp;&apos; )</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现有数组方法"><a href="#实现有数组方法" class="headerlink" title="实现有数组方法"></a>实现有数组方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function parseToQuery( obj )&#123;</span><br><span class="line">    let result = &apos;&apos;</span><br><span class="line">    for( let key in obj )&#123;</span><br><span class="line">        if( obj[ key ] instanceof Array )&#123;</span><br><span class="line">            obj[ key ].forEach( (item) =&gt; &#123;</span><br><span class="line">                result += key + &apos;=&apos; + value + &apos;&amp;&apos;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            result += key + &apos;=&apos; + obj[ key ] + &apos;&amp;&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return result.substring( 0, result.length-1 )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
   
     <article class="post">
@@ -751,13 +838,13 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
 <li>NaN 与任何值都不相等，包括 NaN 本身</li>
 </ul>
 <h3 id="转换类型（3函数-2操作符）"><a href="#转换类型（3函数-2操作符）" class="headerlink" title="转换类型（3函数 2操作符）"></a>转换类型（3函数 2操作符）</h3><ul>
-<li>Number() ==&gt; 可以用于任何函数</li>
-<li>parseInt() ==&gt; 用于将字符串转换为数值 <strong>parseInt(“”) //NaN</strong></li>
-<li>parseFloat() ==&gt; 用于将字符串转换为数值</li>
-<li>一元 + 操作符 ==&gt; 等价于Number()</li>
-<li>‘ - 0 ‘  //任意一个类型减去0</li>
+<li><code>Number()</code> ==&gt; 可以用于任何函数</li>
+<li><code>parseInt()</code> ==&gt; 用于将字符串转换为数值 <strong><code>parseInt(&quot;&quot;) //NaN</code></strong></li>
+<li><code>parseFloat()</code> ==&gt; 用于将字符串转换为数值</li>
+<li>一元 <code>+</code> 操作符 ==&gt; 等价于 <code>Number()</code></li>
+<li><code>&#39; - 0 &#39;</code>  //任意一个类型减去0</li>
 </ul>
-<p><strong>parseInt(‘s’) ==&gt; NaN</strong></p>
+<p><strong><code>parseInt(&#39;s&#39;) ==&gt; NaN</code></strong></p>
 <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h3 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h3><p>字符串默认只能写在一行内，分成多行将会报错。</p>
 <ul>
 <li>如果长字符串必须分成多行，可以在每一行的尾部使用<strong>反斜杠</strong>。<br><strong>注意</strong>：反斜杠的后面必须是换行符，而不能有其他字符（比如空格），否则会报错。</li>
@@ -843,7 +930,7 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
 <li>其他字符可以是字母、数字、下划线或者美元符号<br><strong>中文是合法的标识符，可以用作变量名。</strong></li>
 </ul>
 <h3 id="书写格式"><a href="#书写格式" class="headerlink" title="书写格式"></a>书写格式</h3><p>ECMAScript 中标识符 <strong>推荐</strong> 采用 “驼峰大小写（camelCase）” 书写格式。<br>还有 “短横线分隔命名（kebab-case）” 书写格式和 “单词首字母大写（PascalCase）” 书写格式。</p>
-<p>###语句<br>JavaScript 程序的执行单位为行（line），也就是一行一行地执行。一般情况下，每一行就是一个语句。</p>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><p>JavaScript 程序的执行单位为行（line），也就是一行一行地执行。一般情况下，每一行就是一个语句。</p>
 <ul>
 <li>语句（statement）是为了完成某种任务而进行的操作</li>
 <li>表达式（expression）：指一个为了得到返回值的计算式。</li>
@@ -1126,148 +1213,13 @@ document.write( &apos;&lt;style&gt;html{ font-size:&apos; + pageWidth/10 + &apos
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-28T01:45:02.000Z"><a href="/2018/01/28/CSS-最佳实践-套路（十）-- 混合篇/">2018-01-28</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/28/CSS-最佳实践-套路（十）-- 混合篇/">CSS 最佳实践 + 套路（十） -- 混合篇</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文章主要就是将之前几篇文章中没有提到的，但是个人认为比较重要的 CSS 的最佳实践和套路</p>
-<h2 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h2><h4 id="水平居中："><a href="#水平居中：" class="headerlink" title="水平居中："></a>水平居中：</h4><ul>
-<li>内联元素：父元素加 <code>text-align:center;</code> </li>
-<li>块级元素（<strong>固定宽度</strong>）：<code>margin: 0 auto;</code></li>
-<li>元素不是上述两种情况：<pre><code>1. 将元素变成内联元素　` display: inline-block; ` + ` text-align:center; ` + ` vertical-align: top `
-2. 固定宽度（不推荐）
-</code></pre></li>
-</ul>
-<h4 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h4><ul>
-<li>内联元素：<code>line-height: height;</code></li>
-<li>块级元素：<code>line-height</code> + <code>padding</code> 构造高度，达到垂直居中（凑高度）</li>
-</ul>
-<h4 id="定位居中法"><a href="#定位居中法" class="headerlink" title="定位居中法"></a>定位居中法</h4><ul>
-<li><p>宽度固定</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line">left: 50%;</span><br><span class="line">top: 50%;</span><br><span class="line">margin-top: -width/2;</span><br><span class="line">margin-left: -heigth/2</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>宽度不固定</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line">left: 50%;</span><br><span class="line">top: 50%;</span><br><span class="line">transform: translate(-50%,-50%)   // CSS3 属性</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="弹出层或者-loading-定位居中"><a href="#弹出层或者-loading-定位居中" class="headerlink" title="弹出层或者 loading 定位居中"></a>弹出层或者 loading 定位居中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">position: absolute; // 此种方法需要配合定宽定高</span><br><span class="line">top: 0;</span><br><span class="line">bottom: 0;</span><br><span class="line">left: 0;</span><br><span class="line">right: 0;</span><br><span class="line">margin: auto;</span><br></pre></td></tr></table></figure>
-<h4 id="Flex-布局居中"><a href="#Flex-布局居中" class="headerlink" title="Flex 布局居中"></a>Flex 布局居中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display: flex;</span><br><span class="line">justify-content: center;</span><br><span class="line">align-items: center;</span><br></pre></td></tr></table></figure>
-<h2 id="滚动但是不显示滚动条"><a href="#滚动但是不显示滚动条" class="headerlink" title="滚动但是不显示滚动条"></a>滚动但是不显示滚动条</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow: auto;</span><br><span class="line">&#125;</span><br><span class="line">selector::-webkit-scrollbar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="纯-CSS-实现三角形"><a href="#纯-CSS-实现三角形" class="headerlink" title="纯 CSS 实现三角形"></a>纯 CSS 实现三角形</h2><ul>
-<li><p>first</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div.first&#123;</span><br><span class="line">  border:10px solid transparent;</span><br><span class="line">  width:0;</span><br><span class="line">  border-top-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-077b0d7ad37b7982.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三角形-first.png"></p>
-</li>
-<li><p>second</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div.second&#123;</span><br><span class="line">  border:40px solid transparent;</span><br><span class="line">  width:0;</span><br><span class="line">  border-top-width:0;</span><br><span class="line">  border-left-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-cd63ba6dd15b2ba9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三角形-second.png"></p>
-</li>
-<li><p>third</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">div.third&#123;</span><br><span class="line">  border:20px solid transparent;</span><br><span class="line">  width:0;</span><br><span class="line">  border-top-color: red;</span><br><span class="line">  border-left-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-fc99fb26421f7ca5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="三角形-third.png"></p>
-</li>
-</ul>
-<p>这里推荐一个<a href="https://css-tricks.com/examples/ShapesOfCSS/" target="_blank" rel="noopener">使用纯 CSS 实现各种图形</a>的网站</p>
-<h2 id="两个元素重叠一部分"><a href="#两个元素重叠一部分" class="headerlink" title="两个元素重叠一部分"></a>两个元素重叠一部分</h2><p>  <img src="http://upload-images.jianshu.io/upload_images/9617841-64958b12dd693d58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果图"><br><strong>方法：</strong></p>
-<ul>
-<li><code>margin</code> 负值法： <code>margin-top: -</code></li>
-<li>CSS3 transform属性： <code>transform: translate(- )</code> [ 原始位置保留不变，下方元素和 <code>transform</code> 元素有<strong>间隔</strong> ]</li>
-<li>相对定位：<code>position: relative; top(- )</code> [ 原始位置保留不变，下方元素和相对定位元素有<strong>间隔</strong> ]</li>
-</ul>
-<h2 id="内联元素消除空隙"><a href="#内联元素消除空隙" class="headerlink" title="内联元素消除空隙"></a>内联元素消除空隙</h2><p>当元素为内联元素 | 内联块级元素时，该元素下方会有小空隙，消除空隙<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display: inline | inline-block;</span><br><span class="line">vertical-align: top;</span><br></pre></td></tr></table></figure></p>
-<h2 id="如果想要整个页面的遮罩层，需要使用"><a href="#如果想要整个页面的遮罩层，需要使用" class="headerlink" title="如果想要整个页面的遮罩层，需要使用"></a>如果想要整个页面的遮罩层，需要使用</h2><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    position: fixed;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%; </span><br><span class="line">    ``` </span><br><span class="line">    不能使用 ` position: absolute; ` ，其高度不是页面的高度，是窗口的高度。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##伪类</span><br><span class="line">CSS伪类是添加到选择器的关键字，指定要选择的元素的特殊状态。</span><br><span class="line">- 动态伪类</span><br></pre></td></tr></table></figure>
-</code></pre><p>:link ==&gt; 未访问前的样式效果<br>:hover ==&gt; 鼠标悬停时的样式效果<br>:active ==&gt; 鼠标点击时的样式效果<br>:visited ==&gt; 访问后的样式效果<br>:focus ==&gt; 元素成为焦点时的样式效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 结构伪类（CSS选择符）</span><br></pre></td></tr></table></figure></p>
-<p>:first-child ==&gt; 第一个子元素<br>:last-child ==&gt; 最后一个子元素<br>:nth-child(n) ==&gt; 第 n 个子元素<br>:nth-child(2n) === :nth-child(even) ==&gt; 偶数元素<br>:nth-child(2n+1) === :nth-child(odd) ==&gt; 奇数元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 否定伪类（CSS选择符）</span><br></pre></td></tr></table></figure></p>
-<p>:not() ==&gt; 不符合参数选择器 X 描述的元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 伪元素</span><br><span class="line">伪元素添加到选择器，但不是描述特殊状态，它们可以为元素（**非空元素**）的某些部分设置样式。</span><br><span class="line">- `::before` 为当前元素创建一个**伪元素**，做为已选中元素的**第一个**子元素。常通过 `content` 属性来为该元素添加修饰性的内容。 这个**虚拟元素**默认是行内元素。</span><br><span class="line">- `::after` 为当前元素创建一个**伪元素**，做为已选中元素的**最后一个**子元素。常通过 `content` 属性来为该元素添加修饰性的内容。这个**虚拟元素**默认是行内元素。</span><br></pre></td></tr></table></figure></p>
-<p>div::before{<br>    content: ‘’;  // 必须有，才能显示出内容。<br>}<br>div::after{<br>    content: ‘’;   // 必须有，才能显示出内容。<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">## CSS 属性</span><br><span class="line">1. `work-break: break-all` 打断所有的单词，从而使得词语（单词）换行</span><br><span class="line"></span><br><span class="line">2. 圆：`border-radius: 50%;` </span><br><span class="line"></span><br><span class="line">3. `position` 属性：用于指定一个元素在文档中的定位方式。值：</span><br></pre></td></tr></table></figure></p>
-<pre><code>static：该关键字指定元素使用正常的布局行为，即元素在文档常规流中当前的布局位置。
-relative  
-absolute  
-fixed
-sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）：盒位置根据正常流计算(这称为正常流动中的位置)，然后相对于该元素在流中的 flow root（BFC）和 containing block（最近的块级祖先元素）定位
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. `box-sizing` 属性：用于更改用于计算元素宽度和高度的默认的 CSS 盒子模型。</span><br><span class="line">**值：**</span><br><span class="line">    - `content-box`：默认值，标准盒子模型。`width` 与 `height`只包括内容的宽和高， 不包括边框（border），内边距（padding），外边距（margin）。</span><br><span class="line">    **维度计算：**</span><br><span class="line">    `width` = 内容的  width</span><br><span class="line">    `height` = 内容的 height。</span><br><span class="line">    - `border-box`： `width` 和 `height`属性包括内容，内边距和边框，但不包括外边距。</span><br><span class="line">    **维度计算：**</span><br><span class="line">    `width` = border + padding + 内容的  width</span><br><span class="line">    `height` = border + padding + 内容的 height</span><br><span class="line"></span><br><span class="line">5. `display: inline` 元素</span><br><span class="line">    - 设置 `width` 和 `height` 是无效的</span><br><span class="line">    - 设置 `margin-top` 和 `margin-bottom` 是无效的（解决方案：设置为 `display: inline-block; vertical-align: top;` ，如果此时该元素要居中，给其设置一个**行内父元素**，之后此**行内父元素** `text-align: center;`）</span><br><span class="line">    - 设置 `margin-left` 和 `margin-right` 是**有效**的</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 小技巧 &amp; 注意点</span><br><span class="line"></span><br><span class="line">1. `img` 的 `height` 和 `width` 写在 `img` 标签中，作为标签属性，这样可以避免重排的发生从而浪费了 CPU 性能（页面性能优化）。</span><br></pre></td></tr></table></figure>
-
-&lt;img src= &apos;&apos; width= 200 height= 300 alt= &apos;&apos;&gt;
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. `hr` 的**最佳实践**</span><br></pre></td></tr></table></figure>
-
-.hr{
-    border: none;
-    border-top: 1px solid color;
-}
-```
-</code></pre><ol>
-<li><p><code>span</code> 元素内可以包裹 <code>span</code> ，不能包裹块级元素 <code>div</code> ，可以为 <code>span</code> 设置 <code>display: block</code> 从而达到效果</p>
-</li>
-<li><p><code>li</code> 里面有 <code>a</code> 元素时，如果 <code>a</code> 元素有 <code>padding</code> ，则 <code>li</code> 不能完全包裹 <code>a</code> ，此时需要给 <code>a</code> 添加 <code>display: block;</code> 属性即可。</p>
-</li>
-<li><p>CSS中 <code>width</code> 的默认值是 <strong><code>auto</code></strong></p>
-</li>
-<li><p>如果要继承父元素的颜色，要声明 <code>color: inherit;</code></p>
-</li>
-<li><p><code>animation</code> 动画的时候要注意使用 <code>opacity</code></p>
-</li>
-<li><p>vh（viewport height）：视图高度单位，100vh：表示整个视图高度</p>
-</li>
-<li><p>属性 <code>text-transform: uppercase</code> 将小写字母转化为大写字母</p>
-</li>
-<li><p>position: absolute; 时，使用 <strong>top: 100%;</strong>，而不使用 bottom: 0;</p>
-</li>
-<li><p>注意使用 <code>white-space: nowrap</code> ，强制文本不换行，从而避免使用 <code>width</code> （在创建二级菜单时尤其注意）</p>
-</li>
-<li><p>有时父元素不能完全包裹住带有 <code>padding</code> 的子元素，此时可以尝试给子元素添加 <code>display: inline-block; vertical-align: top;</code> 或者 <code>display: block;</code></p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
-    <a href="/archives/" class="alignleft prev">Vorherige Seite</a>
+    <a href="/archives/" class="alignleft prev">Prev</a>
   
   
-    <a href="/archives/page/3/" class="alignright next">Nächste Seite</a>
+    <a href="/archives/page/3/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav>
@@ -1277,7 +1229,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
       <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
@@ -1295,7 +1247,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>3</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>4</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   

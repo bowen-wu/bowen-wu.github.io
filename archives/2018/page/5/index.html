@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Seite 5 | Archiv: 2018 | 吴博文</title>
+  <title>Page 5 | Archives: 2018 | 吴博文</title>
   <meta name="author" content="吴博文">
   
   
@@ -62,6 +62,79 @@
       <div id="main-col" class="alignleft"><div id="wrapper">
 <h2 class="archive-title">2018</h2>
 <p></p>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-12T11:01:20.000Z"><a href="/2018/01/12/jQuery系列（一）-- touch-jQuery/">2018-01-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/12/jQuery系列（一）-- touch-jQuery/">jQuery系列（一） -- touch jQuery</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="封装函数"><a href="#封装函数" class="headerlink" title="封装函数"></a>封装函数</h1><p>尽管 DOM 提供了 API ，可是当我们使用 DOM API 的时候却不尽人意，它提供的功能实在是有限，并且有些方法还没有，所以我们先来封装两个函数。第一个函数作用是获取一个元素节点的所有兄弟，第二个函数作用是可以对一个节点添加或者删除 class 。</p>
+<h4 id="获取一个元素节点的所有兄弟"><a href="#获取一个元素节点的所有兄弟" class="headerlink" title="获取一个元素节点的所有兄弟"></a>获取一个元素节点的所有兄弟</h4><p>当调用 getSiblings 函数的时候只需要传入一个元素节点即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getSiblings(node) &#123;</span><br><span class="line">        let allchild = node.parentNode.children</span><br><span class="line">        let siblings = &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;</span><br><span class="line">        for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">            if (allchild[i] !== node) &#123;</span><br><span class="line">                siblings[siblings.length] = allchild[i]</span><br><span class="line">                siblings.length += 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return siblings;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="操纵一个节点的-class-可以进行添加和删除"><a href="#操纵一个节点的-class-可以进行添加和删除" class="headerlink" title="操纵一个节点的 class 可以进行添加和删除"></a>操纵一个节点的 class 可以进行添加和删除</h4><p>调用 operationClass 时，需要传入一个节点和一个 classes 对象<code>operationClass( node, { className: true, className: false } )</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function operationClass(node,classes)&#123;</span><br><span class="line">        for(let key in classes)&#123;</span><br><span class="line">            let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">            node.classList[method](key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><p>利用命名空间，从而对上述两个函数进行优化<br>调用方法：<br><code>DOM.operationClass.call(undefined,node,{className:true,className:false})</code><br><code>console.log(DOM.getSiblings.call(undefined,node))</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let DOM = &#123;&#125;</span><br><span class="line">    DOM.operationClass = (node,classes) =&gt; &#123;</span><br><span class="line">        for(let key in classes)&#123;</span><br><span class="line">            let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">            node.classList[method](key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    DOM.getSiblings = (node) =&gt; &#123;</span><br><span class="line">        let allchild = node.parentNode.children</span><br><span class="line"></span><br><span class="line">        let siblings = &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">            if (allchild[i] !== node) &#123;</span><br><span class="line">                siblings[siblings.length] = allchild[i]</span><br><span class="line">                siblings.length += 1</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return siblings;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="最终优化"><a href="#最终优化" class="headerlink" title="最终优化"></a>最终优化</h1><h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p>在 Node.prototype 上添加方法，调用方法是：<br><code>node.operationClass.call(node,{className:true,className:false})</code><br><code>node.getSiblings.call(node)</code><br><strong>缺点</strong>：改变了 Node.prototype<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Node.prototype.operationClass = function(classes)&#123;</span><br><span class="line">       for(let key in classes)&#123;</span><br><span class="line">           let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">           this.classList[method](key)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   Node.prototype.getSiblings = function()&#123;</span><br><span class="line">       let allchild = this.parentNode.children</span><br><span class="line">       let siblings = &#123;</span><br><span class="line">           length: 0</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">           if (allchild[i] !== this) &#123;</span><br><span class="line">               siblings[siblings.length] = allchild[i]</span><br><span class="line">               siblings.length += 1</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       return siblings;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>创造一个新的接口，使用全局变量 otherNode ，无侵入式调用。<br>调用方法：</p>
+<pre><code>let node = otherNode.call(undefined,node)
+node.operationClass.call(undefined,{red:true,blue:false})
+node.getSiblings.call(undefined))
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">window.otherNode = (node) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        operationClass: (classes) =&gt; &#123;</span><br><span class="line">            for (let key in classes) &#123;</span><br><span class="line">                let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">                node.classList[method](key)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        getSiblings : () =&gt; &#123;</span><br><span class="line">            let allchild = node.parentNode.children</span><br><span class="line">            let siblings = &#123;</span><br><span class="line">                length: 0</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">                if (allchild[i] !== node) &#123;</span><br><span class="line">                    siblings[siblings.length] = allchild[i]</span><br><span class="line">                    siblings.length += 1</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return siblings;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="方案二优化"><a href="#方案二优化" class="headerlink" title="方案二优化"></a>方案二优化</h6><p>优化方向：</p>
+<ul>
+<li>允许用户传入一个 CSS 选择器</li>
+<li>添加了操作文本的功能<br>调用方法：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let node = otherNode.call(undefined,&apos;#id&apos;)</span><br><span class="line">node.getSiblings.call(undefined)</span><br><span class="line">node.operationClass.call(undefined,&#123;red:true,blue:false&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">window.otherNode = (nodeOrSelector) =&gt; &#123;</span><br><span class="line">        let node</span><br><span class="line">        if(typeof nodeOrSelector === &apos;string&apos;)&#123;</span><br><span class="line">            node = document.querySelector(nodeOrSelector)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            node = nodeOrSelector</span><br><span class="line">        &#125;</span><br><span class="line">        return &#123;</span><br><span class="line">            operationClass: (classes) =&gt; &#123;</span><br><span class="line">                for (let key in classes) &#123;</span><br><span class="line">                    let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">                    node.classList[method](key)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            setText:(text) =&gt; &#123;</span><br><span class="line">                node.textContent = text;</span><br><span class="line">            &#125;,</span><br><span class="line">            getSiblings : () =&gt; &#123;</span><br><span class="line">                let allchild = node.parentNode.children</span><br><span class="line">                let siblings = &#123;</span><br><span class="line">                    length: 0</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                for (let i = 0, len = allchild.length; i &lt; len; i++) &#123;</span><br><span class="line">                    if (allchild[i] !== node) &#123;</span><br><span class="line">                        siblings[siblings.length] = allchild[i]</span><br><span class="line">                        siblings.length += 1</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return siblings;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="方案二再优化"><a href="#方案二再优化" class="headerlink" title="方案二再优化"></a>方案二再优化</h6><p>优化方向：</p>
+<ul>
+<li>满足更多的 CSS 选择器，例如 <code>ul &gt; li</code></li>
+<li>简化了 <code>text</code> 功能，不传参数，就是获取，传参数就是设置<br>使用方法：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let node = otherNode.call(undefined, &apos;ul &gt; li&apos;)</span><br><span class="line">node.text()</span><br><span class="line">node.text(&apos;hello world&apos;)</span><br><span class="line">node.operationClass.call(undefined, &#123;</span><br><span class="line">    className: false,</span><br><span class="line">    className: true</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">window.otherNode = (nodeOrSelector) =&gt; &#123;</span><br><span class="line">    let nodes = &#123;&#125;</span><br><span class="line">    if (typeof nodeOrSelector === &apos;string&apos;) &#123;</span><br><span class="line">        let temp = document.querySelectorAll(nodeOrSelector)</span><br><span class="line">        for (let i = 0, len = temp.length; i &lt; len; i++) &#123;</span><br><span class="line">            nodes[i] = temp[i]</span><br><span class="line">        &#125;</span><br><span class="line">        nodes.length = temp.length</span><br><span class="line">    &#125; else if (nodeOrSelector instanceof Node) &#123;</span><br><span class="line">        nodes = &#123;</span><br><span class="line">            0: nodeOrSelector,</span><br><span class="line">            length: 1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    nodes.operationClass = (classes) =&gt; &#123;</span><br><span class="line">        for (let key in classes) &#123;</span><br><span class="line">            let method = classes[key] ? &apos;add&apos; : &apos;remove&apos;</span><br><span class="line">            for (let i = 0, len = nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">                nodes[i].classList[method](key)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    nodes.text = (text) =&gt; &#123;</span><br><span class="line">        if (text === undefined) &#123;</span><br><span class="line">            let texts = []</span><br><span class="line">            for (let i = 0, len = nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">                texts.push(nodes[i].textContent)</span><br><span class="line">            &#125;</span><br><span class="line">            return texts</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            for (let i = 0, len = nodes.length; i &lt; len; i++) &#123;</span><br><span class="line">                nodes[i].textContent = text;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return nodes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h1><p>jQuery 就是将 otherNode 更名为 jQuery，当然 jQuery 的兼容性更好、功能更加丰富（DOM 操作、动画、AJAX操作等等），并且它使用了 prototype 。</p>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
   
     <article class="post">
@@ -191,18 +264,15 @@
 <li><p>科里化</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.bind( this [ , arg1 [ , arg2 [ , ... ] ] ] )</span><br></pre></td></tr></table></figure>
+<p><strong>使用实例：</strong></p>
 </li>
+<li>实例1：<strong>基本用法</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-f825f2fa123c4db2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="bind 基本用法"></li>
+<li>实例2：<strong>实际应用</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-71e4fff179f8a3f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="bind 实际应用"></li>
+<li>实例3：<strong>利用 this + apply 实现 bind</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca4c2e02d2132d0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重构 bind"></li>
 </ol>
 </li>
 </ul>
-<pre><code>**使用实例：**
-1. 实例1：**基本用法**
-![bind 基本用法](http://upload-images.jianshu.io/upload_images/9617841-f825f2fa123c4db2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-2. 实例2：**实际应用**
-![bind 实际应用](http://upload-images.jianshu.io/upload_images/9617841-71e4fff179f8a3f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-3. 实例3：**利用 this + apply 实现 bind**
-![重构 bind](http://upload-images.jianshu.io/upload_images/9617841-ca4c2e02d2132d0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><h1 id="new"><a href="#new" class="headerlink" title="new"></a>new</h1><ol>
+<h1 id="new"><a href="#new" class="headerlink" title="new"></a>new</h1><ol>
 <li><p>创建一个新对象 obj ，对象 <code>__proto__</code> 指向构造函数的 <code>prototype</code></p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象. __proto__ === 构造函数.prototype</span><br></pre></td></tr></table></figure>
 </li>
@@ -216,37 +286,11 @@
 2. 沿着作用域链寻找 a 的声明
 3. 若作用域链中没有 a 的声明，则声明全局变量并赋值
 </code></pre><h1 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h1><p>将作用域链中首先要做<strong>变量提升</strong></p>
-<h6 id="例子1："><a href="#例子1：" class="headerlink" title="例子1："></a>例子1：</h6><pre><code>var a = 1;
-function fn(){
-    console.log( a );
-    var a = 2;
-}
-fn.call();  //  a === undefined
-</code></pre><h6 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h6><pre><code>var a = 1;
-function fn1(){
-    console.log( a );  //  a === undefined
-    var a = 2;
-    fn2.call();
-}
-function fn2(){
-    console.log( a );  //  a === 1
-}
-fn1.call();
-</code></pre><h6 id="例子3："><a href="#例子3：" class="headerlink" title="例子3："></a>例子3：</h6><pre><code>var obj = { name: &apos; obj &apos; }
-function fn1(){
-    function fn2(){
-        console.log( this );   // this === window 
-    }
-    fn2.call();
-}
-fn1.call( obj );
-</code></pre><h6 id="例子4："><a href="#例子4：" class="headerlink" title="例子4："></a>例子4：</h6><pre><code>var liTags = document.querySelectAll( &apos; li &apos; );
-for( let i = 0, len = liTags.length; i &lt; len; i++ ){
-    liTags[ i ].onclick = function(){
-        console.log( i )  // 打印出的 i 都是最后的数字
-    }
-}
-</code></pre><h1 id="this-值"><a href="#this-值" class="headerlink" title="this 值"></a>this 值</h1><p>this 的调用主要有两种方式，一种是函数（function），另一种是作为对象的方法（methods）</p>
+<h6 id="例子1："><a href="#例子1：" class="headerlink" title="例子1："></a>例子1：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log( a );</span><br><span class="line">    var a = 2;</span><br><span class="line">&#125;</span><br><span class="line">fn.call();  //  a === undefined</span><br></pre></td></tr></table></figure>
+<h6 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function fn1()&#123;</span><br><span class="line">    console.log( a );  //  a === undefined</span><br><span class="line">    var a = 2;</span><br><span class="line">    fn2.call();</span><br><span class="line">&#125;</span><br><span class="line">function fn2()&#123;</span><br><span class="line">    console.log( a );  //  a === 1</span><br><span class="line">&#125;</span><br><span class="line">fn1.call();</span><br></pre></td></tr></table></figure>
+<h6 id="例子3："><a href="#例子3：" class="headerlink" title="例子3："></a>例子3：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; name: &apos; obj &apos; &#125;</span><br><span class="line">function fn1()&#123;</span><br><span class="line">    function fn2()&#123;</span><br><span class="line">        console.log( this );   // this === window </span><br><span class="line">    &#125;</span><br><span class="line">    fn2.call();</span><br><span class="line">&#125;</span><br><span class="line">fn1.call( obj );</span><br></pre></td></tr></table></figure>
+<h6 id="例子4："><a href="#例子4：" class="headerlink" title="例子4："></a>例子4：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var liTags = document.querySelectAll( &apos; li &apos; );</span><br><span class="line">for( let i = 0, len = liTags.length; i &lt; len; i++ )&#123;</span><br><span class="line">    liTags[ i ].onclick = function()&#123;</span><br><span class="line">        console.log( i )  // 打印出的 i 都是最后的数字</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="this-值"><a href="#this-值" class="headerlink" title="this 值"></a>this 值</h1><p>this 的调用主要有两种方式，一种是函数（function），另一种是作为对象的方法（methods）</p>
 <h3 id="判断-this-值就看函数怎么被调用，之后转化为-call-形式"><a href="#判断-this-值就看函数怎么被调用，之后转化为-call-形式" class="headerlink" title="判断 this 值就看函数怎么被调用，之后转化为 call 形式"></a>判断 this 值就看函数怎么被调用，之后转化为 call 形式</h3><h6 id="例子1：作为对象的方法调用"><a href="#例子1：作为对象的方法调用" class="headerlink" title="例子1：作为对象的方法调用"></a>例子1：作为对象的方法调用</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    fn: fn</span><br><span class="line">&#125;</span><br><span class="line">obj.fn()  // this === obj</span><br></pre></td></tr></table></figure>
 <h6 id="例子2：作为对象属性的深层次嵌套"><a href="#例子2：作为对象属性的深层次嵌套" class="headerlink" title="例子2：作为对象属性的深层次嵌套"></a>例子2：作为对象属性的深层次嵌套</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    wrapper: &#123;</span><br><span class="line">        b: &apos;b&apos;,</span><br><span class="line">        fn: fn</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.wrapper.fn()  // this === &#123; b: &apos;b&apos;, fn: fn &#125; === obj.wrapper</span><br></pre></td></tr></table></figure>
 <h6 id="例子3：-1"><a href="#例子3：-1" class="headerlink" title="例子3："></a>例子3：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    fn () &#123;</span><br><span class="line">        console.log(fn)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function fncb(cb)&#123;</span><br><span class="line">    cb()</span><br><span class="line">&#125;</span><br><span class="line">fncb(obj.fn)  // this === 全局变量</span><br></pre></td></tr></table></figure>
@@ -462,69 +506,77 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
     </header>
     <div class="entry">
       
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>ECMAScript 提供了 3 个特殊的引用类型：Boolean()  Number()  String() ，以便于操作基本类型值。</p>
-<h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><p>当创建基本包装类型时，相对应的变量会有 <strong>proto</strong> 的属性，此属性是基本包装类型指向 Object 类型的 prototype 。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c47b07b10819e131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型"></p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>ECMAScript 提供了 3 个特殊的引用类型：<code>Boolean()</code> <code>Number()</code>  <code>String()</code> ，以便于操作基本类型值。</p>
+<h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><p>当创建基本包装类型时，相对应的变量会有 <code>__proto__</code> 的属性，此属性是基本包装类型指向 Object 类型的 <code>prototype</code> 。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c47b07b10819e131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型"></p>
 <h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-4911258278ef065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Boolean"></p>
 <h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><ul>
-<li>valueof() ==&gt; 返回基本类型值 true 或 false (重写)</li>
-<li>toString() ==&gt; 返回字符串 ‘true’ 和 ‘false’ (重写)</li>
+<li><p><code>valueof()</code> ==&gt; 返回基本类型值 <code>true</code> 或 <code>false</code> (重写)</p>
+</li>
+<li><p><code>toString()</code> ==&gt; 返回字符串 <code>&#39;true&#39;</code> 和 <code>&#39;false&#39;</code> (重写)</p>
+</li>
 </ul>
 <p><strong>套路：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var f1 = false;</span><br><span class="line">var f2 = new Boolean(false);</span><br><span class="line">if(f1)&#123;console.log(1)&#125; //不打印</span><br><span class="line">if(f2)&#123;console.log(2)&#125; //打印2，因为在调用 f2 的时候，f2 对应的包装类型是对象，所有的对象都是真值。</span><br></pre></td></tr></table></figure></p>
 <h3 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-6e664f59886709f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Number"></p>
 <h5 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h5><ul>
-<li>valueof() ==&gt; 返回对象表示的基本类型的数值 （重写）</li>
-<li>toString() ==&gt; 返回字符串形式的数值 （重写）</li>
-<li>toLocaleString() ==&gt; 返回字符串形式的数值 （重写）</li>
-<li>toFixed() ==&gt; 按照指定的小数位返回数值的字符串表示，参数为小数位数</li>
-<li>toExponential() ==&gt; 返回以指数表示法表示的数值的字符串形式，参数为指定输出结果中的小数位数</li>
-<li>toPrecision() ==&gt; 可能返回固定大小格式，也可能返回指数格式；具体规则看哪种格式更加合适，参数为表示数值的所有数字的位数（不包括指数部分）。</li>
+<li><p><code>valueof()</code> ==&gt; 返回对象表示的基本类型的数值 （重写）</p>
+</li>
+<li><p><code>toString()</code> ==&gt; 返回字符串形式的数值 （重写）</p>
+</li>
+<li><p><code>toLocaleString()</code> ==&gt; 返回字符串形式的数值 （重写）</p>
+</li>
+<li><p><code>toFixed()</code> ==&gt; 按照指定的小数位返回数值的字符串表示，参数为小数位数</p>
+</li>
+<li><p><code>toExponential()</code> ==&gt; 返回以指数表示法表示的数值的字符串形式，参数为指定输出结果中的小数位数</p>
+</li>
+<li><p><code>toPrecision()</code> ==&gt; 可能返回固定大小格式，也可能返回指数格式；具体规则看哪种格式更加合适，参数为表示数值的所有数字的位数（不包括指数部分）</p>
+</li>
 </ul>
 <h3 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-5c889bdc59874e0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 String"></p>
 <h5 id="API-2"><a href="#API-2" class="headerlink" title="API"></a>API</h5><ul>
-<li><p>length ==&gt; 属性，表示字符串中包含多少个字符</p>
+<li><p><code>length</code> ==&gt; 属性，表示字符串中包含多少个字符</p>
 </li>
-<li><p>valueof()  ==&gt; 返回对象所表示的基本字符串值</p>
+<li><p><code>valueof()</code>  ==&gt; 返回对象所表示的基本字符串值</p>
 </li>
-<li><p>toLocaleString() ==&gt; 返回对象所表示的基本字符串值</p>
+<li><p><code>toLocaleString()</code> ==&gt; 返回对象所表示的基本字符串值</p>
 </li>
-<li><p>toString() ==&gt; 返回对象所表示的基本字符串值</p>
+<li><p><code>toString()</code> ==&gt; 返回对象所表示的基本字符串值</p>
 </li>
-<li><p>chatAt() ==&gt; 以单字符字符串的形式返回给定位置的那个字符，参数为指定位置</p>
+<li><p><code>chatAt()</code> ==&gt; 以单字符字符串的形式返回给定位置的那个字符，参数为指定位置</p>
 </li>
-<li><p>charCodeAt() ==&gt; 以字符编码的形式返回给定位置的那个字符，参数为指定位置</p>
+<li><p><code>charCodeAt()</code> ==&gt; 以字符编码的形式返回给定位置的那个字符，参数为指定位置</p>
 </li>
-<li><p>concat() ==&gt; 将一个或多个字符串拼接起来，返回拼接得到的新字符串，可以接受任意多个参数（实践中可以使用加号操作符）</p>
+<li><p><code>concat()</code> ==&gt; 将一个或多个字符串拼接起来，返回拼接得到的新字符串，可以接受任意多个参数（实践中可以使用加号操作符）</p>
 </li>
-<li><p>slice() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将传入的负值<strong>与字符串的长度相加</strong>。</p>
+<li><p><code>slice()</code> ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将传入的负值<strong>与字符串的长度相加</strong>。</p>
 </li>
-<li><p>substr() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将负的第一个参数加上字符串的长度，将负的第二个参数转换为0。</p>
+<li><p><code>substr()</code> ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将负的第一个参数加上字符串的长度，将负的第二个参数转换为0。</p>
 </li>
-<li><p>substring() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串返回的个数，<strong>[ 开始位置，个数 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将所有负值转换为0。</p>
+<li><p><code>substring()</code> ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串返回的个数，<strong>[ 开始位置，个数 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将所有负值转换为0。</p>
 </li>
-<li><p>indexOf() ==&gt; 在一个字符串中从前向后搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
+<li><p><code>indexOf()</code> ==&gt; 在一个字符串中从前向后搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
 </li>
-<li><p>lastIndexOf() ==&gt; 在一个字符串中从后向前搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
+<li><p><code>lastIndexOf()</code> ==&gt; 在一个字符串中从后向前搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
 </li>
-<li><p>trim() ==&gt; 创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。</p>
+<li><p><code>trim()</code> ==&gt; 创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。</p>
 </li>
-<li><p>toLowerCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toLowerCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>toLocaleLowerCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toLocaleLowerCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>toUpperCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toUpperCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>toLocalUpperCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toLocalUpperCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>match() ==&gt; 在字符串中匹配模式，接受一个参数，正则或者 RegExp 对象。</p>
+<li><p><code>match()</code> ==&gt; 在字符串中匹配模式，接受一个参数，正则或者 RegExp 对象。</p>
 </li>
-<li><p>search() ==&gt; 在字符串中从前向后查找模式，返回字符串中第一个匹配项的索引，如果没有找到匹配项，则返回 -1，接受一个参数，正则或者 RegExp 对象。</p>
+<li><p><code>search()</code> ==&gt; 在字符串中从前向后查找模式，返回字符串中第一个匹配项的索引，如果没有找到匹配项，则返回 -1，接受一个参数，正则或者 RegExp 对象。</p>
 </li>
-<li><p>replace() ==&gt; 替换子字符串，接受两个参数，第一个参数可以是一个 RegExp 对象或者一个字符串，第二个参数可以是一个字符串或者一个函数</p>
+<li><p><code>replace()</code> ==&gt; 替换子字符串，接受两个参数，第一个参数可以是一个 RegExp 对象或者一个字符串，第二个参数可以是一个字符串或者一个函数</p>
 </li>
-<li><p>split() ==&gt; 基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中，接受一个或两个参数，第一个参数表示分隔符，第二个参数表示数组的长度。</p>
+<li><p><code>split()</code> ==&gt; 基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中，接受一个或两个参数，第一个参数表示分隔符，第二个参数表示数组的长度。</p>
 </li>
 </ul>
-<h5 id="当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成"><a href="#当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成" class="headerlink" title="当在读取模式中访问 Boolean Number 和 String 类型时，后台会自动完成"></a>当在<strong>读取</strong>模式中访问 Boolean Number 和 String 类型时，后台会自动完成</h5><ol>
+<h3 id="当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成"><a href="#当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成" class="headerlink" title="当在读取模式中访问 Boolean Number 和 String 类型时，后台会自动完成"></a>当在<strong>读取</strong>模式中访问 Boolean Number 和 String 类型时，后台会自动完成</h3><ol>
 <li>创建相应的基本类型的一个实例 <strong>( var temp = new 基本包装类型; )</strong></li>
 <li>在实例上调用制定的方法 <strong>( var 变量 = temp.方法; )</strong></li>
 <li>销毁这个实例 <strong>( temp = null; )</strong></li>
@@ -614,7 +666,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 <h1 id="对象声明"><a href="#对象声明" class="headerlink" title="对象声明"></a>对象声明</h1><ol>
 <li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj2 = new Object();  //obj1 和 obj2 没有区别，但是 obj1 === obj2     是 false ，因为存储在 Stsck(栈内存) 中的地址不同</span><br></pre></td></tr></table></figure>
+<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj2 = new Object();  //obj1 和 obj2 没有区别，但是 obj1 === obj2 是 false ，因为存储在 Stsck(栈内存) 中的地址不同</span><br></pre></td></tr></table></figure>
 </li>
 <li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj3 = Object.create(Object.prototype)</span><br></pre></td></tr></table></figure>
 </li>
@@ -629,7 +681,6 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 </li>
 </ul>
 <h1 id="遍历对象"><a href="#遍历对象" class="headerlink" title="遍历对象"></a>遍历对象</h1><h3 id="for-…-in-…-遍历-自身-原型"><a href="#for-…-in-…-遍历-自身-原型" class="headerlink" title="for … in … 遍历 自身 + 原型"></a>for … in … 遍历 自身 + 原型</h3><p>通过 Objct.prototype.hasOwnProprety 筛选出自身属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for( let key in obj )&#123;</span><br><span class="line">    if( obj.hasOwnProperty( key ) )&#123;</span><br><span class="line">        console.log( obj[ key ] )  // 此时必须使用 [] ，key 表示的是字符串</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>### </p>
 <p><img src="http://upload-images.jianshu.io/upload_images/9617841-c3c19ca702bb6cbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object for...in 遍历"></p>
 <h3 id="Object-keys-Object-values-遍历-自身可枚举属性"><a href="#Object-keys-Object-values-遍历-自身可枚举属性" class="headerlink" title="Object.keys() + Object.values() 遍历 自身可枚举属性"></a>Object.keys() + Object.values() 遍历 自身可枚举属性</h3><p><code>Object.keys()</code> + <code>Object.values()</code> 这两种方法的返回值都是一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object.keys(obj).forEach( ( item ) =&gt; &#123;</span><br><span class="line">    console.log( item )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/9617841-fd35328e99b0a602.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object.keys() + Object.values() 遍历"></p>
@@ -638,17 +689,17 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">arr.__proto__ === ??? </span><br><span class="line">Array.__proto__ === ???</span><br><span class="line">typeof Array.prototype  ???</span><br><span class="line">Array.prototype.__proto__ === ???</span><br></pre></td></tr></table></figure>
 <h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr.__proto__ === Array.prototype</span><br><span class="line">Array.__proto__ === Function.prototype</span><br><span class="line">typeof Array.prototype  // &apos;Object&apos;</span><br><span class="line">Array.prototype.__proto__ === Object.prototype</span><br></pre></td></tr></table></figure>
 <h2 id="对象属性赋值-查找"><a href="#对象属性赋值-查找" class="headerlink" title="对象属性赋值 + 查找"></a>对象属性赋值 + 查找</h2><p>对象属性赋值是在自身属性赋值，不会修改原型链，而查找会在原型链中查找</p>
-<h1 id="new-的实现"><a href="#new-的实现" class="headerlink" title="new 的实现"></a>new 的实现</h1><p>var 对象 = new 函数</p>
+<h1 id="new-的实现"><a href="#new-的实现" class="headerlink" title="new 的实现"></a>new 的实现</h1><p><code>var 对象 = new 函数</code></p>
 <h3 id="方法一：Object-create"><a href="#方法一：Object-create" class="headerlink" title="方法一：Object.create()"></a>方法一：Object.create()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = Object.create( constructor.prototype )</span><br><span class="line">    constructor.apply( obj, [].slice.call( argumnets, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="方法二：Object-setPrototypeOf"><a href="#方法二：Object-setPrototypeOf" class="headerlink" title="方法二：Object.setPrototypeOf()"></a>方法二：Object.setPrototypeOf()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = &#123;&#125;</span><br><span class="line">    Object.setPrototypeOf( obj, constructor )</span><br><span class="line">    constructor.apply( obj, [].slice.call( argumnets, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h1><p><code>instanceof</code> 是在原型链中查找是否是其实例（instance）</p>
 <h3 id="instanceof-实现"><a href="#instanceof-实现" class="headerlink" title="instanceof 实现"></a>instanceof 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function _instanceof( instance, fn )&#123;</span><br><span class="line">    let i = instance.__proto__</span><br><span class="line">    while( i )&#123;</span><br><span class="line">        if( i === fn.prototype )&#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">        i = i.__proto__</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>实现继承主要是要实现原型的属性 + 方法</p>
-<h3 id="属性继承"><a href="#属性继承" class="headerlink" title="属性继承"></a>属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call</span><br></pre></td></tr></table></figure>
-<h3 id="方法继承"><a href="#方法继承" class="headerlink" title="方法继承"></a>方法继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.create()</span><br><span class="line">Object.setPrototypeOf()</span><br></pre></td></tr></table></figure>
-<h3 id="属性-方法继承"><a href="#属性-方法继承" class="headerlink" title="属性 + 方法继承"></a>属性 + 方法继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new</span><br></pre></td></tr></table></figure>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>实现继承主要是要实现原型的私有属性 + 公共属性</p>
+<h3 id="私有属性继承"><a href="#私有属性继承" class="headerlink" title="私有属性继承"></a>私有属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call</span><br></pre></td></tr></table></figure>
+<h3 id="公共属性继承"><a href="#公共属性继承" class="headerlink" title="公共属性继承"></a>公共属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.create()</span><br><span class="line">Object.setPrototypeOf()</span><br></pre></td></tr></table></figure>
+<h3 id="私有属性-公共属性继承"><a href="#私有属性-公共属性继承" class="headerlink" title="私有属性 + 公共属性继承"></a>私有属性 + 公共属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.jianshu.com/p/912335a9a175" target="_blank" rel="noopener">继承示例</a></p>
-<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p>最简单的克隆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = JSON.parse( JSON.stringify( obj ) )</span><br></pre></td></tr></table></figure></p>
+<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p>最简单的克隆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = JSON.parse( JSON.stringify( obj ) )</span><br><span class="line">result = Object.assign(&#123;&#125;, obj)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -951,7 +1002,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 
   <nav id="pagination">
   
-    <a href="/archives/2018/page/4/" class="alignleft prev">Vorherige Seite</a>
+    <a href="/archives/2018/page/4/" class="alignleft prev">Prev</a>
   
   
   <div class="clearfix"></div>
@@ -962,7 +1013,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
       <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
@@ -980,7 +1031,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>3</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>4</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   

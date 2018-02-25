@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Seite 3 | Archiv: 2018/1 | 吴博文</title>
+  <title>Page 3 | Archives: 2018/1 | 吴博文</title>
   <meta name="author" content="吴博文">
   
   
@@ -1234,18 +1234,15 @@ node.getSiblings.call(undefined))
 <li><p>科里化</p>
 <p><strong>语法：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun.bind( this [ , arg1 [ , arg2 [ , ... ] ] ] )</span><br></pre></td></tr></table></figure>
+<p><strong>使用实例：</strong></p>
 </li>
+<li>实例1：<strong>基本用法</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-f825f2fa123c4db2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="bind 基本用法"></li>
+<li>实例2：<strong>实际应用</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-71e4fff179f8a3f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="bind 实际应用"></li>
+<li>实例3：<strong>利用 this + apply 实现 bind</strong><br><img src="http://upload-images.jianshu.io/upload_images/9617841-ca4c2e02d2132d0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重构 bind"></li>
 </ol>
 </li>
 </ul>
-<pre><code>**使用实例：**
-1. 实例1：**基本用法**
-![bind 基本用法](http://upload-images.jianshu.io/upload_images/9617841-f825f2fa123c4db2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-2. 实例2：**实际应用**
-![bind 实际应用](http://upload-images.jianshu.io/upload_images/9617841-71e4fff179f8a3f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-3. 实例3：**利用 this + apply 实现 bind**
-![重构 bind](http://upload-images.jianshu.io/upload_images/9617841-ca4c2e02d2132d0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-</code></pre><h1 id="new"><a href="#new" class="headerlink" title="new"></a>new</h1><ol>
+<h1 id="new"><a href="#new" class="headerlink" title="new"></a>new</h1><ol>
 <li><p>创建一个新对象 obj ，对象 <code>__proto__</code> 指向构造函数的 <code>prototype</code></p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象. __proto__ === 构造函数.prototype</span><br></pre></td></tr></table></figure>
 </li>
@@ -1259,37 +1256,11 @@ node.getSiblings.call(undefined))
 2. 沿着作用域链寻找 a 的声明
 3. 若作用域链中没有 a 的声明，则声明全局变量并赋值
 </code></pre><h1 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h1><p>将作用域链中首先要做<strong>变量提升</strong></p>
-<h6 id="例子1："><a href="#例子1：" class="headerlink" title="例子1："></a>例子1：</h6><pre><code>var a = 1;
-function fn(){
-    console.log( a );
-    var a = 2;
-}
-fn.call();  //  a === undefined
-</code></pre><h6 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h6><pre><code>var a = 1;
-function fn1(){
-    console.log( a );  //  a === undefined
-    var a = 2;
-    fn2.call();
-}
-function fn2(){
-    console.log( a );  //  a === 1
-}
-fn1.call();
-</code></pre><h6 id="例子3："><a href="#例子3：" class="headerlink" title="例子3："></a>例子3：</h6><pre><code>var obj = { name: &apos; obj &apos; }
-function fn1(){
-    function fn2(){
-        console.log( this );   // this === window 
-    }
-    fn2.call();
-}
-fn1.call( obj );
-</code></pre><h6 id="例子4："><a href="#例子4：" class="headerlink" title="例子4："></a>例子4：</h6><pre><code>var liTags = document.querySelectAll( &apos; li &apos; );
-for( let i = 0, len = liTags.length; i &lt; len; i++ ){
-    liTags[ i ].onclick = function(){
-        console.log( i )  // 打印出的 i 都是最后的数字
-    }
-}
-</code></pre><h1 id="this-值"><a href="#this-值" class="headerlink" title="this 值"></a>this 值</h1><p>this 的调用主要有两种方式，一种是函数（function），另一种是作为对象的方法（methods）</p>
+<h6 id="例子1："><a href="#例子1：" class="headerlink" title="例子1："></a>例子1：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function fn()&#123;</span><br><span class="line">    console.log( a );</span><br><span class="line">    var a = 2;</span><br><span class="line">&#125;</span><br><span class="line">fn.call();  //  a === undefined</span><br></pre></td></tr></table></figure>
+<h6 id="例子2："><a href="#例子2：" class="headerlink" title="例子2："></a>例子2：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">function fn1()&#123;</span><br><span class="line">    console.log( a );  //  a === undefined</span><br><span class="line">    var a = 2;</span><br><span class="line">    fn2.call();</span><br><span class="line">&#125;</span><br><span class="line">function fn2()&#123;</span><br><span class="line">    console.log( a );  //  a === 1</span><br><span class="line">&#125;</span><br><span class="line">fn1.call();</span><br></pre></td></tr></table></figure>
+<h6 id="例子3："><a href="#例子3：" class="headerlink" title="例子3："></a>例子3：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; name: &apos; obj &apos; &#125;</span><br><span class="line">function fn1()&#123;</span><br><span class="line">    function fn2()&#123;</span><br><span class="line">        console.log( this );   // this === window </span><br><span class="line">    &#125;</span><br><span class="line">    fn2.call();</span><br><span class="line">&#125;</span><br><span class="line">fn1.call( obj );</span><br></pre></td></tr></table></figure>
+<h6 id="例子4："><a href="#例子4：" class="headerlink" title="例子4："></a>例子4：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var liTags = document.querySelectAll( &apos; li &apos; );</span><br><span class="line">for( let i = 0, len = liTags.length; i &lt; len; i++ )&#123;</span><br><span class="line">    liTags[ i ].onclick = function()&#123;</span><br><span class="line">        console.log( i )  // 打印出的 i 都是最后的数字</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="this-值"><a href="#this-值" class="headerlink" title="this 值"></a>this 值</h1><p>this 的调用主要有两种方式，一种是函数（function），另一种是作为对象的方法（methods）</p>
 <h3 id="判断-this-值就看函数怎么被调用，之后转化为-call-形式"><a href="#判断-this-值就看函数怎么被调用，之后转化为-call-形式" class="headerlink" title="判断 this 值就看函数怎么被调用，之后转化为 call 形式"></a>判断 this 值就看函数怎么被调用，之后转化为 call 形式</h3><h6 id="例子1：作为对象的方法调用"><a href="#例子1：作为对象的方法调用" class="headerlink" title="例子1：作为对象的方法调用"></a>例子1：作为对象的方法调用</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    fn: fn</span><br><span class="line">&#125;</span><br><span class="line">obj.fn()  // this === obj</span><br></pre></td></tr></table></figure>
 <h6 id="例子2：作为对象属性的深层次嵌套"><a href="#例子2：作为对象属性的深层次嵌套" class="headerlink" title="例子2：作为对象属性的深层次嵌套"></a>例子2：作为对象属性的深层次嵌套</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    console.log(this)</span><br><span class="line">&#125;</span><br><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    wrapper: &#123;</span><br><span class="line">        b: &apos;b&apos;,</span><br><span class="line">        fn: fn</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.wrapper.fn()  // this === &#123; b: &apos;b&apos;, fn: fn &#125; === obj.wrapper</span><br></pre></td></tr></table></figure>
 <h6 id="例子3：-1"><a href="#例子3：-1" class="headerlink" title="例子3："></a>例子3：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    a: &apos;a&apos;,</span><br><span class="line">    fn () &#123;</span><br><span class="line">        console.log(fn)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function fncb(cb)&#123;</span><br><span class="line">    cb()</span><br><span class="line">&#125;</span><br><span class="line">fncb(obj.fn)  // this === 全局变量</span><br></pre></td></tr></table></figure>
@@ -1505,69 +1476,77 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
     </header>
     <div class="entry">
       
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>ECMAScript 提供了 3 个特殊的引用类型：Boolean()  Number()  String() ，以便于操作基本类型值。</p>
-<h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><p>当创建基本包装类型时，相对应的变量会有 <strong>proto</strong> 的属性，此属性是基本包装类型指向 Object 类型的 prototype 。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c47b07b10819e131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型"></p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>ECMAScript 提供了 3 个特殊的引用类型：<code>Boolean()</code> <code>Number()</code>  <code>String()</code> ，以便于操作基本类型值。</p>
+<h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><p>当创建基本包装类型时，相对应的变量会有 <code>__proto__</code> 的属性，此属性是基本包装类型指向 Object 类型的 <code>prototype</code> 。<br><img src="http://upload-images.jianshu.io/upload_images/9617841-c47b07b10819e131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型"></p>
 <h3 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean()"></a>Boolean()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-4911258278ef065e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Boolean"></p>
 <h5 id="API"><a href="#API" class="headerlink" title="API"></a>API</h5><ul>
-<li>valueof() ==&gt; 返回基本类型值 true 或 false (重写)</li>
-<li>toString() ==&gt; 返回字符串 ‘true’ 和 ‘false’ (重写)</li>
+<li><p><code>valueof()</code> ==&gt; 返回基本类型值 <code>true</code> 或 <code>false</code> (重写)</p>
+</li>
+<li><p><code>toString()</code> ==&gt; 返回字符串 <code>&#39;true&#39;</code> 和 <code>&#39;false&#39;</code> (重写)</p>
+</li>
 </ul>
 <p><strong>套路：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var f1 = false;</span><br><span class="line">var f2 = new Boolean(false);</span><br><span class="line">if(f1)&#123;console.log(1)&#125; //不打印</span><br><span class="line">if(f2)&#123;console.log(2)&#125; //打印2，因为在调用 f2 的时候，f2 对应的包装类型是对象，所有的对象都是真值。</span><br></pre></td></tr></table></figure></p>
 <h3 id="Number"><a href="#Number" class="headerlink" title="Number()"></a>Number()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-6e664f59886709f6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 Number"></p>
 <h5 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h5><ul>
-<li>valueof() ==&gt; 返回对象表示的基本类型的数值 （重写）</li>
-<li>toString() ==&gt; 返回字符串形式的数值 （重写）</li>
-<li>toLocaleString() ==&gt; 返回字符串形式的数值 （重写）</li>
-<li>toFixed() ==&gt; 按照指定的小数位返回数值的字符串表示，参数为小数位数</li>
-<li>toExponential() ==&gt; 返回以指数表示法表示的数值的字符串形式，参数为指定输出结果中的小数位数</li>
-<li>toPrecision() ==&gt; 可能返回固定大小格式，也可能返回指数格式；具体规则看哪种格式更加合适，参数为表示数值的所有数字的位数（不包括指数部分）。</li>
+<li><p><code>valueof()</code> ==&gt; 返回对象表示的基本类型的数值 （重写）</p>
+</li>
+<li><p><code>toString()</code> ==&gt; 返回字符串形式的数值 （重写）</p>
+</li>
+<li><p><code>toLocaleString()</code> ==&gt; 返回字符串形式的数值 （重写）</p>
+</li>
+<li><p><code>toFixed()</code> ==&gt; 按照指定的小数位返回数值的字符串表示，参数为小数位数</p>
+</li>
+<li><p><code>toExponential()</code> ==&gt; 返回以指数表示法表示的数值的字符串形式，参数为指定输出结果中的小数位数</p>
+</li>
+<li><p><code>toPrecision()</code> ==&gt; 可能返回固定大小格式，也可能返回指数格式；具体规则看哪种格式更加合适，参数为表示数值的所有数字的位数（不包括指数部分）</p>
+</li>
 </ul>
 <h3 id="String"><a href="#String" class="headerlink" title="String()"></a>String()</h3><p><img src="http://upload-images.jianshu.io/upload_images/9617841-5c889bdc59874e0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="基本包装类型 String"></p>
 <h5 id="API-2"><a href="#API-2" class="headerlink" title="API"></a>API</h5><ul>
-<li><p>length ==&gt; 属性，表示字符串中包含多少个字符</p>
+<li><p><code>length</code> ==&gt; 属性，表示字符串中包含多少个字符</p>
 </li>
-<li><p>valueof()  ==&gt; 返回对象所表示的基本字符串值</p>
+<li><p><code>valueof()</code>  ==&gt; 返回对象所表示的基本字符串值</p>
 </li>
-<li><p>toLocaleString() ==&gt; 返回对象所表示的基本字符串值</p>
+<li><p><code>toLocaleString()</code> ==&gt; 返回对象所表示的基本字符串值</p>
 </li>
-<li><p>toString() ==&gt; 返回对象所表示的基本字符串值</p>
+<li><p><code>toString()</code> ==&gt; 返回对象所表示的基本字符串值</p>
 </li>
-<li><p>chatAt() ==&gt; 以单字符字符串的形式返回给定位置的那个字符，参数为指定位置</p>
+<li><p><code>chatAt()</code> ==&gt; 以单字符字符串的形式返回给定位置的那个字符，参数为指定位置</p>
 </li>
-<li><p>charCodeAt() ==&gt; 以字符编码的形式返回给定位置的那个字符，参数为指定位置</p>
+<li><p><code>charCodeAt()</code> ==&gt; 以字符编码的形式返回给定位置的那个字符，参数为指定位置</p>
 </li>
-<li><p>concat() ==&gt; 将一个或多个字符串拼接起来，返回拼接得到的新字符串，可以接受任意多个参数（实践中可以使用加号操作符）</p>
+<li><p><code>concat()</code> ==&gt; 将一个或多个字符串拼接起来，返回拼接得到的新字符串，可以接受任意多个参数（实践中可以使用加号操作符）</p>
 </li>
-<li><p>slice() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将传入的负值<strong>与字符串的长度相加</strong>。</p>
+<li><p><code>slice()</code> ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将传入的负值<strong>与字符串的长度相加</strong>。</p>
 </li>
-<li><p>substr() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将负的第一个参数加上字符串的长度，将负的第二个参数转换为0。</p>
+<li><p><code>substr()</code> ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串的<strong>结束位置</strong>，<strong>[ 开始位置，结束位置 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将负的第一个参数加上字符串的长度，将负的第二个参数转换为0。</p>
 </li>
-<li><p>substring() ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串返回的个数，<strong>[ 开始位置，个数 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将所有负值转换为0。</p>
+<li><p><code>substring()</code> ==&gt; 返回被操作字符串的一个<strong>子字符串</strong>，接受一个或者两个参数，<strong>第一个参数</strong>指定子字符串的<strong>开始位置</strong>，<strong>第二个参数</strong>（在指定的情况下）表示子字符串返回的个数，<strong>[ 开始位置，个数 )</strong>。如果第二参数未指定，一直到字符串的结束为止。如果传入的<strong>参数是负值</strong>，将所有负值转换为0。</p>
 </li>
-<li><p>indexOf() ==&gt; 在一个字符串中从前向后搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
+<li><p><code>indexOf()</code> ==&gt; 在一个字符串中从前向后搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
 </li>
-<li><p>lastIndexOf() ==&gt; 在一个字符串中从后向前搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
+<li><p><code>lastIndexOf()</code> ==&gt; 在一个字符串中从后向前搜索给定的子字符串，返回子字符串的位置，如果没有找到该位置，则返回 -1，接受一个或者两个参数，第一个参数表示指定的字符串，第二个参数表示从字符串中的那个位置开始搜索。</p>
 </li>
-<li><p>trim() ==&gt; 创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。</p>
+<li><p><code>trim()</code> ==&gt; 创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。</p>
 </li>
-<li><p>toLowerCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toLowerCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>toLocaleLowerCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toLocaleLowerCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>toUpperCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toUpperCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>toLocalUpperCase() ==&gt; 字符串大小写转换</p>
+<li><p><code>toLocalUpperCase()</code> ==&gt; 字符串大小写转换</p>
 </li>
-<li><p>match() ==&gt; 在字符串中匹配模式，接受一个参数，正则或者 RegExp 对象。</p>
+<li><p><code>match()</code> ==&gt; 在字符串中匹配模式，接受一个参数，正则或者 RegExp 对象。</p>
 </li>
-<li><p>search() ==&gt; 在字符串中从前向后查找模式，返回字符串中第一个匹配项的索引，如果没有找到匹配项，则返回 -1，接受一个参数，正则或者 RegExp 对象。</p>
+<li><p><code>search()</code> ==&gt; 在字符串中从前向后查找模式，返回字符串中第一个匹配项的索引，如果没有找到匹配项，则返回 -1，接受一个参数，正则或者 RegExp 对象。</p>
 </li>
-<li><p>replace() ==&gt; 替换子字符串，接受两个参数，第一个参数可以是一个 RegExp 对象或者一个字符串，第二个参数可以是一个字符串或者一个函数</p>
+<li><p><code>replace()</code> ==&gt; 替换子字符串，接受两个参数，第一个参数可以是一个 RegExp 对象或者一个字符串，第二个参数可以是一个字符串或者一个函数</p>
 </li>
-<li><p>split() ==&gt; 基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中，接受一个或两个参数，第一个参数表示分隔符，第二个参数表示数组的长度。</p>
+<li><p><code>split()</code> ==&gt; 基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中，接受一个或两个参数，第一个参数表示分隔符，第二个参数表示数组的长度。</p>
 </li>
 </ul>
-<h5 id="当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成"><a href="#当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成" class="headerlink" title="当在读取模式中访问 Boolean Number 和 String 类型时，后台会自动完成"></a>当在<strong>读取</strong>模式中访问 Boolean Number 和 String 类型时，后台会自动完成</h5><ol>
+<h3 id="当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成"><a href="#当在读取模式中访问-Boolean-Number-和-String-类型时，后台会自动完成" class="headerlink" title="当在读取模式中访问 Boolean Number 和 String 类型时，后台会自动完成"></a>当在<strong>读取</strong>模式中访问 Boolean Number 和 String 类型时，后台会自动完成</h3><ol>
 <li>创建相应的基本类型的一个实例 <strong>( var temp = new 基本包装类型; )</strong></li>
 <li>在实例上调用制定的方法 <strong>( var 变量 = temp.方法; )</strong></li>
 <li>销毁这个实例 <strong>( temp = null; )</strong></li>
@@ -1617,10 +1596,10 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
 
   <nav id="pagination">
   
-    <a href="/archives/2018/01/page/2/" class="alignleft prev">Vorherige Seite</a>
+    <a href="/archives/2018/01/page/2/" class="alignleft prev">Prev</a>
   
   
-    <a href="/archives/2018/01/page/4/" class="alignright next">Nächste Seite</a>
+    <a href="/archives/2018/01/page/4/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav>
@@ -1630,7 +1609,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
       <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
@@ -1648,7 +1627,7 @@ for( let i = 0, len = liTags.length; i &lt; len; i++ ){
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>3</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>4</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   

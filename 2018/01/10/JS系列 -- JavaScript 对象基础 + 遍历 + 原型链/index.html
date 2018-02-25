@@ -107,7 +107,7 @@
 <h1 id="对象声明"><a href="#对象声明" class="headerlink" title="对象声明"></a>对象声明</h1><ol>
 <li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj2 = new Object();  //obj1 和 obj2 没有区别，但是 obj1 === obj2     是 false ，因为存储在 Stsck(栈内存) 中的地址不同</span><br></pre></td></tr></table></figure>
+<li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj2 = new Object();  //obj1 和 obj2 没有区别，但是 obj1 === obj2 是 false ，因为存储在 Stsck(栈内存) 中的地址不同</span><br></pre></td></tr></table></figure>
 </li>
 <li> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj3 = Object.create(Object.prototype)</span><br></pre></td></tr></table></figure>
 </li>
@@ -122,7 +122,6 @@
 </li>
 </ul>
 <h1 id="遍历对象"><a href="#遍历对象" class="headerlink" title="遍历对象"></a>遍历对象</h1><h3 id="for-…-in-…-遍历-自身-原型"><a href="#for-…-in-…-遍历-自身-原型" class="headerlink" title="for … in … 遍历 自身 + 原型"></a>for … in … 遍历 自身 + 原型</h3><p>通过 Objct.prototype.hasOwnProprety 筛选出自身属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for( let key in obj )&#123;</span><br><span class="line">    if( obj.hasOwnProperty( key ) )&#123;</span><br><span class="line">        console.log( obj[ key ] )  // 此时必须使用 [] ，key 表示的是字符串</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>### </p>
 <p><img src="http://upload-images.jianshu.io/upload_images/9617841-c3c19ca702bb6cbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object for...in 遍历"></p>
 <h3 id="Object-keys-Object-values-遍历-自身可枚举属性"><a href="#Object-keys-Object-values-遍历-自身可枚举属性" class="headerlink" title="Object.keys() + Object.values() 遍历 自身可枚举属性"></a>Object.keys() + Object.values() 遍历 自身可枚举属性</h3><p><code>Object.keys()</code> + <code>Object.values()</code> 这两种方法的返回值都是一个数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object.keys(obj).forEach( ( item ) =&gt; &#123;</span><br><span class="line">    console.log( item )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/9617841-fd35328e99b0a602.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Object.keys() + Object.values() 遍历"></p>
@@ -131,17 +130,17 @@
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let arr = []</span><br><span class="line">arr.__proto__ === ??? </span><br><span class="line">Array.__proto__ === ???</span><br><span class="line">typeof Array.prototype  ???</span><br><span class="line">Array.prototype.__proto__ === ???</span><br></pre></td></tr></table></figure>
 <h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr.__proto__ === Array.prototype</span><br><span class="line">Array.__proto__ === Function.prototype</span><br><span class="line">typeof Array.prototype  // &apos;Object&apos;</span><br><span class="line">Array.prototype.__proto__ === Object.prototype</span><br></pre></td></tr></table></figure>
 <h2 id="对象属性赋值-查找"><a href="#对象属性赋值-查找" class="headerlink" title="对象属性赋值 + 查找"></a>对象属性赋值 + 查找</h2><p>对象属性赋值是在自身属性赋值，不会修改原型链，而查找会在原型链中查找</p>
-<h1 id="new-的实现"><a href="#new-的实现" class="headerlink" title="new 的实现"></a>new 的实现</h1><p>var 对象 = new 函数</p>
+<h1 id="new-的实现"><a href="#new-的实现" class="headerlink" title="new 的实现"></a>new 的实现</h1><p><code>var 对象 = new 函数</code></p>
 <h3 id="方法一：Object-create"><a href="#方法一：Object-create" class="headerlink" title="方法一：Object.create()"></a>方法一：Object.create()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = Object.create( constructor.prototype )</span><br><span class="line">    constructor.apply( obj, [].slice.call( argumnets, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="方法二：Object-setPrototypeOf"><a href="#方法二：Object-setPrototypeOf" class="headerlink" title="方法二：Object.setPrototypeOf()"></a>方法二：Object.setPrototypeOf()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function _new()&#123;</span><br><span class="line">    let constructor = arguments[0]</span><br><span class="line">    let obj = &#123;&#125;</span><br><span class="line">    Object.setPrototypeOf( obj, constructor )</span><br><span class="line">    constructor.apply( obj, [].slice.call( argumnets, 1 ))</span><br><span class="line">    return obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h1><p><code>instanceof</code> 是在原型链中查找是否是其实例（instance）</p>
 <h3 id="instanceof-实现"><a href="#instanceof-实现" class="headerlink" title="instanceof 实现"></a>instanceof 实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function _instanceof( instance, fn )&#123;</span><br><span class="line">    let i = instance.__proto__</span><br><span class="line">    while( i )&#123;</span><br><span class="line">        if( i === fn.prototype )&#123;</span><br><span class="line">            return true</span><br><span class="line">        &#125;</span><br><span class="line">        i = i.__proto__</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>实现继承主要是要实现原型的属性 + 方法</p>
-<h3 id="属性继承"><a href="#属性继承" class="headerlink" title="属性继承"></a>属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call</span><br></pre></td></tr></table></figure>
-<h3 id="方法继承"><a href="#方法继承" class="headerlink" title="方法继承"></a>方法继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.create()</span><br><span class="line">Object.setPrototypeOf()</span><br></pre></td></tr></table></figure>
-<h3 id="属性-方法继承"><a href="#属性-方法继承" class="headerlink" title="属性 + 方法继承"></a>属性 + 方法继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new</span><br></pre></td></tr></table></figure>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>实现继承主要是要实现原型的私有属性 + 公共属性</p>
+<h3 id="私有属性继承"><a href="#私有属性继承" class="headerlink" title="私有属性继承"></a>私有属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call</span><br></pre></td></tr></table></figure>
+<h3 id="公共属性继承"><a href="#公共属性继承" class="headerlink" title="公共属性继承"></a>公共属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object.create()</span><br><span class="line">Object.setPrototypeOf()</span><br></pre></td></tr></table></figure>
+<h3 id="私有属性-公共属性继承"><a href="#私有属性-公共属性继承" class="headerlink" title="私有属性 + 公共属性继承"></a>私有属性 + 公共属性继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.jianshu.com/p/912335a9a175" target="_blank" rel="noopener">继承示例</a></p>
-<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p>最简单的克隆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result = JSON.parse( JSON.stringify( obj ) )</span><br></pre></td></tr></table></figure></p>
+<h2 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h2><p>最简单的克隆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result = JSON.parse( JSON.stringify( obj ) )</span><br><span class="line">result = Object.assign(&#123;&#125;, obj)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -166,7 +165,7 @@
       <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
@@ -184,7 +183,7 @@
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>3</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>4</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   
