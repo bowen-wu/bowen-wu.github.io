@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 3 | 吴博文</title>
+  <title>Seite 3 | 吴博文</title>
   <meta name="author" content="吴博文">
   
   
@@ -60,6 +60,138 @@
   <div id="content" class="inner">
     
       <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-29T00:24:55.000Z"><a href="/2018/01/29/jQuery系列（三）-- DOM/">2018-01-29</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/29/jQuery系列（三）-- DOM/">jQuery系列（三） -- DOM</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="创建元素与属性"><a href="#创建元素与属性" class="headerlink" title="创建元素与属性"></a>创建元素与属性</h1><p>JavaScript：</p>
+<ul>
+<li>创建元素：<code>document.createElement()</code></li>
+<li>设置属性：<code>setAttribute()</code></li>
+<li>添加文本：<code>innerHTML()</code></li>
+<li>加入文档：<code>append()</code></li>
+</ul>
+<p>jQuery：</p>
+<ul>
+<li>创建元素节点：<code>$( &#39;html结构&#39; )</code></li>
+<li>创建文本节点：<code>$( &#39;&lt;div&gt;text node&lt;/div&gt;&#39; )</code></li>
+<li>创建属性节点：<code>$( &#39;&lt;div id=&quot;text&quot; class=&quot;className&quot;&gt;text node&lt;/div&gt;&#39; )</code></li>
+</ul>
+<h1 id="jQuery-DOM-API"><a href="#jQuery-DOM-API" class="headerlink" title="jQuery DOM API"></a>jQuery DOM API</h1><h3 id="DOM-node-插入"><a href="#DOM-node-插入" class="headerlink" title="DOM node 插入"></a>DOM node 插入</h3><ol>
+<li><p>内部插入</p>
+<ul>
+<li><code>.append(content)</code> ==&gt; 向每个匹配的元素内部追加内容。前面是被插入的对象，后面是要在对象内插入的元素内容 </li>
+<li><code>.appendTo(obj)</code> ==&gt;  把所有的匹配元素追加到另一个指定的元素集合中。前面是要插入的元素内容，而后面是被插入的对象</li>
+</ul>
+</li>
+<li><p>外部插入</p>
+<ul>
+<li><code>.after(content)</code> ==&gt; 在匹配元素集合中的每个元素后面插入参数所指定的内容，作为其兄弟节点</li>
+<li><code>before(content)</code> ==&gt; 在匹配的元素的前面插入内容</li>
+</ul>
+</li>
+<li><p>内部插入</p>
+<ul>
+<li><code>.prepend()</code> ==&gt; 向每个匹配的元素内部前置内容</li>
+<li><code>.prependTo()</code> ==&gt; 把所有匹配的元素前置到另一个指定的元素集合中</li>
+</ul>
+</li>
+</ol>
+<p><strong>说明：</strong><code>.peopend()</code> 方法将指定元素插入到匹配元素里面作为他的第一个子元素。<code>.append()</code> 方法最为最后一个参数。</p>
+<ol>
+<li>外部插入：content 在前，() 内为元素<ul>
+<li><code>.insertAfter()</code> ==&gt; 在目标元素后面插入集合中每个匹配的元素</li>
+<li><code>.insertBefore()</code> ==&gt; 在目标元素前面插入集合中每个匹配的元素</li>
+</ul>
+</li>
+</ol>
+<h3 id="DOM-node-删除"><a href="#DOM-node-删除" class="headerlink" title="DOM node 删除"></a>DOM node 删除</h3><ul>
+<li><code>.empty()</code> ==&gt; 移除指定元素的所有子节点</li>
+<li><code>.remove()</code> ==&gt; 将自身移除，同时也会移除元素内部的一切，包括绑定的事件及与该元素相关的 jQuery 数据<br><strong>注意：</strong><code>.remove()</code> 可以传递一个选择器表达式用来过滤将被移除的匹配元素集合，可以选择性地删除节点</li>
+<li><code>.detach()</code> ==&gt; 保留数据的删除操作。让一个 web 元素托管，即从当前页面中移除该元素，但保留这个元素的内存模型对象<br><strong>注意：</strong><code>.detach()</code> 方法是 jQuery 特有的，所以它只能处理通过 jQuery 的方法绑定的事件或者数据，可以通过 <code>.append()</code> 是删除的元素重新回到文档流中</li>
+</ul>
+<h3 id="DOM-node-复制与替换"><a href="#DOM-node-复制与替换" class="headerlink" title="DOM node 复制与替换"></a>DOM node 复制与替换</h3><ul>
+<li><p><code>.clone()</code> ==&gt; 复制所有匹配的元素集合，包括所有匹配元素、匹配元素的下级元素和文字节点<br><strong>注意：</strong>若节点有事件或者数据之类的其他处理，我们需要通过 <code>.clone(true)</code> 传递一个布尔值 <code>true</code> 用来指定，这样不仅仅是简单的克隆节点结构，还把附带的事件与数据复制。</p>
+</li>
+<li><p><code>.replaceWith(newContent)</code> ==&gt; 用提供的内容替换集合中所有匹配的元素并且返回被删除元素的集合</p>
+</li>
+<li><p><code>.replaceAll(target)</code> ==&gt; 用集合的匹配元素替换每个目标元素<br><strong>注意：</strong></p>
+<ol>
+<li><code>.replaceWith()</code> 和 <code>.replaceAll()</code> 会删除与节点相关联的所有数据和 event handler</li>
+<li><code>.replaceWith()</code> 返回 jQuery 对象，可链式使用，但返回的 jQuery 对象引用的是替换前的节点，而不是通过 <code>.replaceWith() / .replaceAll()</code> 方法替换后的节点</li>
+</ol>
+</li>
+<li><p><code>.wrap()</code> ==&gt; 将元素用其他元素包裹起来，即给元素增加一个父元素，返回原始的元素集，以便以后使用链式方法</p>
+</li>
+<li><code>.unwrap()</code> ==&gt; 将匹配的元素的父级元素删除，保留自身在原来的位置</li>
+<li><code>.wrapAll()</code> ==&gt; 将集合中的元素用其他元素包裹起来，增加一个父元素（每个元素分别包裹）</li>
+<li><code>.wrapInner()</code> ==&gt; 将集合中的元素内部所有的子元素用其他元素包裹起来，并当做指定元素的子元素</li>
+</ul>
+<h3 id="jQuery-遍历"><a href="#jQuery-遍历" class="headerlink" title="jQuery 遍历"></a>jQuery 遍历</h3><ul>
+<li><p><code>.children()</code> ==&gt; 返回匹配元素集合中每个元素的所有子元素，并且可以接受一个选择器</p>
+</li>
+<li><p><code>.find()</code> ==&gt; 查找 DOM 树中元素的后代元素（只在后代中遍历，不包括自己）</p>
+</li>
+<li><code>.parent()</code> ==&gt; 查找集合中每一个元素的父元素</li>
+<li><code>.parents()</code> ==&gt; 查找集合中每一个元素的祖辈元素</li>
+<li><p><code>.closest()</code> ==&gt; 从元素本身开始，在 DOM 树上逐级向上元素匹配，并返回最先匹配的祖先元素<br><strong>注意：</strong><code>.parents()</code> 和 <code>.closest()</code> 区别</p>
+<ol>
+<li>起始位置不同：<code>.parents()</code> 开始于父元素； <code>.closest()</code> 开始于当前元素</li>
+<li>遍历的目标不同：<code>.parents()</code> 一直查找到根元素，并将匹配的元素加入集合； <code>.closest()</code> 向上查找，直到找到一个匹配的就停止查找</li>
+<li>结果不同：<code>.parents()</code> 返回的是包含0个或1个或多个元素的 jQuery 对象； <code>.closest()</code> 返回的是包含0个或1个元素的 jQuery 对象</li>
+</ol>
+</li>
+<li><p><code>.next()</code> ==&gt; 查找指定元素集合中每一个元素紧邻的后面同辈元素的元素集合</p>
+</li>
+<li><code>.prev()</code> ==&gt; 查找指定元素集合中每一个元素紧邻的前面同辈元素的元素集合</li>
+<li><code>.siblings()</code> ==&gt; 查找指定元素集合中每一个元素的同辈元素</li>
+<li><code>.add()</code> ==&gt; 创建一个新的 jQuery 对象，元素添加到匹配的元素集合中</li>
+<li><code>.each()</code> ==&gt; 一个 for 循环的迭代器，迭代 jQuery 对象中的每一个 DOM 元素，每次回调函数执行时，会传递当前循环次数作为参数（从0开始）<br> <code>.each()</code> 通过回调的方式处理，并且会有两个固定的实参 ==&gt; 索引（index）和元素（element）<br> <code>.each( (index,element) =&gt; {} )</code></li>
+</ul>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
   <article class="post">
   
     <div class="gallery">
@@ -943,95 +1075,20 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
 </article>
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-26T02:51:19.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（一）-- 概述/">2018-01-26</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/26/CSS-最佳实践-套路（一）-- 概述/">CSS 最佳实践 + 套路（一） -- 概述</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h1><ol>
-<li>Google: 关键词 MDN</li>
-<li><a href="https://css-tricks.com/" title="null" target="_blank" rel="noopener">CSS Tricks</a></li>
-<li><a href="https://www.google.com/search?q=%E9%98%AE%E4%B8%80%E5%B3%B0+css" title="null" target="_blank" rel="noopener">Google: 阮一峰 css</a></li>
-<li><a href="http://www.zhangxinxu.com/wordpress/category/css/page/25/" title="null" target="_blank" rel="noopener">张鑫旭的 240 多篇 CSS 博客</a></li>
-<li><a href="https://tympanus.net/codrops/category/playground/" title="null" target="_blank" rel="noopener">Codrops 炫酷 CSS 效果</a></li>
-<li><a href="http://www.ituring.com.cn/book/1695" title="null" target="_blank" rel="noopener">CSS揭秘</a></li>
-<li><a href="http://cndevdocs.com/" title="null" target="_blank" rel="noopener">CSS 2.1 中文 spec</a></li>
-<li><a href="http://adamschwartz.co/magic-of-css/" title="null" target="_blank" rel="noopener">Magic of CSS</a> 免费在线书<h1 id="引入CSS"><a href="#引入CSS" class="headerlink" title="引入CSS"></a>引入CSS</h1></li>
-<li>内联样式 ==&gt; style属性 ==&gt; <code>style= &#39;color: red; width: 200px; height:200px;&#39;</code></li>
-<li><p>内嵌样式 ==&gt; <code>style</code> 标签 ==&gt; </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  body&#123;</span><br><span class="line">    background: gray;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>外联样式 ==&gt; <code>&lt;link&gt;</code> 标签 ==&gt; </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel= &apos;stylesheet&apos; href= &apos;&apos;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>@import url(./b/css)</code></p>
-</li>
-</ol>
-<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><h3 id="reset-CSS"><a href="#reset-CSS" class="headerlink" title="reset CSS"></a>reset CSS</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*&#123; margin: 0; padding: 0; &#125;</span><br><span class="line">h1, h2, h3, h4, h5, h6, p&#123; margin: 0; padding: 0; &#125;</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><p>添加到浮动元素的父元素上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>元素分类：</p>
-<ul>
-<li>块级元素：<code>block</code> ==&gt; <code>display: block;</code></li>
-<li>内联元素：<code>inline</code> ==&gt; <code>display: inline;</code></li>
-<li>内联块级元素：<code>inline-block</code> ==&gt; <code>display: inline-block;</code></li>
-</ul>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/CSS/">CSS</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
 
 <nav id="pagination">
   
-    <a href="/page/2/" class="alignleft prev">Prev</a>
+    <a href="/page/2/" class="alignleft prev">Vorherige Seite</a>
   
   
-    <a href="/page/4/" class="alignright next">Next</a>
+    <a href="/page/4/" class="alignright next">Nächste Seite</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
       <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="search" name="q" results="0" placeholder="Suche">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
@@ -1049,7 +1106,7 @@ sticky（粘性定位[ 粘性定位是相对定位和固定定位的混合 ]）�
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>4</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>5</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   

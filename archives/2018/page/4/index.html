@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 4 | Archives: 2018 | 吴博文</title>
+  <title>Seite 4 | Archiv: 2018 | 吴博文</title>
   <meta name="author" content="吴博文">
   
   
@@ -62,6 +62,81 @@
       <div id="main-col" class="alignleft"><div id="wrapper">
 <h2 class="archive-title">2018</h2>
 <p></p>
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-26T02:51:19.000Z"><a href="/2018/01/26/CSS-最佳实践-套路（一）-- 概述/">2018-01-26</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/26/CSS-最佳实践-套路（一）-- 概述/">CSS 最佳实践 + 套路（一） -- 概述</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h1><ol>
+<li>Google: 关键词 MDN</li>
+<li><a href="https://css-tricks.com/" title="null" target="_blank" rel="noopener">CSS Tricks</a></li>
+<li><a href="https://www.google.com/search?q=%E9%98%AE%E4%B8%80%E5%B3%B0+css" title="null" target="_blank" rel="noopener">Google: 阮一峰 css</a></li>
+<li><a href="http://www.zhangxinxu.com/wordpress/category/css/page/25/" title="null" target="_blank" rel="noopener">张鑫旭的 240 多篇 CSS 博客</a></li>
+<li><a href="https://tympanus.net/codrops/category/playground/" title="null" target="_blank" rel="noopener">Codrops 炫酷 CSS 效果</a></li>
+<li><a href="http://www.ituring.com.cn/book/1695" title="null" target="_blank" rel="noopener">CSS揭秘</a></li>
+<li><a href="http://cndevdocs.com/" title="null" target="_blank" rel="noopener">CSS 2.1 中文 spec</a></li>
+<li><a href="http://adamschwartz.co/magic-of-css/" title="null" target="_blank" rel="noopener">Magic of CSS</a> 免费在线书<h1 id="引入CSS"><a href="#引入CSS" class="headerlink" title="引入CSS"></a>引入CSS</h1></li>
+<li>内联样式 ==&gt; style属性 ==&gt; <code>style= &#39;color: red; width: 200px; height:200px;&#39;</code></li>
+<li><p>内嵌样式 ==&gt; <code>style</code> 标签 ==&gt; </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  body&#123;</span><br><span class="line">    background: gray;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>外联样式 ==&gt; <code>&lt;link&gt;</code> 标签 ==&gt; </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel= &apos;stylesheet&apos; href= &apos;&apos;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@import url(./b/css)</code></p>
+</li>
+</ol>
+<h1 id="最佳实践-amp-套路"><a href="#最佳实践-amp-套路" class="headerlink" title="最佳实践 &amp; 套路"></a>最佳实践 &amp; 套路</h1><h3 id="reset-CSS"><a href="#reset-CSS" class="headerlink" title="reset CSS"></a>reset CSS</h3><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*&#123; margin: 0; padding: 0; &#125;</span><br><span class="line">h1, h2, h3, h4, h5, h6, p&#123; margin: 0; padding: 0; &#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><p>添加到浮动元素的父元素上。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.clearfix::after&#123;</span><br><span class="line">    content: &apos;&apos;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="相关知识点"><a href="#相关知识点" class="headerlink" title="相关知识点"></a>相关知识点</h1><p>元素分类：</p>
+<ul>
+<li>块级元素：<code>block</code> ==&gt; <code>display: block;</code></li>
+<li>内联元素：<code>inline</code> ==&gt; <code>display: inline;</code></li>
+<li>内联块级元素：<code>inline-block</code> ==&gt; <code>display: inline-block;</code></li>
+</ul>
+
+      
+    </div>
+    <footer>
+            
+        
+  
+  <div class="tags">
+    <a href="/tags/CSS/">CSS</a>
+  </div>
+
+                
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
 
   
     <article class="post">
@@ -1150,307 +1225,13 @@
 </article>
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-01-12T11:05:51.000Z"><a href="/2018/01/12/jQuery系列（二）-- 样式/">2018-01-12</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/01/12/jQuery系列（二）-- 样式/">jQuery系列（二） -- 样式</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>jQuery 函数包装的对象是类数组对象，对象里面包含了 DOM 对象的信息，并封装了很多操作方法，可以和访问数组一样的方法来访问。</p>
-<h1 id="jQuery-对象-和-DOM-对象"><a href="#jQuery-对象-和-DOM-对象" class="headerlink" title="jQuery 对象 和 DOM 对象"></a>jQuery 对象 和 DOM 对象</h1><h3 id="联系"><a href="#联系" class="headerlink" title="联系"></a>联系</h3><p>可是使用 $ 符号将 DOM 对象封装成 jQuery 对象 <code>$( div )</code><br>可是使用 <code>div = $div[ 0 ]</code> 或者 <code>div = $div.get( 0 )</code> 将 jQuery 对象转化成 DOM 对象</p>
-<p>###区别<br>DOM 对象的属性和方法有： .style   .classList<br>jQuery 对象的属性和方法有：.css     .addClass    </p>
-<p><strong>说明：</strong>传递给 $(DOM) 函数的参数是 DOM Object ，则 jQuery 函数会把这个 DOM Object 给包装成一个新的 jQuery 对象</p>
-<h1 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h1><ol>
-<li>id 选择器： $( “#id” )</li>
-<li>类选择器：$( “.class” )</li>
-<li>元素选择器： $( “element” )</li>
-<li>全选择器：$( “*” )</li>
-<li><p>层级选择器</p>
-<ul>
-<li><p>子选择器：$( “parent &gt; child” )</p>
-</li>
-<li><p>后代选择器：$( “ancestor descendant” )</p>
-</li>
-<li><p>相邻兄弟选择器：$( “prev + next” )<br>选择所有紧跟在 <code>prev</code> 元素后的 <code>next</code> 元素</p>
-</li>
-<li><p>一般兄弟选择器：$( “prev ~ siblings” )<br>匹配 <code>prev</code> 元素之后的所有兄弟元素，具有相同的父元素，并匹配过滤 <code>siblings</code> 选择器</p>
-</li>
-</ul>
-</li>
-<li><p>基本筛选选择器</p>
-<ul>
-<li>$( “:first” ) ==&gt; 匹配第一个元素</li>
-<li>$( “:last” ) ==&gt; 匹配最后一个元素</li>
-<li>$( “:not(seletor)” ) ==&gt; 选择所有元素去除不匹配给定的选择器元素</li>
-<li>$( “:eq(index)” ) ==&gt; 在匹配的集合中选择 index 的元素（从0开始）</li>
-<li>$( “:gt(index)” ) ==&gt; 在匹配的集合中选择大于 index 的元素（从0开    始）</li>
-<li>$( “:lt(index)” ) ==&gt; 在匹配的集合中选择小于 index 的元素（从0开    始）</li>
-<li>$( “:odd” ) ==&gt; 选择索引值为奇数的元素</li>
-<li>$( “:even” ) ==&gt; 选择索引值为偶数的元素</li>
-<li>$( “:header” ) ==&gt; 选择所有标题元素</li>
-<li>$( “:root” ) ==&gt; 选择该文档的根元素</li>
-<li>$( “:lang(language)” ) ==&gt; 选择指定语言的所有元素</li>
-<li>$( “:animated” ) ==&gt; 选择所有正在执行动画的元素<br><strong>说明：</strong><pre><code>1. :eq()、:lt()、:gt()、:even、:odd 用来筛选他们前面的匹配表达式的集合元素，根据之前匹配的元素进一步筛选
-2. :gt() 是一个段落筛选，从指定索引的下一个开始，:gt(1) 实际是从2开始
-</code></pre></li>
-</ul>
-</li>
-<li><p>内容筛选选择器</p>
-<ul>
-<li><p>$( “:parent” ) ==&gt; 选择所有含有子元素或者文本的元素</p>
-</li>
-<li><p>$( “:empty” ) ==&gt; 选择所有没有子元素的元素（包括文本节点）</p>
-</li>
-<li><p>$( “:contains(text)” ) ==&gt; 选择所有包含指定文本的元素</p>
-</li>
-<li><p>$( “:has(selector)” ) ==&gt; 选择元素中至少包含指定选择器的元素<br><strong>说明：</strong></p>
-<pre><code>1. :contain 和 :has 都有查找的意思，但 contains 查找包含**制定文本**的元素，has 查找包含**指定元素**的元素
-2. 如果 :contains 匹配的文本包含在元素的子元素中，同样认为是符合条件的
-3. :parent 和 :empty 是相反的，但是两者所涉及的子元素都包括文本节点
-</code></pre></li>
-</ul>
-</li>
-<li><p>可见性筛选选择器</p>
-<ul>
-<li><p>$( “:visible” ) ==&gt; 选择所有显示的元素</p>
-</li>
-<li><p>$( “:hidden” ) ==&gt; 选择所有隐藏的元素</p>
-<p><strong>隐藏元素的方式</strong></p>
-<ol>
-<li>CSS ==&gt; display: none</li>
-<li>width: 0; height: 0;</li>
-<li>visibility: hidden;</li>
-<li>opacity: 0;<br><strong>说明：</strong>如果元素<strong>占据文档中一定的空间</strong>，元素被认为是<strong>可见</strong>的，可见元素的宽高都大于 0 ，元素的 <code>visibility: hidden;</code> 和 <code>opacity: 0;</code> 被认为是可见的，因为他们仍然占据空间布局。不在文档中的元素被认为是不可见的，如果当他们被插入到文档中，jQuery 没有办法知道他们是否是可见的，因为元素可见性依赖于使用的样式。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>属性筛选选择器</p>
-<ul>
-<li><p>$( “[attribute |= ‘value’]” ) ==&gt; 选择指定属性值等于<strong>给定字符串</strong>或<strong>以该字符串为前缀</strong>（该字符串后跟一个连字符 ‘-‘）的元素</p>
-</li>
-<li><p>$( “[attribute <em>= ‘value’]” ) ==&gt; 选择指定属性具有<em>*包含一个给定的子字符串</em></em>的元素（选择给定属性是包含某些值的元素）</p>
-</li>
-<li><p>$( “[attribute ~= ‘value’]” ) ==&gt; 选择指定属性用<strong>空格分隔</strong>的值中包含一个给定值的元素</p>
-</li>
-<li><p>$( “[attribute = ‘value’]” ) ==&gt; 选择指定属性是<strong>给定值</strong>的元素</p>
-</li>
-<li><p>$( “[attribute != ‘value’]” ) ==&gt; 选择<strong>不存在指定属性</strong>，或者指定的属性<strong>不等于给定值</strong>的元素</p>
-</li>
-<li><p>$( “[attribute ^= ‘value’]” ) ==&gt; 选择指定属性是以<strong>给定字符串开始</strong>的元素</p>
-</li>
-<li><p>$( “[attribute $= ‘value’]” ) ==&gt; 选择指定属性是以<strong>给定值结尾</strong>的元素</p>
-</li>
-<li><p>$( “[attribute]” ) ==&gt; 选择所有<strong>具有指定属性</strong>的元素，该属性是任意值</p>
-</li>
-</ul>
-</li>
-<li><p>表单元素选择器</p>
-<ul>
-<li><p>$( “:input” ) ==&gt; 选择所有 input textarea select 和 button 的元素</p>
-</li>
-<li><p>$( “:text” ) ==&gt; 匹配所有文本框</p>
-</li>
-<li><p>$( “:password” ) ==&gt; 匹配所有密码框</p>
-</li>
-<li><p>$( “:raido” ) ==&gt; 匹配所有单选按钮</p>
-</li>
-<li><p>$( “:checkbox” ) ==&gt; 匹配所有复选框</p>
-</li>
-<li><p>$( “:submit” ) ==&gt; 匹配所有提交按钮</p>
-</li>
-<li><p>$( “:image” ) ==&gt; 匹配所有图像域</p>
-</li>
-<li><p>$( “:reset” ) ==&gt; 匹配所有重置按钮</p>
-</li>
-<li><p>$( “:button” ) ==&gt; 匹配所有按钮</p>
-</li>
-<li><p>$( “:file” ) ==&gt; 匹配所有文件域</p>
-</li>
-</ul>
-<p><strong>说明：</strong></p>
-<pre><code>1. 除了 input 筛选选择器，其余每个表单类别选择器都对应一个 input 元素的 type 值，所以其都可以用属性筛选选择器替换
-2. ` $( &quot;:password&quot; ) === $( &quot;[type = password]&quot; ) `
-</code></pre></li>
-<li><p>表单对象属性筛选选择器</p>
-<ul>
-<li><p>$( “:enabled” ) ==&gt; 选取可用的表单元素</p>
-</li>
-<li><p>$( “:disabled” ) ==&gt; 选取不可用的表单元素</p>
-</li>
-<li><p>$( “:checked” ) ==&gt; 选取被选中的 <input> 元素</p>
-</li>
-<li><p>$( “:selected” ) ==&gt; 选取被选中的 <option> 元素</option></p>
-</li>
-</ul>
-<p><strong>说明：</strong></p>
-<pre><code>1. 选择器适用于复选框和单选框，对于**下拉框**元素使用 **:selected** 选择器
-2. 在使用 :checked 的时候，**最佳实践是使用 input: checked** 
-</code></pre></li>
-<li><p>子元素筛选选择器</p>
-<ul>
-<li><p>$( “:first-child” ) ==&gt; 选择所有父级元素下的第一个子元素</p>
-</li>
-<li><p>$( “:last-child” ) ==&gt; 选择所有父级元素下的最后一个子元素</p>
-</li>
-<li><p>$( “:only-child” ) ==&gt; 如果某个元素是其父元素下的唯一子元素，那么它就会被选中</p>
-</li>
-<li><p>$( “:nth-child(n)” ) ==&gt; 选择所有父级元素下的第 n 个子元素，n 是索引值，从 1 开始</p>
-</li>
-<li><p>$( “:nth-last-child(n)” ) ==&gt; 选择所有父级元素下的第 n 个子元素，计数从最后一个开始</p>
-</li>
-</ul>
-</li>
-<li><p>特殊选择器</p>
-<ul>
-<li><p>this ==&gt; 表示当前的上下文对象是一个 HTML 对象，可以调用 HTML 对象所拥有的属性和方法</p>
-</li>
-<li><p>$(this) ==&gt; 代表上下文是一个 jQuery 的上下文对象，可以调用 jQuery 的方法和属性值</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="jQuery-属性与样式"><a href="#jQuery-属性与样式" class="headerlink" title="jQuery 属性与样式"></a>jQuery 属性与样式</h1><ol>
-<li><p>.attr()<br>获取和设置元素属性（DOM操作）</p>
-<ul>
-<li>.attr(传入属性名) ==&gt; 获取属性值</li>
-<li>.attr(属性名, 属性值) ==&gt; 设置属性值</li>
-<li>.attr(属性名, 函数值) ==&gt; 设置属性的函数值</li>
-<li>.attr(attribute) ==&gt; 给指定元素设置多个属性值<br>.attr({属性名1: “属性值1” , 属性名2: “属性值2”, …})</li>
-</ul>
-<p><strong>说明：Attribute 和 Property</strong></p>
-<pre><code>1. Attribute 属性 ，  Property  特性
-2. Attribute 就是 DOM node 自带的属性（id、class、title），Property 是 DOM 元素作为对象，其附加的内容（nodeName、nodeType、tagName）
-</code></pre></li>
-<li><p>.removeAttr()<br> 为匹配的元素集合中的每个元素移除一个属性 attributeName</p>
-</li>
-<li><p>.html()<br> 获取或设置匹配元素的 HTML 内容</p>
-<ul>
-<li>.html() ==&gt; 获取集合中第一个匹配元素的 HTML 内容</li>
-<li>.html(htmlString) ==&gt; 设置每一个匹配元素的 HTML 内容</li>
-<li>.html(function(index, oldhtml)) ==&gt; 用来返回设置 HTML 内容的一个函数<br><strong>说明：</strong><pre><code>.html() 方法内部使用的是 DOM 的 innerHTML 属性来操作的，这个操作是针对整个 HTML 内容（包括文本内容）
-</code></pre></li>
-</ul>
-</li>
-<li><p>.text()<br> 得到匹配元素集合中的每个元素的文本内容的结合，包括他们的后代，或者设置匹配元素集合中每个元素的文本内容为指定的文本内容</p>
-<ul>
-<li>.text() ==&gt; 获取匹配元素集合中每个元素的合并文本，包括他们的后代</li>
-<li>.text(textString) ==&gt; 用来设置匹配元素内容的文本</li>
-<li><p>.text(function(index, text)) ==&gt; 用来返回设置文本内容的一个函数</p>
-<p><strong>说明：.html() 和 .text()</strong></p>
-<pre><code>1. .html() 处理元素内容，.text() 处理文本内容
-2. html() 只能使用在 HTML 文档中，.text() 在 XML 文档和 HTML 文档都能使用
-3. 若处理对象只有一个子文本节点，则 .html 和 .text() 处理结果相同
-</code></pre></li>
-</ul>
-</li>
-<li><p>.val()<br> 处理<strong>表单元素</strong>的值  </p>
-<ul>
-<li>.val() ==&gt; 获取匹配元素集合中第一个元素的当前值</li>
-<li>.val(value) ==&gt; 设置匹配的元素集合中每个元素的值</li>
-<li><p>.val(function(){}) ==&gt; 一个用来返回设置值的函数</p>
-<p><strong>说明：.html() 和 .text()</strong></p>
-<pre><code>1. .val() 处理 select 元素，当没有选择项被选中时，它将返回 null 
-2. 若 select 元素有 multiple 属性，并且至少一个选择项被选中时， .val() 将返回一个数组，这个数组包含每个选中选择项的值
-3. .val() 方法多用来设置表单的字段的值
-</code></pre></li>
-</ul>
-</li>
-<li><p>.addClass()<br> 动态增加 class 类名</p>
-<ul>
-<li>.addClass(className) ==&gt; 为每个匹配元素增加一个或多个类名</li>
-<li><p>.addClass(function(index, currentClass){}) ==&gt; 这个函数返回一个或更多用空格隔开的要增加的样式名</p>
-<p><strong>说明：</strong></p>
-<pre><code>1. .addClass() 方法不会替换一个样式类名，它只是简单的添加一个类名到元素上
-2. 
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  $(&apos;div&apos;).addClass(function(index, className)&#123;</span><br><span class="line">      if( className.indexOf(index) !== -1 )&#123;</span><br><span class="line">          $(this).addClass(&apos;red&apos;)</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>.removeClass()<br> 删除全部或者指定的 class</p>
-<ul>
-<li>.removeClass([className])  ==&gt; 每个匹配的元素移除一个或对个用空格隔开的样式名</li>
-<li><p>.removeClass(function(index, class)) ==&gt; 返回一个或多个要被移除的样式名的函数</p>
-<p><strong>说明：</strong>如果 .removeClass() 没有参数，则会移除所有的样式类</p>
-</li>
-</ul>
-</li>
-<li><p>.toggleClass()<br> 在匹配的元素集合中的每个元素上添加或删除一个或多个样式类，取决于这个样式是否存在，即：如果存在就删除一个类，如果不存在就添加一个类</p>
-<ul>
-<li>.toggleClass(className) ==&gt; 切换类</li>
-<li>.toggleClass(className,switch) ==&gt; 一个布尔值，用来判断样式是否应该被添加或移除</li>
-<li>.toggleClass(function(index, class, switch){})</li>
-</ul>
-</li>
-<li><p>.css()<br> 获取元素样式属性的计算值或者设置元素的 CSS 属性<br> <strong>获取</strong></p>
-<ul>
-<li>.css( “propertyName” ) ==&gt; 获取匹配元素集合中的第一个元素的样式属性的计算值</li>
-<li><p>.css( “propertyNames” ) ==&gt; 传递一组数组，返回一个对象结果</p>
-<p><strong>设置</strong></p>
-</li>
-<li>.css( ‘propertyName’, ‘value’ ) ==&gt; 设置 CSS</li>
-<li>.css( ‘propertyName’, function ) ==&gt; 可以传入一个回调函数，返回取到对应的值进行处理</li>
-<li><p>.css( ‘properties ) ==&gt; 可以传入一个对象，同时设置多个样式，用 <code>{ }</code> 括起</p>
-<p><strong>说明：</strong></p>
-<ol>
-<li>通过 .css() 方法设置的样式属性优先级要高于 .addClass() 方法</li>
-<li>若是<strong>静态结构</strong>，确定了布局规则，使用 <strong>.addClass()</strong> 方法增加类</li>
-<li>若是<strong>动态的 HTML 结构</strong>，在不确定布局或者经常要变化的情况下，使用 <strong>.css()</strong> 方法</li>
-<li>.addClass() 不能获取到指定样式的属性值，.css() 可以获取到指定的样式值</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer>
-            
-        
-  
-  <div class="tags">
-    <a href="/tags/jQuery/">jQuery</a>
-  </div>
-
-                
-      
-
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-  
 
   <nav id="pagination">
   
-    <a href="/archives/2018/page/3/" class="alignleft prev">Prev</a>
+    <a href="/archives/2018/page/3/" class="alignleft prev">Vorherige Seite</a>
   
   
-    <a href="/archives/2018/page/5/" class="alignright next">Next</a>
+    <a href="/archives/2018/page/5/" class="alignright next">Nächste Seite</a>
   
   <div class="clearfix"></div>
 </nav>
@@ -1460,7 +1241,7 @@
       <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="search" name="q" results="0" placeholder="Suche">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
@@ -1478,7 +1259,7 @@
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
   
-    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>4</small></li>
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>5</small></li>
   
     <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
   

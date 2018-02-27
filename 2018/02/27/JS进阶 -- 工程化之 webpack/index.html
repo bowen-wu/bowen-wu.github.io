@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS进阶 -- 工程化之 webpack | 吴博文</title>
+  <meta name="author" content="吴博文">
+  
+  <meta name="description" content="代码链接概述工程化包括了自动化 + 模块化 + 性能优化，前端语言较多并且更新频率较快。123CSS ==&amp;gt; Less ==&amp;gt; Sass ==&amp;gt; Scss ==&amp;gt; Stylus（结合Less + Sass）JS ==&amp;gt; coffee ==&amp;gt; ES6 ==&amp;gt; ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JS进阶 -- 工程化之 webpack"/>
+  <meta property="og:site_name" content="吴博文"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+  
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="canonical" href="http://yoursite.com/2018/02/27/JS进阶 -- 工程化之 webpack/index.html" />
+  <link rel="alternate" href="/atom.xml" title="吴博文" type="application/atom+xml">
+  
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-45991394-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="blog-header">
+  <h1><a href="/">吴博文</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="blog-nav">
+  <ul>
+    
+      <li><a href="/">首页/Home</a></li>
+    
+      <li><a href="/archives">归档/Archives</a></li>
+    
+      <li><a href="/about">关于/About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    
+      <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-27T01:09:03.000Z"><a href="/2018/02/27/JS进阶 -- 工程化之 webpack/">2018-02-27</a></time>
+      
+      
+  
+    <h1 class="title">JS进阶 -- 工程化之 webpack</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="代码链接"><a href="#代码链接" class="headerlink" title="代码链接"></a><a href="https://github.com/bowen-wu/webpack-demo" target="_blank" rel="noopener">代码链接</a></h2><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>工程化包括了自动化 + 模块化 + 性能优化，前端语言较多并且更新频率较快。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CSS ==&gt; Less ==&gt; Sass ==&gt; Scss ==&gt; Stylus（结合Less + Sass）</span><br><span class="line">JS ==&gt; coffee ==&gt; ES6 ==&gt; babel ==&gt; TypeScript ==&gt; Elm</span><br><span class="line">HTML ==&gt; Jade ==&gt; Pug ==&gt; slim</span><br></pre></td></tr></table></figure></p>
+<p>当我们面对这么多语言的时候，Webpack 应运而生，Webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)，它主要为我们解决了工程化的问题。在本篇文章中将要介绍 SCSS + babel + Webpack</p>
+<h2 id="Sass-Scss"><a href="#Sass-Scss" class="headerlink" title="Sass | Scss"></a>Sass | Scss</h2><p>Scss 是 CSS 的预处理语言 | 扩展，<code>Sass makes CSS fun again</code> 这是Scss 要做的事情。Scss添加了嵌套规则、变量、混入、选择器继承，还能和命令行工具 | Web框架插件将其转换为格式良好的标准 CSS</p>
+<h4 id="Sass-与-Scss-区别"><a href="#Sass-与-Scss-区别" class="headerlink" title="Sass 与 Scss 区别"></a>Sass 与 Scss 区别</h4><p>Sass 使用换行 + 缩进进行工作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">body</span><br><span class="line">    background: red</span><br></pre></td></tr></table></figure></p>
+<p>Scss 使用分号 + 花括号进行工作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body&#123;</span><br><span class="line">    background: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装-Scss"><a href="#安装-Scss" class="headerlink" title="安装 Scss"></a>安装 Scss</h4><p>Scss 是有 Ruby 社区创作出来的，所以要使用 <code>gem</code> 命令，但是 <code>node</code> 将 Scss 重写了一遍，所以可以使用 <code>node-sass</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">npm install -g node-sass  // 安装</span><br><span class="line">npm uninstall node-sass -g    // 卸载</span><br><span class="line"></span><br><span class="line">解决问题 4 连 </span><br><span class="line">npm update</span><br><span class="line">npm install</span><br><span class="line">nodejs node_modules/node-sass/scripts/install.js</span><br><span class="line">npm rebuild node-sass</span><br><span class="line"></span><br><span class="line">解决问题 7 连 查看 node-sass 是否存在</span><br><span class="line">npm -v</span><br><span class="line">node -v</span><br><span class="line">node -p process.versions</span><br><span class="line">node -p process.platform</span><br><span class="line">node -p process.arch</span><br><span class="line">node -p &quot;require(&apos;node-sass&apos;).info&quot;</span><br><span class="line">npm ls node-sass</span><br><span class="line"></span><br><span class="line">解决问题 3 连 重新生成 node_modules + package.json</span><br><span class="line">npm -rf node_modules</span><br><span class="line">rm package.json</span><br><span class="line">rm package-lock.json</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line">npm cache clean  // 清除缓存</span><br><span class="line">npm cache clean --force  // 清除缓存</span><br><span class="line">npm install --unsafe-perm</span><br><span class="line">npm config set sass_binary_site http://npm.taobao.org/mirrors/node-sass/    // 切换淘宝源</span><br><span class="line">npm i -g node-sass --save_binary_path=/home/wubowen/Downloads/Linux-x64-48-binding.node   // 通过 .node 包安装</span><br><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org  // 安装 cnpm</span><br><span class="line">cnpm install -g node-sass  // cnpm 安装</span><br><span class="line"></span><br><span class="line">运行配置文件</span><br><span class="line">. ~/.bash_profile</span><br><span class="line">. ~/.npmrc</span><br><span class="line">source ~/.profile</span><br><span class="line">source .npmrc</span><br></pre></td></tr></table></figure></p>
+<p>安装成功之后便可以使用 node-sass 了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node-sass [options] &lt;input&gt; [output]</span><br><span class="line">示例</span><br><span class="line">node-sass src/style.scss dist/style.css</span><br><span class="line">node-sass src/style.scss dist/style.css -w  // Watch a directory or file</span><br></pre></td></tr></table></figure></p>
+<h2 id="babel"><a href="#babel" class="headerlink" title="babel"></a>babel</h2><p>Babel is a JavaScript compiler。它是一款可以将 JS 语法编译为 ES5（IE能读）的编译器</p>
+<h4 id="安装-使用"><a href="#安装-使用" class="headerlink" title="安装 + 使用"></a>安装 + 使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev babel-cli babel-preset-env</span><br><span class="line">touch .babelrc</span><br><span class="line">编辑 .babelrc</span><br><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;env&quot;]</span><br><span class="line">&#125;</span><br><span class="line">npm init   // 创建 package.json</span><br><span class="line">npm install --save-dev babel-cli</span><br><span class="line">package.json 多出一行</span><br><span class="line">&#123;</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">+   &quot;babel-cli&quot;: &quot;^6.0.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在 package.json 中 + </span><br><span class="line">  &#123;</span><br><span class="line">    &quot;name&quot;: &quot;my-project&quot;,</span><br><span class="line">    &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">+   &quot;scripts&quot;: &#123;</span><br><span class="line">+     &quot;build&quot;: &quot;babel src -d lib&quot;</span><br><span class="line">+   &#125;,</span><br><span class="line">    &quot;devDependencies&quot;: &#123;</span><br><span class="line">      &quot;babel-cli&quot;: &quot;^6.0.0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">npm run build   // 运行 package.json 中的 &quot;build&quot;: &quot;babel src -d lib&quot; 这句话</span><br><span class="line">./node_modules/.bin/babel src -d lib    // 将 src 中的文件翻译到 lib 文件中</span><br><span class="line"></span><br><span class="line">之后 index.html 引用 dist 中的文件</span><br><span class="line"></span><br><span class="line">自动监控</span><br><span class="line">./node_modules/.bin/babel path1 -d path2 --watch</span><br></pre></td></tr></table></figure>
+<h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><p>watch 命令行工具可以监控文件的改动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -g watch-cli</span><br><span class="line">watch -p &apos;path1&apos; -c &apos;cp path1 path2&apos;  // 只要 path1 中的文件改动就会将 path1 中的文件复制到 path2 中</span><br></pre></td></tr></table></figure></p>
+<p>watch 也可以用于 img<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch -p &apos;src/img/**/*&apos; -c &apos;cp -r src/img dist/img&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="前端目录规范"><a href="#前端目录规范" class="headerlink" title="前端目录规范"></a>前端目录规范</h2><p>src ==&gt; source 目录 ==&gt; 未经翻译的代码<br>dist ==&gt; distribution 目录 ==&gt; 待发布的代码<br>node_modules ==&gt; 第三方包<br>vendors ==&gt; 第三方代码（jQuery）</p>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><p>通过之前的介绍，我们使用<br> scss ==&gt; node-sass ==&gt; css<br>ES6 JS ==&gt; babel ==&gt; ES5（IE 使用）<br>HTML + img ==&gt; watch ==&gt; 复制<br>我们通过这么多的命令才能实现我们的自动化，那么为什么不使用一种工具，具有以上三者的作用呢，所以 Webpack 应运而生</p>
+<h4 id="Webpack-核心"><a href="#Webpack-核心" class="headerlink" title="Webpack 核心"></a>Webpack 核心</h4><h6 id="入口（entry）"><a href="#入口（entry）" class="headerlink" title="入口（entry）"></a>入口（entry）</h6><p>entry 指示 webpack 使用哪个模块来作为构建其内部依赖图的开始，进入进口后，webpack 会找出有哪些模块和库是入口直接或间接依赖的，每个依赖项随即被处理，最后输出到 bundles 的文件中<br>通过在 webpack 配置中配置 <code>entry</code> 属性来指定起点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: &apos;./path/to/my/entry/file.js&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="出口（output）"><a href="#出口（output）" class="headerlink" title="出口（output）"></a>出口（output）</h6><p>output 属性告诉 webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: &apos;./path/to/my/entry/file.js&apos;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve( __dirname, &apos;dist&apos; )</span><br><span class="line">        filename: &apos;my-first-webpack-bundle.js&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h6 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h6><p>loader 让 webpack 能够去处理非 JavaScript 文件（webpack 自身只能理解 JavaScript）。webpack loader 将所有类型的文件，转换为应用程序的依赖图可以直接引用的模块。<strong>多数 loader 可以通过选项（<code>options</code>）自定义</strong><br>loader 实现的目标</p>
+<ul>
+<li>识别出应该被对应的 loader 进行转换的那些文件（使用 <code>text</code> 属性）</li>
+<li>转换这些文件，使其能被添加到依赖图中（使用 <code>use</code> 属性）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">webpack.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: &apos;./path/to/my/entry/file.js&apos;,</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve( __dirname, &apos;dist&apos; )</span><br><span class="line">        filename: &apos;my-first-webpack-bundle.js&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                // 遇到匹配的文件，使用 loader 进行转换之后再进行打包</span><br><span class="line">                text: /\.txt$/,        // 匹配的文件</span><br><span class="line">                use: &apos;raw-loader&apos;    // 使用的 loader</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &apos;babel-loader&apos;,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: [ &apos;@babel/present-env&apos; ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h6 id="插件（plugins）"><a href="#插件（plugins）" class="headerlink" title="插件（plugins）"></a>插件（plugins）</h6><p>loader 被用于转换某些类型的模块，而插件则用于执行范围更广的任务。插件的范围包括：从打包优化 + 压缩，一直到重新定义环境中的变量<br>想使用一个插件，需要 <code>require()</code> 插件，然后把它添加到 <code>plugins</code> 数组中，多数插件可以通过选项 <code>options</code> 自定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">webpack.config.js</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;); // 通过 npm 安装</span><br><span class="line">const webpack = require(&apos;webpack&apos;); // 用于访问内置插件</span><br><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line"></span><br><span class="line">const config = &#123;</span><br><span class="line">  entry: &apos;./path/to/my/entry/file.js&apos;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, &apos;dist&apos;),</span><br><span class="line">    filename: &apos;my-first-webpack.bundle.js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123; test: /\.txt$/, use: &apos;raw-loader&apos; &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new webpack.optimize.UglifyJsPlugin(),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;template: &apos;./src/index.html&apos;&#125;)</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = config;</span><br></pre></td></tr></table></figure></p>
+<h4 id="webpack-使用"><a href="#webpack-使用" class="headerlink" title="webpack 使用"></a>webpack 使用</h4><p><strong>注意：<code>npm i 找不到的module</code></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mkdir webpack-demo</span><br><span class="line">cd webpack-demo</span><br><span class="line">npm init    // 初始化</span><br><span class="line">一路回车</span><br><span class="line">ls   ==&gt; package.json</span><br><span class="line">npm install --save-dev webpack  // package.json 中多了依赖 webpack</span><br><span class="line">touch webpack.config.js   // 创建配置文件并编辑</span><br><span class="line">vi webpack.config.js</span><br><span class="line">    ****************</span><br><span class="line">    const path = require(&apos;path&apos;);  </span><br><span class="line">    module.exports = &#123;</span><br><span class="line">      entry: &apos;./src/js/&apos;,</span><br><span class="line">      output: &#123;</span><br><span class="line">        filename: &apos;bundle.js&apos;,</span><br><span class="line">        path: path.resolve(__dirname, &apos;dist/js/&apos;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    *****************</span><br><span class="line"></span><br><span class="line">mkdir src src/css src/js </span><br><span class="line">touch src/css/main.scss src/js/index.js src/js/main.js src/index.html  </span><br><span class="line"></span><br><span class="line">    ****************</span><br><span class="line">    index.html 中引入 css，不引 scss</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;./css/main.css&quot;&gt;</span><br><span class="line">    ***************</span><br><span class="line">npx webpack  // 将 src 中的 JS 文件转换 + 复制到 dist/js/</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用-babel-loder"><a href="#使用-babel-loder" class="headerlink" title="使用 babel-loder"></a>使用 <a href="https://github.com/babel/babel-loader/tree/7.x" target="_blank" rel="noopener">babel-loder</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">index.js + main.js</span><br><span class="line"></span><br><span class="line">    ***********************</span><br><span class="line">    let a = 1</span><br><span class="line">    console.log(a)</span><br><span class="line">    </span><br><span class="line">    let b = 1</span><br><span class="line">    console.log(b)</span><br><span class="line">    **********************</span><br><span class="line"></span><br><span class="line">npm install --save-dev babel-loader babel-core babel-preset-env webpack  </span><br><span class="line">// 使用 webpack 3.x babel-loader 7.x | babel 6.x，注意 github 点击[链接](https://github.com/babel/babel-loader/tree/7.x)</span><br><span class="line">vi webpack.config.js</span><br><span class="line"></span><br><span class="line">    **************************</span><br><span class="line">    output: &#123;</span><br><span class="line">        filename: &apos;bundle.js&apos;,</span><br><span class="line">        path: path.resolve(__dirname, &apos;dist/js/&apos;)</span><br><span class="line">    &#125;,</span><br><span class="line">    + module: &#123;</span><br><span class="line">    +   rules: [</span><br><span class="line">    +     &#123;</span><br><span class="line">    +       test: /\.js$/,    // 如果文件是 .js 结尾</span><br><span class="line">    +       exclude: /(node_modules|bower_components)/,</span><br><span class="line">    +       use: &#123;             // 使用 babel-loader 转换</span><br><span class="line">    +         loader: &apos;babel-loader&apos;,</span><br><span class="line">    +       options: &#123;       // 选项，参数 env</span><br><span class="line">    +           presets: [&apos;env&apos;]</span><br><span class="line">    +         &#125;</span><br><span class="line">    +       &#125;</span><br><span class="line">    +     &#125;</span><br><span class="line">    +   ]</span><br><span class="line">    + &#125;</span><br><span class="line">    ***************************</span><br><span class="line"></span><br><span class="line">npx webpack</span><br></pre></td></tr></table></figure>
+<h4 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">touch src/js/app.js</span><br><span class="line">// app.js 调用 main.js + index.js</span><br><span class="line">vi app.js</span><br><span class="line"></span><br><span class="line">    ***************************</span><br><span class="line">    import a from &apos;./main&apos;</span><br><span class="line">    import b from &apos;./index&apos;</span><br><span class="line">    </span><br><span class="line">    a()</span><br><span class="line">    console.log(&apos;app&apos;)</span><br><span class="line">    b()</span><br><span class="line">    **************************</span><br><span class="line"></span><br><span class="line">index.js</span><br><span class="line"></span><br><span class="line">    ********************************</span><br><span class="line">    let b = 1</span><br><span class="line">    function fn() &#123;</span><br><span class="line">        console.log(b)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    export default fn</span><br><span class="line">    *******************************</span><br><span class="line"></span><br><span class="line">main.js</span><br><span class="line"></span><br><span class="line">    **********************************</span><br><span class="line">    export default function()&#123;</span><br><span class="line">        let a =1</span><br><span class="line">        console.log(a)</span><br><span class="line">    &#125;</span><br><span class="line">    ***********************************</span><br><span class="line"></span><br><span class="line">webpack.config.js</span><br><span class="line"></span><br><span class="line">    ********************************</span><br><span class="line">    module.exports = &#123;</span><br><span class="line">    -    entry: &apos;./src/js/&apos;,</span><br><span class="line">    +    entry: &apos;./src/js/app.js&apos;,</span><br><span class="line">    &#125;</span><br><span class="line">    ********************************</span><br><span class="line"></span><br><span class="line">rm -rf dist</span><br><span class="line">npx webpack  // 看终端 log 便可以看到，webpack 将三个 js 文件都转换并复制到了 dist/js 中</span><br></pre></td></tr></table></figure>
+<h4 id="使用-scss-loader"><a href="#使用-scss-loader" class="headerlink" title="使用 scss-loader"></a>使用 <a href="https://github.com/webpack-contrib/sass-loader" target="_blank" rel="noopener">scss-loader</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br><span class="line">vi webpack.config.js</span><br><span class="line"></span><br><span class="line">    ********************************</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.js$/,</span><br><span class="line">                exclude: /(node_modules|bower_components)/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: &apos;babel-loader&apos;,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: [&apos;env&apos;]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        -      &#125;</span><br><span class="line">        +      &#125;,</span><br><span class="line">        +    &#123;</span><br><span class="line">        +        test: /\.scss$/,   // 1. 发现后缀 .scss 文件</span><br><span class="line">        +        use: [</span><br><span class="line">        +            &#123;</span><br><span class="line">        +                loader: &quot;style-loader&quot; // 4. 使用 style-loader 将 JS 字符串 ==&gt; &lt;style&gt; 标签（creates style nodes from JS strings）</span><br><span class="line">        +            &#125;, &#123;</span><br><span class="line">        +                loader: &quot;css-loader&quot; // 3. 使用 css-loader 将 css ==&gt; JS 字符串（translates CSS into CommonJS）</span><br><span class="line">        +            &#125;, &#123;</span><br><span class="line">        +                loader: &quot;sass-loader&quot; // 2. 使用 sass-loader 将 sass ==&gt; css (compiles Sass to CSS）</span><br><span class="line">        +            &#125;</span><br><span class="line">        +        ]</span><br><span class="line">        +    &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    *********************************</span><br><span class="line"></span><br><span class="line">vi app.js</span><br><span class="line"></span><br><span class="line">    **************************</span><br><span class="line">    + import &apos;../css/main.scss&apos;</span><br><span class="line">    **************************</span><br><span class="line"></span><br><span class="line">npx webpack</span><br></pre></td></tr></table></figure>
+<h4 id="使用-postcss-loader"><a href="#使用-postcss-loader" class="headerlink" title="使用 postcss-loader"></a>使用 <a href="https://github.com/postcss/postcss-loader" target="_blank" rel="noopener">postcss-loader</a></h4><p>postcss-loader 能够使得 CSS 自动添加前缀，从而使我们的代码更加强健<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">npm i -D postcss-loader</span><br><span class="line">touch postcss.config.js</span><br><span class="line">vi postcss.config.js</span><br><span class="line"></span><br><span class="line">    *****************************</span><br><span class="line">    module.exports = &#123;</span><br><span class="line">      //parser: &apos;sugarss&apos;,</span><br><span class="line">      plugins: &#123;</span><br><span class="line">        &apos;postcss-import&apos;: &#123;&#125;,</span><br><span class="line">       // &apos;postcss-cssnext&apos;: &#123;&#125;,</span><br><span class="line">       // &apos;cssnano&apos;: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    *******************************</span><br><span class="line"></span><br><span class="line">vi webpack.config.js</span><br><span class="line"></span><br><span class="line">    ************************</span><br><span class="line">    ......</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.scss$/,</span><br><span class="line">                use: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        loader: &quot;style-loader&quot; // creates style nodes from JS strings</span><br><span class="line">                    &#125;, &#123;</span><br><span class="line">                        loader: &quot;css-loader&quot;, // translates CSS into CommonJS</span><br><span class="line">    +                  options: &#123; importLoaders: 1 &#125;</span><br><span class="line">    +              &#125;, &#123;</span><br><span class="line">    +                  loader: &apos;postcss-loader&apos;,</span><br><span class="line">    +                  options: &#123;                     // 如果没有 options 则不会添加后缀，先尝试不添加 options，如果 postcss-loader 不工作，再添加 options</span><br><span class="line">    +                      plugins: () =&gt; [</span><br><span class="line">    +                          require(&apos;autoprefixer&apos;)</span><br><span class="line">    +                      ]</span><br><span class="line">    +                  &#125;</span><br><span class="line">                    &#125;,&#123;</span><br><span class="line">                        loader: &quot;sass-loader&quot; // compiles Sass to CSS</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">    ......</span><br><span class="line">    ***********************</span><br><span class="line"></span><br><span class="line">npx webpack</span><br></pre></td></tr></table></figure></p>
+<h4 id="webpack-总结"><a href="#webpack-总结" class="headerlink" title="webpack 总结"></a>webpack 总结</h4><ul>
+<li>webpack 将前端思想完全转变，将 CSS 写入 JS 中，使用 JS 生成 <style> 标签，这样使得 JS 执行的时候才能加载 CSS，这是一个弊端，可以使用 Cache Control 缓解，即当我们第二次访问的时候，会很快，因为一个 JS 包含了所有问题，可以使用混杂模式，既有传统 CSS，又有 webpack CSS，在 <head> 标签中加入 <style> 基础样式，使用 JS 添加动态样式</li>
+<li>webpack 就是做一系列自动化的流程，例如，通过 babe-loader 将 ES6 转化为 ES5，通过 scss-loader 将 scss 转化为 css，通过 postcss-loader 添加 css 前缀。webpack 是一种基于预编译的模块化方案，把一切内容包括 JS 文件和静态文件都视为模块（module）</li>
+</ul>
+</style></li></ul>
+      
+    </div>
+    <footer>
+      
+        
+        
+          <script src="https://utteranc.es/client.js"
+            repo="winterland1989/winterland1989.github.io"
+            branch="master"
+            issue-term="pathname"
+            async>
+          </script>
+        
+      
+
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+</div></div>
+      <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>10</small></li>
+  
+    <li><a href="/tags/HTML/">HTML</a><small>1</small></li>
+  
+    <li><a href="/tags/HTTP/">HTTP</a><small>9</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>11</small></li>
+  
+    <li><a href="/tags/JavaScript-进阶/">JavaScript 进阶</a><small>5</small></li>
+  
+    <li><a href="/tags/Plugin/">Plugin</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>4</small></li>
+  
+    <li><a href="/tags/前端基础/">前端基础</a><small>4</small></li>
+  
+    <li><a href="/tags/博客/">博客</a><small>1</small></li>
+  
+    <li><a href="/tags/总结/">总结</a><small>4</small></li>
+  
+  </ul>
+</div>
+
+
+</aside>
+    
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="aligncenter">
+  
+  &copy; 2018 吴博文
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="http://cdn.staticfile.org/jquery/2.1.1-rc2/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+
+<div id="scroll2top">
+<img src="/scroll2top/arrow.png"/>
+</div>
+<script src="/scroll2top/scroll2top.min.js"></script>
+<div id="winterland">
+  <canvas></canvas>
+</div>
+<script src="/js/winterland.min.js"></script>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script src="https://www.zybuluo.com/static/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</script>
+
+
+  
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59a3e3079f1b7ad5"></script> 
+  
+
+</body>
+</html>
